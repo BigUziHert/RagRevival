@@ -1,0 +1,50 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.146'
+}
+
+version = '1.0.0'
+group = 'com.biguzi.ragrevival'
+base { archivesName = 'ragrevival-1.21.1' }
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+repositories { mavenCentral() }
+sourceSets {
+    testmod {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+neoForge {
+    version = '21.1.249'
+    runs {
+        client { client() }
+        server { server(); programArgument '--nogui' }
+        gameTestServer {
+            type = 'gameTestServer'
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'ragrevival'
+        }
+    }
+    mods { ragrevival { sourceSet sourceSets.main } }
+}
+dependencies {
+    implementation fileTree(dir: '.local/deps', include: ['sable-neoforge-*.jar', 'sable_player_ragdoll-*.jar', 'ragdoll_reactions-*.jar'])
+    compileOnly fileTree(dir: '.local/deps', include: ['carryon-*.jar'])
+    compileOnly files('.local/deps/sable-companion-common-1.21.1-1.6.0.jar')
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('jar') { from('LICENSE') { into 'META-INF' } }
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+test { useJUnitPlatform() }
+tasks.register('testModJar', Jar) {
+    archiveClassifier = 'test-harness'
+    from sourceSets.testmod.output
+}

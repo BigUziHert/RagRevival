@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.biguzi.ragrevival.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["TargetingConditionsMixin"],
+  "injectors": {"defaultRequire": 1}
+}

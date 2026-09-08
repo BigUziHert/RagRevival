@@ -1,0 +1,38 @@
+{
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.249",
+  "dependencies": [
+    {
+      "name": "Sable",
+      "version": "2.0.3",
+      "file": "sable-neoforge-1.21.1-2.0.3.jar",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/1L6XJqnY/sable-neoforge-1.21.1-2.0.3.jar",
+      "sha256": "da6c3b66238586603d1dcaa2afb012d36815fbce0a2d5938fbb2936701d42279",
+      "scope": "required"
+    },
+    {
+      "name": "Sable: Ragdolls",
+      "version": "0.7.2",
+      "file": "sable_player_ragdoll-1.21.1-0.7.2.jar",
+      "url": "https://edge.forgecdn.net/files/8295/399/sable_player_ragdoll-1.21.1-0.7.2.jar",
+      "sha256": "62e67cb468bdd4d2240e059c24aac19a019ea5373149b788f24f88d22a017013",
+      "scope": "required"
+    },
+    {
+      "name": "Ragdoll Reactions",
+      "version": "0.7.0",
+      "file": "ragdoll_reactions-1.21.1-0.7.0.jar",
+      "url": "https://edge.forgecdn.net/files/8281/400/ragdoll_reactions-1.21.1-0.7.0.jar",
+      "sha256": "d61a118c0b5ad2f3e761af6b3d71726bc2887bb3d0c7c90c2dc604bb4d3792b8",
+      "scope": "required"
+    },
+    {
+      "name": "Carry On",
+      "version": "2.2.6.13",
+      "file": "carryon-neoforge-1.21.1-2.2.6.13.jar",
+      "url": "https://cdn.modrinth.com/data/joEfVgkn/versions/PV8oLZ1q/carryon-neoforge-1.21.1-2.2.6.13.jar",
+      "sha256": "d4f9576b6593db9486a89d35c1d84c31ee89141d99dbae2aa470350ab53c4e09",
+      "scope": "optional-compile"
+    }
+  ]
+}

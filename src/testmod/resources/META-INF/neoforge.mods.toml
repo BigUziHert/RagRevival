@@ -1,0 +1,16 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+
+[[mods]]
+modId="ragrevival_tests"
+version="1.0.0"
+displayName="RagRevival Integration Tests"
+description="Opt-in local dedicated-server integration harness. Never install in a production world."
+
+[[dependencies.ragrevival_tests]]
+modId="ragrevival"
+type="required"
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="SERVER"

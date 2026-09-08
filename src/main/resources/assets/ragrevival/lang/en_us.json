@@ -1,0 +1,12 @@
+{
+  "key.categories.ragrevival": "Rag Revival",
+  "key.ragrevival.give_up": "Give up while downed (hold)",
+  "hud.ragrevival.downed": "Downed — %s remaining",
+  "hud.ragrevival.give_up_hint": "Hold %s for 5 seconds to give up",
+  "hud.ragrevival.giving_up": "Giving up… release to cancel",
+  "hud.ragrevival.being_fed": "Being fed…",
+  "hud.ragrevival.target": "%s — downed, %s remaining",
+  "hud.ragrevival.feeding": "Feeding… keep holding Use",
+  "hud.ragrevival.dragging": "Dragging — release crouch to let go",
+  "hud.ragrevival.rescue_hint": "Hold Use with a revival item; crouch + empty-hand Use to drag"
+}

@@ -1,0 +1,10 @@
+.gradle/
+build/
+.local/
+.research/
+run/
+runs/
+.idea/
+*.iml
+logs/
+crash-reports/

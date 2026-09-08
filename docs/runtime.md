@@ -1,0 +1,88 @@
+# Local two-player test runtime
+
+The Windows PowerShell 7 scripts keep every installation, dependency, configuration,
+log, process record, and test world inside ignored `.local/`. They do not use or
+change Minecraft launcher accounts. Java 21 is required; this machine has
+`C:\Program Files\Java\jdk-21`.
+
+```powershell
+pwsh -File scripts/setup-test-runtime.ps1
+# Setup fetches the three required dependency jars from docs/dependencies.lock.json.
+# Optional: Carry On jar in .local/deps; Unlocked Camera jar in .local/deps (clients only).
+./gradlew.bat build
+pwsh -File scripts/sync-test-mods.ps1
+pwsh -File scripts/start-test-runtime.ps1
+```
+
+NeoForge is pinned to **21.1.249** on Minecraft **1.21.1**. Setup uses the official
+NeoForge installer and Mojang assets, verifies Mojang SHA-1 hashes, and copies
+matching existing asset-cache files when available. Common assets/libraries live
+in `.local/launcher`; game directories, options, mods, natives, and logs are separate:
+
+| Instance | Directory | Identity / address |
+| --- | --- | --- |
+| Dedicated server | `.local/server` | `127.0.0.1:25575` |
+| First client | `.local/client-one` | `ReviveOne` |
+| Second client | `.local/client-two` | `ReviveTwo` |
+
+Both client identities have deterministic offline UUIDs and operator access in
+this private development world. The offline server is bound to loopback and is
+not intended for public hosting. Both clients connect automatically through
+Minecraft Quick Play. Each process has a 4 GiB maximum heap, a 6-chunk view distance,
+and its own console logs. The server runs hidden; both game windows remain visible.
+
+`start-test-runtime.ps1 -Target Server`, `-Target ClientOne`, or `-Target ClientTwo`
+starts an individual instance. `-PrepareOnly` validates installed libraries and
+writes Java argument files without launching. Already-running recorded processes
+are skipped. The local RCON password is randomly generated and remains only in
+ignored server properties. Run administrative commands without displaying it:
+
+```powershell
+pwsh -File scripts/test-server-command.ps1 'list'
+pwsh -File scripts/test-server-command.ps1 'give ReviveOne minecraft:golden_apple 16'
+pwsh -File scripts/test-server-command.ps1 'give ReviveTwo minecraft:golden_apple 16'
+pwsh -File scripts/test-server-command.ps1 'tp ReviveTwo ReviveOne'
+pwsh -File scripts/test-server-command.ps1 'save-all flush'
+pwsh -File scripts/test-server-command.ps1 'stop'
+```
+
+Close both clients and stop the server before replacing mod jars. `sync-test-mods.ps1`
+copies only the three required mods, RagRevival, Carry On if present, and Unlocked
+Camera if present. It never installs the compile-only extracted Sable companion
+jar because Sable already bundles that dependency.
+
+Live interactive behavior needs two people or switching between both windows.
+The task's final report distinguishes compilation/startup checks from feeding,
+movement, camera, dragging, and key-hold interactions actually exercised.
+
+## Optional integration harness
+
+The test harness is a separate source set and JAR; it is never packaged in the
+distributable mod. It changes the two test players' inventories, health, and
+positions, so run it only in the isolated test world. With the server stopped:
+
+```powershell
+./gradlew.bat testModJar
+Copy-Item build/libs/ragrevival-1.21.1-1.0.0-test-harness.jar .local/server/mods/
+pwsh -File scripts/start-test-runtime.ps1
+# After both clients join, leave them idle:
+pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
+pwsh -File scripts/test-server-command.ps1 'ragrevivaltest codec'
+```
+
+The scheduled tests exercise real dedicated-server APIs and native Sable physics
+while both clients receive synchronization. Results are logged as
+`RAGREVIVAL_TEST PASS/FAIL`. Tests include death interception, item/XP game rules,
+feeding cancellation/completion, native drag release, dismount locking, movement
+input, give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage
+edge cases. The codec command can run separately. See `docs/test-results.md` for
+which versions and scenarios were actually executed, including independent real
+reconnection/restart checks.
+
+For the optional client geometry probe, also install the harness JAR into the
+client mod directories before launching. Put the text `ReviveOne` into
+`.local/client-two/ragrevival-geometry.request` while that player is downed and
+nearby. The probe writes a geometry JSON report and a Minecraft-rendered screenshot
+inside that client directory. Synthetic camera rays are geometry checks; actual
+mouse targeting with Unlocked Camera still needs the manual checklist. Remove the
+test harness from all instances after stopping them and before normal play.

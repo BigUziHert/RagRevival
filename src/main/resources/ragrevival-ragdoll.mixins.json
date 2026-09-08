@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.biguzi.ragrevival.ragdoll.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["PoseRequestsAccessor", "PendingLaunchAccessor"],
+  "injectors": {"defaultRequire": 1}
+}
