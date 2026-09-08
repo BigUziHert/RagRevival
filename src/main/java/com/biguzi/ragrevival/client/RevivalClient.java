@@ -13,6 +13,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -63,6 +64,7 @@ public final class RevivalClient {
     public static void register(IEventBus modBus) {
         modBus.addListener(RevivalClient::registerKeys);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, RevivalClient::onInteraction);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RevivalClient::onScroll);
         NeoForge.EVENT_BUS.addListener(RevivalClient::tick);
         NeoForge.EVENT_BUS.addListener(RevivalClient::render);
         NeoForge.EVENT_BUS.addListener(RevivalClient::logout);
@@ -93,14 +95,40 @@ public final class RevivalClient {
     /** Only the exact server-synchronized limbs qualify, never another ragdoll using the same skin. */
     public static boolean shouldOutline(RagdollPartBlockEntity part) {
         Minecraft mc = Minecraft.getInstance();
+        return mc.player != null && !mc.player.getUUID().equals(part.skinProfile().getId()) && isDownedPart(part);
+    }
+
+    public static boolean isDownedPart(BlockPos pos) {
+        Minecraft mc = Minecraft.getInstance();
+        return mc.level != null && mc.level.getBlockEntity(pos) instanceof RagdollPartBlockEntity part
+                && isDownedPart(part);
+    }
+
+    public static boolean isDownedPart(RagdollPartBlockEntity part) {
+        Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null || part.getLevel() != mc.level) return false;
-        UUID owner = part.skinProfile().getId();
-        if (mc.player.getUUID().equals(owner)) return false;
-        Snapshot state = STATES.get(owner);
+        Snapshot state = STATES.get(part.skinProfile().getId());
         if (state == null || System.nanoTime() - state.receivedNanos > 5_000_000_000L) return false;
         var subLevel = Sable.HELPER.getContainingClient(part);
         return subLevel != null && !subLevel.isRemoved()
                 && state.payload.bodyParts().contains(subLevel.getUniqueId());
+    }
+
+    public static boolean hasActiveInteraction() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || isDowned(mc.player) || activeTarget == null || activeAction == null) return false;
+        Snapshot state = STATES.get(activeTarget);
+        return state != null && System.nanoTime() - state.receivedNanos <= 5_000_000_000L;
+    }
+
+    public static boolean hasActiveDrag() {
+        return activeAction == InputAction.DRAG && hasActiveInteraction();
+    }
+
+    private static void onScroll(InputEvent.MouseScrollingEvent event) {
+        // Camera mods (including Unlocked Camera at LOW) receive the wheel first. Only consume
+        // an unclaimed vertical scroll, so vanilla cannot change the empty hotbar slot mid-drag.
+        if (hasActiveDrag() && event.getScrollDeltaY() != 0) event.setCanceled(true);
     }
 
     private static void logout(ClientPlayerNetworkEvent.LoggingOut event) {

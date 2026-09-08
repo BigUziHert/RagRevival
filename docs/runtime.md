@@ -63,7 +63,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.1.0-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.1.1-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -93,3 +93,21 @@ For a screenshot without requiring a downed target, write a short filename label
 such as `outline-wall` into `.local/client-two/ragrevival-visual.request`. The
 test-only client probe captures the actual framebuffer into
 `screenshots/ragrevival-outline-wall.png` without moving the camera or sending input.
+
+For the opt-in scroll regression fixture, install the test harness on both
+clients and the server, leave the rescuer idle, and use the isolated test world:
+
+```powershell
+# Creates a normal same-profile dummy beside the target, expiring after 20 seconds.
+pwsh -File scripts/test-server-command.ps1 'ragrevivaltest scroll-dummy ReviveOne'
+pwsh -File scripts/test-server-command.ps1 'damage ReviveOne 100 minecraft:generic'
+Set-Content .local/client-two/ragrevival-scroll.request ReviveOne
+```
+
+With Unlocked Camera loaded, the fixture posts synthetic wheel events through
+the actual client event bus and checks camera distance, native grab ownership,
+collision suppression, cancellation, and the hotbar gate. Results are written
+to `.local/client-two/ragrevival-scroll.json`. Temporary camera/config/input
+state is restored before the next tick. Ordinary-grip takeover tests emit
+native release packets for their temporary fixture grips, so run only on an idle
+test client. This checks event handling, not a physical mouse-wheel gesture.

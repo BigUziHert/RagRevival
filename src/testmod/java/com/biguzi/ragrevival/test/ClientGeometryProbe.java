@@ -35,6 +35,7 @@ public final class ClientGeometryProbe {
 
     public ClientGeometryProbe() {
         NeoForge.EVENT_BUS.addListener(this::render);
+        new DragScrollProbe();
     }
 
     private void render(RenderGuiEvent.Post event) {

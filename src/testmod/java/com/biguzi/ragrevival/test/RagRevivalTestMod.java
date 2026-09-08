@@ -10,6 +10,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
 import dev.leo.ragdollreactions.physics.ReactionSuppressions;
 import dev.leo.sableplayerragdoll.api.DespawnCondition;
+import dev.leo.sableplayerragdoll.api.PlayerlessDespawnRule;
 import dev.leo.sableplayerragdoll.api.RagdollAPI;
 import dev.leo.sableplayerragdoll.api.RagdollLaunchOptions;
 import dev.leo.sableplayerragdoll.api.RagdollLimbOptions;
@@ -67,6 +68,13 @@ public final class RagRevivalTestMod {
 
     private static void commands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("ragrevivaltest").requires(source -> source.hasPermission(4))
+                .then(Commands.literal("scroll-dummy").then(Commands.argument("target", EntityArgument.player()).executes(context -> {
+                    ServerPlayer player = EntityArgument.getPlayer(context, "target");
+                    RagdollAPI.spawnPlayerless(player.serverLevel(), RagdollBridge.worldPosition(player).add(4, 0, 0),
+                            0, player.getGameProfile(), Vec3.ZERO, PlayerlessDespawnRule.afterTicks(400));
+                    context.getSource().sendSuccess(() -> Component.literal("Created ordinary same-profile dummy for scroll probe; expires in 20 seconds."), false);
+                    return 1;
+                })))
                 .then(Commands.literal("revive").then(Commands.argument("target", EntityArgument.player()).executes(context -> {
                     ServerPlayer player = EntityArgument.getPlayer(context, "target");
                     boolean wasDowned = DownedManager.isDowned(player);

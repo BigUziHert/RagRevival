@@ -4,6 +4,6 @@
   "package": "com.biguzi.ragrevival.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": ["TargetingConditionsMixin"],
-  "client": ["RagdollOutlineMixin"],
+  "client": ["RagdollOutlineMixin", "RagdollGrabInputMixin"],
   "injectors": {"defaultRequire": 1}
 }

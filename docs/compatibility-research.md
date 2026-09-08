@@ -40,6 +40,28 @@ Carry On ordinarily requires both hands empty and its pickup key pressed. Player
 
 All optional Carry On references are inside a nested class loaded only when mod ID `carryon` is present. The mod is a compile-only dependency of Rag Revival, never bundled in the distributable JAR. Client and server test installations use the same selected optional version. Manual tests should enable Carry On's `pickupPlayers` setting when checking player pickup exclusion.
 
+## Dragging and camera scroll (1.1.1)
+
+Sable Ragdolls 0.7.2's `RagdollGrabClient` polls the raw Use key every client tick,
+independently of the canceled interaction event. It can optimistically set a
+native `activePos` on a downed limb even though the server rejects that generic
+grip. Its NORMAL-priority mouse-scroll listener then cancels the event before
+Unlocked Camera's LOW-priority zoom listener runs. On release, that duplicate
+native grip also sends a release packet against the same limb used by our drag.
+
+RagRevival 1.1.1 prevents native client target acquisition for exact synchronized
+downed limbs and while a revival interaction owns the input. A native grip whose
+limb becomes downed is cleared locally, without sending a release packet (server
+downing already removed the old generic grip). The native `isGrabbing` collision
+predicate includes our drag, including when Use is released but crouch stays held.
+
+Unlocked Camera's code, settings and listener remain unchanged. A LOWEST-priority
+RagRevival listener consumes only vertical wheel input still unclaimed during
+our drag; this prevents vanilla hotbar changes if camera zoom is inactive or the
+camera mod is absent. Already canceled input stays canceled, and horizontal-only
+input is left alone. Ordinary native player/mob/dummy grabs retain their normal
+targeting, release, collision grace, and scroll behavior.
+
 ## Scope of evidence
 
 Private repository access and the optional camera build succeeded. Source-level hooks are known for the pinned optional versions. This document does not assert that untested releases or every physics/camera combination are compatible. Runtime results, including dedicated-server startup and multiplayer checks, are recorded in the main testing documentation.
