@@ -7,8 +7,10 @@ import com.biguzi.ragrevival.state.DownedClock;
 import com.biguzi.ragrevival.state.HoldProgress;
 import com.mojang.logging.LogUtils;
 import java.util.*;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -95,6 +97,8 @@ public final class DownedManager {
         player.server.getPlayerList().saveAll();
         clearAggro(player.server);
         sync(player);
+        player.server.getPlayerList().broadcastSystemMessage(Component.translatable(
+                "chat.ragrevival.knocked", player.getDisplayName()).withStyle(ChatFormatting.GOLD), false);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -253,7 +257,7 @@ public final class DownedManager {
     public static void revive(ServerPlayer player) {
         if (!isDowned(player)) return;
         clear(player);
-        player.setHealth((float)Math.min(player.getMaxHealth(), RevivalConfig.RESTORED_HEALTH.get()));
+        player.setHealth((float)(player.getMaxHealth() * RevivalConfig.RESTORED_HEALTH_FRACTION.get()));
         player.invulnerableTime = 20;
         player.fallDistance = 0;
         player.server.getPlayerList().saveAll();

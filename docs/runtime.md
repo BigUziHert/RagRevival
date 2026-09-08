@@ -63,11 +63,13 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.0.0-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.1.0-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest codec'
+# Test-only direct revival, useful for checking outline cleanup after a screenshot:
+pwsh -File scripts/test-server-command.ps1 'ragrevivaltest revive ReviveOne'
 ```
 
 The scheduled tests exercise real dedicated-server APIs and native Sable physics
@@ -86,3 +88,8 @@ nearby. The probe writes a geometry JSON report and a Minecraft-rendered screens
 inside that client directory. Synthetic camera rays are geometry checks; actual
 mouse targeting with Unlocked Camera still needs the manual checklist. Remove the
 test harness from all instances after stopping them and before normal play.
+
+For a screenshot without requiring a downed target, write a short filename label
+such as `outline-wall` into `.local/client-two/ragrevival-visual.request`. The
+test-only client probe captures the actual framebuffer into
+`screenshots/ragrevival-outline-wall.png` without moving the camera or sending input.

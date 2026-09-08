@@ -2,11 +2,13 @@ package com.biguzi.ragrevival.test;
 
 import com.biguzi.ragrevival.DownedManager;
 import com.biguzi.ragrevival.RevivalConfig;
+import com.biguzi.ragrevival.compat.CarryOnCompat;
 import com.biguzi.ragrevival.network.InputAction;
 import com.biguzi.ragrevival.network.InputPayload;
 import com.biguzi.ragrevival.ragdoll.RagdollBridge;
 import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
+import dev.leo.ragdollreactions.physics.ReactionSuppressions;
 import dev.leo.sableplayerragdoll.api.DespawnCondition;
 import dev.leo.sableplayerragdoll.api.RagdollAPI;
 import dev.leo.sableplayerragdoll.api.RagdollLaunchOptions;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.network.chat.Component;
@@ -33,6 +36,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -63,6 +67,14 @@ public final class RagRevivalTestMod {
 
     private static void commands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("ragrevivaltest").requires(source -> source.hasPermission(4))
+                .then(Commands.literal("revive").then(Commands.argument("target", EntityArgument.player()).executes(context -> {
+                    ServerPlayer player = EntityArgument.getPlayer(context, "target");
+                    boolean wasDowned = DownedManager.isDowned(player);
+                    DownedManager.revive(player);
+                    context.getSource().sendSuccess(() -> Component.literal("Revive " + player.getScoreboardName()
+                            + ": wasDowned=" + wasDowned), false);
+                    return wasDowned ? 1 : 0;
+                })))
                 .then(Commands.literal("codec").executes(context -> {
                     int[] result = new int[2];
                     StatePayloadProbe.run((passed, name) -> {
@@ -107,6 +119,9 @@ public final class RagRevivalTestMod {
         private final boolean originalKeepInventory;
         private final boolean originalImmediateRespawn;
         private final boolean originalMobSpawning;
+        private final boolean originalNaturalRegeneration;
+        private final double originalRestoredHealthFraction;
+        private final double originalMaxHealthBase;
         private Zombie zombie;
         private Vec3 site;
         private InputAction heartbeat;
@@ -123,6 +138,9 @@ public final class RagRevivalTestMod {
             originalKeepInventory = server.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY);
             originalImmediateRespawn = server.getGameRules().getBoolean(GameRules.RULE_DO_IMMEDIATE_RESPAWN);
             originalMobSpawning = server.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING);
+            originalNaturalRegeneration = server.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
+            originalRestoredHealthFraction = RevivalConfig.RESTORED_HEALTH_FRACTION.get();
+            originalMaxHealthBase = target.getAttribute(Attributes.MAX_HEALTH).getBaseValue();
         }
 
         private void after(int delay, Runnable action) { cursor += delay; steps.add(new Step(cursor, action)); }
@@ -134,9 +152,13 @@ public final class RagRevivalTestMod {
                 if (!rescuer.isAlive()) rescuer = respawn(rescuer);
                 DownedManager.revive(target); DownedManager.revive(rescuer);
                 RagdollBridge.release(target); RagdollBridge.release(rescuer);
+                CarryOnCompat.releaseForDowning(target); CarryOnCompat.releaseForDowning(rescuer);
+                RevivalConfig.RESTORED_HEALTH_FRACTION.set(0.5);
+                target.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
                 target.setGameMode(GameType.SURVIVAL); rescuer.setGameMode(GameType.SURVIVAL);
                 server.getGameRules().getRule(GameRules.RULE_DO_IMMEDIATE_RESPAWN).set(false, server);
                 server.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, server);
+                server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, server);
                 for (var level : server.getAllLevels()) {
                     List<Entity> ambient = new ArrayList<>();
                     level.getAllEntities().forEach(entity -> { if (entity instanceof Mob) ambient.add(entity); });
@@ -192,6 +214,13 @@ public final class RagRevivalTestMod {
             after(40, () -> {
                 nearTarget();
                 check(RagdollBridge.canReach(rescuer, target), "server can reach real Sable body from nearby player");
+                boolean ready = rescuer.isAlive() && !rescuer.isSpectator() && !DownedManager.isDowned(rescuer)
+                        && !CarryOnCompat.isCarrying(rescuer) && !rescuer.isPassenger() && !rescuer.isVehicle()
+                        && rescuer.getMainHandItem().is(DownedManager.REVIVAL_ITEMS);
+                check(ready, "rescuer ready before feeding: alive=" + rescuer.isAlive()
+                        + " spectator=" + rescuer.isSpectator() + " downed=" + DownedManager.isDowned(rescuer)
+                        + " carrying=" + CarryOnCompat.isCarrying(rescuer) + " passenger=" + rescuer.isPassenger()
+                        + " vehicle=" + rescuer.isVehicle() + " tagged=" + rescuer.getMainHandItem().is(DownedManager.REVIVAL_ITEMS));
                 send(rescuer, InputAction.FEED);
                 check(DownedManager.isBusy(rescuer), "feeding starts for held tagged item");
                 for (int i = 0; i < 100; i++) send(rescuer, InputAction.FEED);
@@ -239,8 +268,8 @@ public final class RagRevivalTestMod {
                 check(!DownedManager.isDowned(target), "continuous feeding revives target");
                 check(apples() == 3, "successful feeding consumes exactly one golden apple");
                 check(!DownedManager.isBusy(rescuer), "successful feeding clears rescue lease");
-                check(target.getHealth() == (float)Math.min(target.getMaxHealth(), RevivalConfig.RESTORED_HEALTH.get()),
-                        "revival restores configured health");
+                check(target.getMaxHealth() == 20 && target.getHealth() == 10,
+                        "default half-health revival restores 10 HP at 20 maximum HP");
                 send(rescuer, InputAction.FEED); send(rescuer, InputAction.FEED);
                 check(apples() == 3, "late repeated packets cannot consume again");
             });
@@ -248,6 +277,34 @@ public final class RagRevivalTestMod {
                 check(!target.isPassenger(), "revival releases native Sable seat");
                 check(Math.abs(target.getX() - site.x) < 20 && Math.abs(target.getZ() - site.z) < 20,
                         "revival returns actual player from plotyard to body world position");
+                target.getAttribute(Attributes.MAX_HEALTH).setBaseValue(40);
+                DownedManager.down(target, target.damageSources().generic());
+            });
+            after(35, () -> {
+                nearTarget(); send(rescuer, InputAction.FEED); heartbeat = InputAction.FEED;
+            });
+            after(RevivalConfig.FEEDING_TICKS.get() + 3, () -> {
+                heartbeat = null;
+                check(!DownedManager.isDowned(target) && target.getMaxHealth() == 40 && target.getHealth() == 20,
+                        "half-health feeding revival scales to 20 HP at 40 maximum HP");
+                check(apples() == 2, "scaled-health revival consumes exactly one golden apple");
+            });
+            after(12, () -> {
+                RevivalConfig.RESTORED_HEALTH_FRACTION.set(0.25);
+                DownedManager.down(target, target.damageSources().generic());
+            });
+            after(35, () -> {
+                nearTarget(); send(rescuer, InputAction.FEED); heartbeat = InputAction.FEED;
+            });
+            after(RevivalConfig.FEEDING_TICKS.get() + 3, () -> {
+                heartbeat = null;
+                check(!DownedManager.isDowned(target) && target.getMaxHealth() == 40 && target.getHealth() == 10,
+                        "configured quarter-health feeding revival restores 10 HP at 40 maximum HP");
+                check(apples() == 1, "configured-health revival consumes exactly one golden apple");
+            });
+            after(12, () -> {
+                RevivalConfig.RESTORED_HEALTH_FRACTION.set(0.5);
+                target.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
                 DownedManager.down(target, target.damageSources().generic());
             });
             after(35, () -> {
@@ -370,6 +427,9 @@ public final class RagRevivalTestMod {
 
         private void tick() {
             ticks++;
+            // Fixture teleports must not create incidental impact ragdolls on either actor.
+            // The short lease expires naturally after this run; explicit RagdollAPI launches remain enabled.
+            suppressFixtureReactions(target); suppressFixtureReactions(rescuer);
             if (moveDowned) RagdollControlHelper.updateInput(target, 1, 1);
             if (heartbeat != null) send(heartbeat == InputAction.GIVE_UP ? target : rescuer, heartbeat);
             while (!steps.isEmpty() && steps.peek().tick <= ticks) steps.remove().action.run();
@@ -377,6 +437,7 @@ public final class RagRevivalTestMod {
 
         private void nearTarget() {
             Vec3 body = RagdollBridge.worldPosition(target);
+            suppressFixtureReactions(rescuer);
             rescuer.teleportTo(body.x + 1.4, site.y, body.z);
             rescuer.setDeltaMovement(Vec3.ZERO);
         }
@@ -391,11 +452,17 @@ public final class RagRevivalTestMod {
             ServerPlayer replacement = server.getPlayerList().respawn(previous, false, Entity.RemovalReason.KILLED);
             // Vanilla's client-command handler performs this assignment after PlayerList.respawn.
             replacement.connection.player = replacement;
+            suppressFixtureReactions(replacement);
             return replacement;
+        }
+
+        private static void suppressFixtureReactions(ServerPlayer player) {
+            ReactionSuppressions.suppress(player, player.serverLevel().getGameTime(), 5);
         }
 
         private void resetPlayer(ServerPlayer player) {
             if (!player.isAlive()) throw new IllegalStateException(player.getScoreboardName() + " must be alive before testing");
+            suppressFixtureReactions(player);
             player.removeAllEffects(); player.setHealth(player.getMaxHealth());
             player.clearFire(); player.setDeltaMovement(Vec3.ZERO); player.setShiftKeyDown(false);
             player.getInventory().clearContent(); player.getFoodData().setFoodLevel(20);
@@ -421,6 +488,11 @@ public final class RagRevivalTestMod {
 
         private void finish(boolean completed) {
             heartbeat = null;
+            suppressFixtureReactions(target); suppressFixtureReactions(rescuer);
+            // Restore fixture overrides before cleanup can fail or revive a surviving player.
+            RevivalConfig.RESTORED_HEALTH_FRACTION.set(originalRestoredHealthFraction);
+            target.getAttribute(Attributes.MAX_HEALTH).setBaseValue(originalMaxHealthBase);
+            server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(originalNaturalRegeneration, server);
             if (zombie != null) zombie.discard();
             for (ServerPlayer player : List.of(target, rescuer)) {
                 DownedManager.revive(player);

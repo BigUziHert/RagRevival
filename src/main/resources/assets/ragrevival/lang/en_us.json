@@ -1,4 +1,5 @@
 {
+  "chat.ragrevival.knocked": "%s is knocked and needs to be revived!",
   "key.categories.ragrevival": "Rag Revival",
   "key.ragrevival.give_up": "Give up while downed (hold)",
   "hud.ragrevival.downed": "Downed — %s remaining",

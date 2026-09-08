@@ -6,6 +6,7 @@ import com.biguzi.ragrevival.network.InputAction;
 import com.biguzi.ragrevival.network.RevivalNetwork;
 import com.biguzi.ragrevival.network.StatePayload;
 import com.mojang.blaze3d.platform.InputConstants;
+import dev.leo.sableplayerragdoll.block.entity.RagdollPartBlockEntity;
 import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.companion.ClientSubLevelAccess;
 import net.minecraft.client.Camera;
@@ -87,6 +88,19 @@ public final class RevivalClient {
 
     public static boolean isDowned(Player player) {
         return player != null && STATES.containsKey(player.getUUID());
+    }
+
+    /** Only the exact server-synchronized limbs qualify, never another ragdoll using the same skin. */
+    public static boolean shouldOutline(RagdollPartBlockEntity part) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.level == null || part.getLevel() != mc.level) return false;
+        UUID owner = part.skinProfile().getId();
+        if (mc.player.getUUID().equals(owner)) return false;
+        Snapshot state = STATES.get(owner);
+        if (state == null || System.nanoTime() - state.receivedNanos > 5_000_000_000L) return false;
+        var subLevel = Sable.HELPER.getContainingClient(part);
+        return subLevel != null && !subLevel.isRemoved()
+                && state.payload.bodyParts().contains(subLevel.getUniqueId());
     }
 
     private static void logout(ClientPlayerNetworkEvent.LoggingOut event) {

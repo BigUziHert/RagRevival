@@ -43,6 +43,7 @@ public final class ClientGeometryProbe {
         nextPoll = now + 500_000_000L;
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) return;
+        captureVisual(mc);
         Path request = mc.gameDirectory.toPath().resolve("ragrevival-geometry.request");
         if (!Files.exists(request)) { waitingSince = 0; return; }
         try {
@@ -72,6 +73,21 @@ public final class ClientGeometryProbe {
                         new GsonBuilder().setPrettyPrinting().create().toJson(Map.of("error", failure.toString())));
                 Files.deleteIfExists(request);
             } catch (Exception ignored) {}
+        }
+    }
+
+    /** Capture the real framebuffer without requiring a downed target or changing the camera. */
+    private static void captureVisual(Minecraft mc) {
+        Path request = mc.gameDirectory.toPath().resolve("ragrevival-visual.request");
+        if (!Files.exists(request)) return;
+        try {
+            String label = Files.readString(request).trim().replaceAll("[^a-zA-Z0-9_-]", "_");
+            if (label.isEmpty()) label = "capture";
+            Files.delete(request);
+            Screenshot.grab(mc.gameDirectory, "ragrevival-" + label + ".png", mc.getMainRenderTarget(),
+                    component -> LogUtils.getLogger().info("RAGREVIVAL_VISUAL screenshot: {}", component.getString()));
+        } catch (Exception failure) {
+            LogUtils.getLogger().error("RAGREVIVAL_VISUAL failed", failure);
         }
     }
 
