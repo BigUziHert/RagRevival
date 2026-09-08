@@ -61,7 +61,12 @@ public final class DownedManager {
         return rescue != null && rescue.action == InputAction.DRAG;
     }
     public static long remainingMillis(Player player) {
-        return isDowned(player) ? DownedClock.remaining(player.getPersistentData().getCompound(DATA_KEY).getLong("deadline"), System.currentTimeMillis()) : 0;
+        if (!isDowned(player)) return 0;
+        UUID rescuer = TARGET_LOCKS.get(player.getUUID());
+        Rescue rescue = rescuer == null ? null : RESCUES.get(rescuer);
+        long now = rescue != null && rescue.action == InputAction.FEED && rescue.hold.isActive(tick)
+                ? rescue.pauseAccountedAt : System.currentTimeMillis();
+        return DownedClock.remaining(player.getPersistentData().getCompound(DATA_KEY).getLong("deadline"), now);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -166,18 +171,22 @@ public final class DownedManager {
         }
         if (rescue != null) { rescue.hold.heartbeat(tick); return; }
         if (TARGET_LOCKS.containsKey(target.getUUID())) return;
+        long now = System.currentTimeMillis();
+        // A request already at/past the deadline cannot turn an expired player into a paused rescue.
+        if (DownedClock.remaining(target.getPersistentData().getCompound(DATA_KEY).getLong("deadline"), now) == 0) return;
         if (input.action() == InputAction.FEED && !actor.getItemInHand(input.hand()).is(REVIVAL_ITEMS)) return;
         if (input.action() == InputAction.DRAG && (!actor.isShiftKeyDown() || !actor.getMainHandItem().isEmpty() || !actor.getOffhandItem().isEmpty())) return;
         if (input.action() != InputAction.FEED && input.action() != InputAction.DRAG) return;
         if (input.action() == InputAction.DRAG && !RagdollBridge.startDrag(actor, target)) return;
         actor.stopUsingItem();
         RESCUES.put(id, new Rescue(actor, target, input.action(), input.hand(), actor.getItemInHand(input.hand()),
-                new HoldProgress(tick), RevivalConfig.FEEDING_TICKS.get()));
+                new HoldProgress(tick), RevivalConfig.FEEDING_TICKS.get(), now));
         TARGET_LOCKS.put(target.getUUID(), id);
     }
 
     private static boolean validTarget(ServerPlayer actor, ServerPlayer target) {
         return actor.level() == target.level() && isDowned(target) && target.isAlive()
+                && target.connection != null && !target.hasDisconnected()
                 && !actor.isPassenger() && !actor.isVehicle() && !target.isVehicle()
                 && RagdollBridge.canReach(actor, target);
     }
@@ -186,6 +195,24 @@ public final class DownedManager {
     public static void tick(ServerTickEvent.Post event) {
         tick++;
         MinecraftServer server = event.getServer();
+        // Validate and credit feeding before expiry: even a last-second feed must get its pause.
+        // Completing the interaction waits until after terminal conditions, including give-up.
+        for (Rescue rescue : List.copyOf(RESCUES.values())) {
+            if (RESCUES.get(rescue.actor.getUUID()) != rescue) continue;
+            ServerPlayer actor = rescue.actor;
+            boolean valid = actor.connection != null && !actor.hasDisconnected() && actor.isAlive() && !actor.isSpectator()
+                    && !isDowned(actor) && !CarryOnCompat.isCarrying(actor) && validTarget(actor, rescue.target)
+                    && rescue.hold.advance(tick);
+            if (rescue.action == InputAction.FEED) {
+                valid &= actor.getItemInHand(rescue.hand) == rescue.stack && rescue.stack.is(REVIVAL_ITEMS)
+                        && !rescue.stack.isEmpty();
+            } else {
+                valid &= actor.isShiftKeyDown() && actor.getMainHandItem().isEmpty() && actor.getOffhandItem().isEmpty();
+                if (valid) valid = RagdollBridge.tickDrag(actor, rescue.target);
+            }
+            if (!valid) { cancelRescue(actor.getUUID()); continue; }
+            creditFeedingTime(rescue, System.currentTimeMillis());
+        }
         for (ServerPlayer player : List.copyOf(server.getPlayerList().getPlayers())) {
             if (!isDowned(player)) continue;
             if (remainingMillis(player) == 0) { finishDeath(player); continue; }
@@ -213,17 +240,6 @@ public final class DownedManager {
         for (Rescue rescue : List.copyOf(RESCUES.values())) {
             if (RESCUES.get(rescue.actor.getUUID()) != rescue) continue;
             ServerPlayer actor = rescue.actor;
-            boolean valid = actor.connection != null && !actor.hasDisconnected() && actor.isAlive() && !actor.isSpectator()
-                    && !isDowned(actor) && !CarryOnCompat.isCarrying(actor) && validTarget(actor, rescue.target)
-                    && rescue.hold.advance(tick);
-            if (rescue.action == InputAction.FEED) {
-                valid &= actor.getItemInHand(rescue.hand) == rescue.stack && rescue.stack.is(REVIVAL_ITEMS)
-                        && !rescue.stack.isEmpty();
-            } else {
-                valid &= actor.isShiftKeyDown() && actor.getMainHandItem().isEmpty() && actor.getOffhandItem().isEmpty();
-                if (valid) valid = RagdollBridge.tickDrag(actor, rescue.target);
-            }
-            if (!valid) { cancelRescue(actor.getUUID()); continue; }
             if (rescue.action == InputAction.FEED && rescue.hold.ticks() >= rescue.duration) {
                 // Single server-thread transaction: ownership + target still valid, clear lock, consume exactly once.
                 ServerPlayer target = rescue.target;
@@ -295,9 +311,19 @@ public final class DownedManager {
     private static void cancelRescue(UUID rescuer) {
         Rescue removed = RESCUES.remove(rescuer);
         if (removed != null) {
+            // Settle the final fraction of a live hold on release/logout/shutdown. A stale lease
+            // earns no extra time; there is never a persisted pause flag that can survive offline.
+            creditFeedingTime(removed, System.currentTimeMillis());
             TARGET_LOCKS.remove(removed.target.getUUID(), rescuer);
             if (removed.action == InputAction.DRAG) RagdollBridge.stopDrag(removed.actor);
         }
+    }
+    private static void creditFeedingTime(Rescue rescue, long now) {
+        if (rescue.action != InputAction.FEED || !rescue.hold.isActive(tick) || !isDowned(rescue.target)) return;
+        long elapsed = Math.max(0, now - rescue.pauseAccountedAt);
+        CompoundTag data = rescue.target.getPersistentData().getCompound(DATA_KEY);
+        data.putLong("deadline", Math.addExact(data.getLong("deadline"), elapsed));
+        rescue.pauseAccountedAt = Math.max(rescue.pauseAccountedAt, now);
     }
     private static void sync(ServerPlayer target) {
         UUID rescuerId = TARGET_LOCKS.get(target.getUUID());
@@ -367,7 +393,27 @@ public final class DownedManager {
         RESCUES.clear(); TARGET_LOCKS.clear(); GIVE_UP.clear(); SOURCES.clear(); TERMINAL.clear(); SETUP_TICKS.clear(); tick = 0;
         RagdollBridge.clear();
     }
-    private record Rescue(ServerPlayer actor, ServerPlayer target, InputAction action, InteractionHand hand,
-                          ItemStack stack, HoldProgress hold, int duration) {}
+    private static final class Rescue {
+        final ServerPlayer actor;
+        final ServerPlayer target;
+        final InputAction action;
+        final InteractionHand hand;
+        final ItemStack stack;
+        final HoldProgress hold;
+        final int duration;
+        long pauseAccountedAt;
+
+        Rescue(ServerPlayer actor, ServerPlayer target, InputAction action, InteractionHand hand,
+               ItemStack stack, HoldProgress hold, int duration, long now) {
+            this.actor = actor;
+            this.target = target;
+            this.action = action;
+            this.hand = hand;
+            this.stack = stack;
+            this.hold = hold;
+            this.duration = duration;
+            this.pauseAccountedAt = now;
+        }
+    }
     private DownedManager() {}
 }

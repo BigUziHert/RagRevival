@@ -14,6 +14,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -23,6 +24,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -322,13 +324,75 @@ public final class RevivalClient {
             progress(gui, center, top + 16, targetState.payload.feedingTicks(), targetState.payload.feedingDuration(),
                     0xFF79D587, text);
         } else {
-            String key = activeAction == InputAction.DRAG ? "hud.ragrevival.dragging" : "hud.ragrevival.rescue_hint";
-            gui.drawCenteredString(mc.font, Component.translatable(key), center, top + 12, 0xFFFFFFFF);
+            renderRescueHint(gui, center, top + 12);
         }
     }
 
+    private static void renderRescueHint(GuiGraphics gui, int center, int top) {
+        Minecraft mc = Minecraft.getInstance();
+        Component keys = Component.empty();
+        Component label;
+        List<ItemStack> icons = List.of();
+        int accent = 0xFFA5DAC0;
+        InteractionHand hand = revivalHand(mc.player);
+        if (activeAction == InputAction.DRAG) {
+            keys = compactKey(mc.options.keyShift);
+            label = Component.translatable("hud.ragrevival.release_drag_hint");
+            accent = 0xFFE6C985;
+        } else if (hand != null) {
+            keys = compactKey(mc.options.keyUse);
+            icons = List.of(mc.player.getItemInHand(hand));
+            label = Component.translatable("hud.ragrevival.revive_hint");
+        } else if (mc.player.getMainHandItem().isEmpty() && mc.player.getOffhandItem().isEmpty()) {
+            keys = mc.player.isShiftKeyDown() ? compactKey(mc.options.keyUse)
+                    : Component.translatable("hud.ragrevival.drag_keys", compactKey(mc.options.keyShift), compactKey(mc.options.keyUse));
+            label = Component.translatable("hud.ragrevival.drag_hint");
+            accent = 0xFFE6C985;
+        } else {
+            // Derive the suggested icons from the same tag, so datapack overrides stay accurate.
+            icons = BuiltInRegistries.ITEM.getTag(REVIVAL_ITEMS)
+                    .map(items -> items.stream().limit(2).map(item -> new ItemStack(item.value())).toList())
+                    .orElse(List.of());
+            label = Component.translatable("hud.ragrevival.equip_hint");
+        }
+        int keyTextWidth = mc.font.width(keys);
+        int keyWidth = keyTextWidth == 0 ? 0 : keyTextWidth + 8;
+        int width = 14 + icons.size() * 20 + (keyWidth == 0 ? 0 : keyWidth + 6) + mc.font.width(label);
+        int left = center - width / 2;
+        // A compact, softly outlined panel with a distinct keycap; the name/timer above stays unchanged.
+        gui.fill(left + 1, top, left + width - 1, top + 22, 0xC9182028);
+        gui.fill(left, top + 1, left + width, top + 21, 0xC9182028);
+        gui.fill(left + 2, top + 21, left + width - 2, top + 22, (accent & 0x00FFFFFF) | 0x66000000);
+        int x = left + 7;
+        for (ItemStack icon : icons) {
+            gui.renderItem(icon, x, top + 3);
+            x += 20;
+        }
+        if (keyWidth > 0) {
+            gui.fill(x, top + 4, x + keyWidth, top + 18, 0xFF35424D);
+            gui.drawString(mc.font, keys, x + 4, top + 7, 0xFFF0F4F5, false);
+            x += keyWidth + 6;
+        }
+        gui.drawString(mc.font, label, x, top + 7, accent, false);
+    }
+
+    private static Component compactKey(KeyMapping mapping) {
+        var key = mapping.getKey();
+        if (key.getType() == InputConstants.Type.MOUSE) {
+            String translation = switch (key.getValue()) {
+                case 0 -> "hud.ragrevival.mouse_left";
+                case 1 -> "hud.ragrevival.mouse_right";
+                case 2 -> "hud.ragrevival.mouse_middle";
+                default -> null;
+            };
+            if (translation != null) return Component.translatable(translation);
+        }
+        return mapping.getTranslatedKeyMessage();
+    }
+
     private static String time(Snapshot snapshot) {
-        long elapsedMillis = (System.nanoTime() - snapshot.receivedNanos) / 1_000_000L;
+        long elapsedMillis = snapshot.payload.feedingTicks() > 0 ? 0
+                : (System.nanoTime() - snapshot.receivedNanos) / 1_000_000L;
         long seconds = Math.max(0, (snapshot.payload.remainingMillis() - elapsedMillis + 999) / 1000);
         return String.format(java.util.Locale.ROOT, "%d:%02d", seconds / 60, seconds % 60);
     }

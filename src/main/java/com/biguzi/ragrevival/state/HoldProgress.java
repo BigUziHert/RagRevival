@@ -8,8 +8,11 @@ public final class HoldProgress {
     private int ticks;
     public HoldProgress(long tick) { lastHeartbeat = tick; lastAdvanced = tick; }
     public void heartbeat(long tick) { lastHeartbeat = tick; }
+    public boolean isActive(long tick) {
+        return tick >= lastAdvanced && tick - lastHeartbeat <= MAX_SILENCE_TICKS;
+    }
     public boolean advance(long tick) {
-        if (tick - lastHeartbeat > MAX_SILENCE_TICKS || tick < lastAdvanced) return false;
+        if (!isActive(tick)) return false;
         if (tick > lastAdvanced) { ticks++; lastAdvanced = tick; }
         return true;
     }

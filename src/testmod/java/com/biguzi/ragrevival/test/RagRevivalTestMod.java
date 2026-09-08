@@ -137,6 +137,10 @@ public final class RagRevivalTestMod {
         private int cursor;
         private int passed;
         private long savedDeadline;
+        private long pausedRemaining;
+        private long resumedRemaining;
+        private long dragRemaining;
+        private long originalCarrotDeadline;
         private UUID ordinaryRoot;
         private Vec3 movementStart;
         private boolean moveDowned;
@@ -238,8 +242,14 @@ public final class RagRevivalTestMod {
                         ClientInformation.createDefault());
                 contender.setPos(rescuer.position());
                 contender.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
+                long ownedDeadline = target.getPersistentData().getCompound("ragrevival:downed").getLong("deadline");
                 send(contender, InputAction.FEED);
                 check(!DownedManager.isBusy(contender), "target lock rejects simultaneous second server actor");
+                for (int i = 0; i < 100; i++) {
+                    send(rescuer, InputAction.FEED); send(contender, InputAction.FEED);
+                }
+                check(target.getPersistentData().getCompound("ragrevival:downed").getLong("deadline") == ownedDeadline,
+                        "same-tick owner packets and rejected contenders cannot extend the downed deadline");
                 heartbeat = InputAction.FEED;
             });
             after(8, () -> {
@@ -316,11 +326,63 @@ public final class RagRevivalTestMod {
                 DownedManager.down(target, target.damageSources().generic());
             });
             after(35, () -> {
+                rescuer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_CARROT, 4));
+                nearTarget();
+                target.getPersistentData().getCompound("ragrevival:downed").putLong("deadline", System.currentTimeMillis() + 10_000);
+                check(rescuer.getMainHandItem().is(DownedManager.REVIVAL_ITEMS),
+                        "golden carrots belong to the default revival item tag");
+                send(rescuer, InputAction.FEED); heartbeat = InputAction.FEED;
+                pausedRemaining = DownedManager.remainingMillis(target);
+                check(DownedManager.isBusy(rescuer), "golden-carrot feeding starts on a downed target");
+            });
+            after(8, () -> {
+                check(Math.abs(DownedManager.remainingMillis(target) - pausedRemaining) <= 10,
+                        "valid golden-carrot feeding freezes the remaining downed time");
+                heartbeat = null; send(rescuer, InputAction.RELEASE);
+                check(!DownedManager.isBusy(rescuer) && DownedManager.isDowned(target)
+                                && rescuer.getMainHandItem().is(Items.GOLDEN_CARROT)
+                                && rescuer.getMainHandItem().getCount() == 4,
+                        "releasing golden-carrot feeding cancels without consuming");
+                resumedRemaining = DownedManager.remainingMillis(target);
+                check(Math.abs(resumedRemaining - pausedRemaining) <= 20,
+                        "canceling feeding preserves the remaining time from the start of feeding");
+            });
+            after(3, () -> {
+                check(DownedManager.remainingMillis(target) < resumedRemaining,
+                        "canceled feeding resumes the downed countdown");
+                nearTarget();
+                originalCarrotDeadline = System.currentTimeMillis() + 300;
+                target.getPersistentData().getCompound("ragrevival:downed").putLong("deadline", originalCarrotDeadline);
+                send(rescuer, InputAction.FEED); heartbeat = InputAction.FEED;
+                pausedRemaining = DownedManager.remainingMillis(target);
+            });
+            after(RevivalConfig.FEEDING_TICKS.get() - 1, () -> {
+                check(DownedManager.isDowned(target) && rescuer.getMainHandItem().getCount() == 4,
+                        "golden-carrot revival requires a fresh full feeding duration after cancellation");
+                check(System.currentTimeMillis() > originalCarrotDeadline && target.isAlive() && DownedManager.isDowned(target),
+                        "last-second feeding keeps the player alive past the original death deadline");
+                check(Math.abs(DownedManager.remainingMillis(target) - pausedRemaining) <= 10,
+                        "last-second feeding continues to preserve the remaining bleed-out time");
+            });
+            after(4, () -> {
+                heartbeat = null;
+                check(!DownedManager.isDowned(target) && target.getMaxHealth() == 20 && target.getHealth() == 10,
+                        "completed golden-carrot feeding revives at half maximum health");
+                check(rescuer.getMainHandItem().is(Items.GOLDEN_CARROT) && rescuer.getMainHandItem().getCount() == 3,
+                        "successful golden-carrot feeding consumes exactly one carrot");
+                send(rescuer, InputAction.FEED); send(rescuer, InputAction.FEED);
+                check(rescuer.getMainHandItem().getCount() == 3,
+                        "late repeated golden-carrot packets cannot consume again");
+            });
+            after(12, () -> DownedManager.down(target, target.damageSources().generic()));
+            after(35, () -> {
                 nearTarget(); rescuer.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
                 rescuer.setShiftKeyDown(true); send(rescuer, InputAction.DRAG); heartbeat = InputAction.DRAG;
+                dragRemaining = DownedManager.remainingMillis(target);
                 check(DownedManager.isDragging(rescuer), "crouching empty-handed rescuer acquires native drag");
             });
             after(5, () -> {
+                check(DownedManager.remainingMillis(target) < dragRemaining, "dragging does not pause the downed countdown");
                 rescuer.setShiftKeyDown(false); heartbeat = null;
             });
             after(3, () -> {
@@ -329,10 +391,16 @@ public final class RagRevivalTestMod {
                 send(rescuer, InputAction.FEED);
                 DownedManager.logout(new PlayerEvent.PlayerLoggedOutEvent(rescuer));
                 check(!DownedManager.isBusy(rescuer), "rescuer logout callback cancels feeding");
+                resumedRemaining = DownedManager.remainingMillis(target);
+            });
+            after(3, () -> {
+                check(DownedManager.remainingMillis(target) < resumedRemaining,
+                        "rescuer disconnect cleanup resumes the downed countdown");
                 DownedManager.login(new PlayerEvent.PlayerLoggedInEvent(rescuer));
                 nearTarget(); send(rescuer, InputAction.FEED);
                 DownedManager.down(rescuer, rescuer.damageSources().generic());
                 check(!DownedManager.isBusy(rescuer), "rescuer becoming downed cancels feeding");
+                resumedRemaining = DownedManager.remainingMillis(target);
                 DownedManager.revive(rescuer);
                 heartbeat = InputAction.GIVE_UP;
                 send(target, InputAction.GIVE_UP);
@@ -340,6 +408,8 @@ public final class RagRevivalTestMod {
             after(20, () -> {
                 heartbeat = null; send(target, InputAction.GIVE_UP_RELEASE);
                 check(DownedManager.isDowned(target) && target.isAlive(), "releasing G cancels give-up progress");
+                check(DownedManager.remainingMillis(target) < resumedRemaining,
+                        "rescuer becoming downed cannot leave the target countdown paused");
             });
             after(5, () -> {
                 server.getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(true, server);
@@ -362,10 +432,20 @@ public final class RagRevivalTestMod {
                 DownedManager.down(target, target.damageSources().generic());
             });
             after(30, () -> {
-                target.getPersistentData().getCompound("ragrevival:downed").putLong("deadline", System.currentTimeMillis() - 1);
+                nearTarget(); send(rescuer, InputAction.FEED); heartbeat = InputAction.FEED;
+                check(DownedManager.isBusy(rescuer), "feeding owns the countdown before terminal-cancellation check");
+            });
+            after(8, () -> {
+                heartbeat = null; send(rescuer, InputAction.RELEASE);
+                long expiredDeadline = System.currentTimeMillis() - 1;
+                target.getPersistentData().getCompound("ragrevival:downed").putLong("deadline", expiredDeadline);
+                send(rescuer, InputAction.FEED);
+                check(!DownedManager.isBusy(rescuer)
+                                && target.getPersistentData().getCompound("ragrevival:downed").getLong("deadline") == expiredDeadline,
+                        "feeding requested after expiry cannot acquire a rescue or extend the deadline");
             });
             after(3, () -> {
-                check(target.isDeadOrDying() && !DownedManager.isDowned(target), "expired server deadline performs terminal death without redowning");
+                check(target.isDeadOrDying() && !DownedManager.isDowned(target), "expired server deadline after canceled feeding performs terminal death without redowning");
                 check(target.getInventory().countItem(Items.DIAMOND) == 0, "countdown death drops inventory with keepInventory false");
                 target = respawn(target);
             });
