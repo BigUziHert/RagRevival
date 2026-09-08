@@ -50,7 +50,8 @@ function Test-Running([string]$Name) {
     $process = Get-Process -Id $processes[$Name].pid -ErrorAction SilentlyContinue
     if (!$process) { return $false }
     if ($process.ProcessName -notin @('java','javaw')) { return $false }
-    return $process.StartTime.ToUniversalTime().ToString('o') -eq $processes[$Name].started
+    # PowerShell 7.5 parses ISO JSON timestamps as DateTime; compare instants, not string coercions.
+    return $process.StartTime.ToUniversalTime().Ticks -eq ([datetime]$processes[$Name].started).ToUniversalTime().Ticks
 }
 if ($Target -in @('All','Server') -and !(Test-Running 'server')) {
     $server = Join-Path $runtime 'server'
