@@ -6,8 +6,6 @@
   "hud.ragrevival.give_up_hint": "Hold %s for 5 seconds to give up",
   "hud.ragrevival.giving_up": "Giving up… release to cancel",
   "hud.ragrevival.being_fed": "Being revived…",
-  "hud.ragrevival.target": "%s — downed, %s remaining",
-  "hud.ragrevival.feeding": "Reviving…",
   "hud.ragrevival.revive_hint": "Hold to revive",
   "hud.ragrevival.drag_hint": "Drag",
   "hud.ragrevival.release_drag_hint": "Release to drop",

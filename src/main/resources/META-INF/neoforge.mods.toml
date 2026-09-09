@@ -4,7 +4,7 @@ license="MIT"
 
 [[mods]]
 modId="ragrevival"
-version="1.2.0"
+version="1.2.1"
 displayName="RagRevival"
 authors="BigUziHert"
 description='''Downed Sable ragdolls, cooperative feeding revival, dragging, and a persistent death countdown.'''

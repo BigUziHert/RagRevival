@@ -63,7 +63,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.2.0-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.2.1-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -93,6 +93,11 @@ For a screenshot without requiring a downed target, write a short filename label
 such as `outline-wall` into `.local/client-two/ragrevival-visual.request`. The
 test-only client probe captures the actual framebuffer into
 `screenshots/ragrevival-outline-wall.png` without moving the camera or sending input.
+
+The special label `rescue-hud` draws the production rescue panel with synthetic
+0%, 25%, 50%, and 100% feeding snapshots, plus another rescuer's progress, before
+capturing it. This previews layout using the current held items and bound keys;
+it does not change gameplay state or simulate holding Use.
 
 For the opt-in scroll regression fixture, install the test harness on both
 clients and the server, leave the rescuer idle, and use the isolated test world:

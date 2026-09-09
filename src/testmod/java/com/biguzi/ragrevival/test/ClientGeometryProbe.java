@@ -1,6 +1,7 @@
 package com.biguzi.ragrevival.test;
 
 import com.biguzi.ragrevival.client.RevivalClient;
+import com.biguzi.ragrevival.network.StatePayload;
 import com.biguzi.ragrevival.ragdoll.RagdollBridge;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
@@ -8,6 +9,7 @@ import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.companion.ClientSubLevelAccess;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
@@ -44,7 +46,7 @@ public final class ClientGeometryProbe {
         nextPoll = now + 500_000_000L;
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) return;
-        captureVisual(mc);
+        captureVisual(mc, event.getGuiGraphics());
         Path request = mc.gameDirectory.toPath().resolve("ragrevival-geometry.request");
         if (!Files.exists(request)) { waitingSince = 0; return; }
         try {
@@ -78,17 +80,42 @@ public final class ClientGeometryProbe {
     }
 
     /** Capture the real framebuffer without requiring a downed target or changing the camera. */
-    private static void captureVisual(Minecraft mc) {
+    private static void captureVisual(Minecraft mc, GuiGraphics gui) {
         Path request = mc.gameDirectory.toPath().resolve("ragrevival-visual.request");
         if (!Files.exists(request)) return;
         try {
             String label = Files.readString(request).trim().replaceAll("[^a-zA-Z0-9_-]", "_");
             if (label.isEmpty()) label = "capture";
             Files.delete(request);
+            if (label.equals("rescue-hud")) renderRescuePreview(mc, gui);
+            gui.flush();
             Screenshot.grab(mc.gameDirectory, "ragrevival-" + label + ".png", mc.getMainRenderTarget(),
                     component -> LogUtils.getLogger().info("RAGREVIVAL_VISUAL screenshot: {}", component.getString()));
         } catch (Exception failure) {
             LogUtils.getLogger().error("RAGREVIVAL_VISUAL failed", failure);
+        }
+    }
+
+    /** Draw the production panel at known progress values without changing input or game state. */
+    private static void renderRescuePreview(Minecraft mc, GuiGraphics gui) throws ReflectiveOperationException {
+        Class<?> snapshotType = Class.forName("com.biguzi.ragrevival.client.RevivalClient$Snapshot");
+        var constructor = snapshotType.getDeclaredConstructor(StatePayload.class, long.class);
+        constructor.setAccessible(true);
+        Method render = RevivalClient.class.getDeclaredMethod("renderRescueHint",
+                GuiGraphics.class, int.class, int.class, snapshotType);
+        render.setAccessible(true);
+        int center = gui.guiWidth() / 2;
+        gui.fill(center - 145, 28, center + 145, 282, 0xDF111820);
+        gui.drawCenteredString(mc.font, "Rescue HUD preview (synthetic progress)", center, 36, 0xFFFFFFFF);
+        int[] ticks = {0, 8, 16, 32, 16};
+        String[] labels = {"Ready", "Reviving 25%", "Reviving 50%", "Reviving 100%", "Another rescuer"};
+        for (int i = 0; i < ticks.length; i++) {
+            int top = 57 + i * 44;
+            gui.drawCenteredString(mc.font, labels[i], center, top, 0xFFAAB7C4);
+            StatePayload payload = new StatePayload(StatePayload.NONE, 54_000, ticks[i], 32, 0,
+                    i == 4 ? StatePayload.NONE : mc.player.getUUID());
+            Object snapshot = constructor.newInstance(payload, System.nanoTime());
+            render.invoke(null, gui, center, top + 12, snapshot);
         }
     }
 

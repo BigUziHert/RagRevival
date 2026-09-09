@@ -14,7 +14,7 @@ Install RagRevival and all three pinned dependencies in **both clients and the d
 | [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | 0.7.2 |
 | [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.0 |
 
-The latest versioned distributable and source JAR are in [`artifacts/1.2.0`](artifacts/1.2.0). Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+The latest versioned distributable and source JAR are in [`artifacts/1.2.1`](artifacts/1.2.1). Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
 
 Optional compatibility test versions: **Carry On 2.2.6.13** on server and clients; **Unlocked Camera 1.0.0**, private source commit `c13cfa3d`, on clients only. See [source inspection and compatibility evidence](docs/compatibility-research.md). Other dependency versions are deliberately not advertised as verified.
 
@@ -28,7 +28,7 @@ Optional compatibility test versions: **Carry On 2.2.6.13** on server and client
 - **Zoom while dragging:** Unlocked Camera receives the mouse wheel normally. If no camera/interaction mod claims a vertical scroll, RagRevival consumes it to keep the hotbar from switching to a held item and interrupting the drag. Ordinary Sable grabs keep their own controls.
 - **Give up:** hold **G** for 100 continuous server ticks (five seconds at 20 TPS). Releasing G cancels. Rebind it under **Options → Controls → Key Binds → RagRevival**.
 - The HUD shows the downed countdown, feeding progress, and give-up progress to the relevant player.
-- Rescue hints use compact item icons and rebind-aware keycaps: `RMB` **Hold to revive**, or the appropriate drag/release control. Item suggestions come from the revival tag; the name and countdown stay unchanged and the displayed timer freezes during feeding.
+- Rescue hints combine compact item icons, rebind-aware keycaps, the action, and the remaining `m:ss` countdown in one panel. The separate player-name/downed sentence is removed. During feeding, a green bar fills along the panel's bottom edge and the countdown freezes. Item suggestions come from the revival tag. The downed player's own HUD and give-up display remain unchanged.
 - Successful revival restores **half of maximum health** by default: five hearts for a normal ten-heart player, scaling with maximum-health modifiers.
 
 Feeding reserves that right-click until release, so holding it after revival does not consume another item. A short server input lease cancels abandoned interactions; loss of window focus or opening a menu also releases the client interaction. Server stalls do not let packet spam accelerate either hold.
@@ -70,7 +70,7 @@ Both foods use the same item tag and revival rules. Enchanted golden apples are 
 
 Selection clips the existing rendered camera ray against the actual rotated ragdoll limbs. It does not modify Unlocked Camera's position, freelook, shoulder selection, or crosshair. The server independently checks line of sight and interaction reach from the rescuer's actual world-space eyes to the real physics body. A camera offset cannot extend reach or permit feeding through walls. Sable plotyard coordinates are projected into world space; dragging uses Sable's native physics constraint and player seat, with no independent teleport loop.
 
-See [dependency API inspection](docs/dependency-api.md) and [latest test evidence](docs/test-results-1.2.0.md) for the exact scope of verification.
+See [dependency API inspection](docs/dependency-api.md) and [latest test evidence](docs/test-results-1.2.1.md) for the exact scope of verification.
 
 ## Build and local test setup
 
@@ -85,7 +85,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.2.0.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.2.1.jar
 ./scripts/start-test-runtime.ps1
 ```
 
@@ -96,7 +96,7 @@ These scripts use isolated `.local/server`, `.local/client-one`, and `.local/cli
 1. Give both players golden apples and golden carrots; down one with lethal ordinary damage (e.g. `/damage ReviveOne 100 minecraft:generic`). Verify no death drops, the two-minute HUD, and one chat announcement. Put a wall between players and verify the rescuer can see the body's gold outline.
 2. Move while downed; try native stand-up/dismount. Check that the body moves but stays downed. Spawn a hostile mob and verify it ignores the downed player.
 3. Empty both rescuer hands, crouch-right-click the body, move, zoom in/out with Unlocked Camera, release right-click while still crouched and zoom again, then release crouch. Check body/player alignment, continued dragging, and release.
-4. Repeat feeding with a golden apple and a golden carrot: cancel midway, move out of reach, then finish. Check the compact item/key hint, no early consumption, exactly one item consumed on success, half maximum health restored, and outline removal. Start a feed with one second left: the countdown should pause and the feed should finish; canceling should resume the clock.
+4. Repeat feeding with a golden apple and a golden carrot: cancel midway, move out of reach, then finish. Check the countdown inside the item/key/action panel and its green bottom-edge fill, no early consumption, exactly one item consumed on success, half maximum health restored, and outline removal. Start a feed with one second left: the countdown should pause and the feed should finish; canceling should resume the clock.
 5. Repeat aiming at limbs with Unlocked Camera's left/right shoulder offsets and freelook; step beyond normal interaction reach and behind a wall. Check visible-body selection and server rejection outside reach.
 6. Down again; hold G briefly and release, then hold for five continuous seconds. Check progress reset and one normal death.
 7. Down again and let the countdown expire. Repeat with `keepInventory` true/false, and reconnect or restart partway through to check that the timer does not reset.

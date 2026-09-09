@@ -315,27 +315,25 @@ public final class RevivalClient {
         if (target == null) return;
         Snapshot targetState = STATES.get(target.getUUID());
         if (targetState == null) return;
-        gui.drawCenteredString(mc.font, Component.translatable("hud.ragrevival.target",
-                target.getDisplayName(), time(targetState)), center, top, 0xFFFFDC9D);
-        if (targetState.payload.feedingTicks() > 0) {
-            Component text = mc.player.getUUID().equals(targetState.payload.rescuer())
-                    ? Component.translatable("hud.ragrevival.feeding")
-                    : Component.translatable("hud.ragrevival.being_fed");
-            progress(gui, center, top + 16, targetState.payload.feedingTicks(), targetState.payload.feedingDuration(),
-                    0xFF79D587, text);
-        } else {
-            renderRescueHint(gui, center, top + 12);
-        }
+        renderRescueHint(gui, center, top + 12, targetState);
     }
 
-    private static void renderRescueHint(GuiGraphics gui, int center, int top) {
+    private static void renderRescueHint(GuiGraphics gui, int center, int top, Snapshot targetState) {
         Minecraft mc = Minecraft.getInstance();
         Component keys = Component.empty();
         Component label;
         List<ItemStack> icons = List.of();
         int accent = 0xFFA5DAC0;
         InteractionHand hand = revivalHand(mc.player);
-        if (activeAction == InputAction.DRAG) {
+        boolean feeding = targetState.payload.feedingTicks() > 0;
+        if (feeding) {
+            boolean ownFeed = mc.player.getUUID().equals(targetState.payload.rescuer());
+            label = Component.translatable(ownFeed ? "hud.ragrevival.revive_hint" : "hud.ragrevival.being_fed");
+            if (ownFeed) {
+                keys = compactKey(mc.options.keyUse);
+                if (hand != null) icons = List.of(mc.player.getItemInHand(hand));
+            }
+        } else if (activeAction == InputAction.DRAG) {
             keys = compactKey(mc.options.keyShift);
             label = Component.translatable("hud.ragrevival.release_drag_hint");
             accent = 0xFFE6C985;
@@ -357,12 +355,23 @@ public final class RevivalClient {
         }
         int keyTextWidth = mc.font.width(keys);
         int keyWidth = keyTextWidth == 0 ? 0 : keyTextWidth + 8;
-        int width = 14 + icons.size() * 20 + (keyWidth == 0 ? 0 : keyWidth + 6) + mc.font.width(label);
+        String countdown = time(targetState);
+        int labelWidth = mc.font.width(label);
+        int width = 14 + icons.size() * 20 + (keyWidth == 0 ? 0 : keyWidth + 6)
+                + labelWidth + 15 + mc.font.width(countdown);
         int left = center - width / 2;
-        // A compact, softly outlined panel with a distinct keycap; the name/timer above stays unchanged.
+        // Keep the action, remaining bleed-out time, and feeding progress in one compact panel.
         gui.fill(left + 1, top, left + width - 1, top + 22, 0xC9182028);
         gui.fill(left, top + 1, left + width, top + 21, 0xC9182028);
-        gui.fill(left + 2, top + 21, left + width - 2, top + 22, (accent & 0x00FFFFFF) | 0x66000000);
+        if (feeding) {
+            int barWidth = width - 2;
+            int filled = Mth.clamp(Math.round((float) targetState.payload.feedingTicks()
+                    / Math.max(1, targetState.payload.feedingDuration()) * barWidth), 0, barWidth);
+            gui.fill(left + 1, top + 20, left + width - 1, top + 22, 0xFF33443C);
+            gui.fill(left + 1, top + 20, left + 1 + filled, top + 22, 0xFF79D587);
+        } else {
+            gui.fill(left + 2, top + 21, left + width - 2, top + 22, (accent & 0x00FFFFFF) | 0x66000000);
+        }
         int x = left + 7;
         for (ItemStack icon : icons) {
             gui.renderItem(icon, x, top + 3);
@@ -374,6 +383,9 @@ public final class RevivalClient {
             x += keyWidth + 6;
         }
         gui.drawString(mc.font, label, x, top + 7, accent, false);
+        x += labelWidth + 7;
+        gui.fill(x, top + 6, x + 1, top + 16, 0xFF46515A);
+        gui.drawString(mc.font, countdown, x + 8, top + 7, 0xFFE6C985, false);
     }
 
     private static Component compactKey(KeyMapping mapping) {
