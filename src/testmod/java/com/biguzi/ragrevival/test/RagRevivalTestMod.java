@@ -30,15 +30,19 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSetCarriedItemPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ClientInformation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
@@ -130,6 +134,7 @@ public final class RagRevivalTestMod {
         private final boolean originalNaturalRegeneration;
         private final double originalRestoredHealthFraction;
         private final double originalMaxHealthBase;
+        private final int originalFeedingTicks;
         private Zombie zombie;
         private Vec3 site;
         private InputAction heartbeat;
@@ -144,6 +149,11 @@ public final class RagRevivalTestMod {
         private UUID ordinaryRoot;
         private Vec3 movementStart;
         private boolean moveDowned;
+        private boolean selfFeedHeartbeat;
+        private InteractionHand selfFeedHand = InteractionHand.MAIN_HAND;
+        private long selfPausedRemaining;
+        private long selfResumedRemaining;
+        private long selfOriginalDeadline;
 
         Run(MinecraftServer server, ServerPlayer target, ServerPlayer rescuer) {
             this.server = server; this.target = target; this.rescuer = rescuer;
@@ -153,6 +163,7 @@ public final class RagRevivalTestMod {
             originalNaturalRegeneration = server.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
             originalRestoredHealthFraction = RevivalConfig.RESTORED_HEALTH_FRACTION.get();
             originalMaxHealthBase = target.getAttribute(Attributes.MAX_HEALTH).getBaseValue();
+            originalFeedingTicks = RevivalConfig.FEEDING_TICKS.get();
         }
 
         private void after(int delay, Runnable action) { cursor += delay; steps.add(new Step(cursor, action)); }
@@ -233,14 +244,22 @@ public final class RagRevivalTestMod {
                         + " spectator=" + rescuer.isSpectator() + " downed=" + DownedManager.isDowned(rescuer)
                         + " carrying=" + CarryOnCompat.isCarrying(rescuer) + " passenger=" + rescuer.isPassenger()
                         + " vehicle=" + rescuer.isVehicle() + " tagged=" + rescuer.getMainHandItem().is(DownedManager.REVIVAL_ITEMS));
+                rescuer.setShiftKeyDown(false);
                 send(rescuer, InputAction.FEED);
-                check(DownedManager.isBusy(rescuer), "feeding starts for held tagged item");
+                check(!DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && apples() == 4,
+                        "standing teammate cannot start feeding or consume a revival item");
+                rescuer.setShiftKeyDown(true);
+                send(rescuer, InputAction.FEED);
+                check(DownedManager.isBusy(rescuer), "crouching teammate feeding starts for held tagged item");
+                check(rescuer.isUsingItem() && rescuer.getUsedItemHand() == InteractionHand.MAIN_HAND,
+                        "teammate feeding starts the guarded main-hand eating animation");
                 for (int i = 0; i < 100; i++) send(rescuer, InputAction.FEED);
                 check(DownedManager.isDowned(target) && apples() == 4, "duplicate input packets cannot finish feeding instantly");
                 ServerPlayer contender = new ServerPlayer(server, target.serverLevel(),
                         new GameProfile(UUID.fromString("c99df12a-6ee3-4fb1-a03e-372098ed7e80"), "TestContender"),
                         ClientInformation.createDefault());
                 contender.setPos(rescuer.position());
+                contender.setShiftKeyDown(true);
                 contender.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
                 long ownedDeadline = target.getPersistentData().getCompound("ragrevival:downed").getLong("deadline");
                 send(contender, InputAction.FEED);
@@ -256,7 +275,31 @@ public final class RagRevivalTestMod {
                 heartbeat = null; send(rescuer, InputAction.RELEASE);
                 check(!DownedManager.isBusy(rescuer) && apples() == 4 && DownedManager.isDowned(target),
                         "releasing feeding cancels without consuming");
+                check(!rescuer.isUsingItem(), "releasing teammate feeding clears the eating animation");
+                ordinaryFoodAfterCleanup(rescuer, "canceled teammate feeding");
                 send(rescuer, InputAction.FEED);
+            });
+            after(3, () -> {
+                // Keep sending FEED so only releasing crouch invalidates this active lease.
+                rescuer.setShiftKeyDown(false);
+                heartbeat = InputAction.FEED;
+            });
+            after(2, () -> {
+                heartbeat = null;
+                check(!DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && apples() == 4,
+                        "releasing crouch cancels active teammate feeding without consuming");
+                check(!rescuer.isUsingItem(), "releasing crouch clears the teammate eating animation");
+                resumedRemaining = DownedManager.remainingMillis(target);
+                send(rescuer, InputAction.FEED);
+                check(!DownedManager.isBusy(rescuer), "standing feed heartbeats cannot reacquire a canceled teammate lease");
+            });
+            after(3, () -> {
+                check(DownedManager.remainingMillis(target) < resumedRemaining,
+                        "releasing crouch resumes the downed countdown");
+                rescuer.setShiftKeyDown(true);
+                send(rescuer, InputAction.FEED);
+                check(DownedManager.isBusy(rescuer), "crouching again permits a new teammate feeding interaction");
+                // No further heartbeat: the existing lease-timeout test remains independent.
             });
             after(10, () -> {
                 check(!DownedManager.isBusy(rescuer) && apples() == 4, "missing input heartbeat expires feeding lease");
@@ -286,6 +329,7 @@ public final class RagRevivalTestMod {
                 check(!DownedManager.isDowned(target), "continuous feeding revives target");
                 check(apples() == 3, "successful feeding consumes exactly one golden apple");
                 check(!DownedManager.isBusy(rescuer), "successful feeding clears rescue lease");
+                check(!rescuer.isUsingItem(), "successful teammate feeding clears the eating animation");
                 check(target.getMaxHealth() == 20 && target.getHealth() == 10,
                         "default half-health revival restores 10 HP at 20 maximum HP");
                 send(rescuer, InputAction.FEED); send(rescuer, InputAction.FEED);
@@ -388,6 +432,7 @@ public final class RagRevivalTestMod {
             after(3, () -> {
                 check(!DownedManager.isDragging(rescuer), "releasing crouch releases drag");
                 rescuer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 3));
+                rescuer.setShiftKeyDown(true);
                 send(rescuer, InputAction.FEED);
                 DownedManager.logout(new PlayerEvent.PlayerLoggedOutEvent(rescuer));
                 check(!DownedManager.isBusy(rescuer), "rescuer logout callback cancels feeding");
@@ -432,6 +477,7 @@ public final class RagRevivalTestMod {
                 DownedManager.down(target, target.damageSources().generic());
             });
             after(30, () -> {
+                rescuer.setShiftKeyDown(true);
                 nearTarget(); send(rescuer, InputAction.FEED); heartbeat = InputAction.FEED;
                 check(DownedManager.isBusy(rescuer), "feeding owns the countdown before terminal-cancellation check");
             });
@@ -510,7 +556,244 @@ public final class RagRevivalTestMod {
                         "administrative kill performs normal terminal death");
                 target = respawn(target);
             });
+            planSelfRevival();
             after(15, () -> finish(true));
+        }
+
+        private void planSelfRevival() {
+            // These cases follow the inventory/XP baseline so self-held test food cannot
+            // replace the diamonds used to verify normal death handling above.
+            after(15, () -> {
+                target.setShiftKeyDown(false);
+                rescuer.setShiftKeyDown(true);
+                target.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                target.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
+                rescuer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
+                DownedManager.down(target, target.damageSources().generic());
+            });
+            after(35, () -> {
+                nearTarget();
+                target.setShiftKeyDown(true);
+                send(target, InputAction.DRAG);
+                check(!DownedManager.isBusy(target) && DownedManager.isDowned(target),
+                        "downed player cannot drag their own body even when crouching with empty hands");
+                target.setShiftKeyDown(false);
+                target.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
+                send(target, InputAction.FEED); selfFeedHeartbeat = true;
+                check(DownedManager.isBusy(target) && target.isPassenger() && !target.isShiftKeyDown(),
+                        "downed seated player can start self-revival without crouching");
+                check(target.isUsingItem() && target.getUsedItemHand() == InteractionHand.MAIN_HAND,
+                        "self-revival animates main-hand eating while mounted in the ragdoll");
+                check(DownedManager.isDowned(target) && target.getMainHandItem().getCount() == 4,
+                        "self-revival does not revive or consume instantly");
+                selfPausedRemaining = DownedManager.remainingMillis(target);
+                send(rescuer, InputAction.FEED);
+                check(DownedManager.isBusy(target) && !DownedManager.isBusy(rescuer)
+                                && target.getMainHandItem().getCount() == 4 && apples() == 4,
+                        "self-revival ownership rejects a simultaneous crouching teammate");
+                long deadline = target.getPersistentData().getCompound("ragrevival:downed").getLong("deadline");
+                for (int i = 0; i < 100; i++) {
+                    send(target, InputAction.FEED); send(rescuer, InputAction.FEED);
+                }
+                check(DownedManager.isDowned(target) && target.getMainHandItem().getCount() == 4
+                                && target.getPersistentData().getCompound("ragrevival:downed").getLong("deadline") == deadline,
+                        "duplicate self-feed and rejected teammate packets cannot advance feeding or extend the deadline");
+            });
+            after(8, () -> {
+                check(Math.abs(DownedManager.remainingMillis(target) - selfPausedRemaining) <= 10,
+                        "valid golden-apple self-feeding pauses the downed countdown");
+                selfFeedHeartbeat = false; send(target, InputAction.RELEASE);
+                check(!DownedManager.isBusy(target) && DownedManager.isDowned(target)
+                                && target.getMainHandItem().getCount() == 4,
+                        "releasing golden-apple self-feeding cancels without consuming");
+                check(!target.isUsingItem(), "canceling self-feeding clears its eating animation");
+                selfResumedRemaining = DownedManager.remainingMillis(target);
+            });
+            after(3, () -> {
+                check(DownedManager.remainingMillis(target) < selfResumedRemaining,
+                        "canceled golden-apple self-feeding resumes the downed countdown");
+                nearTarget();
+                send(rescuer, InputAction.FEED); heartbeat = InputAction.FEED;
+                check(DownedManager.isBusy(rescuer), "crouching teammate can acquire the target after self-feed cancellation");
+                send(target, InputAction.FEED);
+                check(!DownedManager.isBusy(target) && DownedManager.isBusy(rescuer)
+                                && target.getMainHandItem().getCount() == 4 && apples() == 4,
+                        "teammate feeding ownership rejects a simultaneous self-revival request");
+            });
+            after(3, () -> {
+                heartbeat = null; send(rescuer, InputAction.RELEASE);
+                check(apples() == 4 && !DownedManager.isBusy(rescuer),
+                        "canceled teammate contender consumes nothing before self-revival restarts");
+                send(target, InputAction.FEED); selfFeedHeartbeat = true;
+            });
+            after(RevivalConfig.FEEDING_TICKS.get() - 1, () -> {
+                check(DownedManager.isDowned(target) && target.getMainHandItem().getCount() == 4,
+                        "golden-apple self-revival requires a fresh full duration after cancellation");
+            });
+            after(4, () -> {
+                selfFeedHeartbeat = false;
+                check(!DownedManager.isDowned(target) && target.getMaxHealth() == 20 && target.getHealth() == 10,
+                        "completed golden-apple self-revival restores half maximum health");
+                check(target.getMainHandItem().is(Items.GOLDEN_APPLE) && target.getMainHandItem().getCount() == 3,
+                        "successful self-revival consumes exactly one golden apple");
+                check(!DownedManager.isBusy(target) && !target.isPassenger(),
+                        "self-revival releases its rescue lease and native ragdoll seat");
+                check(!target.isUsingItem(), "successful self-revival clears its eating animation");
+                send(target, InputAction.FEED); send(target, InputAction.FEED);
+                check(target.getMainHandItem().getCount() == 3 && !DownedManager.isBusy(target),
+                        "late self-feed packets cannot consume again after successful revival");
+                ordinaryFoodAfterCleanup(target, "successful self-revival");
+            });
+            after(12, () -> {
+                target.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_CARROT, 4));
+                target.setShiftKeyDown(false);
+                DownedManager.down(target, target.damageSources().generic());
+                DownedManager.down(rescuer, rescuer.damageSources().generic());
+            });
+            after(35, () -> {
+                sendTo(target, rescuer, InputAction.FEED);
+                check(DownedManager.isDowned(target) && DownedManager.isDowned(rescuer)
+                                && !DownedManager.isBusy(target) && target.getMainHandItem().getCount() == 4,
+                        "downed player cannot feed another downed player");
+                DownedManager.revive(rescuer);
+                target.getPersistentData().getCompound("ragrevival:downed").putLong("deadline", System.currentTimeMillis() + 10_000);
+                send(target, InputAction.FEED); selfFeedHeartbeat = true;
+                selfPausedRemaining = DownedManager.remainingMillis(target);
+                check(DownedManager.isBusy(target) && !target.isShiftKeyDown()
+                                && target.getMainHandItem().is(DownedManager.REVIVAL_ITEMS),
+                        "golden-carrot self-feeding starts without crouching");
+            });
+            after(8, () -> {
+                check(Math.abs(DownedManager.remainingMillis(target) - selfPausedRemaining) <= 10,
+                        "valid golden-carrot self-feeding freezes remaining downed time");
+                selfFeedHeartbeat = false; send(target, InputAction.RELEASE);
+                check(!DownedManager.isBusy(target) && DownedManager.isDowned(target)
+                                && target.getMainHandItem().getCount() == 4,
+                        "releasing golden-carrot self-feeding cancels without consuming");
+                selfResumedRemaining = DownedManager.remainingMillis(target);
+            });
+            after(3, () -> {
+                check(DownedManager.remainingMillis(target) < selfResumedRemaining,
+                        "canceled golden-carrot self-feeding resumes the downed countdown");
+                selfOriginalDeadline = System.currentTimeMillis() + 300;
+                target.getPersistentData().getCompound("ragrevival:downed").putLong("deadline", selfOriginalDeadline);
+                send(target, InputAction.FEED); selfFeedHeartbeat = true;
+                selfPausedRemaining = DownedManager.remainingMillis(target);
+            });
+            after(RevivalConfig.FEEDING_TICKS.get() - 1, () -> {
+                check(DownedManager.isDowned(target) && target.getMainHandItem().getCount() == 4,
+                        "golden-carrot self-revival requires a fresh full duration after cancellation");
+                check(System.currentTimeMillis() > selfOriginalDeadline && target.isAlive() && DownedManager.isDowned(target),
+                        "last-second self-feeding keeps the player alive past the original deadline");
+                check(Math.abs(DownedManager.remainingMillis(target) - selfPausedRemaining) <= 10,
+                        "last-second self-feeding preserves remaining bleed-out time");
+            });
+            after(4, () -> {
+                selfFeedHeartbeat = false;
+                check(!DownedManager.isDowned(target) && target.getMaxHealth() == 20 && target.getHealth() == 10,
+                        "completed golden-carrot self-revival restores half maximum health");
+                check(target.getMainHandItem().is(Items.GOLDEN_CARROT) && target.getMainHandItem().getCount() == 3,
+                        "successful self-revival consumes exactly one golden carrot");
+                send(target, InputAction.FEED); send(target, InputAction.FEED);
+                check(target.getMainHandItem().getCount() == 3,
+                        "late golden-carrot self-feed packets cannot consume again");
+            });
+            after(12, () -> {
+                target.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                target.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_CARROT, 4));
+                target.setShiftKeyDown(false);
+                DownedManager.down(target, target.damageSources().generic());
+            });
+            after(35, () -> {
+                selfFeedHand = InteractionHand.OFF_HAND;
+                sendSelfFeed(); selfFeedHeartbeat = true;
+                check(DownedManager.isBusy(target) && target.isUsingItem()
+                                && target.getUsedItemHand() == InteractionHand.OFF_HAND && target.getMainHandItem().isEmpty(),
+                        "offhand self-revival starts offhand eating with an empty main hand");
+            });
+            after(RevivalConfig.FEEDING_TICKS.get() - 1, () -> {
+                check(DownedManager.isDowned(target) && target.getOffhandItem().getCount() == 4,
+                        "offhand self-revival requires the full feeding duration");
+            });
+            after(4, () -> {
+                selfFeedHeartbeat = false;
+                check(!DownedManager.isDowned(target) && target.getHealth() == 10,
+                        "offhand golden-carrot self-revival restores half maximum health");
+                check(target.getOffhandItem().is(Items.GOLDEN_CARROT) && target.getOffhandItem().getCount() == 3
+                                && target.getMainHandItem().isEmpty(),
+                        "offhand self-revival consumes exactly one carrot from the correct hand");
+                check(!target.isUsingItem() && !DownedManager.isBusy(target),
+                        "offhand self-revival clears the eating animation and lease");
+                sendSelfFeed(); sendSelfFeed();
+                check(target.getOffhandItem().getCount() == 3 && !DownedManager.isBusy(target),
+                        "late offhand self-feed packets cannot consume again");
+                selfFeedHand = InteractionHand.MAIN_HAND;
+                target.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
+            });
+            after(12, () -> {
+                RevivalConfig.FEEDING_TICKS.set(64);
+                target.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
+                target.removeAllEffects();
+                target.getFoodData().setFoodLevel(7);
+                target.getFoodData().setSaturation(0);
+                DownedManager.down(target, target.damageSources().generic());
+            });
+            after(35, () -> {
+                send(target, InputAction.FEED); selfFeedHeartbeat = true;
+                check(DownedManager.isBusy(target) && target.isUsingItem(),
+                        "64-tick self-feeding starts the eating animation");
+            });
+            after(35, () -> {
+                check(DownedManager.isDowned(target) && target.getMainHandItem().getCount() == 4,
+                        "self-feeding cannot complete or consume at the vanilla 32-tick food duration");
+                check(target.isUsingItem() && target.getUsedItemHand() == InteractionHand.MAIN_HAND,
+                        "guarded eating animation remains active beyond the vanilla food duration");
+                check(target.getFoodData().getFoodLevel() == 7 && target.getFoodData().getSaturationLevel() == 0,
+                        "guarded self-feeding applies no vanilla food or saturation while held");
+                check(target.getActiveEffects().isEmpty(), "guarded self-feeding applies no golden-apple effects while held");
+            });
+            after(28, () -> {
+                check(DownedManager.isDowned(target) && target.getMainHandItem().getCount() == 4,
+                        "configured 64-tick self-feeding remains incomplete at tick 63");
+            });
+            after(4, () -> {
+                selfFeedHeartbeat = false;
+                check(!DownedManager.isDowned(target) && target.getHealth() == 10
+                                && target.getMainHandItem().getCount() == 3,
+                        "configured 64-tick self-feeding revives at half health and consumes exactly one item");
+                check(!target.isUsingItem(), "completed 64-tick self-feeding clears the looping animation");
+                check(target.getFoodData().getFoodLevel() == 7 && target.getFoodData().getSaturationLevel() == 0,
+                        "successful self-feeding applies no vanilla food or saturation");
+                check(target.getActiveEffects().isEmpty(), "successful self-feeding applies no golden-apple effects");
+                RevivalConfig.FEEDING_TICKS.set(originalFeedingTicks);
+                target.getFoodData().setFoodLevel(20);
+                target.getFoodData().setSaturation(5);
+            });
+            after(12, () -> {
+                server.getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(true, server);
+                target.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
+                DownedManager.down(target, target.damageSources().generic());
+            });
+            after(35, () -> {
+                heartbeat = InputAction.GIVE_UP; send(target, InputAction.GIVE_UP);
+            });
+            after(95, () -> {
+                send(target, InputAction.FEED); selfFeedHeartbeat = true;
+                check(DownedManager.isBusy(target) && DownedManager.isDowned(target),
+                        "self-feeding can be active while a nearly completed give-up hold continues");
+            });
+            after(3, () -> {
+                check(target.isAlive() && DownedManager.isDowned(target) && target.getMainHandItem().getCount() == 4,
+                        "self-feeding cannot finish instantly while give-up remains below 100 ticks");
+            });
+            after(4, () -> {
+                selfFeedHeartbeat = false; heartbeat = null;
+                check(target.isDeadOrDying() && !DownedManager.isDowned(target) && !DownedManager.isBusy(target),
+                        "completed give-up overrides active self-feeding and clears its lease");
+                check(target.getMainHandItem().is(Items.GOLDEN_APPLE) && target.getMainHandItem().getCount() == 4,
+                        "give-up during incomplete self-feeding consumes no revival item");
+                target = respawn(target);
+            });
         }
 
         private void tick() {
@@ -520,6 +803,7 @@ public final class RagRevivalTestMod {
             suppressFixtureReactions(target); suppressFixtureReactions(rescuer);
             if (moveDowned) RagdollControlHelper.updateInput(target, 1, 1);
             if (heartbeat != null) send(heartbeat == InputAction.GIVE_UP ? target : rescuer, heartbeat);
+            if (selfFeedHeartbeat) sendSelfFeed();
             while (!steps.isEmpty() && steps.peek().tick <= ticks) steps.remove().action.run();
         }
 
@@ -531,7 +815,52 @@ public final class RagRevivalTestMod {
         }
 
         private void send(ServerPlayer actor, InputAction action) {
-            DownedManager.input(actor, new InputPayload(target.getUUID(), InteractionHand.MAIN_HAND, action));
+            sendTo(actor, target, action);
+        }
+
+        private void sendTo(ServerPlayer actor, ServerPlayer recipient, InputAction action) {
+            DownedManager.input(actor, new InputPayload(recipient.getUUID(), InteractionHand.MAIN_HAND, action));
+        }
+
+        private void sendSelfFeed() {
+            DownedManager.input(target, new InputPayload(target.getUUID(), selfFeedHand, InputAction.FEED));
+        }
+
+        /** Direct native completion checks mixin routing, not physical food-hold timing. */
+        private void ordinaryFoodAfterCleanup(ServerPlayer player, String context) {
+            ItemStack originalStack = player.getMainHandItem().copy();
+            int originalFood = player.getFoodData().getFoodLevel();
+            float originalSaturation = player.getFoodData().getSaturationLevel();
+            List<MobEffectInstance> originalEffects = player.getActiveEffects().stream().map(MobEffectInstance::new).toList();
+            try {
+                player.removeAllEffects();
+                player.getFoodData().setFoodLevel(7);
+                player.getFoodData().setSaturation(0);
+                player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
+                // Keep start and completion in one server callback so an idle client cannot
+                // release the synthetic native use between the two calls.
+                player.startUsingItem(InteractionHand.MAIN_HAND);
+                check(player.isUsingItem() && player.getUsedItemHand() == InteractionHand.MAIN_HAND,
+                        "ordinary food use starts after " + context);
+                var complete = LivingEntity.class.getDeclaredMethod("completeUsingItem");
+                complete.setAccessible(true);
+                complete.invoke(player);
+                check(player.getMainHandItem().getCount() == 3 && !player.isUsingItem(),
+                        "ordinary food completion consumes exactly one item after " + context);
+                check(player.getFoodData().getFoodLevel() == 11 && player.getFoodData().getSaturationLevel() > 0,
+                        "ordinary food completion applies nutrition after " + context);
+                check(player.hasEffect(MobEffects.REGENERATION) && player.hasEffect(MobEffects.ABSORPTION),
+                        "ordinary golden-apple effects apply after " + context);
+            } catch (ReflectiveOperationException failure) {
+                throw new IllegalStateException("Could not exercise native food completion after " + context, failure);
+            } finally {
+                player.stopUsingItem();
+                player.setItemInHand(InteractionHand.MAIN_HAND, originalStack);
+                player.getFoodData().setFoodLevel(originalFood);
+                player.getFoodData().setSaturation(originalSaturation);
+                player.removeAllEffects();
+                originalEffects.forEach(player::addEffect);
+            }
         }
 
         private int apples() { return rescuer.getMainHandItem().getCount(); }
@@ -554,6 +883,8 @@ public final class RagRevivalTestMod {
             player.removeAllEffects(); player.setHealth(player.getMaxHealth());
             player.clearFire(); player.setDeltaMovement(Vec3.ZERO); player.setShiftKeyDown(false);
             player.getInventory().clearContent(); player.getFoodData().setFoodLevel(20);
+            player.getInventory().selected = 0;
+            player.connection.send(new ClientboundSetCarriedItemPacket(0));
             player.experienceLevel = 0; player.totalExperience = 0; player.experienceProgress = 0;
         }
 
@@ -576,9 +907,11 @@ public final class RagRevivalTestMod {
 
         private void finish(boolean completed) {
             heartbeat = null;
+            selfFeedHeartbeat = false;
             suppressFixtureReactions(target); suppressFixtureReactions(rescuer);
             // Restore fixture overrides before cleanup can fail or revive a surviving player.
             RevivalConfig.RESTORED_HEALTH_FRACTION.set(originalRestoredHealthFraction);
+            RevivalConfig.FEEDING_TICKS.set(originalFeedingTicks);
             target.getAttribute(Attributes.MAX_HEALTH).setBaseValue(originalMaxHealthBase);
             server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(originalNaturalRegeneration, server);
             if (zombie != null) zombie.discard();
@@ -588,6 +921,8 @@ public final class RagRevivalTestMod {
                 player.setShiftKeyDown(false);
                 if (player.isAlive()) {
                     player.setHealth(player.getMaxHealth()); player.getFoodData().setFoodLevel(20);
+                    player.getInventory().selected = 0;
+                    player.connection.send(new ClientboundSetCarriedItemPacket(0));
                     player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 16));
                 }
             }

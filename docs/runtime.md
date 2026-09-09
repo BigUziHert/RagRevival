@@ -14,6 +14,9 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
+Install RagRevival **1.3.0** on all three instances together. Its network protocol
+is version 3, so older clients and servers must be updated to match.
+
 NeoForge is pinned to **21.1.249** on Minecraft **1.21.1**. Setup uses the official
 NeoForge installer and Mojang assets, verifies Mojang SHA-1 hashes, and copies
 matching existing asset-cache files when available. Common assets/libraries live
@@ -41,6 +44,8 @@ ignored server properties. Run administrative commands without displaying it:
 pwsh -File scripts/test-server-command.ps1 'list'
 pwsh -File scripts/test-server-command.ps1 'give ReviveOne minecraft:golden_apple 16'
 pwsh -File scripts/test-server-command.ps1 'give ReviveTwo minecraft:golden_apple 16'
+pwsh -File scripts/test-server-command.ps1 'give ReviveOne minecraft:golden_carrot 16'
+pwsh -File scripts/test-server-command.ps1 'give ReviveTwo minecraft:golden_carrot 16'
 pwsh -File scripts/test-server-command.ps1 'tp ReviveTwo ReviveOne'
 pwsh -File scripts/test-server-command.ps1 'save-all flush'
 pwsh -File scripts/test-server-command.ps1 'stop'
@@ -54,6 +59,11 @@ jar because Sable already bundles that dependency.
 Live interactive behavior needs two people or switching between both windows.
 The task's final report distinguishes compilation/startup checks from feeding,
 movement, camera, dragging, and key-hold interactions actually exercised.
+For a quick manual check, hold crouch + Use to feed a teammate, then release
+crouch to check cancellation. While downed, hold Use without crouching to
+self-revive. Observe the eating animation, food crumbs/sounds at the downed head,
+paused countdown, and green progress bar; finish to check one-item consumption
+and half maximum health. Sable's physical limb poses are unchanged.
 
 ## Optional integration harness
 
@@ -63,7 +73,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.2.1-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.3.0-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -75,11 +85,12 @@ pwsh -File scripts/test-server-command.ps1 'ragrevivaltest revive ReviveOne'
 The scheduled tests exercise real dedicated-server APIs and native Sable physics
 while both clients receive synchronization. Results are logged as
 `RAGREVIVAL_TEST PASS/FAIL`. Tests include death interception, item/XP game rules,
-feeding cancellation/completion, native drag release, dismount locking, movement
-input, give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage
-edge cases. The codec command can run separately. See `docs/test-results.md` for
-which versions and scenarios were actually executed, including independent real
-reconnection/restart checks.
+teammate crouch requirements, self-revival, feeding cancellation/completion,
+native-use animation state, native drag release, dismount locking, movement input,
+give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage edge
+cases. The codec command can run separately. See [1.3.0 results](test-results-1.3.0.md)
+for the latest executed checks and [verification history](test-results.md) for
+earlier versions, including independent real reconnection/restart checks.
 
 For the optional client geometry probe, also install the harness JAR into the
 client mod directories before launching. Put the text `ReviveOne` into

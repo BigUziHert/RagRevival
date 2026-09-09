@@ -105,14 +105,14 @@ public final class ClientGeometryProbe {
                 GuiGraphics.class, int.class, int.class, snapshotType);
         render.setAccessible(true);
         int center = gui.guiWidth() / 2;
-        gui.fill(center - 145, 28, center + 145, 282, 0xDF111820);
+        gui.fill(center - 200, 28, center + 200, 326, 0xDF111820);
         gui.drawCenteredString(mc.font, "Rescue HUD preview (synthetic progress)", center, 36, 0xFFFFFFFF);
-        int[] ticks = {0, 8, 16, 32, 16};
-        String[] labels = {"Ready", "Reviving 25%", "Reviving 50%", "Reviving 100%", "Another rescuer"};
+        int[] ticks = {0, 8, 16, 32, 16, 16};
+        String[] labels = {"Ready", "Reviving 25%", "Reviving 50%", "Reviving 100%", "Another rescuer", "Self-revival 50%"};
         for (int i = 0; i < ticks.length; i++) {
             int top = 57 + i * 44;
             gui.drawCenteredString(mc.font, labels[i], center, top, 0xFFAAB7C4);
-            StatePayload payload = new StatePayload(StatePayload.NONE, 54_000, ticks[i], 32, 0,
+            StatePayload payload = new StatePayload(i == 5 ? mc.player.getUUID() : StatePayload.NONE, 54_000, ticks[i], 32, 0,
                     i == 4 ? StatePayload.NONE : mc.player.getUUID());
             Object snapshot = constructor.newInstance(payload, System.nanoTime());
             render.invoke(null, gui, center, top + 12, snapshot);

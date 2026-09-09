@@ -1,5 +1,6 @@
 package com.biguzi.ragrevival.client;
 
+import com.biguzi.ragrevival.FeedingAnimation;
 import com.biguzi.ragrevival.compat.CarryOnCompat;
 import com.biguzi.ragrevival.ragdoll.RagdollBridge;
 import com.biguzi.ragrevival.network.InputAction;
@@ -118,9 +119,19 @@ public final class RevivalClient {
 
     public static boolean hasActiveInteraction() {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null || isDowned(mc.player) || activeTarget == null || activeAction == null) return false;
+        if (mc.player == null || activeTarget == null || activeAction == null) return false;
         Snapshot state = STATES.get(activeTarget);
         return state != null && System.nanoTime() - state.receivedNanos <= 5_000_000_000L;
+    }
+
+    /** Server-confirmed use state for other players; local intent also guards the first sync gap. */
+    public static boolean isFeeding(Player player) {
+        if (player == null) return false;
+        Minecraft mc = Minecraft.getInstance();
+        if (player == mc.player && activeAction == InputAction.FEED && hasActiveInteraction()) return true;
+        long now = System.nanoTime();
+        return STATES.values().stream().anyMatch(state -> state.payload.feedingTicks() > 0
+                && state.payload.rescuer().equals(player.getUUID()) && now - state.receivedNanos <= 5_000_000_000L);
     }
 
     public static boolean hasActiveDrag() {
@@ -152,6 +163,10 @@ public final class RevivalClient {
         if (isDowned(mc.player)) {
             event.setCanceled(true);
             event.setSwingHand(false);
+            if (event.isUseItem() && activeTarget == null && !suppressUseUntilRelease) {
+                InteractionHand hand = revivalHand(mc.player);
+                if (hand != null) beginFeed(mc.player, hand);
+            }
             return;
         }
         if (!event.isUseItem()) return;
@@ -168,8 +183,9 @@ public final class RevivalClient {
         if (CarryOnCompat.isCarrying(mc.player) || mc.player.isPassenger() || mc.player.isVehicle()) return;
         InteractionHand feedingHand = revivalHand(mc.player);
         if (feedingHand != null) {
-            activeHand = feedingHand;
-            activeAction = InputAction.FEED;
+            if (!mc.player.isShiftKeyDown()) return;
+            beginFeed(target, feedingHand);
+            return;
         } else if (mc.player.isShiftKeyDown() && mc.player.getMainHandItem().isEmpty()
                 && mc.player.getOffhandItem().isEmpty()) {
             activeHand = InteractionHand.MAIN_HAND;
@@ -178,6 +194,14 @@ public final class RevivalClient {
             return;
         }
         activeTarget = target.getUUID();
+        suppressUseUntilRelease = true;
+        RevivalNetwork.sendInput(activeTarget, activeHand, activeAction);
+    }
+
+    private static void beginFeed(Player target, InteractionHand hand) {
+        activeTarget = target.getUUID();
+        activeHand = hand;
+        activeAction = InputAction.FEED;
         suppressUseUntilRelease = true;
         RevivalNetwork.sendInput(activeTarget, activeHand, activeAction);
     }
@@ -217,13 +241,20 @@ public final class RevivalClient {
         }
         givingUp = giveUpHeld;
 
+        // Mounted Sable players can bypass vanilla's interaction callback; sample the held key too.
+        if (activeTarget == null && useHeld && !suppressUseUntilRelease && isDowned(mc.player)) {
+            InteractionHand hand = revivalHand(mc.player);
+            if (hand != null) beginFeed(mc.player, hand);
+        }
         if (activeTarget == null) return;
         Player target = mc.level.getPlayerByUUID(activeTarget);
-        boolean allowed = inGame && !isDowned(mc.player) && target != null && isDowned(target)
-                && !CarryOnCompat.isCarrying(mc.player) && !mc.player.isPassenger() && !mc.player.isVehicle()
-                && inReach(mc.player, target);
+        boolean selfFeed = target == mc.player && activeAction == InputAction.FEED;
+        boolean allowed = inGame && target != null && isDowned(target) && mc.player.isAlive()
+                && !mc.player.isSpectator() && !CarryOnCompat.isCarrying(mc.player) && !mc.player.isVehicle()
+                && (selfFeed || !isDowned(mc.player) && !mc.player.isPassenger() && inReach(mc.player, target));
         if (activeAction == InputAction.FEED) {
-            allowed &= useHeld && mc.player.getItemInHand(activeHand).is(REVIVAL_ITEMS);
+            allowed &= useHeld && (selfFeed || mc.player.isShiftKeyDown())
+                    && mc.player.getItemInHand(activeHand).is(REVIVAL_ITEMS);
         } else {
             allowed &= mc.player.isShiftKeyDown() && mc.player.getMainHandItem().isEmpty()
                     && mc.player.getOffhandItem().isEmpty();
@@ -240,6 +271,9 @@ public final class RevivalClient {
     private static void clearInteraction(boolean notifyServer) {
         if (notifyServer && activeTarget != null && Minecraft.getInstance().getConnection() != null) {
             RevivalNetwork.sendInput(activeTarget, activeHand, InputAction.RELEASE);
+        }
+        if (activeAction == InputAction.FEED && Minecraft.getInstance().player != null) {
+            FeedingAnimation.stop(Minecraft.getInstance().player);
         }
         activeTarget = null;
         activeAction = null;
@@ -299,15 +333,14 @@ public final class RevivalClient {
         int center = gui.guiWidth() / 2;
         int top = gui.guiHeight() - 105;
         if (own != null) {
-            gui.drawCenteredString(mc.font, Component.translatable("hud.ragrevival.downed", time(own)), center, top, 0xFFFF8080);
-            gui.drawCenteredString(mc.font, Component.translatable("hud.ragrevival.give_up_hint",
-                    GIVE_UP.getTranslatedKeyMessage()), center, top + 12, 0xFFFFFFFF);
             if (own.payload.giveUpTicks() > 0) {
+                gui.drawCenteredString(mc.font, Component.translatable("hud.ragrevival.downed", time(own)), center, top, 0xFFFF8080);
                 progress(gui, center, top + 26, own.payload.giveUpTicks(), 100, 0xFFE27858,
                         Component.translatable("hud.ragrevival.giving_up"));
-            } else if (own.payload.feedingTicks() > 0) {
-                progress(gui, center, top + 26, own.payload.feedingTicks(), own.payload.feedingDuration(),
-                        0xFF79D587, Component.translatable("hud.ragrevival.being_fed"));
+            } else {
+                renderRescueHint(gui, center, top, own);
+                gui.drawCenteredString(mc.font, Component.translatable("hud.ragrevival.give_up_hint",
+                        GIVE_UP.getTranslatedKeyMessage()), center, top + 27, 0xFFFFFFFF);
             }
             return;
         }
@@ -325,12 +358,14 @@ public final class RevivalClient {
         List<ItemStack> icons = List.of();
         int accent = 0xFFA5DAC0;
         InteractionHand hand = revivalHand(mc.player);
+        boolean self = mc.player.getUUID().equals(targetState.payload.playerId());
         boolean feeding = targetState.payload.feedingTicks() > 0;
         if (feeding) {
             boolean ownFeed = mc.player.getUUID().equals(targetState.payload.rescuer());
-            label = Component.translatable(ownFeed ? "hud.ragrevival.revive_hint" : "hud.ragrevival.being_fed");
+            label = Component.translatable(ownFeed ? (self ? "hud.ragrevival.self_revive_hint"
+                    : "hud.ragrevival.revive_hint") : "hud.ragrevival.being_fed");
             if (ownFeed) {
-                keys = compactKey(mc.options.keyUse);
+                keys = feedingKeys(self);
                 if (hand != null) icons = List.of(mc.player.getItemInHand(hand));
             }
         } else if (activeAction == InputAction.DRAG) {
@@ -338,10 +373,10 @@ public final class RevivalClient {
             label = Component.translatable("hud.ragrevival.release_drag_hint");
             accent = 0xFFE6C985;
         } else if (hand != null) {
-            keys = compactKey(mc.options.keyUse);
+            keys = feedingKeys(self);
             icons = List.of(mc.player.getItemInHand(hand));
-            label = Component.translatable("hud.ragrevival.revive_hint");
-        } else if (mc.player.getMainHandItem().isEmpty() && mc.player.getOffhandItem().isEmpty()) {
+            label = Component.translatable(self ? "hud.ragrevival.self_revive_hint" : "hud.ragrevival.revive_hint");
+        } else if (!self && mc.player.getMainHandItem().isEmpty() && mc.player.getOffhandItem().isEmpty()) {
             keys = mc.player.isShiftKeyDown() ? compactKey(mc.options.keyUse)
                     : Component.translatable("hud.ragrevival.drag_keys", compactKey(mc.options.keyShift), compactKey(mc.options.keyUse));
             label = Component.translatable("hud.ragrevival.drag_hint");
@@ -386,6 +421,12 @@ public final class RevivalClient {
         x += labelWidth + 7;
         gui.fill(x, top + 6, x + 1, top + 16, 0xFF46515A);
         gui.drawString(mc.font, countdown, x + 8, top + 7, 0xFFE6C985, false);
+    }
+
+    private static Component feedingKeys(boolean self) {
+        Minecraft mc = Minecraft.getInstance();
+        return self || mc.player.isShiftKeyDown() ? compactKey(mc.options.keyUse)
+                : Component.translatable("hud.ragrevival.drag_keys", compactKey(mc.options.keyShift), compactKey(mc.options.keyUse));
     }
 
     private static Component compactKey(KeyMapping mapping) {

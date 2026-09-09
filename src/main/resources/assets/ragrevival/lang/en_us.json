@@ -7,6 +7,7 @@
   "hud.ragrevival.giving_up": "Giving up… release to cancel",
   "hud.ragrevival.being_fed": "Being revived…",
   "hud.ragrevival.revive_hint": "Hold to revive",
+  "hud.ragrevival.self_revive_hint": "Hold to self-revive",
   "hud.ragrevival.drag_hint": "Drag",
   "hud.ragrevival.release_drag_hint": "Release to drop",
   "hud.ragrevival.equip_hint": "Equip to revive",

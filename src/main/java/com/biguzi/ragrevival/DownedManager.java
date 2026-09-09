@@ -6,6 +6,7 @@ import com.biguzi.ragrevival.ragdoll.RagdollBridge;
 import com.biguzi.ragrevival.state.DownedClock;
 import com.biguzi.ragrevival.state.HoldProgress;
 import com.mojang.logging.LogUtils;
+import dev.leo.sableplayerragdoll.entity.RagdollSeatEntity;
 import java.util.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
@@ -56,6 +57,15 @@ public final class DownedManager {
         return player.getPersistentData().contains(DATA_KEY) && !TERMINAL.contains(player.getUUID());
     }
     public static boolean isBusy(Player player) { return RESCUES.containsKey(player.getUUID()); }
+    public static boolean isFeeding(Player player) {
+        Rescue rescue = RESCUES.get(player.getUUID());
+        return rescue != null && rescue.action == InputAction.FEED;
+    }
+    /** The server-owned feeding hand, or null when the player has no active feeding interaction. */
+    public static InteractionHand feedingHand(Player player) {
+        Rescue rescue = RESCUES.get(player.getUUID());
+        return rescue != null && rescue.action == InputAction.FEED ? rescue.hand : null;
+    }
     public static boolean isDragging(Player player) {
         Rescue rescue = RESCUES.get(player.getUUID());
         return rescue != null && rescue.action == InputAction.DRAG;
@@ -160,11 +170,15 @@ public final class DownedManager {
             if (isDowned(actor) && actor.isAlive()) GIVE_UP.computeIfAbsent(id, ignored -> new HoldProgress(tick)).heartbeat(tick);
             return;
         }
-        if (!actor.isAlive() || actor.isSpectator() || isDowned(actor) || CarryOnCompat.isCarrying(actor)) {
+        ServerPlayer target = actor.server.getPlayerList().getPlayer(input.target());
+        boolean selfFeed = target == actor && input.action() == InputAction.FEED;
+        if (!actor.isAlive() || actor.isSpectator() || isDowned(actor) && !selfFeed || CarryOnCompat.isCarrying(actor)) {
             cancelRescue(id); return;
         }
-        ServerPlayer target = actor.server.getPlayerList().getPlayer(input.target());
-        if (target == null || target == actor || !validTarget(actor, target)) { cancelRescue(id); return; }
+        if (target == null || target == actor && !selfFeed || !validTarget(actor, target)) { cancelRescue(id); return; }
+        // Feeding a teammate requires crouch for the whole interaction; self-feeding does not.
+        if (input.action() == InputAction.FEED && (!actor.getItemInHand(input.hand()).is(REVIVAL_ITEMS)
+                || !selfFeed && !actor.isShiftKeyDown())) { cancelRescue(id); return; }
         Rescue rescue = RESCUES.get(id);
         if (rescue != null && (rescue.target != target || rescue.hand != input.hand() || rescue.action != input.action())) {
             cancelRescue(id); rescue = null;
@@ -174,7 +188,6 @@ public final class DownedManager {
         long now = System.currentTimeMillis();
         // A request already at/past the deadline cannot turn an expired player into a paused rescue.
         if (DownedClock.remaining(target.getPersistentData().getCompound(DATA_KEY).getLong("deadline"), now) == 0) return;
-        if (input.action() == InputAction.FEED && !actor.getItemInHand(input.hand()).is(REVIVAL_ITEMS)) return;
         if (input.action() == InputAction.DRAG && (!actor.isShiftKeyDown() || !actor.getMainHandItem().isEmpty() || !actor.getOffhandItem().isEmpty())) return;
         if (input.action() != InputAction.FEED && input.action() != InputAction.DRAG) return;
         if (input.action() == InputAction.DRAG && !RagdollBridge.startDrag(actor, target)) return;
@@ -182,13 +195,16 @@ public final class DownedManager {
         RESCUES.put(id, new Rescue(actor, target, input.action(), input.hand(), actor.getItemInHand(input.hand()),
                 new HoldProgress(tick), RevivalConfig.FEEDING_TICKS.get(), now));
         TARGET_LOCKS.put(target.getUUID(), id);
+        if (input.action() == InputAction.FEED) FeedingAnimation.start(actor, input.hand());
     }
 
     private static boolean validTarget(ServerPlayer actor, ServerPlayer target) {
-        return actor.level() == target.level() && isDowned(target) && target.isAlive()
-                && target.connection != null && !target.hasDisconnected()
-                && !actor.isPassenger() && !actor.isVehicle() && !target.isVehicle()
-                && RagdollBridge.canReach(actor, target);
+        if (actor.level() != target.level() || !isDowned(target) || !target.isAlive()
+                || target.connection == null || target.hasDisconnected() || actor.isVehicle() || target.isVehicle()) return false;
+        // A downed player's actual entity rides Sable's seat. Self-feeding needs no world ray/reach
+        // test, but must not grant the same exception to another passenger or an ordinary ragdoll.
+        if (actor == target) return !actor.isPassenger() || actor.getVehicle() instanceof RagdollSeatEntity;
+        return !actor.isPassenger() && RagdollBridge.canReach(actor, target);
     }
 
     @SubscribeEvent
@@ -200,11 +216,13 @@ public final class DownedManager {
         for (Rescue rescue : List.copyOf(RESCUES.values())) {
             if (RESCUES.get(rescue.actor.getUUID()) != rescue) continue;
             ServerPlayer actor = rescue.actor;
+            boolean selfFeed = rescue.action == InputAction.FEED && actor == rescue.target;
             boolean valid = actor.connection != null && !actor.hasDisconnected() && actor.isAlive() && !actor.isSpectator()
-                    && !isDowned(actor) && !CarryOnCompat.isCarrying(actor) && validTarget(actor, rescue.target)
+                    && (!isDowned(actor) || selfFeed) && !CarryOnCompat.isCarrying(actor) && validTarget(actor, rescue.target)
                     && rescue.hold.advance(tick);
             if (rescue.action == InputAction.FEED) {
-                valid &= actor.getItemInHand(rescue.hand) == rescue.stack && rescue.stack.is(REVIVAL_ITEMS)
+                valid &= (selfFeed || actor.isShiftKeyDown())
+                        && actor.getItemInHand(rescue.hand) == rescue.stack && rescue.stack.is(REVIVAL_ITEMS)
                         && !rescue.stack.isEmpty();
             } else {
                 valid &= actor.isShiftKeyDown() && actor.getMainHandItem().isEmpty() && actor.getOffhandItem().isEmpty();
@@ -212,6 +230,8 @@ public final class DownedManager {
             }
             if (!valid) { cancelRescue(actor.getUUID()); continue; }
             creditFeedingTime(rescue, System.currentTimeMillis());
+            if (rescue.action == InputAction.FEED)
+                FeedingAnimation.tick(actor, rescue.target, rescue.hand, rescue.hold.ticks());
         }
         for (ServerPlayer player : List.copyOf(server.getPlayerList().getPlayers())) {
             if (!isDowned(player)) continue;
@@ -309,8 +329,11 @@ public final class DownedManager {
         if (rescuer != null) cancelRescue(rescuer);
     }
     private static void cancelRescue(UUID rescuer) {
-        Rescue removed = RESCUES.remove(rescuer);
+        Rescue removed = RESCUES.get(rescuer);
         if (removed != null) {
+            // Keep ownership present while clearing native use so its item callbacks remain guarded.
+            if (removed.action == InputAction.FEED) FeedingAnimation.stop(removed.actor);
+            RESCUES.remove(rescuer);
             // Settle the final fraction of a live hold on release/logout/shutdown. A stale lease
             // earns no extra time; there is never a persisted pause flag that can survive offline.
             creditFeedingTime(removed, System.currentTimeMillis());

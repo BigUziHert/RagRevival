@@ -10,7 +10,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public final class RevivalNetwork {
     public static void register(RegisterPayloadHandlersEvent event) {
-        var registrar = event.registrar("2");
+        var registrar = event.registrar("3");
         registrar.playToServer(InputPayload.TYPE, InputPayload.CODEC, (p,c) -> c.enqueueWork(() -> {
             if (c.player() instanceof ServerPlayer player) DownedManager.input(player, p);
         }));
