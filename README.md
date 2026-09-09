@@ -14,9 +14,9 @@ Install RagRevival and all three dependencies in **both clients and the dedicate
 | [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | 0.7.2 |
 | [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.0 |
 
-The latest versioned distributable and source JAR are in [`artifacts/1.3.3`](artifacts/1.3.3). Install matching **1.3.3** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+The latest versioned distributable and source JAR are in [`artifacts/1.3.4`](artifacts/1.3.4). Install matching **1.3.4** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
 
-RagRevival no longer rejects NeoForge or Sable releases by version number. Minecraft **1.21.1** is still required, and dependencies retain their own requirements. This removes RagRevival's startup blocks for NeoForge **21.1.248** and Sable **2.0.5**. Accepting a version does not establish compatibility with every historical or future API; see the [1.3.3 compatibility inspection](docs/version-compatibility-1.3.3.md). Build and local setup downloads remain pinned for reproducibility.
+Version **1.3.4** omits the NeoForge and Sable range fields so FML uses its unbounded default. It supersedes **1.3.3**, whose explicitly empty ranges still caused dependency rejection in FML 4.0.43. Minecraft **1.21.1** is required, and dependencies retain their own requirements. Broad version acceptance does not establish compatibility with every historical or future API; see the [1.3.4 range correction and validation](docs/version-compatibility-1.3.4.md). Builds and local setup remain pinned to NeoForge **21.1.249** and Sable **2.0.3** for reproducibility.
 
 Optional compatibility test versions: **Carry On 2.2.6.13** on server and clients; **Unlocked Camera 1.0.0**, private source commit `c13cfa3d`, on clients only. See [source inspection and compatibility evidence](docs/compatibility-research.md). Other dependency versions are deliberately not advertised as verified.
 
@@ -75,7 +75,7 @@ Both foods use the same item tag and revival rules. Enchanted golden apples are 
 
 Selection clips the existing rendered camera ray against the actual rotated ragdoll limbs. It does not modify Unlocked Camera's position, freelook, shoulder selection, or crosshair. The server independently checks line of sight and interaction reach from the rescuer's actual world-space eyes to the real physics body. A camera offset cannot extend reach or permit feeding through walls. Sable plotyard coordinates are projected into world space; dragging uses Sable's native physics constraint and player seat, with no independent teleport loop.
 
-Version **1.3.3 was assembled and its dependency APIs inspected; no tests were run**, preserving the user's earlier request. See [1.3.3 compatibility inspection](docs/version-compatibility-1.3.3.md), [dependency API inspection](docs/dependency-api.md), and [1.3.1 evidence, the previous tested release](docs/test-results-1.3.1.md) for the exact scope.
+See [1.3.4 range correction and targeted loader validation](docs/version-compatibility-1.3.4.md), [dependency API inspection](docs/dependency-api.md), and [1.3.1 evidence, the previous multiplayer-tested release](docs/test-results-1.3.1.md) for the exact scope. Loader parsing is separate from game startup and gameplay verification.
 
 ## Build and local test setup
 
@@ -90,7 +90,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.3.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.4.jar
 ./scripts/start-test-runtime.ps1
 ```
 

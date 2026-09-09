@@ -1,16 +1,15 @@
 # RagRevival 1.3.3
 
-Replace the older RagRevival JAR with `ragrevival-1.21.1-1.3.3.jar` in the
-server and every client's `mods` folder while those instances are stopped.
-Source and SHA-256 checksums are alongside the distributable.
+**Superseded: install [1.3.4](../1.3.4) instead.** This release's explicitly
+empty NeoForge and Sable ranges still cause dependency rejection in FML
+4.0.43. An empty range value behaves differently from an omitted range.
+The prior claim that 1.3.3 removed that startup rejection was incorrect.
 
-RagRevival no longer imposes a version range on NeoForge or Sable. This
-removes its startup rejection of NeoForge 21.1.248 and Sable 2.0.5. Minecraft
-1.21.1, Java 21, Sable, Sable: Ragdolls 0.7.2 and Ragdoll Reactions 0.7.0
-are still required. Dependencies retain their own requirements. Gameplay,
-the compact HUD, and network protocol 3 are unchanged.
+The archived distributable, source, and SHA-256 checksums remain here for
+release history. Gameplay, the compact HUD, and network protocol 3 were
+unchanged in this release.
 
-Version acceptance does not guarantee every past or future API is compatible.
-See the [source/API inspection and its limits](../../docs/version-compatibility-1.3.3.md).
+See the [corrected 1.3.3 record](../../docs/version-compatibility-1.3.3.md)
+and [1.3.4 range correction](../../docs/version-compatibility-1.3.4.md).
 Assembly succeeded; no automated or gameplay tests were run, preserving
 the user's earlier request. Third-party dependencies are not bundled.

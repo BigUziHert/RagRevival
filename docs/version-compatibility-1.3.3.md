@@ -1,20 +1,27 @@
 # Version compatibility in 1.3.3
 
+**Superseded by [1.3.4](version-compatibility-1.3.4.md).** The explicit empty
+ranges shipped in 1.3.3 still caused dependency rejection under FML 4.0.43.
+An empty value is not equivalent to omitting the range in that loader. The
+earlier claim that 1.3.3 removed the startup block was incorrect.
+
 The reported server failed during dependency validation: RagRevival 1.3.2
 required NeoForge `[21.1.249,21.2)` and Sable `[2.0.3]`, whereas the server
 had NeoForge 21.1.248 and Sable 2.0.5. No RagRevival gameplay code had run.
 
 ## Loading policy
 
-RagRevival 1.3.3 declares an empty `versionRange` for NeoForge and Sable.
-NeoForge documents this as accepting any version in its
-[dependency configuration reference](https://docs.neoforged.net/docs/1.21.1/gettingstarted/modfiles/#dependency-configurations).
-Both remain required on both sides. Minecraft remains exactly 1.21.1;
+RagRevival 1.3.3 declares an explicit empty `versionRange` for NeoForge and
+Sable. The default described in NeoForge's
+[dependency configuration reference](https://docs.neoforged.net/docs/1.21.1/gettingstarted/modfiles/#dependency-configurations)
+was incorrectly applied to a present-but-empty value. This did not produce
+the intended unbounded range in FML 4.0.43.
+Both dependencies remain required on both sides. Minecraft remains exactly 1.21.1;
 Sable: Ragdolls 0.7.2 and Ragdoll Reactions 0.7.0 remain required. The Java
 21 and JavaFML 4 requirements are unchanged. No dependency is bundled.
 
-This removes RagRevival's two reported version rejection messages. It does
-not override other mods' requirements or promise that every historical or
+Use 1.3.4 for the corrected range declaration. A broad declaration does not
+override other mods' requirements or promise that every historical or
 future API works. For example, Sable 2.0.3 and 2.0.5 themselves require
 NeoForge 21.1.228 or later. Builds for other Minecraft versions are outside
 this mod's scope. Keep the same mod versions on the server and clients.
@@ -66,8 +73,9 @@ library. Removing RagRevival's pin cannot remove those upstream limits.
 ## Release verification scope
 
 `gradlew.bat assemble` succeeded for 1.3.3 and produced the distributable
-and source JARs. The packaged `META-INF/neoforge.mods.toml` was inspected
-to confirm both unrestricted ranges and the required dependencies.
+and source JARs. The packaged `META-INF/neoforge.mods.toml` was inspected,
+but its empty ranges were mistakenly treated as unrestricted. Assembly and
+text inspection did not establish the loader's actual range semantics.
 No automated or gameplay tests were run, preserving the user's earlier
 request. Existing test clients and the local server were not changed.
 The [1.3.1 report](test-results-1.3.1.md) remains the latest executed
