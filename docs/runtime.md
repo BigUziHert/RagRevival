@@ -14,8 +14,8 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.3.0** on all three instances together. Its network protocol
-is version 3, so older clients and servers must be updated to match.
+Install RagRevival **1.3.1** on all three instances together. It retains network
+protocol 3; use matching client/server versions for the current presentation.
 
 NeoForge is pinned to **21.1.249** on Minecraft **1.21.1**. Setup uses the official
 NeoForge installer and Mojang assets, verifies Mojang SHA-1 hashes, and copies
@@ -61,9 +61,12 @@ The task's final report distinguishes compilation/startup checks from feeding,
 movement, camera, dragging, and key-hold interactions actually exercised.
 For a quick manual check, hold crouch + Use to feed a teammate, then release
 crouch to check cancellation. While downed, hold Use without crouching to
-self-revive. Observe the eating animation, food crumbs/sounds at the downed head,
-paused countdown, and green progress bar; finish to check one-item consumption
-and half maximum health. Sable's physical limb poses are unchanged.
+self-revive. Teammate feeding should keep the rescuer's food held, with crumbs
+and sounds at the downed head. The downed player's two-row card combines
+self-revival/timer above a G keycap and **Hold for 5s** below. Its shared thin
+green bottom track shows revival or G progress, with G taking priority. Check
+timer pause, one-item consumption, and half maximum health on success. Sable's
+physical limb poses and hidden seated first-person hands are unchanged.
 
 ## Optional integration harness
 
@@ -73,7 +76,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.3.0-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.3.1-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -88,7 +91,7 @@ while both clients receive synchronization. Results are logged as
 teammate crouch requirements, self-revival, feeding cancellation/completion,
 native-use animation state, native drag release, dismount locking, movement input,
 give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage edge
-cases. The codec command can run separately. See [1.3.0 results](test-results-1.3.0.md)
+cases. The codec command can run separately. See [1.3.1 results](test-results-1.3.1.md)
 for the latest executed checks and [verification history](test-results.md) for
 earlier versions, including independent real reconnection/restart checks.
 
@@ -105,10 +108,11 @@ such as `outline-wall` into `.local/client-two/ragrevival-visual.request`. The
 test-only client probe captures the actual framebuffer into
 `screenshots/ragrevival-outline-wall.png` without moving the camera or sending input.
 
-The special label `rescue-hud` draws the production rescue panel with synthetic
-0%, 25%, 50%, and 100% feeding snapshots, plus another rescuer's progress, before
-capturing it. This previews layout using the current held items and bound keys;
-it does not change gameplay state or simulate holding Use.
+The special label `rescue-hud` draws four production panels using synthetic
+snapshots: teammate feeding at 50%, the player's ready self-revival card with
+its integrated G hint, self-feeding at 50%, and G at 50% while feeding is at 25%
+to show give-up bar priority. This previews layout using the current held items
+and bound keys; it does not change gameplay state or simulate holding Use.
 
 For the opt-in scroll regression fixture, install the test harness on both
 clients and the server, leave the rescuer idle, and use the isolated test world:

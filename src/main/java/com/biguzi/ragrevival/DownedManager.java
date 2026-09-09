@@ -195,7 +195,7 @@ public final class DownedManager {
         RESCUES.put(id, new Rescue(actor, target, input.action(), input.hand(), actor.getItemInHand(input.hand()),
                 new HoldProgress(tick), RevivalConfig.FEEDING_TICKS.get(), now));
         TARGET_LOCKS.put(target.getUUID(), id);
-        if (input.action() == InputAction.FEED) FeedingAnimation.start(actor, input.hand());
+        if (selfFeed) FeedingAnimation.start(actor, input.hand());
     }
 
     private static boolean validTarget(ServerPlayer actor, ServerPlayer target) {

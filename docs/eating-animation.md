@@ -35,3 +35,13 @@ do not have a distinct EAT arm pose; the held item, crumbs, and sound supply tha
 view's feedback. Custom non-food tagged items use crumbs/sound only.
 
 See [1.3.0 verification](test-results-1.3.0.md) for runtime checks and their limits.
+
+## Change in 1.3.1
+
+Native eating use now starts only for self-revival. A teammate retains the
+held-food appearance while crumbs and chewing sounds still come from the
+downed player's head. Both the initial server start and per-tick restart are
+restricted to self-feeding, and client presentation follows the same rule.
+Managed-use guards and successful server consumption remain unchanged. The
+seated-hand and rigid-limb limitations above still apply. See
+[1.3.1 verification](test-results-1.3.1.md) for that release's checks.

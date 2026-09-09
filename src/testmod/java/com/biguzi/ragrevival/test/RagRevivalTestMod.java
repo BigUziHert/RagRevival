@@ -251,8 +251,8 @@ public final class RagRevivalTestMod {
                 rescuer.setShiftKeyDown(true);
                 send(rescuer, InputAction.FEED);
                 check(DownedManager.isBusy(rescuer), "crouching teammate feeding starts for held tagged item");
-                check(rescuer.isUsingItem() && rescuer.getUsedItemHand() == InteractionHand.MAIN_HAND,
-                        "teammate feeding starts the guarded main-hand eating animation");
+                check(!rescuer.isUsingItem(),
+                        "teammate feeding keeps the rescuer out of native self-eating");
                 for (int i = 0; i < 100; i++) send(rescuer, InputAction.FEED);
                 check(DownedManager.isDowned(target) && apples() == 4, "duplicate input packets cannot finish feeding instantly");
                 ServerPlayer contender = new ServerPlayer(server, target.serverLevel(),
@@ -272,10 +272,13 @@ public final class RagRevivalTestMod {
                 heartbeat = InputAction.FEED;
             });
             after(8, () -> {
+                check(DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && !rescuer.isUsingItem()
+                                && rescuer.getMainHandItem().is(Items.GOLDEN_APPLE) && apples() == 4,
+                        "sustained teammate feeding holds the apple without self-eating or early consumption");
                 heartbeat = null; send(rescuer, InputAction.RELEASE);
                 check(!DownedManager.isBusy(rescuer) && apples() == 4 && DownedManager.isDowned(target),
                         "releasing feeding cancels without consuming");
-                check(!rescuer.isUsingItem(), "releasing teammate feeding clears the eating animation");
+                check(!rescuer.isUsingItem(), "releasing teammate feeding leaves no native item use active");
                 ordinaryFoodAfterCleanup(rescuer, "canceled teammate feeding");
                 send(rescuer, InputAction.FEED);
             });
@@ -288,7 +291,7 @@ public final class RagRevivalTestMod {
                 heartbeat = null;
                 check(!DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && apples() == 4,
                         "releasing crouch cancels active teammate feeding without consuming");
-                check(!rescuer.isUsingItem(), "releasing crouch clears the teammate eating animation");
+                check(!rescuer.isUsingItem(), "releasing crouch leaves no teammate native item use active");
                 resumedRemaining = DownedManager.remainingMillis(target);
                 send(rescuer, InputAction.FEED);
                 check(!DownedManager.isBusy(rescuer), "standing feed heartbeats cannot reacquire a canceled teammate lease");
@@ -329,7 +332,7 @@ public final class RagRevivalTestMod {
                 check(!DownedManager.isDowned(target), "continuous feeding revives target");
                 check(apples() == 3, "successful feeding consumes exactly one golden apple");
                 check(!DownedManager.isBusy(rescuer), "successful feeding clears rescue lease");
-                check(!rescuer.isUsingItem(), "successful teammate feeding clears the eating animation");
+                check(!rescuer.isUsingItem(), "successful teammate feeding leaves no native item use active");
                 check(target.getMaxHealth() == 20 && target.getHealth() == 10,
                         "default half-health revival restores 10 HP at 20 maximum HP");
                 send(rescuer, InputAction.FEED); send(rescuer, InputAction.FEED);

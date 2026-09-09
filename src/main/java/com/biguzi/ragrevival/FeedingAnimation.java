@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.phys.Vec3;
 
-/** Uses Minecraft's eating presentation while the rescue transaction owns all item effects. */
+/** Self-feeding uses native eating; both rescue paths show food effects at the patient's mouth. */
 public final class FeedingAnimation {
     private FeedingAnimation() {}
 
@@ -58,9 +58,9 @@ public final class FeedingAnimation {
 
     /** Broadcast crumbs and chewing at the visible patient's mouth, including self-feeding. */
     public static void tick(ServerPlayer actor, ServerPlayer target, InteractionHand hand, int ticks) {
-        // Native release packets may arrive before the matching rescue release; only a still-valid
-        // server hold can keep the cosmetic use active.
-        start(actor, hand);
+        // Only self-revival raises food to the actor's mouth. A teammate keeps it held while
+        // the recipient's mouth effects show who is being fed.
+        if (actor == target) start(actor, hand);
         if (ticks < 4 || ticks % 4 != 0) return;
         ItemStack stack = actor.getItemInHand(hand);
         if (stack.isEmpty()) return;

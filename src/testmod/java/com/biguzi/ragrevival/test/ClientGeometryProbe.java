@@ -105,15 +105,17 @@ public final class ClientGeometryProbe {
                 GuiGraphics.class, int.class, int.class, snapshotType);
         render.setAccessible(true);
         int center = gui.guiWidth() / 2;
-        gui.fill(center - 200, 28, center + 200, 326, 0xDF111820);
+        gui.fill(center - 200, 28, center + 200, 312, 0xDF111820);
         gui.drawCenteredString(mc.font, "Rescue HUD preview (synthetic progress)", center, 36, 0xFFFFFFFF);
-        int[] ticks = {0, 8, 16, 32, 16, 16};
-        String[] labels = {"Ready", "Reviving 25%", "Reviving 50%", "Reviving 100%", "Another rescuer", "Self-revival 50%"};
+        int[] ticks = {16, 0, 16, 8};
+        int[] giveUpTicks = {0, 0, 0, 50};
+        int[] tops = {57, 104, 172, 240};
+        String[] labels = {"Teammate revival 50%", "Downed: ready", "Self-revival 50%", "Give-up 50% overrides feeding 25%"};
         for (int i = 0; i < ticks.length; i++) {
-            int top = 57 + i * 44;
+            int top = tops[i];
             gui.drawCenteredString(mc.font, labels[i], center, top, 0xFFAAB7C4);
-            StatePayload payload = new StatePayload(i == 5 ? mc.player.getUUID() : StatePayload.NONE, 54_000, ticks[i], 32, 0,
-                    i == 4 ? StatePayload.NONE : mc.player.getUUID());
+            StatePayload payload = new StatePayload(i > 0 ? mc.player.getUUID() : StatePayload.NONE,
+                    54_000, ticks[i], 32, giveUpTicks[i], mc.player.getUUID());
             Object snapshot = constructor.newInstance(payload, System.nanoTime());
             render.invoke(null, gui, center, top + 12, snapshot);
         }

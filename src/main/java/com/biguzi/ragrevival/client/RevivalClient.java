@@ -333,15 +333,7 @@ public final class RevivalClient {
         int center = gui.guiWidth() / 2;
         int top = gui.guiHeight() - 105;
         if (own != null) {
-            if (own.payload.giveUpTicks() > 0) {
-                gui.drawCenteredString(mc.font, Component.translatable("hud.ragrevival.downed", time(own)), center, top, 0xFFFF8080);
-                progress(gui, center, top + 26, own.payload.giveUpTicks(), 100, 0xFFE27858,
-                        Component.translatable("hud.ragrevival.giving_up"));
-            } else {
-                renderRescueHint(gui, center, top, own);
-                gui.drawCenteredString(mc.font, Component.translatable("hud.ragrevival.give_up_hint",
-                        GIVE_UP.getTranslatedKeyMessage()), center, top + 27, 0xFFFFFFFF);
-            }
+            renderRescueHint(gui, center, top, own);
             return;
         }
         Player target = activeTarget == null ? pickBody() : mc.level.getPlayerByUUID(activeTarget);
@@ -392,22 +384,31 @@ public final class RevivalClient {
         int keyWidth = keyTextWidth == 0 ? 0 : keyTextWidth + 8;
         String countdown = time(targetState);
         int labelWidth = mc.font.width(label);
-        int width = 14 + icons.size() * 20 + (keyWidth == 0 ? 0 : keyWidth + 6)
+        int contentWidth = icons.size() * 20 + (keyWidth == 0 ? 0 : keyWidth + 6)
                 + labelWidth + 15 + mc.font.width(countdown);
+        boolean givingUpNow = self && targetState.payload.giveUpTicks() > 0;
+        Component giveUpKey = compactKey(GIVE_UP);
+        Component giveUpLabel = Component.translatable(givingUpNow
+                ? "hud.ragrevival.giving_up" : "hud.ragrevival.give_up_hint");
+        int giveUpKeyWidth = mc.font.width(giveUpKey) + 8;
+        int giveUpWidth = self ? giveUpKeyWidth + 6 + mc.font.width(giveUpLabel) : 0;
+        int width = 14 + Math.max(contentWidth, giveUpWidth);
+        int height = self ? 42 : 22;
         int left = center - width / 2;
-        // Keep the action, remaining bleed-out time, and feeding progress in one compact panel.
-        gui.fill(left + 1, top, left + width - 1, top + 22, 0xC9182028);
-        gui.fill(left, top + 1, left + width, top + 21, 0xC9182028);
-        if (feeding) {
+        // Both downed-player actions share the same card and bottom progress track.
+        gui.fill(left + 1, top, left + width - 1, top + height, 0xC9182028);
+        gui.fill(left, top + 1, left + width, top + height - 1, 0xC9182028);
+        if (feeding || givingUpNow) {
             int barWidth = width - 2;
-            int filled = Mth.clamp(Math.round((float) targetState.payload.feedingTicks()
-                    / Math.max(1, targetState.payload.feedingDuration()) * barWidth), 0, barWidth);
-            gui.fill(left + 1, top + 20, left + width - 1, top + 22, 0xFF33443C);
-            gui.fill(left + 1, top + 20, left + 1 + filled, top + 22, 0xFF79D587);
+            int current = givingUpNow ? targetState.payload.giveUpTicks() : targetState.payload.feedingTicks();
+            int duration = givingUpNow ? 100 : targetState.payload.feedingDuration();
+            int filled = Mth.clamp(Math.round((float) current / Math.max(1, duration) * barWidth), 0, barWidth);
+            gui.fill(left + 1, top + height - 2, left + width - 1, top + height, 0xFF33443C);
+            gui.fill(left + 1, top + height - 2, left + 1 + filled, top + height, 0xFF79D587);
         } else {
-            gui.fill(left + 2, top + 21, left + width - 2, top + 22, (accent & 0x00FFFFFF) | 0x66000000);
+            gui.fill(left + 2, top + height - 1, left + width - 2, top + height, (accent & 0x00FFFFFF) | 0x66000000);
         }
-        int x = left + 7;
+        int x = center - contentWidth / 2;
         for (ItemStack icon : icons) {
             gui.renderItem(icon, x, top + 3);
             x += 20;
@@ -421,6 +422,14 @@ public final class RevivalClient {
         x += labelWidth + 7;
         gui.fill(x, top + 6, x + 1, top + 16, 0xFF46515A);
         gui.drawString(mc.font, countdown, x + 8, top + 7, 0xFFE6C985, false);
+        if (self) {
+            gui.fill(left + 7, top + 22, left + width - 7, top + 23, 0x6646515A);
+            int giveUpX = center - giveUpWidth / 2;
+            gui.fill(giveUpX, top + 25, giveUpX + giveUpKeyWidth, top + 39, 0xFF35424D);
+            gui.drawString(mc.font, giveUpKey, giveUpX + 4, top + 28, 0xFFF0F4F5, false);
+            gui.drawString(mc.font, giveUpLabel, giveUpX + giveUpKeyWidth + 6, top + 28,
+                    givingUpNow ? 0xFFA5DAC0 : 0xFFBEC8CE, false);
+        }
     }
 
     private static Component feedingKeys(boolean self) {
@@ -448,16 +457,6 @@ public final class RevivalClient {
                 : (System.nanoTime() - snapshot.receivedNanos) / 1_000_000L;
         long seconds = Math.max(0, (snapshot.payload.remainingMillis() - elapsedMillis + 999) / 1000);
         return String.format(java.util.Locale.ROOT, "%d:%02d", seconds / 60, seconds % 60);
-    }
-
-    private static void progress(GuiGraphics gui, int center, int top, int current, int duration, int color,
-                                 Component label) {
-        Minecraft mc = Minecraft.getInstance();
-        int width = 160;
-        gui.drawCenteredString(mc.font, label, center, top, 0xFFFFFFFF);
-        gui.fill(center - width / 2, top + 12, center + width / 2, top + 18, 0xAA161616);
-        int filled = Mth.clamp(Math.round((float) current / Math.max(1, duration) * width), 0, width);
-        gui.fill(center - width / 2, top + 12, center - width / 2 + filled, top + 18, color);
     }
 
     private record Snapshot(StatePayload payload, long receivedNanos) {}

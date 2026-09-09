@@ -6,7 +6,9 @@ for the drag/zoom fix. [1.2.0 verification](test-results-1.2.0.md) covers golden
 carrots, compact prompts, and feeding pause. See [1.2.1 verification](test-results-1.2.1.md)
 for the combined rescue prompt and bottom-edge revival bar. See
 [1.3.0 verification](test-results-1.3.0.md) for teammate crouch requirements,
-self-revival, eating animation, and the latest test runtime.
+self-revival and eating animation. See [1.3.1 verification](test-results-1.3.1.md)
+for teammate held-food presentation, the combined give-up card, and the latest
+test runtime.
 
 Final live dedicated-server run: 2026-09-08, Minecraft 1.21.1, NeoForge 21.1.249, Java 21.0.6.
 Installed main JAR SHA-256: `0b8639ce9f6c86f2c7b13694f563f3787ae23263d41933e8919f8d8b88031e1b`.

@@ -14,7 +14,7 @@ Install RagRevival and all three pinned dependencies in **both clients and the d
 | [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | 0.7.2 |
 | [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.0 |
 
-The latest versioned distributable and source JAR are in [`artifacts/1.3.0`](artifacts/1.3.0). Install matching **1.3.0** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+The latest versioned distributable and source JAR are in [`artifacts/1.3.1`](artifacts/1.3.1). Install matching **1.3.1** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
 
 Optional compatibility test versions: **Carry On 2.2.6.13** on server and clients; **Unlocked Camera 1.0.0**, private source commit `c13cfa3d`, on clients only. See [source inspection and compatibility evidence](docs/compatibility-research.md). Other dependency versions are deliberately not advertised as verified.
 
@@ -24,14 +24,14 @@ Optional compatibility test versions: **Carry On 2.2.6.13** on server and client
 - **Find a teammate:** chat announces "<player> is knocked and needs to be revived!" once per knockdown. Other players see a gold outline around the actual downed body through walls in the same dimension, within Sable's native render range (64 blocks, with limbs loaded). The outline ends when the player is revived, dies, or disconnects; ordinary ragdolls have no rescue outline. Seeing the outline does not let you feed through walls.
 - **Feed a teammate:** aim at the visible body with a **golden apple or golden carrot** in either hand, then hold both **crouch and Use Item/right-click** for 32 server ticks (1.6 seconds at 20 TPS). Standing up, releasing Use, losing reach, changing the stack, changing dimension, disconnecting, or becoming downed cancels progress.
 - **Revive yourself:** while downed, hold Use Item/right-click with a revival item in either hand. Crouching is optional for self-revival. It uses the same feeding duration, pauses bleed-out, and consumes one item only after completion. Releasing Use, changing the stack, disconnecting, or a terminal death cancels it. You cannot revive another player while downed.
-- **Eating animation:** held food uses Minecraft's eating animation, with food crumbs and eating sounds at the downed body's head. The animation adds no hunger, saturation, or food buffs; successful revival restores configured health. Sable hides first-person hands while seated and renders rigid limbs, so self-revival shows mouth crumbs/sound without moving those arms. Non-food items added through the tag still revive, with crumbs/sound but no native tool-use animation.
+- **Feeding presentation:** a teammate keeps the revival item held while food crumbs and eating sounds play at the downed body's head. Native eating use is reserved for self-revival. Sable hides first-person hands while seated and renders rigid limbs, so self-revival's visible feedback is mouth crumbs/sound. Feeding adds no hunger, saturation, or food buffs; successful revival restores configured health. Non-food items added through the tag still revive, with crumbs/sound and their held appearance.
 - Only successful feeding consumes one item, including in creative mode. A target has one rescue owner at a time, shared by self-revival, teammate feeding, and dragging.
 - **Last-second rescue:** valid feeding pauses bleed-out, so a feed started before the deadline can finish. Cancellation or a lost input lease resumes the remaining time. Dragging does not pause it; an already-expired target cannot start a new feed. Giving up remains terminal, even during feeding.
 - **Drag:** with both hands empty, crouch and right-click the body. Keep crouching to drag; right-click may be released. Releasing crouch releases the native physics grip. A body cannot be fed, dragged, and carried simultaneously.
 - **Zoom while dragging:** Unlocked Camera receives the mouse wheel normally. If no camera/interaction mod claims a vertical scroll, RagRevival consumes it to keep the hotbar from switching to a held item and interrupting the drag. Ordinary Sable grabs keep their own controls.
 - **Give up:** hold **G** for 100 continuous server ticks (five seconds at 20 TPS). Releasing G cancels. Rebind it under **Options → Controls → Key Binds → RagRevival**.
 - The HUD shows the downed countdown, feeding progress, and give-up progress to the relevant player.
-- Rescue hints combine compact item icons, rebind-aware keycaps, the action, and the remaining `m:ss` countdown in one panel. During feeding, a green bar fills along the panel's bottom edge and the countdown freezes. The downed player also gets a compact self-revival prompt and a give-up key hint, with their G hold progress retained. Item suggestions come from the revival tag.
+- Rescue hints combine compact item icons, rebind-aware keycaps, the action, and the remaining `m:ss` countdown in one panel. The downed player's card has two rows: self-revival and the timer above, then a G keycap with **Hold for 5s** below. One thin green track along the card's bottom edge fills for revival or giving up, with the player's G progress taking priority. The countdown freezes during feeding. Item suggestions come from the revival tag.
 - Successful revival restores **half of maximum health** by default: five hearts for a normal ten-heart player, scaling with maximum-health modifiers.
 
 Feeding reserves that right-click until release, so holding it after revival does not consume another item. A short server input lease cancels abandoned interactions; loss of window focus or opening a menu also releases the client interaction. Server stalls do not let packet spam accelerate either hold.
@@ -73,7 +73,7 @@ Both foods use the same item tag and revival rules. Enchanted golden apples are 
 
 Selection clips the existing rendered camera ray against the actual rotated ragdoll limbs. It does not modify Unlocked Camera's position, freelook, shoulder selection, or crosshair. The server independently checks line of sight and interaction reach from the rescuer's actual world-space eyes to the real physics body. A camera offset cannot extend reach or permit feeding through walls. Sable plotyard coordinates are projected into world space; dragging uses Sable's native physics constraint and player seat, with no independent teleport loop.
 
-See [dependency API inspection](docs/dependency-api.md) and [latest test evidence](docs/test-results-1.3.0.md) for the exact scope of verification.
+See [dependency API inspection](docs/dependency-api.md) and [latest test evidence](docs/test-results-1.3.1.md) for the exact scope of verification.
 
 ## Build and local test setup
 
@@ -88,7 +88,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.0.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.1.jar
 ./scripts/start-test-runtime.ps1
 ```
 
@@ -99,10 +99,10 @@ These scripts use isolated `.local/server`, `.local/client-one`, and `.local/cli
 1. Give both players golden apples and golden carrots; down one with lethal ordinary damage (e.g. `/damage ReviveOne 100 minecraft:generic`). Verify no death drops, the two-minute HUD, and one chat announcement. Put a wall between players and verify the rescuer can see the body's gold outline.
 2. Move while downed; try native stand-up/dismount. Check that the body moves but stays downed. Spawn a hostile mob and verify it ignores the downed player.
 3. Empty both rescuer hands, crouch-right-click the body, move, zoom in/out with Unlocked Camera, release right-click while still crouched and zoom again, then release crouch. Check body/player alignment, continued dragging, and release.
-4. Repeat teammate feeding with a golden apple and a golden carrot: hold crouch + Use, cancel by releasing crouch, cancel by releasing Use, move out of reach, then finish. Check eating motion, crumbs/sounds at the target's head, the countdown and green bottom-edge fill, no early consumption, exactly one item consumed on success, half maximum health restored, and outline removal. Start a feed with one second left: the countdown should pause and the feed should finish; canceling should resume the clock.
+4. Repeat teammate feeding with a golden apple and a golden carrot: hold crouch + Use, cancel by releasing crouch, cancel by releasing Use, move out of reach, then finish. Check that the rescuer keeps the food held while crumbs/sounds come from the target's head. Check the countdown and green bottom-edge fill, no early consumption, exactly one item consumed on success, half maximum health restored, and outline removal. Start a feed with one second left: the countdown should pause and the feed should finish; canceling should resume the clock.
 5. Repeat aiming at limbs with Unlocked Camera's left/right shoulder offsets and freelook; step beyond normal interaction reach and behind a wall. Check visible-body selection and server rejection outside reach.
-6. Down with a revival item in either hand. Hold Use without crouching to self-revive; cancel once, then complete. Check the self prompt, animation, paused countdown, one item consumed, and half health. Try self-revival while a teammate is already feeding you, then reverse who starts first; only the owner should progress or consume.
-7. Down again; hold G briefly and release, then hold for five continuous seconds. Check progress reset and one normal death. Start a feed just before G completes to verify that terminal give-up still takes priority.
+6. Down with a revival item in either hand. Hold Use without crouching to self-revive; cancel once, then complete. Check the two-row self prompt, mouth effects, paused countdown, one item consumed, and half health. Try self-revival while a teammate is already feeding you, then reverse who starts first; only the owner should progress or consume.
+7. Down again; hold G briefly and release, then hold for five continuous seconds. Check that the same card's thin green bottom track fills and resets, and that completing it causes one normal death. Start a feed just before G completes to verify that the track shows your G progress and terminal give-up still takes priority.
 8. Down again and let the countdown expire. Repeat with `keepInventory` true/false, and reconnect or restart partway through to check that the timer does not reset.
 
 The integration harness is test-only and is never inside the distributable JAR. It intentionally manipulates the isolated test players/world; do not run it on a valued world.
