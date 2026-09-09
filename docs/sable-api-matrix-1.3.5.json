@@ -1,0 +1,774 @@
+{
+  "generatedUtc": "2026-09-08T20:38:55.008405-05:00",
+  "sourceJar": "artifacts/1.3.5/ragrevival-1.21.1-1.3.5.jar",
+  "sourceJarSha256": "e03f414c431e9ee98c65333f426281c2eeaae60292fb60e479be334e722e7863",
+  "scope": "Exact public field/method descriptors referenced by the production JAR, resolved through candidate class hierarchies including embedded Sable Companion; nine concrete API classes present. No Minecraft/mod execution or mixin validation.",
+  "requirements": [
+    {
+      "kind": "field",
+      "owner": "dev/ryanhcode/sable/Sable",
+      "name": "HELPER",
+      "descriptor": "Ldev/ryanhcode/sable/ActiveSableCompanion;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/ActiveSableCompanion",
+      "name": "getContaining",
+      "descriptor": "(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/Vec3i;)Ldev/ryanhcode/sable/sublevel/SubLevel;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/ActiveSableCompanion",
+      "name": "getContainingClient",
+      "descriptor": "(Lnet/minecraft/world/level/block/entity/BlockEntity;)Ldev/ryanhcode/sable/sublevel/ClientSubLevel;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/ActiveSableCompanion",
+      "name": "projectOutOfSubLevel",
+      "descriptor": "(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/api/sublevel/SubLevelContainer",
+      "name": "getContainer",
+      "descriptor": "(Lnet/minecraft/world/level/Level;)Ldev/ryanhcode/sable/api/sublevel/SubLevelContainer;",
+      "callers": [
+        "com/biguzi/ragrevival/FeedingAnimation",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/api/sublevel/SubLevelContainer",
+      "name": "getSubLevel",
+      "descriptor": "(Ljava/util/UUID;)Ldev/ryanhcode/sable/sublevel/SubLevel;",
+      "callers": [
+        "com/biguzi/ragrevival/FeedingAnimation",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/companion/ClientSubLevelAccess",
+      "name": "renderPose",
+      "descriptor": "()Ldev/ryanhcode/sable/companion/math/Pose3dc;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/companion/math/Pose3d",
+      "name": "transformPosition",
+      "descriptor": "(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;",
+      "callers": [
+        "com/biguzi/ragrevival/FeedingAnimation"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/companion/math/Pose3dc",
+      "name": "transformPosition",
+      "descriptor": "(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/companion/math/Pose3dc",
+      "name": "transformPositionInverse",
+      "descriptor": "(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;",
+      "callers": [
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/ClientSubLevel",
+      "name": "getUniqueId",
+      "descriptor": "()Ljava/util/UUID;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/ClientSubLevel",
+      "name": "isRemoved",
+      "descriptor": "()Z",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/ServerSubLevel",
+      "name": "getUniqueId",
+      "descriptor": "()Ljava/util/UUID;",
+      "callers": [
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/ServerSubLevel",
+      "name": "isRemoved",
+      "descriptor": "()Z",
+      "callers": [
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/SubLevel",
+      "name": "getPlot",
+      "descriptor": "()Ldev/ryanhcode/sable/sublevel/plot/LevelPlot;",
+      "callers": [
+        "com/biguzi/ragrevival/FeedingAnimation",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/SubLevel",
+      "name": "getUniqueId",
+      "descriptor": "()Ljava/util/UUID;",
+      "callers": [
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/SubLevel",
+      "name": "isRemoved",
+      "descriptor": "()Z",
+      "callers": [
+        "com/biguzi/ragrevival/FeedingAnimation",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/SubLevel",
+      "name": "logicalPose",
+      "descriptor": "()Ldev/ryanhcode/sable/companion/math/Pose3d;",
+      "callers": [
+        "com/biguzi/ragrevival/FeedingAnimation",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/plot/LevelPlot",
+      "name": "getCenterBlock",
+      "descriptor": "()Lnet/minecraft/core/BlockPos;",
+      "callers": [
+        "com/biguzi/ragrevival/FeedingAnimation",
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "dev/ryanhcode/sable/sublevel/system/SubLevelPhysicsSystem",
+      "name": "get",
+      "descriptor": "(Lnet/minecraft/world/level/Level;)Ldev/ryanhcode/sable/sublevel/system/SubLevelPhysicsSystem;",
+      "callers": [
+        "com/biguzi/ragrevival/ragdoll/RagdollBridge"
+      ]
+    }
+  ],
+  "concreteClasses": [
+    "dev/ryanhcode/sable/Sable",
+    "dev/ryanhcode/sable/ActiveSableCompanion",
+    "dev/ryanhcode/sable/api/sublevel/SubLevelContainer",
+    "dev/ryanhcode/sable/sublevel/SubLevel",
+    "dev/ryanhcode/sable/sublevel/ServerSubLevel",
+    "dev/ryanhcode/sable/sublevel/ClientSubLevel",
+    "dev/ryanhcode/sable/sublevel/system/SubLevelPhysicsSystem",
+    "dev/ryanhcode/sable/sublevel/plot/LevelPlot",
+    "dev/ryanhcode/sable/sublevel/plot/ServerLevelPlot"
+  ],
+  "results": [
+    {
+      "version": "1.1.1",
+      "modrinthVersionId": "mXmIPopR",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/mXmIPopR/sable-neoforge-1.21.1-1.1.1.jar",
+      "sha256": "bdd0f60743ab9be006de8b959765d9a0e59df493ad2a11093ef7c37c61969368",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.5.0,)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.5.0.jar",
+          "sha256": "435d69e61fdebfbc0c3bf2c9a7bffe861e017d0ed1dc94bad7f858847f1f8114"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "1.1.3",
+      "modrinthVersionId": "g8CObHcP",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/g8CObHcP/sable-neoforge-1.21.1-1.1.3.jar",
+      "sha256": "aff91dc1c65caf104e8161ba6225c7767f93594c6783455adf238a90624cc952",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.5.0,)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.5.0.jar",
+          "sha256": "435d69e61fdebfbc0c3bf2c9a7bffe861e017d0ed1dc94bad7f858847f1f8114"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "1.2.1",
+      "modrinthVersionId": "ADGYo8vU",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/ADGYo8vU/sable-neoforge-1.21.1-1.2.1.jar",
+      "sha256": "04c011b0e89aca265d0d274e18fdf86fa727bfcd66ddbedeaae2acea1f6c506d",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "1.2.2",
+      "modrinthVersionId": "3FMsUjO4",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/3FMsUjO4/sable-neoforge-1.21.1-1.2.2.jar",
+      "sha256": "15fb660a0d368204b37f3967bfcc48137397b7174ca2945c5635cc4539c755f8",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "2.0.0",
+      "modrinthVersionId": "NGuyFOeE",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/NGuyFOeE/sable-neoforge-1.21.1-2.0.0.jar",
+      "sha256": "0eff61c2f6eda6386f63fb14bc38e930687c0f30e36d10fd360f2bec5f02f687",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.228,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "sodium",
+          "type": "incompatible",
+          "versionRange": "(,0.8.12-alpha.2+mc1.21.1)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "2.0.1",
+      "modrinthVersionId": "znvYZcVX",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/znvYZcVX/sable-neoforge-1.21.1-2.0.1.jar",
+      "sha256": "f0513d490dc099a7271b5e29b5040a1ff556219dee1007df3fe29355fd7ff68d",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.228,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "sodium",
+          "type": "incompatible",
+          "versionRange": "(,0.8.12-alpha.2+mc1.21.1)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "2.0.2",
+      "modrinthVersionId": "6PfAtJN1",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/6PfAtJN1/sable-neoforge-1.21.1-2.0.2.jar",
+      "sha256": "adb4bd51e5602188d3383ff99ac1f2bbf02cc95532788744b90620563ca04a25",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.228,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "sodium",
+          "type": "incompatible",
+          "versionRange": "(,0.8.12-alpha.2+mc1.21.1)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "2.0.3",
+      "modrinthVersionId": "1L6XJqnY",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/1L6XJqnY/sable-neoforge-1.21.1-2.0.3.jar",
+      "sha256": "da6c3b66238586603d1dcaa2afb012d36815fbce0a2d5938fbb2936701d42279",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.228,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "sodium",
+          "type": "incompatible",
+          "versionRange": "(,0.8.12-alpha.2+mc1.21.1)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        },
+        {
+          "modId": "littletiles",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "2.0.4",
+      "modrinthVersionId": "bMSNCogw",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/bMSNCogw/sable-neoforge-1.21.1-2.0.4.jar",
+      "sha256": "06f34fe28749de185b318b8ed2e046e8a5ffad20c20bdf433a06e0267af6870b",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.228,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "sodium",
+          "type": "incompatible",
+          "versionRange": "(,0.8.12-alpha.2+mc1.21.1)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "2.0.5",
+      "modrinthVersionId": "U678xqle",
+      "url": "https://cdn.modrinth.com/data/T9PomCSv/versions/U678xqle/sable-neoforge-1.21.1-2.0.5.jar",
+      "sha256": "c8710f85bc780bbf523e6726ceaaf76dd0b8c61479db497b382c6bb34317e7ab",
+      "publishedSha512Verified": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.228,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "flywheel",
+          "type": "optional",
+          "versionRange": "[1.0.6,)"
+        },
+        {
+          "modId": "create",
+          "type": "optional",
+          "versionRange": "[6.0.10,6.1.0)"
+        },
+        {
+          "modId": "sablecompanion",
+          "type": "incompatible",
+          "versionRange": "(1.6.0,)"
+        },
+        {
+          "modId": "sodium",
+          "type": "incompatible",
+          "versionRange": "(,0.8.12-alpha.2+mc1.21.1)"
+        },
+        {
+          "modId": "scalablelux",
+          "type": "incompatible"
+        }
+      ],
+      "embeddedCompanion": [
+        {
+          "filename": "sable-companion-common-1.21.1-1.6.0.jar",
+          "sha256": "873633e35046e3761b277ff8a1ecad0d55d9a3014fa81a0b084c9aecba1f3bed"
+        }
+      ],
+      "requiredMemberCount": 20,
+      "matchedMemberCount": 20,
+      "concreteClassCount": 9,
+      "missingConcreteClasses": [],
+      "missingMembers": [],
+      "result": "pass"
+    }
+  ]
+}

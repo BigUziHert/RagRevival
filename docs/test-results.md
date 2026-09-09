@@ -7,8 +7,9 @@ carrots, compact prompts, and feeding pause. See [1.2.1 verification](test-resul
 for the combined rescue prompt and bottom-edge revival bar. See
 [1.3.0 verification](test-results-1.3.0.md) for teammate crouch requirements,
 self-revival and eating animation. See [1.3.1 verification](test-results-1.3.1.md)
-for teammate held-food presentation, the combined give-up card, and the latest
-test runtime.
+for teammate held-food presentation and the combined give-up card. See
+[1.3.5 verification](test-results-1.3.5.md) for the current dependency-parser
+regression tests, compatibility matrix and latest test runtime.
 
 Final live dedicated-server run: 2026-09-08, Minecraft 1.21.1, NeoForge 21.1.249, Java 21.0.6.
 Installed main JAR SHA-256: `0b8639ce9f6c86f2c7b13694f563f3787ae23263d41933e8919f8d8b88031e1b`.

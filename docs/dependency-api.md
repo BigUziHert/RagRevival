@@ -1,10 +1,31 @@
 # Inspected dependency APIs
 
-These are the original build/runtime baselines. Release 1.3.4 removes
-RagRevival's NeoForge and Sable version restrictions; the build lock remains
-reproducible. See [1.3.4 loader validation](version-compatibility-1.3.4.md)
-and [dependency API inspection](version-compatibility-1.3.3.md) for
-NeoForge 21.1.248 and Sable 2.0.5, including the limits of that evidence.
+These are the original build baselines, retained for reproducibility in
+**1.3.5**. RagRevival accepts broad NeoForge/Sable versions within Minecraft
+1.21.1 through FML's omitted-range default. See [current multiplayer evidence](test-results-1.3.5.md),
+[the 1.3.4 loader correction](version-compatibility-1.3.4.md), and
+[reproducible compatibility profiles](compatibility-runtime.md).
+
+The production JAR's 20 referenced Sable public fields/methods were resolved
+with their exact descriptors through class hierarchies and embedded Companion
+libraries in ten published versions: **1.1.1, 1.1.3, 1.2.1, 1.2.2, 2.0.0,
+2.0.1, 2.0.2, 2.0.3, 2.0.4, and 2.0.5**. Each matched 20/20 members, with
+all nine concrete API classes present. The [machine-readable report](sable-api-matrix-1.3.5.json)
+records artifact URLs, verified hashes, dependency metadata, and exact members.
+No source adapter change was needed. This static check does not establish
+every version's physics behavior or mixin compatibility; executed combinations
+are listed separately in the runtime evidence.
+
+The [NeoForge report](neoforge-api-matrix-1.3.5.json) resolves all 50 referenced
+NeoForge-owned members across the 28 published releases from 21.1.219 through
+21.1.250. It checks exact public descriptors, inheritance and static/instance
+consistency, excluding Minecraft patches, separate FML/event-bus APIs and
+runtime/mixin behavior. The dedicated-server matrix covers five combinations.
+
+The reviewed Sable 1.x releases require NeoForge 21.1.219+; 2.x requires
+21.1.228+. Optional Unlocked Camera requires 21.1.235+ and is excluded from
+earlier profiles. Ragdolls 0.7.2 and Reactions 0.7.0 remain mandatory. Future
+versions and arbitrary modpacks are outside the verified matrix.
 
 The implementation targets published Minecraft 1.21.1 NeoForge artifacts, downloaded from their original distribution CDNs. Exact URLs and SHA-256 digests are in [dependencies.lock.json](dependencies.lock.json). The three ragdoll dependencies below are required on server and clients; their binaries and research checkouts are not redistributed in this repository. The lock also contains Carry On 2.2.6.13 as an optional runtime integration required only for the compile classpath. `scripts/fetch-dependencies.ps1` fetches and verifies all four so a clean clone can compile; Carry On remains optional when installing RagRevival.
 

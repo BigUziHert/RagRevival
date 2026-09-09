@@ -14,11 +14,13 @@ Install RagRevival and all three dependencies in **both clients and the dedicate
 | [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | 0.7.2 |
 | [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.0 |
 
-The latest versioned distributable and source JAR are in [`artifacts/1.3.4`](artifacts/1.3.4). Install matching **1.3.4** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+The latest versioned distributable and source JAR are in [`artifacts/1.3.5`](artifacts/1.3.5). Install matching **1.3.5** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
 
-Version **1.3.4** omits the NeoForge and Sable range fields so FML uses its unbounded default. It supersedes **1.3.3**, whose explicitly empty ranges still caused dependency rejection in FML 4.0.43. Minecraft **1.21.1** is required, and dependencies retain their own requirements. Broad version acceptance does not establish compatibility with every historical or future API; see the [1.3.4 range correction and validation](docs/version-compatibility-1.3.4.md). Builds and local setup remain pinned to NeoForge **21.1.249** and Sable **2.0.3** for reproducibility.
+RagRevival omits the NeoForge and Sable range fields so FML uses its unbounded default; Minecraft **1.21.1** is required. Version **1.3.5** adds durable loader regression tests and a [compatibility matrix with real multiplayer evidence](docs/test-results-1.3.5.md). All 20 referenced Sable API members matched across ten published versions, without an adapter change. This does not guarantee every NeoForge patch, future dependency, or other modpack. The [1.3.4 range correction](docs/version-compatibility-1.3.4.md) remains in place; 1.3.3's explicitly empty ranges were incorrect.
 
-Optional compatibility test versions: **Carry On 2.2.6.13** on server and clients; **Unlocked Camera 1.0.0**, private source commit `c13cfa3d`, on clients only. See [source inspection and compatibility evidence](docs/compatibility-research.md). Other dependency versions are deliberately not advertised as verified.
+Dependencies retain their own requirements: the reviewed Sable 1.x releases need NeoForge **21.1.219+**, and Sable 2.x needs **21.1.228+**. Builds and the base local setup remain pinned to NeoForge **21.1.249** and Sable **2.0.3** for reproducibility. See [compatibility runtime instructions](docs/compatibility-runtime.md) to reproduce the other profiles.
+
+Optional compatibility test versions: **Carry On 2.2.6.13** on server and clients; **Unlocked Camera 1.0.0**, private source commit `c13cfa3d`, on clients only. Unlocked Camera requires NeoForge **21.1.235+**, so it is omitted from earlier profiles. See [source inspection and compatibility evidence](docs/compatibility-research.md) and the [current test matrix](docs/test-results-1.3.5.md) for the precise combinations checked.
 
 ## Play
 
@@ -75,7 +77,7 @@ Both foods use the same item tag and revival rules. Enchanted golden apples are 
 
 Selection clips the existing rendered camera ray against the actual rotated ragdoll limbs. It does not modify Unlocked Camera's position, freelook, shoulder selection, or crosshair. The server independently checks line of sight and interaction reach from the rescuer's actual world-space eyes to the real physics body. A camera offset cannot extend reach or permit feeding through walls. Sable plotyard coordinates are projected into world space; dragging uses Sable's native physics constraint and player seat, with no independent teleport loop.
 
-See [1.3.4 range correction and targeted loader validation](docs/version-compatibility-1.3.4.md), [dependency API inspection](docs/dependency-api.md), and [1.3.1 evidence, the previous multiplayer-tested release](docs/test-results-1.3.1.md) for the exact scope. Loader parsing is separate from game startup and gameplay verification.
+See [1.3.5 verification](docs/test-results-1.3.5.md) and [dependency API inspection](docs/dependency-api.md) for the exact scope. Static API checks, loader parsing, server gameplay, and synthetic camera checks provide different evidence; actual mouse gestures and untested modpacks remain manual verification.
 
 ## Build and local test setup
 
@@ -90,7 +92,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.4.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.5.jar
 ./scripts/start-test-runtime.ps1
 ```
 

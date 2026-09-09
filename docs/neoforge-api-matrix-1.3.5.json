@@ -1,0 +1,780 @@
+{
+  "generatedUtc": "2026-09-08T20:54:21.625594-05:00",
+  "sourceJar": "artifacts/1.3.5/ragrevival-1.21.1-1.3.5.jar",
+  "sourceJarSha256": "e03f414c431e9ee98c65333f426281c2eeaae60292fb60e479be334e722e7863",
+  "scope": "Exact public NeoForge-owned member descriptors used by the production JAR, including inherited resolution and static/instance parity. Excludes Minecraft-patched methods, FML APIs, event-bus APIs, mixin application, and runtime behavior.",
+  "metadataUrl": "https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml",
+  "requirements": [
+    {
+      "kind": "field",
+      "owner": "net/neoforged/neoforge/client/settings/KeyConflictContext",
+      "name": "IN_GAME",
+      "descriptor": "Lnet/neoforged/neoforge/client/settings/KeyConflictContext;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "field",
+      "owner": "net/neoforged/neoforge/common/NeoForge",
+      "name": "EVENT_BUS",
+      "descriptor": "Lnet/neoforged/bus/api/IEventBus;",
+      "callers": [
+        "com/biguzi/ragrevival/RagRevival",
+        "com/biguzi/ragrevival/client/RevivalClient",
+        "com/biguzi/ragrevival/compat/CarryOnCompat$Loaded"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/client/event/InputEvent$InteractionKeyMappingTriggered",
+      "name": "isUseItem",
+      "descriptor": "()Z",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/client/event/InputEvent$InteractionKeyMappingTriggered",
+      "name": "setSwingHand",
+      "descriptor": "(Z)V",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/client/event/InputEvent$MouseScrollingEvent",
+      "name": "getScrollDeltaY",
+      "descriptor": "()D",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/client/event/RegisterKeyMappingsEvent",
+      "name": "register",
+      "descriptor": "(Lnet/minecraft/client/KeyMapping;)V",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/client/event/RenderGuiEvent$Post",
+      "name": "getGuiGraphics",
+      "descriptor": "()Lnet/minecraft/client/gui/GuiGraphics;",
+      "callers": [
+        "com/biguzi/ragrevival/client/RevivalClient"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$Builder",
+      "name": "<init>",
+      "descriptor": "()V",
+      "callers": [
+        "com/biguzi/ragrevival/RevivalConfig"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$Builder",
+      "name": "build",
+      "descriptor": "()Lnet/neoforged/neoforge/common/ModConfigSpec;",
+      "callers": [
+        "com/biguzi/ragrevival/RevivalConfig"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$Builder",
+      "name": "comment",
+      "descriptor": "(Ljava/lang/String;)Lnet/neoforged/neoforge/common/ModConfigSpec$Builder;",
+      "callers": [
+        "com/biguzi/ragrevival/RevivalConfig"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$Builder",
+      "name": "comment",
+      "descriptor": "([Ljava/lang/String;)Lnet/neoforged/neoforge/common/ModConfigSpec$Builder;",
+      "callers": [
+        "com/biguzi/ragrevival/RevivalConfig"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$Builder",
+      "name": "defineInRange",
+      "descriptor": "(Ljava/lang/String;DDD)Lnet/neoforged/neoforge/common/ModConfigSpec$DoubleValue;",
+      "callers": [
+        "com/biguzi/ragrevival/RevivalConfig"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$Builder",
+      "name": "defineInRange",
+      "descriptor": "(Ljava/lang/String;III)Lnet/neoforged/neoforge/common/ModConfigSpec$IntValue;",
+      "callers": [
+        "com/biguzi/ragrevival/RevivalConfig"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$DoubleValue",
+      "name": "get",
+      "descriptor": "()Ljava/lang/Object;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/common/ModConfigSpec$IntValue",
+      "name": "get",
+      "descriptor": "()Ljava/lang/Object;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/EntityTravelToDimensionEvent",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingChangeTargetEvent",
+      "name": "getNewAboutToBeSetTarget",
+      "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingChangeTargetEvent",
+      "name": "setNewAboutToBeSetTarget",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingDeathEvent",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingDeathEvent",
+      "name": "getSource",
+      "descriptor": "()Lnet/minecraft/world/damagesource/DamageSource;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingIncomingDamageEvent",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingIncomingDamageEvent",
+      "name": "getSource",
+      "descriptor": "()Lnet/minecraft/world/damagesource/DamageSource;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/AttackEntityEvent",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerEvent$Clone",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerEvent$Clone",
+      "name": "getOriginal",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerEvent$Clone",
+      "name": "isWasDeath",
+      "descriptor": "()Z",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerEvent$PlayerChangedDimensionEvent",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerEvent$PlayerLoggedInEvent",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerEvent$PlayerLoggedOutEvent",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteract",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteract",
+      "name": "getTarget",
+      "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteract",
+      "name": "setCancellationResult",
+      "descriptor": "(Lnet/minecraft/world/InteractionResult;)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteractSpecific",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteractSpecific",
+      "name": "getTarget",
+      "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteractSpecific",
+      "name": "setCancellationResult",
+      "descriptor": "(Lnet/minecraft/world/InteractionResult;)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$RightClickBlock",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$RightClickBlock",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$RightClickBlock",
+      "name": "setCancellationResult",
+      "descriptor": "(Lnet/minecraft/world/InteractionResult;)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$RightClickItem",
+      "name": "getEntity",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$RightClickItem",
+      "name": "setCancellationResult",
+      "descriptor": "(Lnet/minecraft/world/InteractionResult;)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/server/ServerStoppingEvent",
+      "name": "getServer",
+      "descriptor": "()Lnet/minecraft/server/MinecraftServer;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/event/tick/ServerTickEvent$Post",
+      "name": "getServer",
+      "descriptor": "()Lnet/minecraft/server/MinecraftServer;",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/PacketDistributor",
+      "name": "sendToAllPlayers",
+      "descriptor": "(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;[Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/PacketDistributor",
+      "name": "sendToPlayer",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;[Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V",
+      "callers": [
+        "com/biguzi/ragrevival/DownedManager"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/PacketDistributor",
+      "name": "sendToServer",
+      "descriptor": "(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;[Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V",
+      "callers": [
+        "com/biguzi/ragrevival/network/RevivalNetwork"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/event/RegisterPayloadHandlersEvent",
+      "name": "registrar",
+      "descriptor": "(Ljava/lang/String;)Lnet/neoforged/neoforge/network/registration/PayloadRegistrar;",
+      "callers": [
+        "com/biguzi/ragrevival/network/RevivalNetwork"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/handling/IPayloadContext",
+      "name": "enqueueWork",
+      "descriptor": "(Ljava/lang/Runnable;)Ljava/util/concurrent/CompletableFuture;",
+      "callers": [
+        "com/biguzi/ragrevival/network/RevivalNetwork"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/handling/IPayloadContext",
+      "name": "player",
+      "descriptor": "()Lnet/minecraft/world/entity/player/Player;",
+      "callers": [
+        "com/biguzi/ragrevival/network/RevivalNetwork"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/registration/PayloadRegistrar",
+      "name": "playToClient",
+      "descriptor": "(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload$Type;Lnet/minecraft/network/codec/StreamCodec;Lnet/neoforged/neoforge/network/handling/IPayloadHandler;)Lnet/neoforged/neoforge/network/registration/PayloadRegistrar;",
+      "callers": [
+        "com/biguzi/ragrevival/network/RevivalNetwork"
+      ]
+    },
+    {
+      "kind": "method",
+      "owner": "net/neoforged/neoforge/network/registration/PayloadRegistrar",
+      "name": "playToServer",
+      "descriptor": "(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload$Type;Lnet/minecraft/network/codec/StreamCodec;Lnet/neoforged/neoforge/network/handling/IPayloadHandler;)Lnet/neoforged/neoforge/network/registration/PayloadRegistrar;",
+      "callers": [
+        "com/biguzi/ragrevival/network/RevivalNetwork"
+      ]
+    }
+  ],
+  "excludedExternalMembers": [
+    {
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingDeathEvent",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/event/entity/living/LivingIncomingDamageEvent",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/event/entity/EntityTravelToDimensionEvent",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/event/entity/player/AttackEntityEvent",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$RightClickItem",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteract",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$EntityInteractSpecific",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/client/event/InputEvent$MouseScrollingEvent",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    },
+    {
+      "owner": "net/neoforged/neoforge/client/event/InputEvent$InteractionKeyMappingTriggered",
+      "name": "setCanceled",
+      "descriptor": "(Z)V",
+      "actualDeclaration": "net/neoforged/bus/api/ICancellableEvent",
+      "reason": "external event-bus API"
+    }
+  ],
+  "results": [
+    {
+      "version": "21.1.219",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.219/neoforge-21.1.219-universal.jar",
+      "sha256": "a062142f38543701e3d4da385f19e8dd9d76d19625c204e9c0aca22ad491b4fd",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.220",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.220/neoforge-21.1.220-universal.jar",
+      "sha256": "4a00ecf46d5613029a9e85e3eb352d980080d8fccb852cdafd36006299d37386",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.221",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.221/neoforge-21.1.221-universal.jar",
+      "sha256": "0975f3a301accc7e32ac6bc94820d3c300d728434ea915e2e57886e283a339ff",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.222",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.222/neoforge-21.1.222-universal.jar",
+      "sha256": "3576b4c071bb3799e690206219109f31acb12ee492fff89de28a2aa6af9b5028",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.223",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.223/neoforge-21.1.223-universal.jar",
+      "sha256": "5223a4cca544ec48c2e881b4f43f4fd986f8185b6a4f4a246755e312b89bcfa4",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.224",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.224/neoforge-21.1.224-universal.jar",
+      "sha256": "91f37241d975382c069e18dd8430d14f476485ab0590bb833e761fa7a1f14fc2",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.225",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.225/neoforge-21.1.225-universal.jar",
+      "sha256": "4de47214cdb183e2571965bb214392d583c59b8ff7b9850e46933961aeca27c9",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.226",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.226/neoforge-21.1.226-universal.jar",
+      "sha256": "750d9066dc6f8f8d4a489b85a1f99dcb1a89c91aabbf994a6f25386c82317ddd",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.227",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.227/neoforge-21.1.227-universal.jar",
+      "sha256": "485694c66f23e31f6039f30f27f8cb09f3ed27648484035c0902106da1c57680",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.228",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.228/neoforge-21.1.228-universal.jar",
+      "sha256": "60077b308e9046ab9717c7ec8536299d166a8237de99229a8cc6dfb63cab1fca",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.229",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.229/neoforge-21.1.229-universal.jar",
+      "sha256": "f8da762ae567b0a13d751a07a251ae832206a6c28ab8aebb787535c5945b53b7",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.230",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.230/neoforge-21.1.230-universal.jar",
+      "sha256": "e36c18ddf28b86a50c224e6f7cde34275a403c2e327b1c90b4271ebee68bfc91",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.231",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.231/neoforge-21.1.231-universal.jar",
+      "sha256": "27ddf2c1cbf085332b800bfbf74250fa5c3148588827770c3b7d86bb7b11a86b",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.232",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.232/neoforge-21.1.232-universal.jar",
+      "sha256": "313a13c09add19374302bf7c796b1e57e51d05b1f9a842bf3bde0db31aab8932",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.233",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.233/neoforge-21.1.233-universal.jar",
+      "sha256": "ff997bfd7db9735755545a0d073bfb56bef55a8c9dd17bc1bba215a5dd55fc0d",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.234",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.234/neoforge-21.1.234-universal.jar",
+      "sha256": "5855aebcccce0ba5016187d1c524dd8360d330b774498b1ee0e5434f5700eb46",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.235",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.235/neoforge-21.1.235-universal.jar",
+      "sha256": "dbded1a88b4a4f4e30a981672e58132dbd0cae64677e33a2ad867d00a4343d5e",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.236",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.236/neoforge-21.1.236-universal.jar",
+      "sha256": "325b3ce5098ea46bfc29e903e14420ea3dc253fca024f0896e3bce741b1d911a",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.238",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.238/neoforge-21.1.238-universal.jar",
+      "sha256": "250768640c7abfe36a344b7f7b639269c0d1ee9147f80aaf3cb1a46e1c843ca8",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.240",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.240/neoforge-21.1.240-universal.jar",
+      "sha256": "e2cea64f5a0581f4c406889ba4ae74ebf05764d2b5235ca2f70d97c01f22c1a8",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.241",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.241/neoforge-21.1.241-universal.jar",
+      "sha256": "4ceaf2c6a1bd9520bf77f227bde8e9eeb441764ecadd33ef1a4328dcbaff4d3f",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.242",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.242/neoforge-21.1.242-universal.jar",
+      "sha256": "f53311c12580bbdf2c5bf918435cc78c0d8fe5b16c2884801d6c93695b2fc815",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.243",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.243/neoforge-21.1.243-universal.jar",
+      "sha256": "0424e81c5948f08e529631c915c35bc38feffc24597ab3458bf7ecf0c0d83399",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.244",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.244/neoforge-21.1.244-universal.jar",
+      "sha256": "d874b2aa4d511919a567ae73f13510e63e16f7318194eb2c03824cd68a59df6f",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.247",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.247/neoforge-21.1.247-universal.jar",
+      "sha256": "b55d3551e9b0d9b68fa4c47a2122deaf4019b549d8df3c74d9a27b2e43c9718a",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.248",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.248/neoforge-21.1.248-universal.jar",
+      "sha256": "90a56f70425711b4e1a4b94ff0c2904ae9f6d74ca6478b3b2152ac794a07b8e5",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.249",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.249/neoforge-21.1.249-universal.jar",
+      "sha256": "63ba902edcae4476d49ffc28b18d566b0fcc5bf12edebcce1a2033f254f28155",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    },
+    {
+      "version": "21.1.250",
+      "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.250/neoforge-21.1.250-universal.jar",
+      "sha256": "1f9cc68fe9ec0416475d34ce76e95a696b9721d5d338168563dab0632c3d2956",
+      "requiredMemberCount": 50,
+      "matchedMemberCount": 50,
+      "missingMembers": [],
+      "result": "pass"
+    }
+  ]
+}

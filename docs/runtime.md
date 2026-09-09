@@ -14,18 +14,19 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.3.4** on all three instances together. It retains network
+Install RagRevival **1.3.5** on all three instances together. It retains network
 protocol 3; use matching client/server versions for the current presentation.
-It supersedes 1.3.3's invalid use of explicit empty dependency ranges. See
-[range correction and targeted loader validation](version-compatibility-1.3.4.md).
-That validation is separate from launching Minecraft or running gameplay tests.
-The setup and test instructions below remain available for later use.
+See [1.3.5 verification](test-results-1.3.5.md) for the loader regression tests,
+real multiplayer matrix, and limits of camera checks. To prepare other NeoForge
+and Sable combinations without changing this base setup, follow
+[compatibility runtime instructions](compatibility-runtime.md).
 
 The setup script pins NeoForge to **21.1.249** on Minecraft **1.21.1** for
 reproducibility, with Sable **2.0.3** as the build/download baseline. RagRevival
-1.3.4 omits NeoForge and Sable range fields to use FML's unbounded default;
-other mods retain their own
-requirements, and API compatibility still depends on the installed versions.
+1.3.5 omits NeoForge and Sable range fields to use FML's unbounded default.
+Other mods retain their own requirements: reviewed Sable 1.x versions require
+NeoForge 21.1.219+, Sable 2.x requires 21.1.228+, and optional Unlocked Camera
+requires 21.1.235+. Runtime coverage is limited to the recorded combinations.
 Setup uses the official
 NeoForge installer and Mojang assets, verifies Mojang SHA-1 hashes, and copies
 matching existing asset-cache files when available. Common assets/libraries live
@@ -86,7 +87,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.3.4-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.3.5-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -101,10 +102,9 @@ while both clients receive synchronization. Results are logged as
 teammate crouch requirements, self-revival, feeding cancellation/completion,
 native-use animation state, native drag release, dismount locking, movement input,
 give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage edge
-cases. The codec command can run separately. See [1.3.1 results](test-results-1.3.1.md)
-for the previous multiplayer-tested release; these checks were not rerun for 1.3.4. See
-[verification history](test-results.md) for earlier versions, including
-independent real reconnection/restart checks.
+cases. The codec command can run separately. See [1.3.5 results](test-results-1.3.5.md)
+for the current compatibility matrix and actual restart check, and
+[verification history](test-results.md) for earlier versions.
 
 For the optional client geometry probe, also install the harness JAR into the
 client mod directories before launching. Put the text `ReviveOne` into
