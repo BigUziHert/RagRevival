@@ -1,5 +1,10 @@
 # Inspected dependency APIs
 
+These are the original build/runtime baselines. Release 1.3.3 removes
+RagRevival's NeoForge and Sable version restrictions; the build lock remains
+reproducible. See [1.3.3 inspection](version-compatibility-1.3.3.md) for
+NeoForge 21.1.248 and Sable 2.0.5, including the limits of that evidence.
+
 The implementation targets published Minecraft 1.21.1 NeoForge artifacts, downloaded from their original distribution CDNs. Exact URLs and SHA-256 digests are in [dependencies.lock.json](dependencies.lock.json). The three ragdoll dependencies below are required on server and clients; their binaries and research checkouts are not redistributed in this repository. The lock also contains Carry On 2.2.6.13 as an optional runtime integration required only for the compile classpath. `scripts/fetch-dependencies.ps1` fetches and verifies all four so a clean clone can compile; Carry On remains optional when installing RagRevival.
 
 | Dependency | Selected artifact | Inspected source |

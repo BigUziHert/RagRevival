@@ -14,12 +14,15 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.3.2** on all three instances together. It retains network
+Install RagRevival **1.3.3** on all three instances together. It retains network
 protocol 3; use matching client/server versions for the current presentation.
-This release was assembled only; no tests were run at the user's request.
+This release was assembled and its dependency APIs inspected; no tests were run
+at the user's earlier request. See [compatibility inspection](version-compatibility-1.3.3.md).
 The setup and test instructions below remain available for later use.
 
-NeoForge is pinned to **21.1.249** on Minecraft **1.21.1**. Setup uses the official
+The setup script pins NeoForge to **21.1.249** on Minecraft **1.21.1** for
+reproducibility. RagRevival itself imposes no NeoForge or Sable version range.
+Setup uses the official
 NeoForge installer and Mojang assets, verifies Mojang SHA-1 hashes, and copies
 matching existing asset-cache files when available. Common assets/libraries live
 in `.local/launcher`; game directories, options, mods, natives, and logs are separate:
@@ -79,7 +82,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.3.2-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.3.3-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -95,7 +98,7 @@ teammate crouch requirements, self-revival, feeding cancellation/completion,
 native-use animation state, native drag release, dismount locking, movement input,
 give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage edge
 cases. The codec command can run separately. See [1.3.1 results](test-results-1.3.1.md)
-for the previous tested release; these checks were not rerun for 1.3.2. See
+for the previous tested release; these checks were not rerun for 1.3.3. See
 [verification history](test-results.md) for earlier versions, including
 independent real reconnection/restart checks.
 
