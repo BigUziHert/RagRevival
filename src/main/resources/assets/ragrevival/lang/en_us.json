@@ -3,7 +3,6 @@
   "key.categories.ragrevival": "Rag Revival",
   "key.ragrevival.give_up": "Give up while downed (hold)",
   "hud.ragrevival.give_up_hint": "Hold for 5s to give up",
-  "hud.ragrevival.giving_up": "Giving up… release to cancel",
   "hud.ragrevival.being_fed": "Being revived…",
   "hud.ragrevival.revive_hint": "Hold to revive",
   "hud.ragrevival.self_revive_hint": "Hold to self-revive",

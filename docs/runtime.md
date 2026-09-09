@@ -14,8 +14,10 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.3.1** on all three instances together. It retains network
+Install RagRevival **1.3.2** on all three instances together. It retains network
 protocol 3; use matching client/server versions for the current presentation.
+This release was assembled only; no tests were run at the user's request.
+The setup and test instructions below remain available for later use.
 
 NeoForge is pinned to **21.1.249** on Minecraft **1.21.1**. Setup uses the official
 NeoForge installer and Mojang assets, verifies Mojang SHA-1 hashes, and copies
@@ -63,7 +65,8 @@ For a quick manual check, hold crouch + Use to feed a teammate, then release
 crouch to check cancellation. While downed, hold Use without crouching to
 self-revive. Teammate feeding should keep the rescuer's food held, with crumbs
 and sounds at the downed head. The downed player's two-row card combines
-self-revival/timer above a G keycap and **Hold for 5s** below. Its shared thin
+self-revival/timer above a G keycap and **Hold for 5s to give up** below. The
+hint and its color remain constant while G is held. Its shared thin
 green bottom track shows revival or G progress, with G taking priority. Check
 timer pause, one-item consumption, and half maximum health on success. Sable's
 physical limb poses and hidden seated first-person hands are unchanged.
@@ -76,7 +79,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.3.1-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.3.2-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -92,8 +95,9 @@ teammate crouch requirements, self-revival, feeding cancellation/completion,
 native-use animation state, native drag release, dismount locking, movement input,
 give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage edge
 cases. The codec command can run separately. See [1.3.1 results](test-results-1.3.1.md)
-for the latest executed checks and [verification history](test-results.md) for
-earlier versions, including independent real reconnection/restart checks.
+for the previous tested release; these checks were not rerun for 1.3.2. See
+[verification history](test-results.md) for earlier versions, including
+independent real reconnection/restart checks.
 
 For the optional client geometry probe, also install the harness JAR into the
 client mod directories before launching. Put the text `ReviveOne` into

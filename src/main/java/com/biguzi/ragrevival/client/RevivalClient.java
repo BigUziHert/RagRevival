@@ -388,8 +388,7 @@ public final class RevivalClient {
                 + labelWidth + 15 + mc.font.width(countdown);
         boolean givingUpNow = self && targetState.payload.giveUpTicks() > 0;
         Component giveUpKey = compactKey(GIVE_UP);
-        Component giveUpLabel = Component.translatable(givingUpNow
-                ? "hud.ragrevival.giving_up" : "hud.ragrevival.give_up_hint");
+        Component giveUpLabel = Component.translatable("hud.ragrevival.give_up_hint");
         int giveUpKeyWidth = mc.font.width(giveUpKey) + 8;
         int giveUpWidth = self ? giveUpKeyWidth + 6 + mc.font.width(giveUpLabel) : 0;
         int width = 14 + Math.max(contentWidth, giveUpWidth);
@@ -428,7 +427,7 @@ public final class RevivalClient {
             gui.fill(giveUpX, top + 25, giveUpX + giveUpKeyWidth, top + 39, 0xFF35424D);
             gui.drawString(mc.font, giveUpKey, giveUpX + 4, top + 28, 0xFFF0F4F5, false);
             gui.drawString(mc.font, giveUpLabel, giveUpX + giveUpKeyWidth + 6, top + 28,
-                    givingUpNow ? 0xFFA5DAC0 : 0xFFBEC8CE, false);
+                    0xFFBEC8CE, false);
         }
     }
 

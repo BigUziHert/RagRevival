@@ -14,7 +14,7 @@ Install RagRevival and all three pinned dependencies in **both clients and the d
 | [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | 0.7.2 |
 | [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.0 |
 
-The latest versioned distributable and source JAR are in [`artifacts/1.3.1`](artifacts/1.3.1). Install matching **1.3.1** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+The latest versioned distributable and source JAR are in [`artifacts/1.3.2`](artifacts/1.3.2). Install matching **1.3.2** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
 
 Optional compatibility test versions: **Carry On 2.2.6.13** on server and clients; **Unlocked Camera 1.0.0**, private source commit `c13cfa3d`, on clients only. See [source inspection and compatibility evidence](docs/compatibility-research.md). Other dependency versions are deliberately not advertised as verified.
 
@@ -31,7 +31,7 @@ Optional compatibility test versions: **Carry On 2.2.6.13** on server and client
 - **Zoom while dragging:** Unlocked Camera receives the mouse wheel normally. If no camera/interaction mod claims a vertical scroll, RagRevival consumes it to keep the hotbar from switching to a held item and interrupting the drag. Ordinary Sable grabs keep their own controls.
 - **Give up:** hold **G** for 100 continuous server ticks (five seconds at 20 TPS). Releasing G cancels. Rebind it under **Options → Controls → Key Binds → RagRevival**.
 - The HUD shows the downed countdown, feeding progress, and give-up progress to the relevant player.
-- Rescue hints combine compact item icons, rebind-aware keycaps, the action, and the remaining `m:ss` countdown in one panel. The downed player's card has two rows: self-revival and the timer above, then a G keycap with **Hold for 5s** below. One thin green track along the card's bottom edge fills for revival or giving up, with the player's G progress taking priority. The countdown freezes during feeding. Item suggestions come from the revival tag.
+- Rescue hints combine compact item icons, rebind-aware keycaps, the action, and the remaining `m:ss` countdown in one panel. The downed player's card has two rows: self-revival and the timer above, then a G keycap with **Hold for 5s to give up** below. That hint and its color stay constant while G is held. One thin green track along the card's bottom edge fills for revival or giving up, with the player's G progress taking priority. The countdown freezes during feeding. Item suggestions come from the revival tag.
 - Successful revival restores **half of maximum health** by default: five hearts for a normal ten-heart player, scaling with maximum-health modifiers.
 
 Feeding reserves that right-click until release, so holding it after revival does not consume another item. A short server input lease cancels abandoned interactions; loss of window focus or opening a menu also releases the client interaction. Server stalls do not let packet spam accelerate either hold.
@@ -73,7 +73,7 @@ Both foods use the same item tag and revival rules. Enchanted golden apples are 
 
 Selection clips the existing rendered camera ray against the actual rotated ragdoll limbs. It does not modify Unlocked Camera's position, freelook, shoulder selection, or crosshair. The server independently checks line of sight and interaction reach from the rescuer's actual world-space eyes to the real physics body. A camera offset cannot extend reach or permit feeding through walls. Sable plotyard coordinates are projected into world space; dragging uses Sable's native physics constraint and player seat, with no independent teleport loop.
 
-See [dependency API inspection](docs/dependency-api.md) and [latest test evidence](docs/test-results-1.3.1.md) for the exact scope of verification.
+Version **1.3.2 was assembled only; no tests were run at the user's request**. See [dependency API inspection](docs/dependency-api.md) and [1.3.1 evidence, the previous tested release](docs/test-results-1.3.1.md) for the scope of earlier verification.
 
 ## Build and local test setup
 
@@ -88,7 +88,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.1.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.2.jar
 ./scripts/start-test-runtime.ps1
 ```
 
