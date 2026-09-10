@@ -14,16 +14,18 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.3.5** on all three instances together. It retains network
+Install RagRevival **1.3.6** on all three instances together. It retains network
 protocol 3; use matching client/server versions for the current presentation.
-See [1.3.5 verification](test-results-1.3.5.md) for the loader regression tests,
-real multiplayer matrix, and limits of camera checks. To prepare other NeoForge
+The new standing drag/feed controls are ready for manual testing. See
+[1.3.6 build checks and manual checklist](test-results-1.3.6.md), and
+[historical 1.3.5 verification](test-results-1.3.5.md) for the loader regression
+tests, earlier multiplayer matrix, and limits of camera checks. To prepare other NeoForge
 and Sable combinations without changing this base setup, follow
 [compatibility runtime instructions](compatibility-runtime.md).
 
 The setup script pins NeoForge to **21.1.249** on Minecraft **1.21.1** for
 reproducibility, with Sable **2.0.3** as the build/download baseline. RagRevival
-1.3.5 omits NeoForge and Sable range fields to use FML's unbounded default.
+1.3.6 omits NeoForge and Sable range fields to use FML's unbounded default.
 Other mods retain their own requirements: reviewed Sable 1.x versions require
 NeoForge 21.1.219+, Sable 2.x requires 21.1.228+, and optional Unlocked Camera
 requires 21.1.235+. Runtime coverage is limited to the recorded combinations.
@@ -69,8 +71,11 @@ jar because Sable already bundles that dependency.
 Live interactive behavior needs two people or switching between both windows.
 The task's final report distinguishes compilation/startup checks from feeding,
 movement, camera, dragging, and key-hold interactions actually exercised.
-For a quick manual check, hold crouch + Use to feed a teammate, then release
-crouch to check cancellation. While downed, hold Use without crouching to
+For a quick manual check, hold Use while standing to feed a teammate. Crouch
+and stand again while holding Use to check uninterrupted progress, then release
+Use to check cancellation. With both hands empty, start dragging while standing,
+change posture while holding Use, and release Use to release the body. Repeat
+both actions starting while crouched. While downed, hold Use without crouching to
 self-revive. Teammate feeding should keep the rescuer's food held, with crumbs
 and sounds at the downed head. The downed player's two-row card combines
 self-revival/timer above a G keycap and **Hold for 5s to give up** below. The
@@ -87,7 +92,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.3.5-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.3.6-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -99,11 +104,14 @@ pwsh -File scripts/test-server-command.ps1 'ragrevivaltest revive ReviveOne'
 The scheduled tests exercise real dedicated-server APIs and native Sable physics
 while both clients receive synchronization. Results are logged as
 `RAGREVIVAL_TEST PASS/FAIL`. Tests include death interception, item/XP game rules,
-teammate crouch requirements, self-revival, feeding cancellation/completion,
-native-use animation state, native drag release, dismount locking, movement input,
+standing teammate feeding and drag acquisition, posture changes during those
+interactions, self-revival, feeding cancellation/completion, native-use animation
+state, Use release and lost-input cleanup, dismount locking, movement input,
 give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage edge
-cases. The codec command can run separately. See [1.3.5 results](test-results-1.3.5.md)
-for the current compatibility matrix and actual restart check, and
+cases. The codec command can run separately. The updated standing-control harness
+has not been run for 1.3.6; leave both clients idle if choosing to run it.
+See [1.3.5 results](test-results-1.3.5.md)
+for the earlier compatibility matrix and actual restart check, and
 [verification history](test-results.md) for earlier versions.
 
 For the optional client geometry probe, also install the harness JAR into the

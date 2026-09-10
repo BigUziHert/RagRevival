@@ -35,7 +35,7 @@ public abstract class RagdollGrabInputMixin {
         if (activePos == null) return;
         if (RevivalClient.isDownedPart(activePos)) {
             // The server already released old generic grips on downing. Do not send a native
-            // release packet: it could release the valid crouch-drag now owning this same limb.
+            // release packet: it could release the valid rescue grip now owning this same limb.
             RagdollGrabClient.clearActive();
         } else if (RevivalClient.hasActiveInteraction()) {
             // A held use press can move from an ordinary body onto a downed player. Release
@@ -54,8 +54,7 @@ public abstract class RagdollGrabInputMixin {
 
     @Inject(method = "isGrabbing", at = @At("RETURN"), cancellable = true)
     private static void ragrevival$keepDragCollisionRules(CallbackInfoReturnable<Boolean> cir) {
-        // Native isGrabbing supplies Sable's local collision rules; our grip needs them too,
-        // including after right-click is released while crouch remains held.
+        // Native isGrabbing supplies Sable's local collision rules while our Use-held grip is active.
         if (RevivalClient.hasActiveDrag()) cir.setReturnValue(true);
     }
 }

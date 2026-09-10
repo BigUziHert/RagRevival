@@ -176,9 +176,9 @@ public final class DownedManager {
             cancelRescue(id); return;
         }
         if (target == null || target == actor && !selfFeed || !validTarget(actor, target)) { cancelRescue(id); return; }
-        // Feeding a teammate requires crouch for the whole interaction; self-feeding does not.
-        if (input.action() == InputAction.FEED && (!actor.getItemInHand(input.hand()).is(REVIVAL_ITEMS)
-                || !selfFeed && !actor.isShiftKeyDown())) { cancelRescue(id); return; }
+        if (input.action() == InputAction.FEED && !actor.getItemInHand(input.hand()).is(REVIVAL_ITEMS)) {
+            cancelRescue(id); return;
+        }
         Rescue rescue = RESCUES.get(id);
         if (rescue != null && (rescue.target != target || rescue.hand != input.hand() || rescue.action != input.action())) {
             cancelRescue(id); rescue = null;
@@ -188,7 +188,7 @@ public final class DownedManager {
         long now = System.currentTimeMillis();
         // A request already at/past the deadline cannot turn an expired player into a paused rescue.
         if (DownedClock.remaining(target.getPersistentData().getCompound(DATA_KEY).getLong("deadline"), now) == 0) return;
-        if (input.action() == InputAction.DRAG && (!actor.isShiftKeyDown() || !actor.getMainHandItem().isEmpty() || !actor.getOffhandItem().isEmpty())) return;
+        if (input.action() == InputAction.DRAG && (!actor.getMainHandItem().isEmpty() || !actor.getOffhandItem().isEmpty())) return;
         if (input.action() != InputAction.FEED && input.action() != InputAction.DRAG) return;
         if (input.action() == InputAction.DRAG && !RagdollBridge.startDrag(actor, target)) return;
         actor.stopUsingItem();
@@ -221,11 +221,10 @@ public final class DownedManager {
                     && (!isDowned(actor) || selfFeed) && !CarryOnCompat.isCarrying(actor) && validTarget(actor, rescue.target)
                     && rescue.hold.advance(tick);
             if (rescue.action == InputAction.FEED) {
-                valid &= (selfFeed || actor.isShiftKeyDown())
-                        && actor.getItemInHand(rescue.hand) == rescue.stack && rescue.stack.is(REVIVAL_ITEMS)
+                valid &= actor.getItemInHand(rescue.hand) == rescue.stack && rescue.stack.is(REVIVAL_ITEMS)
                         && !rescue.stack.isEmpty();
             } else {
-                valid &= actor.isShiftKeyDown() && actor.getMainHandItem().isEmpty() && actor.getOffhandItem().isEmpty();
+                valid &= actor.getMainHandItem().isEmpty() && actor.getOffhandItem().isEmpty();
                 if (valid) valid = RagdollBridge.tickDrag(actor, rescue.target);
             }
             if (!valid) { cancelRescue(actor.getUUID()); continue; }

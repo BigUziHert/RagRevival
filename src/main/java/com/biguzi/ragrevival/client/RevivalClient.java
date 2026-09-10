@@ -183,10 +183,9 @@ public final class RevivalClient {
         if (CarryOnCompat.isCarrying(mc.player) || mc.player.isPassenger() || mc.player.isVehicle()) return;
         InteractionHand feedingHand = revivalHand(mc.player);
         if (feedingHand != null) {
-            if (!mc.player.isShiftKeyDown()) return;
             beginFeed(target, feedingHand);
             return;
-        } else if (mc.player.isShiftKeyDown() && mc.player.getMainHandItem().isEmpty()
+        } else if (mc.player.getMainHandItem().isEmpty()
                 && mc.player.getOffhandItem().isEmpty()) {
             activeHand = InteractionHand.MAIN_HAND;
             activeAction = InputAction.DRAG;
@@ -253,10 +252,10 @@ public final class RevivalClient {
                 && !mc.player.isSpectator() && !CarryOnCompat.isCarrying(mc.player) && !mc.player.isVehicle()
                 && (selfFeed || !isDowned(mc.player) && !mc.player.isPassenger() && inReach(mc.player, target));
         if (activeAction == InputAction.FEED) {
-            allowed &= useHeld && (selfFeed || mc.player.isShiftKeyDown())
+            allowed &= useHeld
                     && mc.player.getItemInHand(activeHand).is(REVIVAL_ITEMS);
         } else {
-            allowed &= mc.player.isShiftKeyDown() && mc.player.getMainHandItem().isEmpty()
+            allowed &= useHeld && mc.player.getMainHandItem().isEmpty()
                     && mc.player.getOffhandItem().isEmpty();
         }
         if (!allowed) {
@@ -357,20 +356,19 @@ public final class RevivalClient {
             label = Component.translatable(ownFeed ? (self ? "hud.ragrevival.self_revive_hint"
                     : "hud.ragrevival.revive_hint") : "hud.ragrevival.being_fed");
             if (ownFeed) {
-                keys = feedingKeys(self);
+                keys = compactKey(mc.options.keyUse);
                 if (hand != null) icons = List.of(mc.player.getItemInHand(hand));
             }
         } else if (activeAction == InputAction.DRAG) {
-            keys = compactKey(mc.options.keyShift);
-            label = Component.translatable("hud.ragrevival.release_drag_hint");
+            keys = compactKey(mc.options.keyUse);
+            label = Component.translatable("hud.ragrevival.drag_hint");
             accent = 0xFFE6C985;
         } else if (hand != null) {
-            keys = feedingKeys(self);
+            keys = compactKey(mc.options.keyUse);
             icons = List.of(mc.player.getItemInHand(hand));
             label = Component.translatable(self ? "hud.ragrevival.self_revive_hint" : "hud.ragrevival.revive_hint");
         } else if (!self && mc.player.getMainHandItem().isEmpty() && mc.player.getOffhandItem().isEmpty()) {
-            keys = mc.player.isShiftKeyDown() ? compactKey(mc.options.keyUse)
-                    : Component.translatable("hud.ragrevival.drag_keys", compactKey(mc.options.keyShift), compactKey(mc.options.keyUse));
+            keys = compactKey(mc.options.keyUse);
             label = Component.translatable("hud.ragrevival.drag_hint");
             accent = 0xFFE6C985;
         } else {
@@ -429,12 +427,6 @@ public final class RevivalClient {
             gui.drawString(mc.font, giveUpLabel, giveUpX + giveUpKeyWidth + 6, top + 28,
                     0xFFBEC8CE, false);
         }
-    }
-
-    private static Component feedingKeys(boolean self) {
-        Minecraft mc = Minecraft.getInstance();
-        return self || mc.player.isShiftKeyDown() ? compactKey(mc.options.keyUse)
-                : Component.translatable("hud.ragrevival.drag_keys", compactKey(mc.options.keyShift), compactKey(mc.options.keyUse));
     }
 
     private static Component compactKey(KeyMapping mapping) {

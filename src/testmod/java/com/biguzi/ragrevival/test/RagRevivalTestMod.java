@@ -246,11 +246,11 @@ public final class RagRevivalTestMod {
                         + " vehicle=" + rescuer.isVehicle() + " tagged=" + rescuer.getMainHandItem().is(DownedManager.REVIVAL_ITEMS));
                 rescuer.setShiftKeyDown(false);
                 send(rescuer, InputAction.FEED);
-                check(!DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && apples() == 4,
-                        "standing teammate cannot start feeding or consume a revival item");
+                check(DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && apples() == 4,
+                        "standing teammate starts feeding without instant revival or consumption");
                 rescuer.setShiftKeyDown(true);
                 send(rescuer, InputAction.FEED);
-                check(DownedManager.isBusy(rescuer), "crouching teammate feeding starts for held tagged item");
+                check(DownedManager.isBusy(rescuer), "crouching during teammate feeding retains the interaction");
                 check(!rescuer.isUsingItem(),
                         "teammate feeding keeps the rescuer out of native self-eating");
                 for (int i = 0; i < 100; i++) send(rescuer, InputAction.FEED);
@@ -283,25 +283,24 @@ public final class RagRevivalTestMod {
                 send(rescuer, InputAction.FEED);
             });
             after(3, () -> {
-                // Keep sending FEED so only releasing crouch invalidates this active lease.
+                // Keep sending FEED while changing posture; only Use release should cancel.
                 rescuer.setShiftKeyDown(false);
                 heartbeat = InputAction.FEED;
             });
             after(2, () -> {
-                heartbeat = null;
-                check(!DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && apples() == 4,
-                        "releasing crouch cancels active teammate feeding without consuming");
-                check(!rescuer.isUsingItem(), "releasing crouch leaves no teammate native item use active");
+                check(DownedManager.isBusy(rescuer) && DownedManager.isDowned(target) && apples() == 4,
+                        "standing up continues active teammate feeding without early consumption");
+                check(!rescuer.isUsingItem(), "standing teammate feeding does not start native self-eating");
+                heartbeat = null; send(rescuer, InputAction.RELEASE);
+                check(!DownedManager.isBusy(rescuer) && apples() == 4,
+                        "Use release cancels standing teammate feeding without consuming");
                 resumedRemaining = DownedManager.remainingMillis(target);
-                send(rescuer, InputAction.FEED);
-                check(!DownedManager.isBusy(rescuer), "standing feed heartbeats cannot reacquire a canceled teammate lease");
             });
             after(3, () -> {
                 check(DownedManager.remainingMillis(target) < resumedRemaining,
-                        "releasing crouch resumes the downed countdown");
-                rescuer.setShiftKeyDown(true);
+                        "releasing Use while standing resumes the downed countdown");
                 send(rescuer, InputAction.FEED);
-                check(DownedManager.isBusy(rescuer), "crouching again permits a new teammate feeding interaction");
+                check(DownedManager.isBusy(rescuer), "standing teammate can start a fresh feeding interaction");
                 // No further heartbeat: the existing lease-timeout test remains independent.
             });
             after(10, () -> {
@@ -424,18 +423,30 @@ public final class RagRevivalTestMod {
             after(12, () -> DownedManager.down(target, target.damageSources().generic()));
             after(35, () -> {
                 nearTarget(); rescuer.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-                rescuer.setShiftKeyDown(true); send(rescuer, InputAction.DRAG); heartbeat = InputAction.DRAG;
+                rescuer.setShiftKeyDown(false); send(rescuer, InputAction.DRAG); heartbeat = InputAction.DRAG;
                 dragRemaining = DownedManager.remainingMillis(target);
-                check(DownedManager.isDragging(rescuer), "crouching empty-handed rescuer acquires native drag");
+                check(DownedManager.isDragging(rescuer), "standing empty-handed rescuer acquires native drag");
             });
             after(5, () -> {
                 check(DownedManager.remainingMillis(target) < dragRemaining, "dragging does not pause the downed countdown");
-                rescuer.setShiftKeyDown(false); heartbeat = null;
+                check(DownedManager.isDragging(rescuer), "held Use maintains standing native drag");
+                rescuer.setShiftKeyDown(true);
             });
             after(3, () -> {
-                check(!DownedManager.isDragging(rescuer), "releasing crouch releases drag");
+                check(DownedManager.isDragging(rescuer), "crouching while holding Use retains native drag");
+                rescuer.setShiftKeyDown(false);
+            });
+            after(3, () -> {
+                check(DownedManager.isDragging(rescuer), "standing up while holding Use retains native drag");
+                heartbeat = null; send(rescuer, InputAction.RELEASE);
+                check(!DownedManager.isDragging(rescuer), "Use release immediately releases native drag");
+                nearTarget(); send(rescuer, InputAction.DRAG);
+                check(DownedManager.isDragging(rescuer), "standing rescuer can reacquire native drag after release");
+                // No further heartbeat: an abandoned standing drag must expire too.
+            });
+            after(10, () -> {
+                check(!DownedManager.isDragging(rescuer), "missing input heartbeat expires standing drag lease");
                 rescuer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 3));
-                rescuer.setShiftKeyDown(true);
                 send(rescuer, InputAction.FEED);
                 DownedManager.logout(new PlayerEvent.PlayerLoggedOutEvent(rescuer));
                 check(!DownedManager.isBusy(rescuer), "rescuer logout callback cancels feeding");

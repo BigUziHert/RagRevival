@@ -190,7 +190,7 @@ public final class RagdollBridge {
 
     /** Uses the native spring constraint rather than teleporting either the body or its passenger. */
     public static boolean startDrag(ServerPlayer rescuer, ServerPlayer target) {
-        if (rescuer == target || rescuer.level() != target.level() || !rescuer.isShiftKeyDown()) return false;
+        if (rescuer == target || rescuer.level() != target.level()) return false;
         for (Drag drag : DRAGS.values()) {
             if (drag.targetId().equals(target.getUUID()) && drag.rescuer() != rescuer) return false;
         }
@@ -215,7 +215,7 @@ public final class RagdollBridge {
     public static boolean tickDrag(ServerPlayer rescuer, ServerPlayer target) {
         Drag drag = DRAGS.get(rescuer.getUUID());
         if (drag == null || !drag.targetId().equals(target.getUUID())) return false;
-        if (!rescuer.isShiftKeyDown() || rescuer.isDeadOrDying() || rescuer.isSpectator()
+        if (rescuer.isDeadOrDying() || rescuer.isSpectator()
                 || rescuer.level() != target.level() || drag.part().isRemoved()
                 || RagdollAPI.isRagdolled(rescuer)) {
             stopDrag(rescuer);
@@ -226,7 +226,7 @@ public final class RagdollBridge {
             stopDrag(rescuer);
             return false;
         }
-        // An ordinary Sable right-click release may race with our crouch grip; the crouch lease owns it.
+        // An ordinary Sable right-click release may race with our grip; the rescue lease owns it.
         drag.part().startGrab(rescuer.getUUID());
         return true;
     }

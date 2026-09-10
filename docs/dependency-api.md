@@ -1,12 +1,13 @@
 # Inspected dependency APIs
 
 These are the original build baselines, retained for reproducibility in
-**1.3.5**. RagRevival accepts broad NeoForge/Sable versions within Minecraft
-1.21.1 through FML's omitted-range default. See [current multiplayer evidence](test-results-1.3.5.md),
+**1.3.6**. RagRevival accepts broad NeoForge/Sable versions within Minecraft
+1.21.1 through FML's omitted-range default. See [1.3.6 verification](test-results-1.3.6.md),
+[historical 1.3.5 multiplayer evidence](test-results-1.3.5.md),
 [the 1.3.4 loader correction](version-compatibility-1.3.4.md), and
 [reproducible compatibility profiles](compatibility-runtime.md).
 
-The production JAR's 20 referenced Sable public fields/methods were resolved
+The 1.3.5 production JAR's 20 referenced Sable public fields/methods were resolved
 with their exact descriptors through class hierarchies and embedded Companion
 libraries in ten published versions: **1.1.1, 1.1.3, 1.2.1, 1.2.2, 2.0.0,
 2.0.1, 2.0.2, 2.0.3, 2.0.4, and 2.0.5**. Each matched 20/20 members, with
@@ -57,7 +58,9 @@ Each player body is six `RagdollPartBlockEntity` instances in separate linked su
 
 ## Dragging
 
-`RagdollPartBlockEntity.startGrab(UUID)` and `stopGrab(UUID)` manage the native Rapier spring constraint. This applies physics to the body and inherits native collision and seat synchronization. The adapter selects the closest real limb, has one drag owner per target, and refreshes the grip only while the controller maintains the crouch lease. Native grips break beyond four blocks; the adapter uses the same limit. Existing ordinary grips are removed when the body becomes downed. `RagdollAPI.setGrabDisabled` is applied to every linked limb because version 0.7.2 checks the clicked limb's tag rather than its root; this prevents the upstream generic grab packet from starting an uncontrolled additional grip on a downed body. Direct `startGrab` is intentionally unaffected by that packet gate. The adapter directly starts only its validated owned grip and sends the upstream grab animation callbacks.
+`RagdollPartBlockEntity.startGrab(UUID)` and `stopGrab(UUID)` manage the native Rapier spring constraint. This applies physics to the body and inherits native collision and seat synchronization. The adapter selects the closest real limb, has one drag owner per target, and refreshes the grip only while the controller receives held-Use input. Since 1.3.6, standing and crouching are both allowed for acquisition and continuation; releasing Use ends the grip. Both hands must remain empty. Native grips break beyond four blocks; the adapter uses the same limit. Existing ordinary grips are removed when the body becomes downed. `RagdollAPI.setGrabDisabled` is applied to every linked limb because version 0.7.2 checks the clicked limb's tag rather than its root; this prevents the upstream generic grab packet from starting an uncontrolled additional grip on a downed body. Direct `startGrab` is intentionally unaffected by that packet gate. The adapter directly starts only its validated owned grip and sends the upstream grab animation callbacks.
+
+Teammate feeding also accepts either posture in 1.3.6 and continues while Use is held. Standing up does not cancel or restart feeding. Server reach, held-item checks, the exclusive rescue owner, Carry On exclusion, and input-lease expiry still validate both interaction types. The updated standing-control harness is available, but the linked multiplayer runs are from 1.3.5 and tested that version's crouch-based rules.
 
 ## Reactions distinction
 
