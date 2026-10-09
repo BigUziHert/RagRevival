@@ -24,6 +24,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
@@ -42,9 +43,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 /** All mutation runs on the logical server thread. The persisted deadline is the authority. */
 public final class DownedManager {
-    public static final TagKey<Item> REVIVAL_ITEMS = TagKey.create(Registries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(RagRevival.MOD_ID, "revival_items"));
+    public static final TagKey<Item> REVIVAL_ITEMS = RevivalItems.REVIVAL_ITEMS;
     private static final String DATA_KEY = "ragrevival:downed";
+    private static final int REVIVAL_GRACE_TICKS = 10 * 20;
+    private static final Map<UUID, Long> REVIVAL_GRACE = new HashMap<>();
     private static final Map<UUID, DamageSource> SOURCES = new HashMap<>();
     private static final Map<UUID, Rescue> RESCUES = new HashMap<>();
     private static final Map<UUID, UUID> TARGET_LOCKS = new HashMap<>();
@@ -55,6 +57,14 @@ public final class DownedManager {
 
     public static boolean isDowned(Player player) {
         return player.getPersistentData().contains(DATA_KEY) && !TERMINAL.contains(player.getUUID());
+    }
+    /** Server-tick grace is temporary and never carried into a later life or server session. */
+    public static boolean hasRevivalGrace(Player player) {
+        return !player.level().isClientSide && player.isAlive()
+                && REVIVAL_GRACE.getOrDefault(player.getUUID(), 0L) > tick;
+    }
+    public static boolean isMobProtected(Player player) {
+        return isDowned(player) || hasRevivalGrace(player);
     }
     public static boolean isBusy(Player player) { return RESCUES.containsKey(player.getUUID()); }
     public static boolean isFeeding(Player player) {
@@ -82,6 +92,7 @@ public final class DownedManager {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void death(LivingDeathEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || TERMINAL.contains(player.getUUID())) return;
+        REVIVAL_GRACE.remove(player.getUUID());
         // Totems already ran before LivingDeathEvent. Administrative kill and the void stay terminal.
         if (event.getSource().is(DamageTypes.GENERIC_KILL) || event.getSource().is(DamageTypes.FELL_OUT_OF_WORLD)) {
             if (isDowned(player)) clear(player);
@@ -95,6 +106,7 @@ public final class DownedManager {
 
     public static void down(ServerPlayer player, DamageSource source) {
         if (isDowned(player)) return;
+        REVIVAL_GRACE.remove(player.getUUID());
         cancelInvolving(player);
         CarryOnCompat.releaseForDowning(player);
         player.stopUsingItem();
@@ -118,12 +130,19 @@ public final class DownedManager {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void damage(LivingIncomingDamageEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player && isDowned(player)
-                && !event.getSource().is(DamageTypes.GENERIC_KILL)) event.setCanceled(true);
+        if (!(event.getEntity() instanceof ServerPlayer player)
+                || event.getSource().is(DamageTypes.GENERIC_KILL)) return;
+        if (isDowned(player) || hasRevivalGrace(player) && isMobDamage(event.getSource()))
+            event.setCanceled(true);
+    }
+    private static boolean isMobDamage(DamageSource source) {
+        // Include shots already airborne when revival finishes, without granting PvP/environment immunity.
+        return source.getEntity() instanceof Mob || source.getDirectEntity() instanceof Mob
+                || source.getDirectEntity() instanceof Projectile projectile && projectile.getOwner() instanceof Mob;
     }
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void target(LivingChangeTargetEvent event) {
-        if (event.getNewAboutToBeSetTarget() instanceof Player player && isDowned(player))
+        if (event.getNewAboutToBeSetTarget() instanceof Player player && isMobProtected(player))
             event.setNewAboutToBeSetTarget(null);
     }
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -176,7 +195,7 @@ public final class DownedManager {
             cancelRescue(id); return;
         }
         if (target == null || target == actor && !selfFeed || !validTarget(actor, target)) { cancelRescue(id); return; }
-        if (input.action() == InputAction.FEED && !actor.getItemInHand(input.hand()).is(REVIVAL_ITEMS)) {
+        if (input.action() == InputAction.FEED && !RevivalItems.canRevive(actor.getItemInHand(input.hand()))) {
             cancelRescue(id); return;
         }
         Rescue rescue = RESCUES.get(id);
@@ -210,6 +229,7 @@ public final class DownedManager {
     @SubscribeEvent
     public static void tick(ServerTickEvent.Post event) {
         tick++;
+        REVIVAL_GRACE.values().removeIf(expiresAt -> expiresAt <= tick);
         MinecraftServer server = event.getServer();
         // Validate and credit feeding before expiry: even a last-second feed must get its pause.
         // Completing the interaction waits until after terminal conditions, including give-up.
@@ -221,7 +241,7 @@ public final class DownedManager {
                     && (!isDowned(actor) || selfFeed) && !CarryOnCompat.isCarrying(actor) && validTarget(actor, rescue.target)
                     && rescue.hold.advance(tick);
             if (rescue.action == InputAction.FEED) {
-                valid &= actor.getItemInHand(rescue.hand) == rescue.stack && rescue.stack.is(REVIVAL_ITEMS)
+                valid &= actor.getItemInHand(rescue.hand) == rescue.stack && RevivalItems.canRevive(rescue.stack)
                         && !rescue.stack.isEmpty();
             } else {
                 valid &= actor.getMainHandItem().isEmpty() && actor.getOffhandItem().isEmpty();
@@ -275,17 +295,17 @@ public final class DownedManager {
     }
 
     private static void clearAggro(MinecraftServer server) {
-        if (server.getPlayerList().getPlayers().stream().noneMatch(DownedManager::isDowned)) return;
+        if (server.getPlayerList().getPlayers().stream().noneMatch(DownedManager::isMobProtected)) return;
         for (var level : server.getAllLevels()) for (var entity : level.getAllEntities()) if (entity instanceof Mob mob) {
-            if (mob.getTarget() instanceof Player p && isDowned(p)) { mob.setTarget(null); mob.getNavigation().stop(); }
+            if (mob.getTarget() instanceof Player p && isMobProtected(p)) { mob.setTarget(null); mob.getNavigation().stop(); }
             var brain = mob.getBrain();
             if (brain.hasMemoryValue(MemoryModuleType.ATTACK_TARGET)
-                    && brain.getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null) instanceof Player p && isDowned(p)) {
+                    && brain.getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null) instanceof Player p && isMobProtected(p)) {
                 brain.eraseMemory(MemoryModuleType.ATTACK_TARGET);
                 brain.eraseMemory(MemoryModuleType.WALK_TARGET);
                 brain.eraseMemory(MemoryModuleType.LOOK_TARGET);
             }
-            if (mob.getLastHurtByMob() instanceof Player p && isDowned(p)) mob.setLastHurtByMob(null);
+            if (mob.getLastHurtByMob() instanceof Player p && isMobProtected(p)) mob.setLastHurtByMob(null);
         }
     }
 
@@ -293,8 +313,10 @@ public final class DownedManager {
         if (!isDowned(player)) return;
         clear(player);
         player.setHealth((float)(player.getMaxHealth() * RevivalConfig.RESTORED_HEALTH_FRACTION.get()));
+        REVIVAL_GRACE.put(player.getUUID(), tick + REVIVAL_GRACE_TICKS);
         player.invulnerableTime = 20;
         player.fallDistance = 0;
+        clearAggro(player.server);
         player.server.getPlayerList().saveAll();
     }
     public static void finishDeath(ServerPlayer player) {
@@ -314,6 +336,7 @@ public final class DownedManager {
         } finally { TERMINAL.remove(player.getUUID()); }
     }
     private static void clear(ServerPlayer player) {
+        REVIVAL_GRACE.remove(player.getUUID());
         cancelInvolving(player);
         GIVE_UP.remove(player.getUUID());
         SETUP_TICKS.remove(player.getUUID());
@@ -362,6 +385,7 @@ public final class DownedManager {
     @SubscribeEvent
     public static void logout(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
+            REVIVAL_GRACE.remove(player.getUUID());
             if (isDowned(player)) checkpointPosition(player);
             cancelInvolving(player); GIVE_UP.remove(player.getUUID());
             SETUP_TICKS.remove(player.getUUID());
@@ -384,6 +408,7 @@ public final class DownedManager {
     }
     @SubscribeEvent
     public static void clone(PlayerEvent.Clone event) {
+        if (event.isWasDeath()) REVIVAL_GRACE.remove(event.getEntity().getUUID());
         if (!event.isWasDeath() && event.getOriginal().getPersistentData().contains(DATA_KEY))
             event.getEntity().getPersistentData().put(DATA_KEY, event.getOriginal().getPersistentData().getCompound(DATA_KEY).copy());
         else event.getEntity().getPersistentData().remove(DATA_KEY);
@@ -412,6 +437,7 @@ public final class DownedManager {
     }
     @SubscribeEvent
     public static void stopped(ServerStoppedEvent event) {
+        REVIVAL_GRACE.clear();
         RESCUES.clear(); TARGET_LOCKS.clear(); GIVE_UP.clear(); SOURCES.clear(); TERMINAL.clear(); SETUP_TICKS.clear(); tick = 0;
         RagdollBridge.clear();
     }

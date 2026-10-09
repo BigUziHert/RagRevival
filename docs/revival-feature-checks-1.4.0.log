@@ -1,0 +1,88 @@
+[09Oct2026 07:46:19.383] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible item minecraft:golden_apple
+[09Oct2026 07:46:19.383] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible item minecraft:golden_carrot
+[09Oct2026 07:46:19.383] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible item minecraft:honey_bottle
+[09Oct2026 07:46:19.384] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible item minecraft:glistering_melon_slice
+[09Oct2026 07:46:19.384] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible item minecraft:totem_of_undying
+[09Oct2026 07:46:19.384] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible item minecraft:enchanted_golden_apple
+[09Oct2026 07:46:19.384] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:healing]=net.minecraft.world.item.alchemy.Potion@6f25b5e8}
+[09Oct2026 07:46:19.384] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:strong_healing]=net.minecraft.world.item.alchemy.Potion@20b11bd3}
+[09Oct2026 07:46:19.384] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:regeneration]=net.minecraft.world.item.alchemy.Potion@3e40eda3}
+[09Oct2026 07:46:19.384] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:long_regeneration]=net.minecraft.world.item.alchemy.Potion@342e2b72}
+[09Oct2026 07:46:19.385] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:strong_regeneration]=net.minecraft.world.item.alchemy.Potion@1f21f1f}
+[09Oct2026 07:46:19.385] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:water]=net.minecraft.world.item.alchemy.Potion@2b70ce89}
+[09Oct2026 07:46:19.385] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:awkward]=net.minecraft.world.item.alchemy.Potion@4dd7d611}
+[09Oct2026 07:46:19.385] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:harming]=net.minecraft.world.item.alchemy.Potion@14c428e9}
+[09Oct2026 07:46:19.385] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:poison]=net.minecraft.world.item.alchemy.Potion@2c5037b}
+[09Oct2026 07:46:19.385] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:swiftness]=net.minecraft.world.item.alchemy.Potion@589da32a}
+[09Oct2026 07:46:19.385] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS empty, ordinary food, and empty potion rejected
+[09Oct2026 07:46:19.386] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS throwable potions are not revival items
+[09Oct2026 07:46:19.386] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS healing base with a custom harmful effect is rejected
+[09Oct2026 07:46:19.386] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS every UI example is an eligible revival stack
+[09Oct2026 07:46:22.816] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS production /revive is registered
+[09Oct2026 07:46:22.816] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS /revive requires operator permission level 2
+[09Oct2026 07:46:22.820] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS reviving a healthy player fails without granting grace
+[09Oct2026 07:46:22.899] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:22.899] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS a non-operator cannot revive a downed player
+[09Oct2026 07:46:22.899] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS unknown target fails safely
+[09Oct2026 07:46:23.072] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS teammate honey-bottle feeding starts
+[09Oct2026 07:46:23.092] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS operator /revive succeeds
+[09Oct2026 07:46:23.092] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS command revival cancels teammate feeding without consumption
+[09Oct2026 07:46:23.092] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS command revival uses configured restored health
+[09Oct2026 07:46:23.092] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS command revival immediately grants mob grace
+[09Oct2026 07:46:23.093] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob melee damage is blocked throughout grace
+[09Oct2026 07:46:23.093] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS an existing mob arrow cannot damage during grace
+[09Oct2026 07:46:23.093] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob cannot set revived player as direct target
+[09Oct2026 07:46:23.093] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob target search rejects revived player
+[09Oct2026 07:46:23.093] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS player target queries still see revived player
+[09Oct2026 07:46:23.127] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS tick clears brain attack target and retaliation during grace
+[09Oct2026 07:46:23.127] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS environmental damage remains active during grace
+[09Oct2026 07:46:23.132] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS player damage remains active during grace
+[09Oct2026 07:46:33.016] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob grace remains active at tick 199
+[09Oct2026 07:46:33.017] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob melee damage is blocked throughout grace
+[09Oct2026 07:46:33.017] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS an existing mob arrow cannot damage during grace
+[09Oct2026 07:46:33.065] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob grace expires exactly at tick 200
+[09Oct2026 07:46:33.065] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob targeting resumes after grace
+[09Oct2026 07:46:33.065] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob target search resumes after grace
+[09Oct2026 07:46:33.066] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS mob projectile damage resumes after grace
+[09Oct2026 07:46:33.137] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:33.137] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS honey bottle starts self-revival
+[09Oct2026 07:46:34.667] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS honey bottle requires full configured hold before consumption
+[09Oct2026 07:46:34.741] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS honey bottle timed revival consumes one and grants grace
+[09Oct2026 07:46:34.741] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS honey bottle revival does not trigger ordinary item effects
+[09Oct2026 07:46:34.741] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS honey bottle late input cannot consume twice
+[09Oct2026 07:46:34.784] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:34.784] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS glistering melon slice starts self-revival
+[09Oct2026 07:46:36.317] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS glistering melon slice requires full configured hold before consumption
+[09Oct2026 07:46:36.389] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS glistering melon slice timed revival consumes one and grants grace
+[09Oct2026 07:46:36.389] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS glistering melon slice revival does not trigger ordinary item effects
+[09Oct2026 07:46:36.389] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS glistering melon slice late input cannot consume twice
+[09Oct2026 07:46:36.434] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:36.434] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS healing potion starts self-revival
+[09Oct2026 07:46:37.966] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS healing potion requires full configured hold before consumption
+[09Oct2026 07:46:38.038] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS healing potion timed revival consumes one and grants grace
+[09Oct2026 07:46:38.039] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS healing potion revival does not trigger ordinary item effects
+[09Oct2026 07:46:38.039] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS healing potion late input cannot consume twice
+[09Oct2026 07:46:38.083] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:38.083] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS totem of undying starts self-revival
+[09Oct2026 07:46:39.617] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS totem of undying requires full configured hold before consumption
+[09Oct2026 07:46:39.691] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS totem of undying timed revival consumes one and grants grace
+[09Oct2026 07:46:39.691] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS totem of undying revival does not trigger ordinary item effects
+[09Oct2026 07:46:39.691] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS totem of undying late input cannot consume twice
+[09Oct2026 07:46:39.730] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:39.730] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS regeneration potion starts self-revival
+[09Oct2026 07:46:41.267] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS regeneration potion requires full configured hold before consumption
+[09Oct2026 07:46:41.336] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS regeneration potion timed revival consumes one and grants grace
+[09Oct2026 07:46:41.336] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS regeneration potion revival does not trigger ordinary item effects
+[09Oct2026 07:46:41.336] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS regeneration potion late input cannot consume twice
+[09Oct2026 07:46:41.381] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:41.382] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS enchanted golden apple starts self-revival
+[09Oct2026 07:46:42.916] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS enchanted golden apple requires full configured hold before consumption
+[09Oct2026 07:46:42.987] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS enchanted golden apple timed revival consumes one and grants grace
+[09Oct2026 07:46:42.987] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS enchanted golden apple revival does not trigger ordinary item effects
+[09Oct2026 07:46:42.987] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS enchanted golden apple late input cannot consume twice
+[09Oct2026 07:46:43.031] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+[09Oct2026 07:46:43.032] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS self-feeding starts before administrative revival
+[09Oct2026 07:46:43.042] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS command revival cancels self-feeding without consumption
+[09Oct2026 07:46:43.046] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS /kill stays terminal during grace and clears protection
+[09Oct2026 07:46:43.046] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASS /revive does not resurrect a dead player
+[09Oct2026 07:46:43.090] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASSED passed=87 failed=0 ticks=475

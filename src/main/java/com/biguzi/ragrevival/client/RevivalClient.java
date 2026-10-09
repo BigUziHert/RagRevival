@@ -1,6 +1,7 @@
 package com.biguzi.ragrevival.client;
 
 import com.biguzi.ragrevival.FeedingAnimation;
+import com.biguzi.ragrevival.RevivalItems;
 import com.biguzi.ragrevival.compat.CarryOnCompat;
 import com.biguzi.ragrevival.ragdoll.RagdollBridge;
 import com.biguzi.ragrevival.network.InputAction;
@@ -15,16 +16,11 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -49,8 +45,6 @@ import java.util.UUID;
 
 /** Input intent and presentation only. Health, item consumption and all clocks belong to the server. */
 public final class RevivalClient {
-    private static final TagKey<Item> REVIVAL_ITEMS = TagKey.create(Registries.ITEM,
-            ResourceLocation.fromNamespaceAndPath("ragrevival", "revival_items"));
     private static final KeyMapping GIVE_UP = new KeyMapping("key.ragrevival.give_up",
             KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G,
             "key.categories.ragrevival");
@@ -207,7 +201,7 @@ public final class RevivalClient {
 
     private static InteractionHand revivalHand(Player player) {
         for (InteractionHand hand : InteractionHand.values()) {
-            if (player.getItemInHand(hand).is(REVIVAL_ITEMS)) return hand;
+            if (RevivalItems.canRevive(player.getItemInHand(hand))) return hand;
         }
         return null;
     }
@@ -253,7 +247,7 @@ public final class RevivalClient {
                 && (selfFeed || !isDowned(mc.player) && !mc.player.isPassenger() && inReach(mc.player, target));
         if (activeAction == InputAction.FEED) {
             allowed &= useHeld
-                    && mc.player.getItemInHand(activeHand).is(REVIVAL_ITEMS);
+                    && RevivalItems.canRevive(mc.player.getItemInHand(activeHand));
         } else {
             allowed &= useHeld && mc.player.getMainHandItem().isEmpty()
                     && mc.player.getOffhandItem().isEmpty();
@@ -372,10 +366,12 @@ public final class RevivalClient {
             label = Component.translatable("hud.ragrevival.drag_hint");
             accent = 0xFFE6C985;
         } else {
-            // Derive the suggested icons from the same tag, so datapack overrides stay accurate.
-            icons = BuiltInRegistries.ITEM.getTag(REVIVAL_ITEMS)
-                    .map(items -> items.stream().limit(2).map(item -> new ItemStack(item.value())).toList())
-                    .orElse(List.of());
+            // Cycle a single example every two seconds, keeping the card the same size
+            // as datapacks add items. Potion examples carry their real contents/colors.
+            List<ItemStack> examples = RevivalItems.examples();
+            if (!examples.isEmpty()) {
+                icons = List.of(examples.get(Math.floorMod(mc.level.getGameTime() / 40, examples.size())));
+            }
             label = Component.translatable("hud.ragrevival.equip_hint");
         }
         int keyTextWidth = mc.font.width(keys);

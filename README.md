@@ -18,7 +18,9 @@ Ragdoll Reactions 0.7.0 declares Sable: Ragdolls 0.6.9 or later, but the
 0.6.9 combination fails in Reactions due to a missing mob API. Use the
 verified versions in [1.3.7 verification](docs/test-results-1.3.7.md).
 
-The latest versioned distributable and source JAR are in [`artifacts/1.3.7`](artifacts/1.3.7). Install matching **1.3.7** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+The latest versioned distributable and source JAR are in [`artifacts/1.4.0`](artifacts/1.4.0). Install matching **1.4.0** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+
+Version **1.4.0** adds the operator command `/revive <PlayerName>`, more revival items, a compact cycling item hint, and ten seconds of mob protection after every revival. See [1.4.0 verification](docs/test-results-1.4.0.md).
 
 Version **1.3.7** removes the exact Sable: Ragdolls **0.7.2** requirement that blocked startup with **0.7.5**. RagRevival now accepts all Ragdolls versions in its loader metadata, while still requiring the mod on both sides. Upstream API compatibility and each dependency's own requirements still apply; an unrestricted version range cannot guarantee every past or future release works. See [1.3.7 verification](docs/test-results-1.3.7.md).
 
@@ -34,7 +36,7 @@ Optional compatibility test versions: **Carry On 2.2.6.13** on server and client
 
 - **Downed:** use the movement normally provided by Sable Ragdolls. Its stand-up/dismount controls cannot end the downed state.
 - **Find a teammate:** chat announces "<player> is knocked and needs to be revived!" once per knockdown. Other players see a gold outline around the actual downed body through walls in the same dimension, within Sable's native render range (64 blocks, with limbs loaded). The outline ends when the player is revived, dies, or disconnects; ordinary ragdolls have no rescue outline. Seeing the outline does not let you feed through walls.
-- **Feed a teammate:** aim at the visible body with a **golden apple or golden carrot** in either hand, then hold **Use Item/right-click** for 32 server ticks (1.6 seconds at 20 TPS). You may stand or crouch, including changing posture during feeding. Releasing Use, losing reach, changing the stack, changing dimension, disconnecting, or becoming downed cancels progress.
+- **Feed a teammate:** aim at the visible body with a **revival item** in either hand, then hold **Use Item/right-click** for 32 server ticks (1.6 seconds at 20 TPS). Items include golden apples, golden carrots, honey bottles, glistering melon slices, Healing potions, totems of undying, Regeneration potions, and enchanted golden apples. You may stand or crouch, including changing posture during feeding. Releasing Use, losing reach, changing the stack, changing dimension, disconnecting, or becoming downed cancels progress.
 - **Revive yourself:** while downed, hold Use Item/right-click with a revival item in either hand. Crouching is optional for self-revival. It uses the same feeding duration, pauses bleed-out, and consumes one item only after completion. Releasing Use, changing the stack, disconnecting, or a terminal death cancels it. You cannot revive another player while downed.
 - **Feeding presentation:** a teammate keeps the revival item held while food crumbs and eating sounds play at the downed body's head. Native eating use is reserved for self-revival. Sable hides first-person hands while seated and renders rigid limbs, so self-revival's visible feedback is mouth crumbs/sound. Feeding adds no hunger, saturation, or food buffs; successful revival restores configured health. Non-food items added through the tag still revive, with crumbs/sound and their held appearance.
 - Only successful feeding consumes one item, including in creative mode. A target has one rescue owner at a time, shared by self-revival, teammate feeding, and dragging.
@@ -43,8 +45,10 @@ Optional compatibility test versions: **Carry On 2.2.6.13** on server and client
 - **Zoom while dragging:** Unlocked Camera receives the mouse wheel normally. If no camera/interaction mod claims a vertical scroll, RagRevival consumes it to keep the hotbar from switching to a held item and interrupting the drag. Ordinary Sable grabs keep their own controls.
 - **Give up:** hold **G** for 100 continuous server ticks (five seconds at 20 TPS). Releasing G cancels. Rebind it under **Options → Controls → Key Binds → RagRevival**.
 - The HUD shows the downed countdown, feeding progress, and give-up progress to the relevant player.
-- Rescue hints combine compact item icons, rebind-aware keycaps, the action, and the remaining `m:ss` countdown in one panel. The downed player's card has two rows: self-revival and the timer above, then a G keycap with **Hold for 5s to give up** below. That hint and its color stay constant while G is held. One thin green track along the card's bottom edge fills for revival or giving up, with the player's G progress taking priority. The countdown freezes during feeding. Item suggestions come from the revival tag.
+- Rescue hints show one item icon, rebind-aware keycaps, the action, and the remaining `m:ss` countdown in one panel. A held valid item stays visible; otherwise the equip hint cycles through eligible examples every two seconds, including correctly colored Healing and Regeneration potions. The downed player's card has two rows: self-revival and the timer above, then a G keycap with **Hold for 5s to give up** below. That hint and its color stay constant while G is held. One thin green track along the card's bottom edge fills for revival or giving up, with the player's G progress taking priority. The countdown freezes during feeding. Item suggestions follow the revival tag.
 - Successful revival restores **half of maximum health** by default: five hearts for a normal ten-heart player, scaling with maximum-health modifiers.
+- **Revival grace:** after any successful revival, mobs ignore the revived player for **200 server ticks (10 seconds at 20 TPS)**. Existing mob targets and attack memories are cleared, and mob damage, including arrows already in flight, is blocked during the grace period. PvP and environmental damage retain their normal rules. Grace ends on logout, death, or a new knockdown; it is not persisted across server restarts.
+- **Operator revival:** `/revive <PlayerName>` instantly revives one online downed player without consuming an item. Operators with permission level 2 or higher and the server console can use it. It cancels any active feeding or dragging, restores configured health, and grants the same grace period. Players who are not downed are left unchanged.
 
 Feeding reserves that right-click until release, so holding it after revival does not consume another item. A short server input lease cancels abandoned interactions; loss of window focus or opening a menu also releases the client interaction. Server stalls do not let packet spam accelerate either hold.
 
@@ -60,13 +64,15 @@ Edit `config/ragrevival-server.toml` on the server (or `<world>/serverconfig/rag
 
 Version 1.1.0 replaces the old `restoredHealth` fixed health-point setting. NeoForge corrects existing configs to add `restoredHealthFraction = 0.5`; the old value is no longer used. To change the percentage, edit the new setting while the server is stopped.
 
-Replace the revival item with a datapack overriding `data/ragrevival/tags/item/revival_items.json`:
+Customize eligible items with a datapack overriding `data/ragrevival/tags/item/revival_items.json`. For example, to restrict revival to the original two foods:
 
 ```json
 {"replace":true,"values":["minecraft:golden_apple","minecraft:golden_carrot"]}
 ```
 
-Both foods use the same item tag and revival rules. Enchanted golden apples are not accepted unless added. The revival action restores configured health; it does not apply the item's normal food effects.
+The default tag includes golden apples, golden carrots, honey bottles, glistering melon slices, totems of undying, enchanted golden apples, and `minecraft:potion`. Drinkable potions additionally require Healing I/II or Regeneration I/II (including extended Regeneration). Water, other potions, custom-effect mixtures, splash potions, and lingering potions are rejected. Removing `minecraft:potion` from a replacement tag disables potion revival. Other tagged items remain supported.
+
+Every successful item revival consumes one item and restores configured health. It does not apply the item's ordinary food/potion effects or return an empty bottle. A held totem still has vanilla priority on the initial lethal hit; it can be used for revival after the player is already downed.
 
 ## Lifecycle and edge cases
 
@@ -100,7 +106,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.7.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.4.0.jar
 ./scripts/start-test-runtime.ps1
 ```
 

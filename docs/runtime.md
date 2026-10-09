@@ -14,10 +14,12 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.3.6** on all three instances together. It retains network
+Install RagRevival **1.4.0** on all three instances together. It retains network
 protocol 3; use matching client/server versions for the current presentation.
-The new standing drag/feed controls are ready for manual testing. See
-[1.3.6 build checks and manual checklist](test-results-1.3.6.md), and
+This release adds operator revival, more revival items, a single cycling item
+hint, and ten seconds of mob protection after revival. See
+[1.4.0 verification](test-results-1.4.0.md),
+[the standing-control manual checklist](test-results-1.3.6.md), and
 [historical 1.3.5 verification](test-results-1.3.5.md) for the loader regression
 tests, earlier multiplayer matrix, and limits of camera checks. To prepare other NeoForge
 and Sable combinations without changing this base setup, follow
@@ -25,7 +27,7 @@ and Sable combinations without changing this base setup, follow
 
 The setup script pins NeoForge to **21.1.249** on Minecraft **1.21.1** for
 reproducibility, with Sable **2.0.3** as the build/download baseline. RagRevival
-1.3.6 omits NeoForge and Sable range fields to use FML's unbounded default.
+1.4.0 omits NeoForge, Sable, and Sable: Ragdolls range fields to use FML's unbounded default.
 Other mods retain their own requirements: reviewed Sable 1.x versions require
 NeoForge 21.1.219+, Sable 2.x requires 21.1.228+, and optional Unlocked Camera
 requires 21.1.235+. Runtime coverage is limited to the recorded combinations.
@@ -58,7 +60,11 @@ pwsh -File scripts/test-server-command.ps1 'give ReviveOne minecraft:golden_appl
 pwsh -File scripts/test-server-command.ps1 'give ReviveTwo minecraft:golden_apple 16'
 pwsh -File scripts/test-server-command.ps1 'give ReviveOne minecraft:golden_carrot 16'
 pwsh -File scripts/test-server-command.ps1 'give ReviveTwo minecraft:golden_carrot 16'
+pwsh -File scripts/test-server-command.ps1 'give ReviveOne minecraft:honey_bottle 16'
+pwsh -File scripts/test-server-command.ps1 'give ReviveOne minecraft:potion[minecraft:potion_contents={potion:"minecraft:healing"}]'
 pwsh -File scripts/test-server-command.ps1 'tp ReviveTwo ReviveOne'
+# Production operator command; the named player must be online and downed:
+pwsh -File scripts/test-server-command.ps1 'revive ReviveOne'
 pwsh -File scripts/test-server-command.ps1 'save-all flush'
 pwsh -File scripts/test-server-command.ps1 'stop'
 ```
@@ -84,6 +90,17 @@ green bottom track shows revival or G progress, with G taking priority. Check
 timer pause, one-item consumption, and half maximum health on success. Sable's
 physical limb poses and hidden seated first-person hands are unchanged.
 
+For 1.4.0, repeat self-revival and teammate feeding with honey bottles,
+glistering melon slices, totems of undying, enchanted golden apples, and
+drinkable Healing/Regeneration potions. Healing I/II and normal/long/strong
+Regeneration qualify; water, harmful potions, splash potions, and lingering
+potions do not. With no valid held item, confirm the equip hint cycles one
+eligible icon every two seconds; holding a valid item keeps that icon fixed.
+Check `/revive <PlayerName>` as a level-2 operator and from the server console.
+After item or command revival, nearby mobs should release their target and
+ignore the player for 200 server ticks (ten seconds at 20 TPS), with mob arrows
+already in flight also blocked. Targeting resumes after grace expires.
+
 ## Optional integration harness
 
 The test harness is a separate source set and JAR; it is never packaged in the
@@ -92,13 +109,13 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.3.6-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.4.0-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest codec'
-# Test-only direct revival, useful for checking outline cleanup after a screenshot:
-pwsh -File scripts/test-server-command.ps1 'ragrevivaltest revive ReviveOne'
+# Production revival, useful for checking outline cleanup after a screenshot:
+pwsh -File scripts/test-server-command.ps1 'revive ReviveOne'
 ```
 
 The scheduled tests exercise real dedicated-server APIs and native Sable physics
@@ -108,11 +125,30 @@ standing teammate feeding and drag acquisition, posture changes during those
 interactions, self-revival, feeding cancellation/completion, native-use animation
 state, Use release and lost-input cleanup, dismount locking, movement input,
 give-up timing, distinct ordinary ragdolls, lifecycle callbacks, and damage edge
-cases. The codec command can run separately. The updated standing-control harness
-has not been run for 1.3.6; leave both clients idle if choosing to run it.
+cases. The codec command can run separately. This is the historical two-client
+suite; it has not been rerun for 1.4.0, and its newer standing-control assertions
+were not exercised in the earlier recorded matrix. Leave both clients idle if
+choosing to run it.
 See [1.3.5 results](test-results-1.3.5.md)
 for the earlier compatibility matrix and actual restart check, and
 [verification history](test-results.md) for earlier versions.
+
+The focused 1.4.0 probe uses temporary native server players and packet sinks,
+so it requires no client windows. Disconnect all clients before invoking it;
+it refuses to start while any real player is connected. With the matching
+test harness installed in the isolated server:
+
+```powershell
+pwsh -File scripts/start-test-runtime.ps1 -Target Server
+pwsh -File scripts/test-server-command.ps1 'ragrevivaltest revive-features'
+```
+
+This probe checks revival-item eligibility, potion contents and HUD examples,
+item feeding, command permissions and state cleanup, mob target and damage
+protection, and grace expiration. Its server log prefix is `RAGREVIVAL_FEATURE`.
+It does not validate physical mouse/key input or the rendered HUD. Check
+[1.4.0 verification](test-results-1.4.0.md) for the execution status and results;
+the availability of the command alone does not imply a completed runtime run.
 
 For the optional client geometry probe, also install the harness JAR into the
 client mod directories before launching. Put the text `ReviveOne` into

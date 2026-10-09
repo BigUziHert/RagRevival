@@ -96,8 +96,14 @@ public final class RagRevivalTestMod {
                     context.getSource().sendSuccess(() -> Component.literal("Codec checks: " + result[0] + " passed, " + result[1] + " failed."), false);
                     return result[1] == 0 ? 1 : 0;
                 }))
+                .then(Commands.literal("revive-features").executes(context -> {
+                    if (current != null) { context.getSource().sendFailure(Component.literal("An integration run is already active.")); return 0; }
+                    String result = RevivalFeatureProbe.start(context.getSource().getServer());
+                    context.getSource().sendSuccess(() -> Component.literal(result), false);
+                    return RevivalFeatureProbe.active() ? 1 : 0;
+                }))
                 .then(Commands.literal("run").executes(context -> {
-                    if (current != null) { context.getSource().sendFailure(Component.literal("A test run is already active.")); return 0; }
+                    if (current != null || RevivalFeatureProbe.active()) { context.getSource().sendFailure(Component.literal("A test run is already active.")); return 0; }
                     MinecraftServer server = context.getSource().getServer();
                     ServerPlayer one = server.getPlayerList().getPlayerByName("ReviveOne");
                     ServerPlayer two = server.getPlayerList().getPlayerByName("ReviveTwo");
@@ -112,6 +118,7 @@ public final class RagRevivalTestMod {
     }
 
     private static void tick(ServerTickEvent.Post event) {
+        RevivalFeatureProbe.tick(event.getServer());
         if (current == null || current.server != event.getServer()) return;
         try { current.tick(); }
         catch (Throwable failure) {

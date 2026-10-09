@@ -18,6 +18,7 @@ public final class RagRevival {
         container.registerConfig(ModConfig.Type.SERVER, RevivalConfig.SPEC);
         bus.addListener(RevivalNetwork::register);
         NeoForge.EVENT_BUS.register(DownedManager.class);
+        NeoForge.EVENT_BUS.addListener(RevivalCommands::register);
         CarryOnCompat.register();
         if (FMLEnvironment.dist == Dist.CLIENT) RevivalClient.register(bus);
     }

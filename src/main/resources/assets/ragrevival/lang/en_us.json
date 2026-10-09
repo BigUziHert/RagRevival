@@ -1,5 +1,8 @@
 {
   "chat.ragrevival.knocked": "%s is knocked and needs to be revived!",
+  "commands.ragrevival.revive.success": "Revived %s.",
+  "commands.ragrevival.revive.not_downed": "%s is not downed.",
+  "commands.ragrevival.revive.not_alive": "%s is dead and must respawn before they can be revived.",
   "key.categories.ragrevival": "Rag Revival",
   "key.ragrevival.give_up": "Give up while downed (hold)",
   "hud.ragrevival.give_up_hint": "Hold for 5s to give up",
@@ -7,7 +10,7 @@
   "hud.ragrevival.revive_hint": "Hold to revive",
   "hud.ragrevival.self_revive_hint": "Hold to self-revive",
   "hud.ragrevival.drag_hint": "Hold to drag",
-  "hud.ragrevival.equip_hint": "Equip to revive",
+  "hud.ragrevival.equip_hint": "Equip a revival item",
   "hud.ragrevival.mouse_left": "LMB",
   "hud.ragrevival.mouse_right": "RMB",
   "hud.ragrevival.mouse_middle": "MMB"
