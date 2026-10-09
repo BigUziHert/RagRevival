@@ -11,14 +11,20 @@ Install RagRevival and all three dependencies in **both clients and the dedicate
 | Mod | Required version |
 | --- | --- |
 | [Sable](https://modrinth.com/mod/sable) | No version restriction in RagRevival; 2.0.3 is the build baseline |
-| [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | 0.7.2 |
+| [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | No version restriction in RagRevival; 0.7.2 is the build baseline |
 | [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.0 |
 
-The latest versioned distributable and source JAR are in [`artifacts/1.3.6`](artifacts/1.3.6). Install matching **1.3.6** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+Ragdoll Reactions 0.7.0 declares Sable: Ragdolls 0.6.9 or later, but the
+0.6.9 combination fails in Reactions due to a missing mob API. Use the
+verified versions in [1.3.7 verification](docs/test-results-1.3.7.md).
+
+The latest versioned distributable and source JAR are in [`artifacts/1.3.7`](artifacts/1.3.7). Install matching **1.3.7** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+
+Version **1.3.7** removes the exact Sable: Ragdolls **0.7.2** requirement that blocked startup with **0.7.5**. RagRevival now accepts all Ragdolls versions in its loader metadata, while still requiring the mod on both sides. Upstream API compatibility and each dependency's own requirements still apply; an unrestricted version range cannot guarantee every past or future release works. See [1.3.7 verification](docs/test-results-1.3.7.md).
 
 Version **1.3.6** allows standing or crouching when dragging and feeding teammates. Hold Use to maintain either action; releasing Use cancels it. See [1.3.6 build checks and manual checklist](docs/test-results-1.3.6.md). The updated posture assertions in the integration harness are available for testing; the earlier multiplayer matrix was run on **1.3.5**, before this control change.
 
-RagRevival omits the NeoForge and Sable range fields so FML uses its unbounded default; Minecraft **1.21.1** is required. Version **1.3.5** added durable loader regression tests and a [compatibility matrix with real multiplayer evidence](docs/test-results-1.3.5.md). All 20 referenced Sable API members matched across ten published versions, without an adapter change. This does not guarantee every NeoForge patch, future dependency, or other modpack. The [1.3.4 range correction](docs/version-compatibility-1.3.4.md) remains in place; 1.3.3's explicitly empty ranges were incorrect.
+RagRevival omits the NeoForge, Sable, and Sable: Ragdolls range fields so FML uses its unbounded default; Minecraft **1.21.1** is required. Version **1.3.5** added durable loader regression tests and a [compatibility matrix with real multiplayer evidence](docs/test-results-1.3.5.md). All 20 referenced Sable API members matched across ten published versions, without an adapter change. This does not guarantee every NeoForge patch, future dependency, or other modpack. The [1.3.4 range correction](docs/version-compatibility-1.3.4.md) remains in place; 1.3.3's explicitly empty ranges were incorrect.
 
 Dependencies retain their own requirements: the reviewed Sable 1.x releases need NeoForge **21.1.219+**, and Sable 2.x needs **21.1.228+**. Builds and the base local setup remain pinned to NeoForge **21.1.249** and Sable **2.0.3** for reproducibility. See [compatibility runtime instructions](docs/compatibility-runtime.md) to reproduce the other profiles.
 
@@ -79,7 +85,7 @@ Both foods use the same item tag and revival rules. Enchanted golden apples are 
 
 Selection clips the existing rendered camera ray against the actual rotated ragdoll limbs. It does not modify Unlocked Camera's position, freelook, shoulder selection, or crosshair. The server independently checks line of sight and interaction reach from the rescuer's actual world-space eyes to the real physics body. A camera offset cannot extend reach or permit feeding through walls. Sable plotyard coordinates are projected into world space; dragging uses Sable's native physics constraint and player seat, with no independent teleport loop.
 
-See [1.3.6 verification](docs/test-results-1.3.6.md), [historical 1.3.5 verification](docs/test-results-1.3.5.md), and [dependency API inspection](docs/dependency-api.md) for the exact scope. Static API checks, loader parsing, server gameplay, and synthetic camera checks provide different evidence; the new standing controls, actual mouse gestures, and untested modpacks remain manual verification.
+See [1.3.7 verification](docs/test-results-1.3.7.md), [1.3.6 control changes](docs/test-results-1.3.6.md), [historical 1.3.5 verification](docs/test-results-1.3.5.md), and [dependency API inspection](docs/dependency-api.md) for the exact scope. Static API checks, loader parsing, server gameplay, and synthetic camera checks provide different evidence; the new standing controls, actual mouse gestures, and untested modpacks remain manual verification.
 
 ## Build and local test setup
 
@@ -94,7 +100,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.6.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.3.7.jar
 ./scripts/start-test-runtime.ps1
 ```
 

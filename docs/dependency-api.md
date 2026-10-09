@@ -1,11 +1,19 @@
 # Inspected dependency APIs
 
 These are the original build baselines, retained for reproducibility in
-**1.3.6**. RagRevival accepts broad NeoForge/Sable versions within Minecraft
-1.21.1 through FML's omitted-range default. See [1.3.6 verification](test-results-1.3.6.md),
+**1.3.7**. RagRevival accepts all NeoForge, Sable, and Sable: Ragdolls versions
+in its Minecraft 1.21.1 loader metadata through FML's omitted-range default.
+See [1.3.7 verification](test-results-1.3.7.md), [1.3.6 verification](test-results-1.3.6.md),
 [historical 1.3.5 multiplayer evidence](test-results-1.3.5.md),
 [the 1.3.4 loader correction](version-compatibility-1.3.4.md), and
 [reproducible compatibility profiles](compatibility-runtime.md).
+
+The [1.3.7 Ragdolls binary matrix](ragdolls-api-matrix-1.3.7.json) checks all
+16 published releases. Versions 0.6.9, 0.7.0, 0.7.2, 0.7.4, and 0.7.5 match
+RagRevival's required API surface after making the extra pending-player index
+optional. Dedicated startup and live adapter checks pass on 0.7.0, 0.7.2,
+and 0.7.5. The 0.6.9 combination fails in Reactions' own mod constructor;
+see [runtime evidence](ragdolls-startup-1.3.7.json) for that limitation.
 
 The 1.3.5 production JAR's 20 referenced Sable public fields/methods were resolved
 with their exact descriptors through class hierarchies and embedded Companion
@@ -25,7 +33,8 @@ runtime/mixin behavior. The dedicated-server matrix covers five combinations.
 
 The reviewed Sable 1.x releases require NeoForge 21.1.219+; 2.x requires
 21.1.228+. Optional Unlocked Camera requires 21.1.235+ and is excluded from
-earlier profiles. Ragdolls 0.7.2 and Reactions 0.7.0 remain mandatory. Future
+earlier profiles. Ragdolls remains mandatory with no RagRevival version restriction;
+0.7.2 remains the build baseline. Reactions 0.7.0 remains mandatory. Future
 versions and arbitrary modpacks are outside the verified matrix.
 
 The implementation targets published Minecraft 1.21.1 NeoForge artifacts, downloaded from their original distribution CDNs. Exact URLs and SHA-256 digests are in [dependencies.lock.json](dependencies.lock.json). The three ragdoll dependencies below are required on server and clients; their binaries and research checkouts are not redistributed in this repository. The lock also contains Carry On 2.2.6.13 as an optional runtime integration required only for the compile classpath. `scripts/fetch-dependencies.ps1` fetches and verifies all four so a clean clone can compile; Carry On remains optional when installing RagRevival.
@@ -43,6 +52,13 @@ Sable contains Sable Companion 1.6.0, Veil 4.1.4, and its Rapier native library 
 ## Ragdoll lifecycle and movement
 
 `RagdollAPI.launch(player, velocity, options, pose)` creates a queued physics body. Supplying an explicit `RagdollPoseSnapshot` avoids the asynchronous client-pose request path. Launch/seat completion still happens on Sable's next physics tick, so the adapter reports readiness only when the seat is actually mounted. Two small accessor mixins provide the cancellation absent from upstream's public API: they remove only this player's pending client-pose requests during downing and release. This prevents a Reactions request created before fatal damage from launching another body after a very short configured feeding interaction.
+
+Since 1.3.7, the additional `PENDING_PLAYERS` index is accessed through a cached,
+optional reflective lookup instead of a required accessor. It is absent in
+Ragdolls 0.6.9 and 0.7.0, whose pending-request map is sufficient for cancellation.
+Newer versions still clear both structures. Only a missing index is optional;
+unexpected types and access failures are reported. Reactions 0.7.0's own
+Ragdolls 0.6.9 minimum still applies.
 
 `RagdollLaunchOptions` supplies `autoSeat(true)`, `lockDismount(true)`, and a nonempty list containing `DespawnCondition.never()`. Empty custom conditions would restore Sable's configured expiry behavior. Existing Reactions ragdolls are converted in place using `RagdollSessionManager.setCustomDespawnConditions` and `setDismountLocked`, preserving their current pose, velocity, native movement inputs, and joints.
 

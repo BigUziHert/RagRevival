@@ -1,0 +1,1803 @@
+{
+  "reactionsRagdollsVersionRange": "[0.6.9,)",
+  "generatedUtc": "2026-09-18T19:10:21.598799+00:00",
+  "sourceJar": "build/libs/ragrevival-1.21.1-1.3.7.jar",
+  "sourceJarSha256": "a616cd8e78a979ba4d01e162eb058ecb1d75a4795bd569e442a629912e89609e",
+  "scope": "Static binary check of exact referenced Sable Ragdolls-owned public member descriptors, unchanged staticness, and required private mixin target descriptors/staticness. PENDING_PLAYERS is optional with the 1.3.7 compatibility helper. Referenced API classes/interfaces checked for presence. Inherited Minecraft methods excluded. Render invocation presence checked separately with javap for 0.7.5. Does not execute Minecraft or validate gameplay.",
+  "requirements": [
+    {
+      "kind": "field",
+      "owner": "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart",
+      "name": "HEAD",
+      "descriptor": "Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+      "name": "notifyGrabbed",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+      "name": "notifyReleased",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/DespawnCondition",
+      "name": "never",
+      "descriptor": "()Ldev/leo/sableplayerragdoll/api/DespawnCondition;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollAPI",
+      "name": "activeSession",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollAPI",
+      "name": "isRagdolled",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;)Z"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollAPI",
+      "name": "launch",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollAPI",
+      "name": "setGrabDisabled",
+      "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions",
+      "name": "builder",
+      "descriptor": "()Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+      "name": "autoSeat",
+      "descriptor": "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+      "name": "build",
+      "descriptor": "()Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+      "name": "despawnConditions",
+      "descriptor": "(Ljava/util/List;)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+      "name": "lockDismount",
+      "descriptor": "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+      "name": "defaults",
+      "descriptor": "()Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+      "name": "<init>",
+      "descriptor": "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollSession",
+      "name": "release",
+      "descriptor": "()V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "name": "bodyPart",
+      "descriptor": "()Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "name": "skinProfile",
+      "descriptor": "()Lcom/mojang/authlib/GameProfile;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "name": "startGrab",
+      "descriptor": "(Ljava/util/UUID;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "name": "stopGrab",
+      "descriptor": "(Ljava/util/UUID;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+      "name": "clearActive",
+      "descriptor": "()V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/physics/RagdollAssemblyHelper",
+      "name": "linkedParts",
+      "descriptor": "(Ljava/util/UUID;)Ljava/util/List;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/physics/RagdollExpireHelper",
+      "name": "expireImmediate",
+      "descriptor": "(Ldev/ryanhcode/sable/sublevel/system/SubLevelPhysicsSystem;Lnet/minecraft/server/level/ServerLevel;Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Ljava/lang/String;Z)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/physics/RagdollSeatingHelper",
+      "name": "trySeatEntity",
+      "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;Ldev/ryanhcode/sable/sublevel/ServerSubLevel;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+      "name": "activeRagdollForPlayer",
+      "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;)Ldev/ryanhcode/sable/sublevel/ServerSubLevel;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+      "name": "isExpiring",
+      "descriptor": "(Ldev/ryanhcode/sable/sublevel/ServerSubLevel;)Z"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+      "name": "setCustomDespawnConditions",
+      "descriptor": "(Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Ljava/util/List;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+      "name": "setDismountLocked",
+      "descriptor": "(Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Z)V"
+    }
+  ],
+  "requiredClasses": [
+    "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+    "dev/leo/sableplayerragdoll/api/DespawnCondition",
+    "dev/leo/sableplayerragdoll/api/RagdollAPI",
+    "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+    "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions",
+    "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+    "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+    "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+    "dev/leo/sableplayerragdoll/api/RagdollSession",
+    "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+    "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart",
+    "dev/leo/sableplayerragdoll/entity/RagdollSeatEntity",
+    "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+    "dev/leo/sableplayerragdoll/physics/RagdollAssemblyHelper",
+    "dev/leo/sableplayerragdoll/physics/RagdollExpireHelper",
+    "dev/leo/sableplayerragdoll/physics/RagdollSeatingHelper",
+    "dev/leo/sableplayerragdoll/physics/RagdollSessionManager"
+  ],
+  "mixinRequirements": [
+    {
+      "kind": "field",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+      "name": "PENDING",
+      "descriptor": "Ljava/util/Map;"
+    },
+    {
+      "kind": "field",
+      "owner": "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+      "name": "playerId",
+      "descriptor": "Ljava/util/UUID;"
+    },
+    {
+      "kind": "field",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+      "name": "activePos",
+      "descriptor": "Lnet/minecraft/core/BlockPos;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+      "name": "stopGrab",
+      "descriptor": "()V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+      "name": "onClientTick",
+      "descriptor": "(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+      "name": "onScroll",
+      "descriptor": "(Lnet/neoforged/neoforge/client/event/InputEvent$MouseScrollingEvent;)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+      "name": "targetedPart",
+      "descriptor": "(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/core/BlockPos;"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+      "name": "isGrabbing",
+      "descriptor": "()Z"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollPartBlockEntityRenderer",
+      "name": "render",
+      "descriptor": "(Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V"
+    },
+    {
+      "kind": "method",
+      "owner": "dev/leo/sableplayerragdoll/neoforge/client/RagdollPartBlockEntityRenderer",
+      "name": "renderLayers",
+      "descriptor": "(Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity;Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V"
+    }
+  ],
+  "excludedInheritedReferences": [
+    [
+      "method",
+      "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "getLevel",
+      "()Lnet/minecraft/world/level/Level;"
+    ],
+    [
+      "method",
+      "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "getBlockPos",
+      "()Lnet/minecraft/core/BlockPos;"
+    ],
+    [
+      "method",
+      "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "isRemoved",
+      "()Z"
+    ],
+    [
+      "method",
+      "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+      "getBlockState",
+      "()Lnet/minecraft/world/level/block/state/BlockState;"
+    ]
+  ],
+  "results": [
+    {
+      "version": "0.1.0",
+      "modrinthVersionId": "6TqIcPIY",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/6TqIcPIY/sable_player_ragdoll-1.21.1-0.1.0.jar",
+      "sha256": "a50a350da69a3f70159212d2e0ccc5cccc7a7e760eddeae1b9a5231f129a87b6",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 12,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+          "setDismountLocked",
+          "(Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "stopGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+          "defaults",
+          "()Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/physics/RagdollExpireHelper",
+          "expireImmediate",
+          "(Ldev/ryanhcode/sable/sublevel/system/SubLevelPhysicsSystem;Lnet/minecraft/server/level/ServerLevel;Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Ljava/lang/String;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "startGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions",
+          "builder",
+          "()Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "autoSeat",
+          "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "lockDismount",
+          "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "despawnConditions",
+          "(Ljava/util/List;)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "build",
+          "()Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 1,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "activePos",
+          "Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "stopGrab",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onClientTick",
+          "(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onScroll",
+          "(Lnet/neoforged/neoforge/client/event/InputEvent$MouseScrollingEvent;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "targetedPart",
+          "(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollPartBlockEntityRenderer",
+          "renderLayers",
+          "(Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity;Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions",
+        "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+        "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+        "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.2.0",
+      "modrinthVersionId": "3jpll9cp",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/3jpll9cp/sable_player_ragdoll-1.21.1-0.2.0.jar",
+      "sha256": "ce8b44ff25531b0fd5348e62b5c4ea687810c87642673d12b79236d92bab35fe",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 13,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+          "setDismountLocked",
+          "(Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "stopGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+          "defaults",
+          "()Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "startGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions",
+          "builder",
+          "()Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "autoSeat",
+          "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "lockDismount",
+          "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "despawnConditions",
+          "(Ljava/util/List;)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "build",
+          "()Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 1,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "activePos",
+          "Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "stopGrab",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onClientTick",
+          "(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onScroll",
+          "(Lnet/neoforged/neoforge/client/event/InputEvent$MouseScrollingEvent;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "targetedPart",
+          "(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollPartBlockEntityRenderer",
+          "renderLayers",
+          "(Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity;Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions",
+        "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+        "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+        "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.3.0",
+      "modrinthVersionId": "1D0SH4zC",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/1D0SH4zC/sable_player_ragdoll-1.21.1-0.3.0.jar",
+      "sha256": "e2927c4fdacef93c9d1935db72a97232dca2d0572d1967d4d3e56107f003f1f9",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 17,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+          "setDismountLocked",
+          "(Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "stopGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+          "defaults",
+          "()Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "startGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "lockDismount",
+          "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 1,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "activePos",
+          "Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "stopGrab",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onClientTick",
+          "(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onScroll",
+          "(Lnet/neoforged/neoforge/client/event/InputEvent$MouseScrollingEvent;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "targetedPart",
+          "(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollPartBlockEntityRenderer",
+          "renderLayers",
+          "(Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity;Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollLimbOptions",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+        "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.4.0",
+      "modrinthVersionId": "bW6EMjQK",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/bW6EMjQK/sable_player_ragdoll-1.21.1-0.4.0.jar",
+      "sha256": "1f0bb31c009ed20e5ac5f2308b8433b1bffc7102aa6a75a8bd2aed40948ed292",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 18,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/physics/RagdollSessionManager",
+          "setDismountLocked",
+          "(Ldev/ryanhcode/sable/sublevel/ServerSubLevel;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "stopGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity",
+          "startGrab",
+          "(Ljava/util/UUID;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder",
+          "lockDismount",
+          "(Z)Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions$Builder;"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 1,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "activePos",
+          "Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "stopGrab",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onClientTick",
+          "(Lnet/neoforged/neoforge/client/event/ClientTickEvent$Post;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "onScroll",
+          "(Lnet/neoforged/neoforge/client/event/InputEvent$MouseScrollingEvent;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "targetedPart",
+          "(Lnet/minecraft/client/Minecraft;)Lnet/minecraft/core/BlockPos;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollPartBlockEntityRenderer",
+          "renderLayers",
+          "(Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity;Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+        "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.4.3",
+      "modrinthVersionId": "4Na2k0d7",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/4Na2k0d7/sable_player_ragdoll-1.21.1-0.4.3.jar",
+      "sha256": "d684067677b66325282cd6dd1392490031d6925eda112d3ad916cce7758d7ee3",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 22,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 6,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollPartBlockEntityRenderer",
+          "renderLayers",
+          "(Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity;Ldev/leo/sableplayerragdoll/block/entity/RagdollPartBlockEntity$BodyPart;Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.5.0",
+      "modrinthVersionId": "IpWp6KpV",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/IpWp6KpV/sable_player_ragdoll-1.21.1-0.5.0.jar",
+      "sha256": "a48af20de3ac823300610c08c42b1ac3a96b21ccad846501c78398a97e5a6900",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 22,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 7,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.5.3",
+      "modrinthVersionId": "8yRAD5CD",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/8yRAD5CD/sable_player_ragdoll-1.21.1-0.5.3.jar",
+      "sha256": "0f89e91901b74fc9998c7f2776097672d49a6a7f54ccc2aeee4d899eda8ab780",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 22,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 7,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.5.5",
+      "modrinthVersionId": "909l8KE6",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/909l8KE6/sable_player_ragdoll-1.21.1-0.5.5.jar",
+      "sha256": "807b55ea8fa7da5b82df78f053d48afa7b4e2fe7a3a0598484983bf50eac7c9a",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 22,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 7,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.6.0",
+      "modrinthVersionId": "rRIy2l94",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/rRIy2l94/sable_player_ragdoll-1.21.1-0.6.0.jar",
+      "sha256": "783581fe00c1a7af96394e83ac0414f1e528ca82aa8e1004a6fc28f5af47be32",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 22,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 7,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.6.5",
+      "modrinthVersionId": "MR41OKhc",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/MR41OKhc/sable_player_ragdoll-1.21.1-0.6.5.jar",
+      "sha256": "f3f7776ceeb474b6ffd857204407296d01198c2071f27f8bcd979d1535ec5e6f",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 22,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "clearActive",
+          "()V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "setGrabDisabled",
+          "(Lnet/minecraft/server/level/ServerLevel;Ljava/util/UUID;Z)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyGrabbed",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+          "notifyReleased",
+          "(Lnet/minecraft/server/level/ServerPlayer;)V"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 7,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/neoforge/client/RagdollGrabClient",
+          "isGrabbing",
+          "()Z"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/RagdollGrabCallbacks",
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.6.7",
+      "modrinthVersionId": "4rKB9d2S",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/4rKB9d2S/sable_player_ragdoll-1.21.1-0.6.7.jar",
+      "sha256": "e06d64e7d11bc5ea5851442c24efd95e4f23f4729100934bbc91b85b89fbb3ef",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 26,
+      "missingMembers": [
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot",
+          "<init>",
+          "(Ldev/leo/sableplayerragdoll/api/RagdollLimbOptions;F)V"
+        ],
+        [
+          "method",
+          "dev/leo/sableplayerragdoll/api/RagdollAPI",
+          "launch",
+          "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/phys/Vec3;Ldev/leo/sableplayerragdoll/api/RagdollLaunchOptions;Ldev/leo/sableplayerragdoll/api/RagdollPoseSnapshot;)Ldev/leo/sableplayerragdoll/api/RagdollSession;"
+        ]
+      ],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 8,
+      "missingMixinTargets": [
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+          "PENDING",
+          "Ljava/util/Map;"
+        ],
+        [
+          "field",
+          "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests$PendingLaunch",
+          "playerId",
+          "Ljava/util/UUID;"
+        ]
+      ],
+      "missingClasses": [
+        "dev/leo/sableplayerragdoll/api/RagdollAsyncPoseRequests",
+        "dev/leo/sableplayerragdoll/api/RagdollPoseSnapshot"
+      ],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "fail"
+    },
+    {
+      "version": "0.6.9",
+      "modrinthVersionId": "ESsmhtcl",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/ESsmhtcl/sable_player_ragdoll-1.21.1-0.6.9.jar",
+      "sha256": "8d011700e30409de6162c9acc369b03d77999d2e3e3cc1a3c3f145f31fa484fe",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 28,
+      "missingMembers": [],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 10,
+      "missingMixinTargets": [],
+      "missingClasses": [],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "version": "0.7.0",
+      "modrinthVersionId": "oC0rXp8f",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/oC0rXp8f/sable_player_ragdoll-1.21.1-0.7.0.jar",
+      "sha256": "f6455694afa0f0ce2bc72ff2c64b8d3218006a9127e1343bc43c82a312582653",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 28,
+      "missingMembers": [],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 10,
+      "missingMixinTargets": [],
+      "missingClasses": [],
+      "optionalPendingPlayersIndex": "absent_supported",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "version": "0.7.2",
+      "modrinthVersionId": "imE1vUMn",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/imE1vUMn/sable_player_ragdoll-1.21.1-0.7.2.jar",
+      "sha256": "62e67cb468bdd4d2240e059c24aac19a019ea5373149b788f24f88d22a017013",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 28,
+      "missingMembers": [],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 10,
+      "missingMixinTargets": [],
+      "missingClasses": [],
+      "optionalPendingPlayersIndex": "present_static_set",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        },
+        {
+          "modId": "jade",
+          "type": "optional",
+          "versionRange": "[15,)"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "version": "0.7.4",
+      "modrinthVersionId": "qixfTt58",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/qixfTt58/sable_player_ragdoll-1.21.1-0.7.4.jar",
+      "sha256": "6dd2f5cd649afc15be7986cfdea382b02bd2332d77af738db24c6e2a980b65cd",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 28,
+      "missingMembers": [],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 10,
+      "missingMixinTargets": [],
+      "missingClasses": [],
+      "optionalPendingPlayersIndex": "present_static_set",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        },
+        {
+          "modId": "jade",
+          "type": "optional",
+          "versionRange": "[15,)"
+        }
+      ],
+      "result": "pass"
+    },
+    {
+      "version": "0.7.5",
+      "modrinthVersionId": "CyKh8XSr",
+      "url": "https://cdn.modrinth.com/data/I3mWDgfy/versions/CyKh8XSr/sable_player_ragdoll-1.21.1-0.7.5.jar",
+      "sha256": "69611deff1c2b18ae0ae7dbaea24cc14f4b69f0368297653933ae9b33adf2d2b",
+      "publishedSha512Verified": true,
+      "requiredMemberCount": 28,
+      "matchedMemberCount": 28,
+      "missingMembers": [],
+      "mixinTargetCount": 10,
+      "matchedMixinTargetCount": 10,
+      "missingMixinTargets": [],
+      "missingClasses": [],
+      "optionalPendingPlayersIndex": "present_static_set",
+      "optionalPendingPlayersIndexCompatible": true,
+      "dependencies": [
+        {
+          "modId": "neoforge",
+          "type": "required",
+          "versionRange": "[21.1.219,)"
+        },
+        {
+          "modId": "minecraft",
+          "type": "required",
+          "versionRange": "[1.21.1]"
+        },
+        {
+          "modId": "sable",
+          "type": "required",
+          "versionRange": "[1.1.0,)"
+        },
+        {
+          "modId": "jade",
+          "type": "optional",
+          "versionRange": "[15,)"
+        }
+      ],
+      "result": "pass"
+    }
+  ]
+}

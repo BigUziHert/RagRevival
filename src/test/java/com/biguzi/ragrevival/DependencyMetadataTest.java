@@ -24,7 +24,8 @@ class DependencyMetadataTest {
         var dependencies = productionDependencies();
         var versions = Map.of(
                 "neoforge", List.of("21.1.248", "21.1.249"),
-                "sable", List.of("2.0.3", "2.0.5"));
+                "sable", List.of("2.0.3", "2.0.5"),
+                "sable_player_ragdoll", List.of("0.6.9", "0.7.0", "0.7.2", "0.7.3", "0.7.4", "0.7.5", "0.8.0", "1.0.0"));
         for (var entry : versions.entrySet()) {
             var dependency = required(dependencies, entry.getKey());
             assertSame(IModInfo.UNBOUNDED, dependency.getVersionRange(),
@@ -33,6 +34,22 @@ class DependencyMetadataTest {
                 assertTrue(accepts(dependency, version), entry.getKey() + " rejected " + version);
             }
         }
+    }
+
+    @Test void exactRagdollsPinReproducesTheReportedUpgradeFailure() throws Exception {
+        var config = new TomlParser().parse(new StringReader("""
+                modId="sable_player_ragdoll"
+                type="required"
+                versionRange="[0.7.2]"
+                ordering="AFTER"
+                side="BOTH"
+                """));
+        var released = parseDependency(config);
+        assertTrue(accepts(released, "0.7.2"));
+        assertFalse(accepts(released, "0.7.5"), "The released pin must reproduce the upgrade rejection");
+        var fixed = required(productionDependencies(), "sable_player_ragdoll");
+        assertTrue(accepts(fixed, "0.7.5"), "The shipped metadata must accept the reported upgrade");
+        assertEquals(released.getOrdering(), fixed.getOrdering(), "Keep Ragdolls loaded before RagRevival");
     }
 
     @Test void explicitlyEmptyRangeReproducesTheReleasedStartupFailure() throws Exception {

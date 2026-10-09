@@ -5,6 +5,7 @@ import com.biguzi.ragrevival.ragdoll.mixin.PoseRequestsAccessor;
 import dev.leo.sableplayerragdoll.RagdollGrabCallbacks;
 import dev.leo.sableplayerragdoll.api.DespawnCondition;
 import dev.leo.sableplayerragdoll.api.RagdollAPI;
+import dev.leo.sableplayerragdoll.api.RagdollAsyncPoseRequests;
 import dev.leo.sableplayerragdoll.api.RagdollLaunchOptions;
 import dev.leo.sableplayerragdoll.api.RagdollLimbOptions;
 import dev.leo.sableplayerragdoll.api.RagdollPoseSnapshot;
@@ -30,6 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -39,8 +41,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-/** The version-pinned Sable adapter. Player coordinates may live inside Sable's plotyard. */
+/** Sable adapter. Player coordinates may live inside Sable's plotyard. */
 public final class RagdollBridge {
+    private static final Consumer<UUID> REMOVE_PENDING_PLAYER =
+            PendingPoseCompat.pendingPlayerRemover(RagdollAsyncPoseRequests.class);
     private static final List<DespawnCondition> NEVER_EXPIRE = List.of(DespawnCondition.never());
     private static final RagdollLaunchOptions DOWNED_OPTIONS = RagdollLaunchOptions.builder()
             .autoSeat(true).lockDismount(true).despawnConditions(NEVER_EXPIRE).build();
@@ -250,7 +254,7 @@ public final class RagdollBridge {
         // Remove that player's request so its delayed client response cannot create a second body.
         PoseRequestsAccessor.ragrevival$pending().entrySet().removeIf(entry ->
                 ((PendingLaunchAccessor) entry.getValue()).ragrevival$playerId().equals(playerId));
-        PoseRequestsAccessor.ragrevival$pendingPlayers().remove(playerId);
+        REMOVE_PENDING_PLAYER.accept(playerId);
     }
 
     private static List<Part> parts(Player player) {
