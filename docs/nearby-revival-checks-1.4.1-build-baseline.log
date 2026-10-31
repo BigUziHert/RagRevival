@@ -1,0 +1,98 @@
+RAGREVIVAL_NEARBY PASS overlapping self-revival: lethal damage downs NearbyFirst
+RAGREVIVAL_NEARBY PASS overlapping self-revival: lethal damage downs NearbySecond
+RAGREVIVAL_NEARBY PASS overlapping self-revival: both players are mounted before cleanup
+RAGREVIVAL_NEARBY PASS overlapping self-revival: neighbor has a distinct six-part body and seat
+RAGREVIVAL_NEARBY PASS overlapping self-revival: native cleanup query includes its own seat
+RAGREVIVAL_NEARBY PASS overlapping self-revival: native unfiltered cleanup query includes the neighboring seat
+RAGREVIVAL_NEARBY PASS overlapping self-revival: self-feed starts while both players are downed
+RAGREVIVAL_NEARBY PASS overlapping self-revival: on the self-revival tick: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS overlapping self-revival: on the self-revival tick: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS overlapping self-revival: on the self-revival tick: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS overlapping self-revival: self-revival completes and releases its own seat
+RAGREVIVAL_NEARBY PASS overlapping self-revival: self-revival consumes exactly one item
+RAGREVIVAL_NEARBY PASS overlapping self-revival: cleanup removes and unregisters its own original body
+RAGREVIVAL_NEARBY PASS overlapping self-revival: after self-revival settles: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS overlapping self-revival: after self-revival settles: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS overlapping self-revival: after self-revival settles: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS overlapping self-revival: revived player can start feeding the remaining neighbor
+RAGREVIVAL_NEARBY PASS overlapping self-revival: neighbor revives normally when actually fed
+RAGREVIVAL_NEARBY PASS overlapping self-revival: teammate revival consumes exactly one additional item
+RAGREVIVAL_NEARBY PASS adjacent self-revival: lethal damage downs NearbyFirst
+RAGREVIVAL_NEARBY PASS adjacent self-revival: lethal damage downs NearbySecond
+RAGREVIVAL_NEARBY PASS adjacent self-revival: both players are mounted before cleanup
+RAGREVIVAL_NEARBY PASS adjacent self-revival: neighbor has a distinct six-part body and seat
+RAGREVIVAL_NEARBY PASS adjacent self-revival: native cleanup query includes its own seat
+RAGREVIVAL_NEARBY geometry adjacent self-revival: neighboringSeatInCleanupQuery=false
+RAGREVIVAL_NEARBY PASS adjacent self-revival: self-feed starts while both players are downed
+RAGREVIVAL_NEARBY PASS adjacent self-revival: on the self-revival tick: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS adjacent self-revival: on the self-revival tick: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS adjacent self-revival: on the self-revival tick: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS adjacent self-revival: self-revival completes and releases its own seat
+RAGREVIVAL_NEARBY PASS adjacent self-revival: self-revival consumes exactly one item
+RAGREVIVAL_NEARBY PASS adjacent self-revival: cleanup removes and unregisters its own original body
+RAGREVIVAL_NEARBY PASS adjacent self-revival: after self-revival settles: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS adjacent self-revival: after self-revival settles: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS adjacent self-revival: after self-revival settles: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS adjacent self-revival: revived player can start feeding the remaining neighbor
+RAGREVIVAL_NEARBY PASS adjacent self-revival: neighbor revives normally when actually fed
+RAGREVIVAL_NEARBY PASS adjacent self-revival: teammate revival consumes exactly one additional item
+RAGREVIVAL_NEARBY PASS command revival: lethal damage downs NearbyFirst
+RAGREVIVAL_NEARBY PASS command revival: lethal damage downs NearbySecond
+RAGREVIVAL_NEARBY PASS command revival: both players are mounted before cleanup
+RAGREVIVAL_NEARBY PASS command revival: neighbor has a distinct six-part body and seat
+RAGREVIVAL_NEARBY PASS command revival: native cleanup query includes its own seat
+RAGREVIVAL_NEARBY PASS command revival: native unfiltered cleanup query includes the neighboring seat
+RAGREVIVAL_NEARBY PASS command revival: command revives only its named player
+RAGREVIVAL_NEARBY PASS command revival: cleanup removes its own original seat
+RAGREVIVAL_NEARBY PASS command revival: cleanup removes and unregisters its own original body
+RAGREVIVAL_NEARBY PASS command revival: immediately after cleanup: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS command revival: immediately after cleanup: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS command revival: immediately after cleanup: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS command revival: three ticks after cleanup: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS command revival: three ticks after cleanup: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS command revival: three ticks after cleanup: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS terminal death: lethal damage downs NearbyFirst
+RAGREVIVAL_NEARBY PASS terminal death: lethal damage downs NearbySecond
+RAGREVIVAL_NEARBY PASS terminal death: both players are mounted before cleanup
+RAGREVIVAL_NEARBY PASS terminal death: neighbor has a distinct six-part body and seat
+RAGREVIVAL_NEARBY PASS terminal death: native cleanup query includes its own seat
+RAGREVIVAL_NEARBY PASS terminal death: native unfiltered cleanup query includes the neighboring seat
+RAGREVIVAL_NEARBY PASS terminal death: terminal death clears only its own state
+RAGREVIVAL_NEARBY PASS terminal death: cleanup removes its own original seat
+RAGREVIVAL_NEARBY PASS terminal death: cleanup removes and unregisters its own original body
+RAGREVIVAL_NEARBY PASS terminal death: immediately after cleanup: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS terminal death: immediately after cleanup: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS terminal death: immediately after cleanup: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS terminal death: three ticks after cleanup: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS terminal death: three ticks after cleanup: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS terminal death: three ticks after cleanup: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS logout: lethal damage downs NearbyFirst
+RAGREVIVAL_NEARBY PASS logout: lethal damage downs NearbySecond
+RAGREVIVAL_NEARBY PASS logout: both players are mounted before cleanup
+RAGREVIVAL_NEARBY PASS logout: neighbor has a distinct six-part body and seat
+RAGREVIVAL_NEARBY PASS logout: native cleanup query includes its own seat
+RAGREVIVAL_NEARBY PASS logout: native unfiltered cleanup query includes the neighboring seat
+RAGREVIVAL_NEARBY PASS logout: logout retains its own persisted downed state
+RAGREVIVAL_NEARBY PASS logout: cleanup removes its own original seat
+RAGREVIVAL_NEARBY PASS logout: cleanup removes and unregisters its own original body
+RAGREVIVAL_NEARBY PASS logout: immediately after cleanup: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS logout: immediately after cleanup: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS logout: immediately after cleanup: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS logout: three ticks after cleanup: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS logout: three ticks after cleanup: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS logout: three ticks after cleanup: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: ordinary ragdoll rider has no downed state
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: lethal damage downs NearbySecond
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: both players are mounted before cleanup
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: neighbor has a distinct six-part body and seat
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: native cleanup query includes its own seat
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: native unfiltered cleanup query includes the neighboring seat
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: ordinary expiration releases its healthy rider
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: ordinary expiration unregisters its own body
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: immediately after ordinary expiration: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: immediately after ordinary expiration: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: immediately after ordinary expiration: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: three ticks after ordinary expiration: neighbor stays downed and alive
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: three ticks after ordinary expiration: original neighboring seat survives with its passenger
+RAGREVIVAL_NEARBY PASS ordinary ragdoll expiry: three ticks after ordinary expiration: original neighboring body remains registered
+RAGREVIVAL_NEARBY PASSED passed=96 failed=0 ticks=649

@@ -14,10 +14,10 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.4.0** on all three instances together. It retains network
+Install RagRevival **1.4.1** on all three instances together. It retains network
 protocol 3; use matching client/server versions for the current presentation.
-This release adds operator revival, more revival items, a single cycling item
-hint, and ten seconds of mob protection after revival. See
+This release fixes nearby ragdoll cleanup releasing another downed player's seat.
+See [1.4.1 verification](test-results-1.4.1.md),
 [1.4.0 verification](test-results-1.4.0.md),
 [the standing-control manual checklist](test-results-1.3.6.md), and
 [historical 1.3.5 verification](test-results-1.3.5.md) for the loader regression
@@ -27,7 +27,7 @@ and Sable combinations without changing this base setup, follow
 
 The setup script pins NeoForge to **21.1.249** on Minecraft **1.21.1** for
 reproducibility, with Sable **2.0.3** as the build/download baseline. RagRevival
-1.4.0 omits NeoForge, Sable, and Sable: Ragdolls range fields to use FML's unbounded default.
+1.4.1 omits NeoForge, Sable, and Sable: Ragdolls range fields to use FML's unbounded default.
 Other mods retain their own requirements: reviewed Sable 1.x versions require
 NeoForge 21.1.219+, Sable 2.x requires 21.1.228+, and optional Unlocked Camera
 requires 21.1.235+. Runtime coverage is limited to the recorded combinations.
@@ -109,7 +109,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.4.0-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.4.1-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'
@@ -149,6 +149,19 @@ protection, and grace expiration. Its server log prefix is `RAGREVIVAL_FEATURE`.
 It does not validate physical mouse/key input or the rendered HUD. Check
 [1.4.0 verification](test-results-1.4.0.md) for the execution status and results;
 the availability of the command alone does not imply a completed runtime run.
+
+The 1.4.1 nearby-body regression uses the same isolated-server approach:
+
+```powershell
+pwsh -File scripts/test-server-command.ps1 'ragrevivaltest nearby-revival'
+```
+
+It refuses to run with real players connected. It checks overlapping and adjacent
+downed players, timed self-revival followed by teammate feeding, command revival,
+terminal death, logout, and ordinary ragdoll expiration. The original neighboring
+seat and body must survive cleanup both immediately and on later ticks. Results
+use the `RAGREVIVAL_NEARBY` prefix. This checks native server physics and passenger
+ownership; actual client input and rendering still require a gameplay check.
 
 For the optional client geometry probe, also install the harness JAR into the
 client mod directories before launching. Put the text `ReviveOne` into

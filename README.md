@@ -18,7 +18,9 @@ Ragdoll Reactions 0.7.0 declares Sable: Ragdolls 0.6.9 or later, but the
 0.6.9 combination fails in Reactions due to a missing mob API. Use the
 verified versions in [1.3.7 verification](docs/test-results-1.3.7.md).
 
-The latest versioned distributable and source JAR are in [`artifacts/1.4.0`](artifacts/1.4.0). Install matching **1.4.0** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+The latest versioned distributable and source JAR are in [`artifacts/1.4.1`](artifacts/1.4.1). Install matching **1.4.1** versions on the server and every client; this release uses network protocol 3. Third-party dependencies are downloaded separately; they are not embedded or committed. Keep Sable Ragdolls enabled. Its native libraries are already included inside Sable.
+
+Version **1.4.1** fixes nearby ragdoll cleanup releasing another downed player's seat. Reviving one player now preserves neighboring bodies and their passengers. See [1.4.1 verification](docs/test-results-1.4.1.md).
 
 Version **1.4.0** adds the operator command `/revive <PlayerName>`, more revival items, a compact cycling item hint, and ten seconds of mob protection after every revival. See [1.4.0 verification](docs/test-results-1.4.0.md).
 
@@ -106,7 +108,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.4.0.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.4.1.jar
 ./scripts/start-test-runtime.ps1
 ```
 

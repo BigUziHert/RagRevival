@@ -97,13 +97,19 @@ public final class RagRevivalTestMod {
                     return result[1] == 0 ? 1 : 0;
                 }))
                 .then(Commands.literal("revive-features").executes(context -> {
-                    if (current != null) { context.getSource().sendFailure(Component.literal("An integration run is already active.")); return 0; }
+                    if (current != null || NearbyRevivalProbe.active()) { context.getSource().sendFailure(Component.literal("An integration run is already active.")); return 0; }
                     String result = RevivalFeatureProbe.start(context.getSource().getServer());
                     context.getSource().sendSuccess(() -> Component.literal(result), false);
                     return RevivalFeatureProbe.active() ? 1 : 0;
                 }))
-                .then(Commands.literal("run").executes(context -> {
+                .then(Commands.literal("nearby-revival").executes(context -> {
                     if (current != null || RevivalFeatureProbe.active()) { context.getSource().sendFailure(Component.literal("A test run is already active.")); return 0; }
+                    String result = NearbyRevivalProbe.start(context.getSource().getServer());
+                    context.getSource().sendSuccess(() -> Component.literal(result), false);
+                    return NearbyRevivalProbe.active() ? 1 : 0;
+                }))
+                .then(Commands.literal("run").executes(context -> {
+                    if (current != null || RevivalFeatureProbe.active() || NearbyRevivalProbe.active()) { context.getSource().sendFailure(Component.literal("A test run is already active.")); return 0; }
                     MinecraftServer server = context.getSource().getServer();
                     ServerPlayer one = server.getPlayerList().getPlayerByName("ReviveOne");
                     ServerPlayer two = server.getPlayerList().getPlayerByName("ReviveTwo");
@@ -119,6 +125,7 @@ public final class RagRevivalTestMod {
 
     private static void tick(ServerTickEvent.Post event) {
         RevivalFeatureProbe.tick(event.getServer());
+        NearbyRevivalProbe.tick(event.getServer());
         if (current == null || current.server != event.getServer()) return;
         try { current.tick(); }
         catch (Throwable failure) {

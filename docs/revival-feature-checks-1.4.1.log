@@ -1,0 +1,88 @@
+RAGREVIVAL_FEATURE PASS eligible item minecraft:golden_apple
+RAGREVIVAL_FEATURE PASS eligible item minecraft:golden_carrot
+RAGREVIVAL_FEATURE PASS eligible item minecraft:honey_bottle
+RAGREVIVAL_FEATURE PASS eligible item minecraft:glistering_melon_slice
+RAGREVIVAL_FEATURE PASS eligible item minecraft:totem_of_undying
+RAGREVIVAL_FEATURE PASS eligible item minecraft:enchanted_golden_apple
+RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:healing]=net.minecraft.world.item.alchemy.Potion@6ec4a04a}
+RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:strong_healing]=net.minecraft.world.item.alchemy.Potion@1901fa4a}
+RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:regeneration]=net.minecraft.world.item.alchemy.Potion@3c49bb0a}
+RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:long_regeneration]=net.minecraft.world.item.alchemy.Potion@2b70ce89}
+RAGREVIVAL_FEATURE PASS eligible potion Reference{ResourceKey[minecraft:potion / minecraft:strong_regeneration]=net.minecraft.world.item.alchemy.Potion@4eda3af9}
+RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:water]=net.minecraft.world.item.alchemy.Potion@3586c7bc}
+RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:awkward]=net.minecraft.world.item.alchemy.Potion@7a28868f}
+RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:harming]=net.minecraft.world.item.alchemy.Potion@85a1a12}
+RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:poison]=net.minecraft.world.item.alchemy.Potion@1768729f}
+RAGREVIVAL_FEATURE PASS ineligible potion Reference{ResourceKey[minecraft:potion / minecraft:swiftness]=net.minecraft.world.item.alchemy.Potion@6c9dc2b0}
+RAGREVIVAL_FEATURE PASS empty, ordinary food, and empty potion rejected
+RAGREVIVAL_FEATURE PASS throwable potions are not revival items
+RAGREVIVAL_FEATURE PASS healing base with a custom harmful effect is rejected
+RAGREVIVAL_FEATURE PASS every UI example is an eligible revival stack
+RAGREVIVAL_FEATURE PASS production /revive is registered
+RAGREVIVAL_FEATURE PASS /revive requires operator permission level 2
+RAGREVIVAL_FEATURE PASS reviving a healthy player fails without granting grace
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS a non-operator cannot revive a downed player
+RAGREVIVAL_FEATURE PASS unknown target fails safely
+RAGREVIVAL_FEATURE PASS teammate honey-bottle feeding starts
+RAGREVIVAL_FEATURE PASS operator /revive succeeds
+RAGREVIVAL_FEATURE PASS command revival cancels teammate feeding without consumption
+RAGREVIVAL_FEATURE PASS command revival uses configured restored health
+RAGREVIVAL_FEATURE PASS command revival immediately grants mob grace
+RAGREVIVAL_FEATURE PASS mob melee damage is blocked throughout grace
+RAGREVIVAL_FEATURE PASS an existing mob arrow cannot damage during grace
+RAGREVIVAL_FEATURE PASS mob cannot set revived player as direct target
+RAGREVIVAL_FEATURE PASS mob target search rejects revived player
+RAGREVIVAL_FEATURE PASS player target queries still see revived player
+RAGREVIVAL_FEATURE PASS tick clears brain attack target and retaliation during grace
+RAGREVIVAL_FEATURE PASS environmental damage remains active during grace
+RAGREVIVAL_FEATURE PASS player damage remains active during grace
+RAGREVIVAL_FEATURE PASS mob grace remains active at tick 199
+RAGREVIVAL_FEATURE PASS mob melee damage is blocked throughout grace
+RAGREVIVAL_FEATURE PASS an existing mob arrow cannot damage during grace
+RAGREVIVAL_FEATURE PASS mob grace expires exactly at tick 200
+RAGREVIVAL_FEATURE PASS mob targeting resumes after grace
+RAGREVIVAL_FEATURE PASS mob target search resumes after grace
+RAGREVIVAL_FEATURE PASS mob projectile damage resumes after grace
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS honey bottle starts self-revival
+RAGREVIVAL_FEATURE PASS honey bottle requires full configured hold before consumption
+RAGREVIVAL_FEATURE PASS honey bottle timed revival consumes one and grants grace
+RAGREVIVAL_FEATURE PASS honey bottle revival does not trigger ordinary item effects
+RAGREVIVAL_FEATURE PASS honey bottle late input cannot consume twice
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS glistering melon slice starts self-revival
+RAGREVIVAL_FEATURE PASS glistering melon slice requires full configured hold before consumption
+RAGREVIVAL_FEATURE PASS glistering melon slice timed revival consumes one and grants grace
+RAGREVIVAL_FEATURE PASS glistering melon slice revival does not trigger ordinary item effects
+RAGREVIVAL_FEATURE PASS glistering melon slice late input cannot consume twice
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS healing potion starts self-revival
+RAGREVIVAL_FEATURE PASS healing potion requires full configured hold before consumption
+RAGREVIVAL_FEATURE PASS healing potion timed revival consumes one and grants grace
+RAGREVIVAL_FEATURE PASS healing potion revival does not trigger ordinary item effects
+RAGREVIVAL_FEATURE PASS healing potion late input cannot consume twice
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS totem of undying starts self-revival
+RAGREVIVAL_FEATURE PASS totem of undying requires full configured hold before consumption
+RAGREVIVAL_FEATURE PASS totem of undying timed revival consumes one and grants grace
+RAGREVIVAL_FEATURE PASS totem of undying revival does not trigger ordinary item effects
+RAGREVIVAL_FEATURE PASS totem of undying late input cannot consume twice
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS regeneration potion starts self-revival
+RAGREVIVAL_FEATURE PASS regeneration potion requires full configured hold before consumption
+RAGREVIVAL_FEATURE PASS regeneration potion timed revival consumes one and grants grace
+RAGREVIVAL_FEATURE PASS regeneration potion revival does not trigger ordinary item effects
+RAGREVIVAL_FEATURE PASS regeneration potion late input cannot consume twice
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS enchanted golden apple starts self-revival
+RAGREVIVAL_FEATURE PASS enchanted golden apple requires full configured hold before consumption
+RAGREVIVAL_FEATURE PASS enchanted golden apple timed revival consumes one and grants grace
+RAGREVIVAL_FEATURE PASS enchanted golden apple revival does not trigger ordinary item effects
+RAGREVIVAL_FEATURE PASS enchanted golden apple late input cannot consume twice
+RAGREVIVAL_FEATURE PASS native lethal damage creates the downed fixture
+RAGREVIVAL_FEATURE PASS self-feeding starts before administrative revival
+RAGREVIVAL_FEATURE PASS command revival cancels self-feeding without consumption
+RAGREVIVAL_FEATURE PASS /kill stays terminal during grace and clears protection
+RAGREVIVAL_FEATURE PASS /revive does not resurrect a dead player
+RAGREVIVAL_FEATURE PASSED passed=87 failed=0 ticks=475

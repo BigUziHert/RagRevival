@@ -66,6 +66,16 @@ The inspected `SablePlayerRagdollNeoForge.onEntityMount` cancels manual dismount
 
 ## Real body targeting and reach
 
+Since 1.4.1, `RagdollSeatCleanupMixin` restricts the seats returned to native
+`RagdollExpireHelper.discardSeatEntities` to the expiring root's exact sublevel
+UUID. Sable's entity lookup expands a plot-space bounding box into world space
+and other intersecting sublevels. The unfiltered native lookup can therefore
+return another nearby body's seat; deleting that seat leaves its player downed
+with a removed vehicle. The filter preserves native cleanup for the expiring
+body, including ordinary expiration, while retaining all foreign seats.
+The invocation descriptor matches inspected Ragdolls 0.5.0 through 0.7.5 binaries;
+runtime evidence and tested combinations are in [1.4.1 verification](test-results-1.4.1.md).
+
 Sable physically stores a mounted player's coordinates in a remote plotyard. Treating `Player.position()` as an ordinary world position produces incorrect reach and death positions. The adapter projects it with `Sable.HELPER.projectOutOfSubLevel`; body physics and the player continue to be synchronized by the native seat rather than independent per-tick teleports.
 
 Each player body is six `RagdollPartBlockEntity` instances in separate linked sublevels. The adapter reads each part's actual outline shape and transforms the ray into the part's local coordinates. This respects rotated limbs rather than testing the hidden vanilla player box. Server queries use logical physics poses; client queries use `ClientSubLevelAccess.renderPose()` so the ray follows the displayed interpolated limbs. The server sends the active body's exact linked sublevel UUIDs in the downed-state packet, bounded to six parts. Both sides query only those IDs, so a playerless dummy using the same skin/profile cannot be mistaken for the downed player. Client topology is cleared on revival/death, disconnect, dimension change, and stale state timeout.
