@@ -22,6 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -169,6 +170,9 @@ public final class RevivalClient {
             event.setSwingHand(false);
             return;
         }
+        // Keep vanilla throwing available when the camera points straight at a body.
+        // An offhand throw also needs the first (main hand) use event to pass through.
+        if (splashThrowHand(mc.player) != null) return;
         Player target = pickBody();
         if (target == null) return;
         // Reserve downed-player interactions before Carry On/vanilla tries its own action.
@@ -203,6 +207,14 @@ public final class RevivalClient {
         for (InteractionHand hand : InteractionHand.values()) {
             if (RevivalItems.canRevive(player.getItemInHand(hand))) return hand;
         }
+        return null;
+    }
+
+    private static InteractionHand splashThrowHand(Player player) {
+        ItemStack mainHand = player.getMainHandItem();
+        if (mainHand.is(Items.SPLASH_POTION)) return InteractionHand.MAIN_HAND;
+        if (!RevivalItems.canRevive(mainHand) && player.getOffhandItem().is(Items.SPLASH_POTION))
+            return InteractionHand.OFF_HAND;
         return null;
     }
 
@@ -342,8 +354,10 @@ public final class RevivalClient {
         Component label;
         List<ItemStack> icons = List.of();
         int accent = 0xFFA5DAC0;
-        InteractionHand hand = revivalHand(mc.player);
         boolean self = mc.player.getUUID().equals(targetState.payload.playerId());
+        InteractionHand splashHand = self ? null : splashThrowHand(mc.player);
+        ItemStack splash = splashHand == null ? ItemStack.EMPTY : mc.player.getItemInHand(splashHand);
+        InteractionHand hand = splashHand == null ? revivalHand(mc.player) : null;
         boolean feeding = targetState.payload.feedingTicks() > 0;
         if (feeding) {
             boolean ownFeed = mc.player.getUUID().equals(targetState.payload.rescuer());
@@ -357,6 +371,10 @@ public final class RevivalClient {
             keys = compactKey(mc.options.keyUse);
             label = Component.translatable("hud.ragrevival.drag_hint");
             accent = 0xFFE6C985;
+        } else if (RevivalItems.canSplashRevive(splash)) {
+            keys = compactKey(mc.options.keyUse);
+            icons = List.of(splash);
+            label = Component.translatable("hud.ragrevival.splash_revive_hint");
         } else if (hand != null) {
             keys = compactKey(mc.options.keyUse);
             icons = List.of(mc.player.getItemInHand(hand));

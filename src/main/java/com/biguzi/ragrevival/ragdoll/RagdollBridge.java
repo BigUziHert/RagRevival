@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
@@ -125,6 +126,16 @@ public final class RagdollBridge {
     public static List<UUID> bodyPartIds(ServerPlayer player) {
         ServerSubLevel root = RagdollSessionManager.activeRagdollForPlayer(player.serverLevel(), player.getUUID());
         return root == null || root.isRemoved() ? List.of() : List.copyOf(RagdollAssemblyHelper.linkedParts(root.getUniqueId()));
+    }
+
+    /** Sable reports projectile hits on limbs using their local plotyard block coordinates. */
+    public static ServerPlayer playerForHitPart(ServerLevel level, BlockPos pos) {
+        if (!(level.getBlockEntity(pos) instanceof RagdollPartBlockEntity part)) return null;
+        SubLevel limb = Sable.HELPER.getContaining(level, pos);
+        if (limb == null) return null;
+        ServerPlayer player = level.getServer().getPlayerList().getPlayer(part.skinProfile().getId());
+        // An ordinary ragdoll dummy can share the player's skin without belonging to their body.
+        return player != null && player.level() == level && bodyPartIds(player).contains(limb.getUniqueId()) ? player : null;
     }
 
     public static void acceptClientParts(UUID playerId, List<UUID> partIds) {

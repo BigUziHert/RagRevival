@@ -124,7 +124,11 @@ final class RevivalFeatureProbe {
             nearTarget();
             rescuer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.HONEY_BOTTLE, 2));
             input(rescuer, InputAction.FEED);
-            check(DownedManager.isFeeding(rescuer), "teammate honey-bottle feeding starts");
+            check(!DownedManager.isBusy(rescuer) && rescuer.getMainHandItem().getCount() == 2,
+                    "honey bottle cannot start teammate feeding");
+            rescuer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 2));
+            input(rescuer, InputAction.FEED);
+            check(DownedManager.isFeeding(rescuer), "teammate golden-apple feeding starts");
             check(execute("revive RevivalProbe", 2) == 1, "operator /revive succeeds");
             check(!DownedManager.isDowned(target) && !DownedManager.isBusy(rescuer)
                             && !rescuer.isUsingItem() && rescuer.getMainHandItem().getCount() == 2,
@@ -175,12 +179,8 @@ final class RevivalFeatureProbe {
             check(target.getHealth() < health, "mob projectile damage resumes after grace");
             zombie.setTarget(null);
         });
-        // Exercise the actual configured timed feeding path for every newly added item.
-        successfulFeed(new ItemStack(Items.HONEY_BOTTLE, 2), "honey bottle");
-        successfulFeed(new ItemStack(Items.GLISTERING_MELON_SLICE, 2), "glistering melon slice");
-        successfulFeed(PotionContents.createItemStack(Items.POTION, Potions.HEALING), "healing potion");
-        successfulFeed(new ItemStack(Items.TOTEM_OF_UNDYING), "totem of undying");
-        successfulFeed(PotionContents.createItemStack(Items.POTION, Potions.REGENERATION), "regeneration potion");
+        successfulFeed(PotionContents.createItemStack(Items.POTION, Potions.STRONG_HEALING), "Healing II");
+        successfulFeed(PotionContents.createItemStack(Items.POTION, Potions.STRONG_REGENERATION), "Regeneration II");
         successfulFeed(new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 2), "enchanted golden apple");
         after(1, () -> {
             down();
@@ -228,24 +228,33 @@ final class RevivalFeatureProbe {
     }
 
     private void classification() {
-        for (var item : List.of(Items.GOLDEN_APPLE, Items.GOLDEN_CARROT, Items.HONEY_BOTTLE,
-                Items.GLISTERING_MELON_SLICE, Items.TOTEM_OF_UNDYING, Items.ENCHANTED_GOLDEN_APPLE))
+        for (var item : List.of(Items.GOLDEN_APPLE, Items.GOLDEN_CARROT, Items.ENCHANTED_GOLDEN_APPLE))
             check(RevivalItems.canRevive(new ItemStack(item)), "eligible item " + item);
-        for (var potion : List.of(Potions.HEALING, Potions.STRONG_HEALING, Potions.REGENERATION,
-                Potions.LONG_REGENERATION, Potions.STRONG_REGENERATION))
-            check(RevivalItems.canRevive(PotionContents.createItemStack(Items.POTION, potion)), "eligible potion " + potion);
-        for (var potion : List.of(Potions.WATER, Potions.AWKWARD, Potions.HARMING, Potions.POISON, Potions.SWIFTNESS))
+        for (var item : List.of(Items.HONEY_BOTTLE, Items.GLISTERING_MELON_SLICE, Items.TOTEM_OF_UNDYING))
+            check(!RevivalItems.canRevive(new ItemStack(item)), "ineligible item " + item);
+        for (var potion : List.of(Potions.STRONG_HEALING, Potions.STRONG_REGENERATION)) {
+            ItemStack drink = PotionContents.createItemStack(Items.POTION, potion);
+            ItemStack splash = PotionContents.createItemStack(Items.SPLASH_POTION, potion);
+            check(RevivalItems.canRevive(drink) && !RevivalItems.canSplashRevive(drink), "eligible drink " + potion);
+            check(RevivalItems.canSplashRevive(splash) && !RevivalItems.canRevive(splash), "eligible splash " + potion);
+            var mixed = drink.get(DataComponents.POTION_CONTENTS).withEffectAdded(new MobEffectInstance(MobEffects.POISON, 200));
+            drink.set(DataComponents.POTION_CONTENTS, mixed);
+            splash.set(DataComponents.POTION_CONTENTS, mixed);
+            check(!RevivalItems.canRevive(drink) && !RevivalItems.canSplashRevive(splash), "custom mix rejected " + potion);
+        }
+        for (var potion : List.of(Potions.HEALING, Potions.REGENERATION, Potions.LONG_REGENERATION,
+                Potions.WATER, Potions.AWKWARD, Potions.HARMING, Potions.POISON, Potions.SWIFTNESS)) {
             check(!RevivalItems.canRevive(PotionContents.createItemStack(Items.POTION, potion)), "ineligible potion " + potion);
+            check(!RevivalItems.canSplashRevive(PotionContents.createItemStack(Items.SPLASH_POTION, potion)),
+                    "ineligible splash potion " + potion);
+        }
         check(!RevivalItems.canRevive(ItemStack.EMPTY) && !RevivalItems.canRevive(new ItemStack(Items.APPLE))
                         && !RevivalItems.canRevive(new ItemStack(Items.POTION)), "empty, ordinary food, and empty potion rejected");
-        check(!RevivalItems.canRevive(PotionContents.createItemStack(Items.SPLASH_POTION, Potions.HEALING))
-                        && !RevivalItems.canRevive(PotionContents.createItemStack(Items.LINGERING_POTION, Potions.REGENERATION)),
-                "throwable potions are not revival items");
-        ItemStack poisoned = PotionContents.createItemStack(Items.POTION, Potions.HEALING);
-        poisoned.set(DataComponents.POTION_CONTENTS, poisoned.get(DataComponents.POTION_CONTENTS)
-                .withEffectAdded(new MobEffectInstance(MobEffects.POISON, 200)));
-        check(!RevivalItems.canRevive(poisoned), "healing base with a custom harmful effect is rejected");
-        check(RevivalItems.examples().stream().allMatch(RevivalItems::canRevive), "every UI example is an eligible revival stack");
+        ItemStack lingering = PotionContents.createItemStack(Items.LINGERING_POTION, Potions.STRONG_REGENERATION);
+        check(!RevivalItems.canRevive(lingering) && !RevivalItems.canSplashRevive(lingering), "lingering potion is ineligible");
+        var examples = RevivalItems.examples();
+        check(examples.size() == 5 && examples.stream().allMatch(RevivalItems::canRevive),
+                "the UI shows the three default foods and both tier II drinks");
     }
 
     private void graceDamage() {

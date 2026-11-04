@@ -13,6 +13,7 @@ import dev.leo.sableplayerragdoll.api.RagdollAPI;
 import dev.leo.sableplayerragdoll.api.RagdollLaunchOptions;
 import dev.leo.sableplayerragdoll.api.RagdollLimbOptions;
 import dev.leo.sableplayerragdoll.api.RagdollPoseSnapshot;
+import dev.leo.sableplayerragdoll.block.entity.RagdollPartBlockEntity;
 import dev.leo.sableplayerragdoll.entity.RagdollSeatEntity;
 import dev.leo.sableplayerragdoll.physics.RagdollExpireHelper;
 import dev.leo.sableplayerragdoll.physics.RagdollSessionManager;
@@ -26,24 +27,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import net.minecraft.core.Holder;
 import net.minecraft.network.Connection;
 import net.minecraft.network.PacketSendListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ClientInformation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.slf4j.Logger;
 
@@ -59,6 +72,11 @@ final class NearbyRevivalProbe {
     private ServerPlayer second;
     private ServerPlayer heartbeatActor;
     private ServerPlayer heartbeatTarget;
+    private ServerPlayer splashThrower;
+    private ServerPlayer splashSurvivor;
+    private ThrownPotion splash;
+    private UUID splashHitPlayer;
+    private String splashImpact;
     private Entity firstSeat;
     private ServerSubLevel firstRoot;
     private Entity secondSeat;
@@ -91,6 +109,23 @@ final class NearbyRevivalProbe {
         catch (Throwable failure) {
             LOGGER.error("RAGREVIVAL_NEARBY ABORTED at tick {}", current.ticks, failure);
             current.finish(false);
+        }
+    }
+
+    static void captureSplashImpact(ProjectileImpactEvent event) {
+        NearbyRevivalProbe probe = current;
+        if (probe == null || event.getProjectile() != probe.splash) return;
+        HitResult hit = event.getRayTraceResult();
+        if (hit instanceof BlockHitResult block) {
+            var level = probe.splash.level();
+            probe.splashImpact = level.getBlockState(block.getBlockPos()).getBlock() + " at " + block.getBlockPos();
+            if (level.getBlockEntity(block.getBlockPos()) instanceof RagdollPartBlockEntity part) {
+                probe.splashHitPlayer = part.skinProfile().getId();
+            }
+        } else if (hit instanceof EntityHitResult entity) {
+            probe.splashImpact = entity.getEntity().getName().getString() + " at " + hit.getLocation();
+        } else {
+            probe.splashImpact = hit.getType() + " at " + hit.getLocation();
         }
     }
 
@@ -128,7 +163,33 @@ final class NearbyRevivalProbe {
             neighborUnchanged("immediately after ordinary expiration");
         });
         after(3, () -> neighborUnchanged("three ticks after ordinary expiration"));
+        knockdownExperience();
+        splashRevival(Potions.STRONG_HEALING);
+        ineligibleSplashes();
+        splashRevival(Potions.STRONG_REGENERATION);
         after(1, () -> finish(true));
+    }
+
+    private void knockdownExperience() {
+        after(1, () -> {
+            cleanupPlayers();
+            scenario = "knockdown XP";
+            first = player("NearbyFirst", site);
+            first.giveExperiencePoints(103);
+            first.totalExperience = 910; // The stored total can diverge from the points in the XP bar.
+        });
+        after(70, () -> {
+            down(first);
+            check(first.experienceLevel == 6 && Math.round(first.experienceProgress * first.getXpNeededForNextLevel()) == 6,
+                    "deducts 25 whole points from 103 current XP points");
+            float remainingProgress = first.experienceProgress;
+            DownedManager.down(first, first.damageSources().generic());
+            check(first.experienceLevel == 6 && first.experienceProgress == remainingProgress,
+                    "another down call cannot charge the same knockdown again");
+            DownedManager.revive(first);
+            check(first.experienceLevel == 6 && first.experienceProgress == remainingProgress,
+                    "revival keeps the post-knockdown XP balance");
+        });
     }
 
     private void pair(String name, double offset) {
@@ -219,6 +280,115 @@ final class NearbyRevivalProbe {
             check(!DownedManager.isDowned(second) && !second.isPassenger(), "neighbor revives normally when actually fed");
             check(first.getMainHandItem().isEmpty(), "teammate revival consumes exactly one additional item");
         });
+    }
+
+    private void splashRevival(Holder<Potion> potion) {
+        pair("overlapping " + potion.getRegisteredName() + " splash revival", 0);
+        after(1, () -> {
+            splashThrower = player("NearbyThrower", site.add(3, 0, 0));
+            throwSplash(sharedSplashOrigin(), potion);
+            check(DownedManager.isDowned(first) && DownedManager.isDowned(second),
+                    "throwing a bottle alone leaves both players downed before impact");
+            splash.tick();
+        });
+        after(8, () -> {
+            splashSurvivor = DownedManager.isDowned(first) ? first : second;
+            ServerPlayer revived = splashSurvivor == first ? second : first;
+            checkSplash(revived.getUUID().equals(splashHitPlayer) && splash.isRemoved()
+                            && DownedManager.isDowned(first) != DownedManager.isDowned(second),
+                    "one direct splash hitting overlapping bodies revives exactly the player it hits");
+            check(DownedManager.hasRevivalGrace(revived) && !revived.isPassenger(),
+                    "the selected player leaves their ragdoll and receives revival grace");
+            check(splashSurvivor.getVehicle() == (splashSurvivor == first ? firstSeat : secondSeat),
+                    "the other player keeps their original seat");
+            Vec3 body = RagdollBridge.worldPosition(splashSurvivor);
+            revived.teleportTo(body.x + 3, body.y, body.z);
+        });
+    }
+
+    private void ineligibleSplashes() {
+        after(1, () -> {
+            throwSplash(splashOrigin(splashSurvivor), Potions.HEALING);
+            splash.tick();
+        });
+        after(8, () -> {
+            checkSplash(splashSurvivor.getUUID().equals(splashHitPlayer) && splash.isRemoved() && DownedManager.isDowned(splashSurvivor),
+                    "Healing I splash impacts without reviving");
+            Vec3 from = splashOrigin(splashSurvivor);
+            splashThrower.teleportTo(from.x - 3, from.y, from.z);
+            splash = new ThrownPotion(splashSurvivor.serverLevel(), from.x, from.y, from.z);
+            splash.setItem(PotionContents.createItemStack(Items.SPLASH_POTION, Potions.STRONG_HEALING));
+            aimSplash();
+            if (!splashSurvivor.serverLevel().addFreshEntity(splash)) throw new IllegalStateException("Could not spawn ownerless splash potion");
+            splash.tick();
+        });
+        after(8, () -> checkSplash(splashSurvivor.getUUID().equals(splashHitPlayer) && splash.isRemoved() && DownedManager.isDowned(splashSurvivor),
+                "ownerless Healing II splash impacts without reviving"));
+    }
+
+    private void checkSplash(boolean condition, String name) {
+        if (!condition) LOGGER.error("RAGREVIVAL_NEARBY splash impact={} hitPlayer={} removed={} firstDowned={} secondDowned={} owner={}",
+                splashImpact, splashHitPlayer, splash.isRemoved(), DownedManager.isDowned(first), DownedManager.isDowned(second), splash.getOwner());
+        check(condition, name);
+    }
+
+    private void throwSplash(Vec3 from, Holder<Potion> potion) {
+        splashThrower.teleportTo(from.x, from.y - splashThrower.getEyeHeight() + 0.1, from.z);
+        splashThrower.setXRot(90);
+        splashThrower.setDeltaMovement(Vec3.ZERO);
+        ItemStack bottle = PotionContents.createItemStack(Items.SPLASH_POTION, potion);
+        splashThrower.setItemInHand(InteractionHand.MAIN_HAND, bottle);
+        bottle.use(splashThrower.serverLevel(), splashThrower, InteractionHand.MAIN_HAND);
+        check(splashThrower.getMainHandItem().isEmpty(), "throwing consumes exactly one " + potion.getRegisteredName() + " bottle");
+        splash = splashThrower.serverLevel().getEntitiesOfClass(ThrownPotion.class, new AABB(from, from).inflate(0.5),
+                projectile -> projectile.getOwner() == splashThrower).stream().findFirst().orElseThrow();
+        aimSplash();
+    }
+
+    private void aimSplash() {
+        // Resolve the prechecked trajectory in one native movement tick, before another physics step moves the limb.
+        splashHitPlayer = null;
+        splashImpact = "no collision";
+        splash.setDeltaMovement(new Vec3(0, -3, 0));
+    }
+
+    private static Vec3 splashOrigin(ServerPlayer target) {
+        for (AABB limb : RagdollBridge.worldBodyBoxes(target)) {
+            Vec3 center = limb.getCenter();
+            Vec3 from = new Vec3(center.x, limb.maxY + 1.5, center.z);
+            Vec3 to = new Vec3(center.x, limb.minY - 0.5, center.z);
+            if (target.getUUID().equals(limbOwnerOnPath(target.serverLevel(), from, to))) return from;
+        }
+        throw new IllegalStateException("No unobstructed splash trajectory through the remaining body");
+    }
+
+    private Vec3 sharedSplashOrigin() {
+        for (AABB left : RagdollBridge.worldBodyBoxes(first)) {
+            for (AABB right : RagdollBridge.worldBodyBoxes(second)) {
+                double minX = Math.max(left.minX, right.minX);
+                double maxX = Math.min(left.maxX, right.maxX);
+                double minZ = Math.max(left.minZ, right.minZ);
+                double maxZ = Math.min(left.maxZ, right.maxZ);
+                if (minX >= maxX || minZ >= maxZ) continue;
+                double x = (minX + maxX) / 2;
+                double z = (minZ + maxZ) / 2;
+                Vec3 from = new Vec3(x, Math.max(left.maxY, right.maxY) + 1.5, z);
+                Vec3 to = new Vec3(x, Math.min(left.minY, right.minY) - 0.5, z);
+                UUID limbOwner = limbOwnerOnPath(first.serverLevel(), from, to);
+                if ((first.getUUID().equals(limbOwner) || second.getUUID().equals(limbOwner))
+                        && RagdollBridge.raycastBody(first, from, to).isPresent()
+                        && RagdollBridge.raycastBody(second, from, to).isPresent()) {
+                    return from;
+                }
+            }
+        }
+        throw new IllegalStateException("No common splash trajectory through the overlapping bodies");
+    }
+
+    private static UUID limbOwnerOnPath(ServerLevel level, Vec3 from, Vec3 to) {
+        BlockHitResult hit = level.clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty()));
+        return hit.getType() == HitResult.Type.BLOCK && level.getBlockEntity(hit.getBlockPos()) instanceof RagdollPartBlockEntity part
+                ? part.skinProfile().getId() : null;
     }
 
     private void cleanupScenario(String name, Runnable action) {
@@ -313,6 +483,8 @@ final class NearbyRevivalProbe {
         heartbeatActor = null;
         heartbeatTarget = null;
         watchSelfRevival = false;
+        if (splash != null && !splash.isRemoved()) splash.discard();
+        splash = null;
         for (ServerPlayer player : players) {
             try {
                 if (!player.isRemoved()) {

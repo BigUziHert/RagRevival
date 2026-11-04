@@ -67,6 +67,7 @@ public final class RagRevivalTestMod {
 
     public RagRevivalTestMod() {
         NeoForge.EVENT_BUS.addListener(RagRevivalTestMod::commands);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, NearbyRevivalProbe::captureSplashImpact);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RagRevivalTestMod::tick);
     }
 
@@ -207,7 +208,7 @@ public final class RagRevivalTestMod {
                 target.teleportTo(site.x, site.y, site.z);
                 rescuer.teleportTo(site.x + 1.8, site.y, site.z);
                 target.getInventory().setItem(0, new ItemStack(Items.DIAMOND, 3));
-                target.experienceLevel = 7; target.totalExperience = 91; target.experienceProgress = 0;
+                seedKnockdownExperience();
                 rescuer.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, 4));
             });
             // ServerPlayer has a separate 60-tick spawn immunity timer after fixture respawn.
@@ -221,8 +222,8 @@ public final class RagRevivalTestMod {
                 target.hurt(target.damageSources().generic(), 1000);
                 check(DownedManager.isDowned(target), "lethal damage enters downed state");
                 check(target.isAlive() && target.getHealth() == 1, "downing prevents normal death");
-                check(target.getInventory().countItem(Items.DIAMOND) == 3 && target.experienceLevel == 7,
-                        "inventory and XP remain intact when downed");
+                check(target.getInventory().countItem(Items.DIAMOND) == 3, "inventory remains intact when downed");
+                check(hasReducedExperience(), "knockdown reduces current XP from 103 to 78 points");
                 check(zombie.getTarget() == null, "existing mob target is cleared");
             });
             after(40, () -> {
@@ -243,6 +244,7 @@ public final class RagRevivalTestMod {
             });
             after(10, () -> {
                 DownedManager.login(new PlayerEvent.PlayerLoggedInEvent(target));
+                check(hasReducedExperience(), "damage while downed and lifecycle callbacks preserve the deducted XP balance");
                 check(target.getPersistentData().getCompound("ragrevival:downed").getLong("deadline") == savedDeadline,
                         "login callback retains original deadline");
                 check(DownedManager.remainingMillis(target) < RevivalConfig.DOWNED_SECONDS.get() * 1000L,
@@ -434,7 +436,10 @@ public final class RagRevivalTestMod {
                 check(rescuer.getMainHandItem().getCount() == 3,
                         "late repeated golden-carrot packets cannot consume again");
             });
-            after(12, () -> DownedManager.down(target, target.damageSources().generic()));
+            after(12, () -> {
+                seedKnockdownExperience();
+                DownedManager.down(target, target.damageSources().generic());
+            });
             after(35, () -> {
                 nearTarget(); rescuer.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
                 rescuer.setShiftKeyDown(false); send(rescuer, InputAction.DRAG); heartbeat = InputAction.DRAG;
@@ -492,8 +497,8 @@ public final class RagRevivalTestMod {
             after(5, () -> {
                 heartbeat = null;
                 check(!DownedManager.isDowned(target) && target.isDeadOrDying(), "100-tick give-up performs terminal death once");
-                check(target.getInventory().countItem(Items.DIAMOND) == 3 && target.experienceLevel == 7,
-                        "terminal death respects keepInventory true for items and XP");
+                check(target.getInventory().countItem(Items.DIAMOND) == 3 && hasReducedExperience(),
+                        "terminal death with keepInventory retains items and the post-knockdown XP balance");
                 target = respawn(target);
             });
             after(20, () -> {
@@ -501,7 +506,7 @@ public final class RagRevivalTestMod {
                 server.getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(false, server);
                 target.teleportTo(site.x, site.y, site.z);
                 target.getInventory().setItem(0, new ItemStack(Items.DIAMOND, 3));
-                target.experienceLevel = 7; target.totalExperience = 91;
+                seedKnockdownExperience();
                 DownedManager.down(target, target.damageSources().generic());
             });
             after(30, () -> {
@@ -892,6 +897,16 @@ public final class RagRevivalTestMod {
         }
 
         private int apples() { return rescuer.getMainHandItem().getCount(); }
+
+        private void seedKnockdownExperience() {
+            target.experienceLevel = 7;
+            target.experienceProgress = 12f / 21; // 91 points for level 7, plus 12 in the bar.
+            target.totalExperience = 910; // Can diverge from the XP represented by the bar.
+        }
+
+        private boolean hasReducedExperience() {
+            return target.experienceLevel == 6 && Math.round(target.experienceProgress * target.getXpNeededForNextLevel()) == 6;
+        }
 
         private ServerPlayer respawn(ServerPlayer previous) {
             ServerPlayer replacement = server.getPlayerList().respawn(previous, false, Entity.RemovalReason.KILLED);

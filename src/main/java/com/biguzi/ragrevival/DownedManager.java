@@ -9,12 +9,14 @@ import com.mojang.logging.LogUtils;
 import dev.leo.sableplayerragdoll.entity.RagdollSeatEntity;
 import java.util.*;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
@@ -25,11 +27,16 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
@@ -118,6 +125,7 @@ public final class DownedManager {
         data.putLong("deadline", DownedClock.deadline(System.currentTimeMillis(), RevivalConfig.DOWNED_SECONDS.get()));
         source.typeHolder().unwrapKey().ifPresent(key -> data.putString("damageType", key.location().toString()));
         player.getPersistentData().put(DATA_KEY, data);
+        deductKnockdownExperience(player);
         checkpointPosition(player);
         SOURCES.put(player.getUUID(), source);
         RagdollBridge.ensureDowned(player);
@@ -128,6 +136,40 @@ public final class DownedManager {
                 "chat.ragrevival.knocked", player.getDisplayName()).withStyle(ChatFormatting.GOLD), false);
     }
 
+    private static void deductKnockdownExperience(ServerPlayer player) {
+        // Minecraft's totalExperience counter does not account for levels spent on enchanting or anvils.
+        int level = player.experienceLevel;
+        // The fractional bar can drift slightly when vanilla awards XP across several levels.
+        int barPoints = Math.round(player.experienceProgress * player.getXpNeededForNextLevel());
+        long points = experienceAtLevel(level) + barPoints;
+        long lost = points / 4;
+        if (lost == 0) return;
+
+        long remaining = points - lost;
+        int lower = 0;
+        int upper = level;
+        while (lower < upper) {
+            int middle = upper - (upper - lower) / 2;
+            if (experienceAtLevel(middle) <= remaining) lower = middle;
+            else upper = middle - 1;
+        }
+        player.setExperienceLevels(lower);
+        player.setExperiencePoints((int) (remaining - experienceAtLevel(lower)));
+        player.totalExperience = (int) Math.max(0, player.totalExperience - lost);
+        player.sendSystemMessage(Component.translatable("chat.ragrevival.xp_lost", lost).withStyle(ChatFormatting.GOLD));
+    }
+
+    private static long experienceAtLevel(int level) {
+        // Sum the vanilla points needed for each prior level across its three XP brackets.
+        if (level <= 15) return (long) level * (level + 6);
+        if (level <= 30) {
+            long levelsAbove15 = level - 15;
+            return 315 + 37 * levelsAbove15 + 5 * levelsAbove15 * (levelsAbove15 - 1) / 2;
+        }
+        long levelsAbove30 = level - 30;
+        return 1395 + 112 * levelsAbove30 + 9 * levelsAbove30 * (levelsAbove30 - 1) / 2;
+    }
+
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void damage(LivingIncomingDamageEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)
@@ -135,6 +177,29 @@ public final class DownedManager {
         if (isDowned(player) || hasRevivalGrace(player) && isMobDamage(event.getSource()))
             event.setCanceled(true);
     }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void splashImpact(ProjectileImpactEvent event) {
+        if (!(event.getProjectile() instanceof ThrownPotion potion) || potion.isRemoved()
+                || !(potion.level() instanceof ServerLevel level)
+                || !(event.getRayTraceResult() instanceof BlockHitResult hit)
+                || !RevivalItems.canSplashRevive(potion.getItem())) return;
+        if (!(potion.getOwner() instanceof ServerPlayer thrower) || thrower.level() != level
+                || !thrower.isAlive() || thrower.isSpectator() || isDowned(thrower)
+                || thrower.connection == null || thrower.hasDisconnected()) return;
+
+        ServerPlayer target = RagdollBridge.playerForHitPart(level, hit.getBlockPos());
+        if (target == null || target == thrower || !target.isAlive() || !isDowned(target)
+                || target.connection == null || target.hasDisconnected() || remainingMillis(target) == 0) return;
+
+        // Consume this impact as one rescue. An ordinary miss keeps vanilla splash behavior.
+        event.setCanceled(true);
+        PotionContents contents = potion.getItem().getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+        level.levelEvent(contents.is(Potions.STRONG_HEALING) ? 2007 : 2002, potion.blockPosition(), contents.getColor());
+        potion.discard();
+        revive(target);
+    }
+
     private static boolean isMobDamage(DamageSource source) {
         // Include shots already airborne when revival finishes, without granting PvP/environment immunity.
         return source.getEntity() instanceof Mob || source.getDirectEntity() instanceof Mob

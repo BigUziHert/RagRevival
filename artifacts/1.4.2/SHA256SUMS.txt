@@ -1,0 +1,2 @@
+eef84d786d73afcd13a5569768bbacda31fd641037e8f39db556ff73b5a1335c  ragrevival-1.21.1-1.4.2-sources.jar
+cb317f852220b7fc54d8a0a691799f18cfc17c1d5bf7550a84d6f2b3e35c1530  ragrevival-1.21.1-1.4.2.jar

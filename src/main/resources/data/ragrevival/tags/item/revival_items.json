@@ -3,10 +3,7 @@
   "values": [
     "minecraft:golden_apple",
     "minecraft:golden_carrot",
-    "minecraft:honey_bottle",
-    "minecraft:glistering_melon_slice",
-    "minecraft:potion",
-    "minecraft:totem_of_undying",
-    "minecraft:enchanted_golden_apple"
+    "minecraft:enchanted_golden_apple",
+    "minecraft:potion"
   ]
 }

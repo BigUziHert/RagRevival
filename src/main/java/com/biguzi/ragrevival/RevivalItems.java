@@ -24,13 +24,17 @@ public final class RevivalItems {
     public static boolean canRevive(ItemStack stack) {
         if (stack.isEmpty() || !stack.is(REVIVAL_ITEMS)) return false;
         if (!(stack.getItem() instanceof PotionItem)) return true;
-        if (!stack.is(Items.POTION)) return false;
+        return stack.is(Items.POTION) && hasRevivalPotionContents(stack);
+    }
+
+    public static boolean canSplashRevive(ItemStack stack) {
+        return stack.is(Items.SPLASH_POTION) && hasRevivalPotionContents(stack);
+    }
+
+    private static boolean hasRevivalPotionContents(ItemStack stack) {
         PotionContents contents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-        // A potion item tag cannot distinguish its contents. Vanilla's match also excludes
-        // custom effects, so adding a healing base cannot disguise a harmful mixture.
-        return contents.is(Potions.HEALING) || contents.is(Potions.STRONG_HEALING)
-                || contents.is(Potions.REGENERATION) || contents.is(Potions.LONG_REGENERATION)
-                || contents.is(Potions.STRONG_REGENERATION);
+        // Vanilla's match excludes custom effects, including mixtures with an eligible base.
+        return contents.is(Potions.STRONG_HEALING) || contents.is(Potions.STRONG_REGENERATION);
     }
 
     /** One representative per item/potion family, rebuilt from the current synchronized tag. */
@@ -38,8 +42,8 @@ public final class RevivalItems {
         return BuiltInRegistries.ITEM.getTag(REVIVAL_ITEMS)
                 .map(items -> items.stream().flatMap(item -> {
                     if (item.value() == Items.POTION) {
-                        return Stream.of(PotionContents.createItemStack(Items.POTION, Potions.HEALING),
-                                PotionContents.createItemStack(Items.POTION, Potions.REGENERATION));
+                        return Stream.of(PotionContents.createItemStack(Items.POTION, Potions.STRONG_HEALING),
+                                PotionContents.createItemStack(Items.POTION, Potions.STRONG_REGENERATION));
                     }
                     return Stream.of(new ItemStack(item.value()));
                 }).filter(RevivalItems::canRevive).toList())
