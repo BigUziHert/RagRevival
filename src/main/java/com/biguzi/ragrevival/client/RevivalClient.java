@@ -286,6 +286,7 @@ public final class RevivalClient {
 
     /** Select the rendered physics body along the existing camera, without changing any camera state. */
     private static Player pickBody() {
+        if (STATES.isEmpty()) return null;
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return null;
         Camera camera = mc.gameRenderer.getMainCamera();
