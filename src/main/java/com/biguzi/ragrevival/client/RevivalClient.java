@@ -97,6 +97,7 @@ public final class RevivalClient {
     }
 
     public static boolean isDownedPart(BlockPos pos) {
+        if (STATES.isEmpty()) return false;
         Minecraft mc = Minecraft.getInstance();
         return mc.level != null && mc.level.getBlockEntity(pos) instanceof RagdollPartBlockEntity part
                 && isDownedPart(part);
@@ -121,7 +122,7 @@ public final class RevivalClient {
 
     /** Server-confirmed use state for other players; local intent also guards the first sync gap. */
     public static boolean isFeeding(Player player) {
-        if (player == null) return false;
+        if (player == null || STATES.isEmpty()) return false;
         Minecraft mc = Minecraft.getInstance();
         if (player == mc.player && activeAction == InputAction.FEED && hasActiveInteraction()) return true;
         long now = System.nanoTime();

@@ -351,7 +351,6 @@ public final class DownedManager {
                 if (isDowned(target)) {
                     rescue.stack.shrink(1);
                     revive(target);
-                    actor.server.getPlayerList().saveAll();
                 }
             }
         }
