@@ -14,8 +14,9 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.4.2** on all three instances together. It uses network
-protocol 3. See the [1.4.2 release notes](../artifacts/1.4.2/README.md) for the
+Install RagRevival **1.4.3** on all three instances together. It uses network
+protocol 3. See the [1.4.3 release notes](../artifacts/1.4.3/README.md) for the
+performance changes and the [1.4.2 release notes](../artifacts/1.4.2/README.md) for the
 knockdown XP penalty and potion rules. The earlier [1.4.1 verification](test-results-1.4.1.md)
 covers the fix for nearby ragdoll cleanup releasing another downed player's seat.
 See also [1.4.0 verification](test-results-1.4.0.md),
@@ -27,7 +28,7 @@ and Sable combinations without changing this base setup, follow
 
 The setup script pins NeoForge to **21.1.249** on Minecraft **1.21.1** for
 reproducibility, with Sable **2.0.3** as the build/download baseline. RagRevival
-1.4.2 omits NeoForge, Sable, and Sable: Ragdolls range fields to use FML's unbounded default.
+1.4.3 omits NeoForge, Sable, and Sable: Ragdolls range fields to use FML's unbounded default.
 Other mods retain their own requirements: reviewed Sable 1.x versions require
 NeoForge 21.1.219+, Sable 2.x requires 21.1.228+, and optional Unlocked Camera
 requires 21.1.235+. Runtime coverage is limited to the recorded combinations.
@@ -115,7 +116,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.4.2-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.4.3-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'

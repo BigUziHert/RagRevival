@@ -18,7 +18,9 @@ Ragdoll Reactions 0.7.0 declares Sable: Ragdolls 0.6.9 or later, but the
 0.6.9 combination fails in Reactions due to a missing mob API. Use the
 verified versions in [1.3.7 verification](docs/test-results-1.3.7.md).
 
-The latest versioned distributable and source JAR are in [`artifacts/1.4.2`](artifacts/1.4.2). Install matching **1.4.2** versions on the server and every client. This release uses network protocol 3. Download third-party dependencies separately and keep Sable Ragdolls enabled. Sable bundles the native libraries.
+The latest versioned distributable and source JAR are in [`artifacts/1.4.3`](artifacts/1.4.3). Install matching **1.4.3** versions on the server and every client. This release uses network protocol 3. Download third-party dependencies separately and keep Sable Ragdolls enabled. Sable bundles the native libraries.
+
+Version **1.4.3** skips unnecessary client targeting, feeding-state checks, and ragdoll block lookups when no downed states are known. It also removes a duplicate save of all players after feeding completes. See the [1.4.3 release notes](artifacts/1.4.3/README.md).
 
 Version **1.4.2** deducts 25% of current XP points when a player is knocked. Held potion revives use Healing II or Regeneration II, and either tier-II splash variant can revive one teammate with a direct hit. Honey bottles, glistering melon slices, and Totems of Undying leave the default feeding tag. See the [1.4.2 release notes](artifacts/1.4.2/README.md).
 
@@ -111,7 +113,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.4.2.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.4.3.jar
 ./scripts/start-test-runtime.ps1
 ```
 
