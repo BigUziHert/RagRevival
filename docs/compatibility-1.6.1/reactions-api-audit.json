@@ -1,0 +1,15 @@
+{
+  "changed": [
+    "dev/leo/ragdollreactions/physics/ReactionMobLauncher$ActiveMobLaunch.class",
+    "dev/leo/ragdollreactions/physics/ReactionMobLauncher.class"
+  ],
+  "unchanged": 47,
+  "newClassCount": 49,
+  "newSha256": "AEAAA51C368E7A41589E329762EA87C4F8DB258E314C847B84B185B08C285AB3",
+  "oldSha256": "D61A118C0B5AD2F3E761AF6B3D71726BC2887BB3D0C7C90C2DC604BB4D3792B8",
+  "oldJar": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\deps\\ragdoll_reactions-1.21.1-0.7.0.jar",
+  "newJar": "C:/Users/caleb/curseforge/minecraft/Instances/Modded Minecraft/mods/ragdoll_reactions-1.21.1-0.8.0.jar",
+  "added": [],
+  "removed": [],
+  "oldClassCount": 49
+}

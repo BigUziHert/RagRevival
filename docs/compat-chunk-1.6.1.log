@@ -1,0 +1,22 @@
+[12Nov2026 17:26:19.927] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS distant fixture chunk has no vanilla force-load ticket
+[12Nov2026 17:26:19.927] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK START pid=7820 corpse=41ef58c2-4b12-4301-aba7-203c8436b8f3 site=(576.5, 128.0, 576.5) viewDistance=5
+[12Nov2026 17:26:24.578] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS distant entity-ticking chunk starts a native corpse body
+[12Nov2026 17:26:24.579] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS plain vanilla entity in a separate nearby chunk starts loaded
+[12Nov2026 17:26:24.580] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK DEPART tick=100 root=dedf73a9-481f-48c7-a8a8-e87c893538a4 parts=6 savedPosition=(576.5098936848369, 127.97708678942269, 575.262538520936)
+[12Nov2026 17:26:24.682] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK LEAVE tick=101 reason=null
+[12Nov2026 17:26:25.579] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK AWAY tick=120 entityLoaded=false bound=false loadedNativeParts=0 chunkLoaded=false plainControlLoaded=false observer=(0.5, 128.0, 0.5)
+[12Nov2026 17:26:25.580] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS plain vanilla control also unloads after the normal player chunk-tracker move
+[12Nov2026 17:26:25.580] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS distance alone emits the engine entity-leave event and unloads the actual world chunk
+[12Nov2026 17:26:25.580] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS corpse entity leaves active entity storage outside player view distance
+[12Nov2026 17:26:25.580] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS out-of-range chunk eviction releases the corpse runtime binding
+[12Nov2026 17:26:25.581] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS all six native parts leave active sublevel storage after distant chunk eviction
+[12Nov2026 17:26:35.578] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS returning within view distance restores the original corpse UUID
+[12Nov2026 17:26:35.579] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS actual chunk reload preserves all inventory compartments exactly
+[12Nov2026 17:26:35.579] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS actual chunk reload resumes native articulated physics
+[12Nov2026 17:26:35.579] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS reloaded native body maintains all six valid limb transforms
+[12Nov2026 17:26:35.579] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS reloaded body settles within a quarter-block of its original supporting position
+[12Nov2026 17:26:35.579] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK RETURN tick=320 originalRoot=dedf73a9-481f-48c7-a8a8-e87c893538a4 currentRoot=dedf73a9-481f-48c7-a8a8-e87c893538a4 parts=6 maximumLimbSpeed=0.0 before=(576.5098936848369, 127.97708678942269, 575.262538520936) after=(576.5098939351374, 127.9770854560437, 575.2625385207972)
+[12Nov2026 17:26:35.580] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS restored corpse owns exactly six active native parts
+[12Nov2026 17:26:35.580] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASS restored native joints settle without sustained artificial motion
+[12Nov2026 17:26:35.581] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK LEAVE tick=320 reason=DISCARDED
+[12Nov2026 17:26:35.595] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASSED passed=15 failed=0 ticks=320 pid=7820

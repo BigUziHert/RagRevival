@@ -11,14 +11,22 @@ Install RagRevival and all three dependencies in **both clients and the dedicate
 | Mod | Required version |
 | --- | --- |
 | [Sable](https://modrinth.com/mod/sable) | No version restriction in RagRevival; 2.0.3 is the build baseline |
-| [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | No version restriction in RagRevival; 0.7.2 is the build baseline |
-| [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.0 |
+| [Sable: Ragdolls](https://www.curseforge.com/minecraft/mc-mods/sable-ragdolls) | No version restriction in RagRevival; 0.7.2 is the build baseline; 0.8.1 has a dedicated compatibility adapter |
+| [Ragdoll Reactions](https://www.curseforge.com/minecraft/mc-mods/ragdoll-reactions) | 0.7.x or 0.8.x; checked with 0.7.0 and 0.8.0 |
 
 Ragdoll Reactions 0.7.0 declares Sable: Ragdolls 0.6.9 or later, but the
 0.6.9 combination fails in Reactions due to a missing mob API. Use the
 verified versions in [1.3.7 verification](docs/test-results-1.3.7.md).
 
-The latest versioned distributable and source JAR are in [`artifacts/1.4.3`](artifacts/1.4.3). Install matching **1.4.3** versions on the server and every client. This release uses network protocol 3. Download third-party dependencies separately and keep Sable Ragdolls enabled. Sable bundles the native libraries.
+The latest versioned distributable and source JAR are in [`artifacts/1.6.1`](artifacts/1.6.1). Install matching **1.6.1** versions on the server and every client. This release uses network protocol 5, including when Corpse is absent. Download third-party dependencies separately and keep Sable Ragdolls enabled. Sable bundles the native libraries.
+
+Version **1.6.1** adapts to Sable Ragdolls **0.8.1** and Ragdoll Reactions **0.8.0**, including the new per-block body identities and session storage. Marked corpses saved with the older Ragdolls storage retain their native identities when loaded. Corpse tracking distinguishes logical limbs from their containing Sable bodies, including limbs moved into another vessel. See [updated dependency checks and pack limitations](docs/compatibility-1.6.1.md).
+
+Version **1.6.0** keeps corpses as native Sable ragdolls for their loaded lifetime. Existing downed limbs and joints transfer directly at death, settled bodies remain responsive, and saved native bodies resume after a server restart. Hold Use with an empty main hand to drag; crouch-Use or Use with an item opens Corpse's inventory. The old timeout, body cap, and distance settings are ignored. See [native corpse behavior and verification](docs/corpse-native-1.6.0.md).
+
+Version **1.5.1** fixes corpse drift on moving Sable platforms and after loading saved physics, and preserves empty slots in displayed equipment across server restarts. See [restart and sublevel verification](docs/corpse-persistence-1.5.1.md). That version kept corpse dragging disabled; right-click opened its inventory.
+
+Version **1.5.0** adds optional [Corpse](https://www.curseforge.com/minecraft/mc-mods/corpse) compatibility. Final deaths leave a Sable ragdoll with Corpse's own inventory, menus, ownership rules, skeleton stage, death history, and despawn rules. A capped, short physics simulation saves its six limb poses and releases every Sable part afterward. See [compatibility details and verification](docs/corpse-compatibility-1.5.0.md).
 
 Version **1.4.3** skips unnecessary client targeting, feeding-state checks, and ragdoll block lookups when no downed states are known. It also removes a duplicate save of all players after feeding completes. See the [1.4.3 release notes](artifacts/1.4.3/README.md).
 
@@ -49,6 +57,7 @@ Optional compatibility test versions: **Carry On 2.2.6.13** on server and client
 - Only successful feeding consumes one item, including in creative mode. A target has one rescue owner at a time, shared by self-revival, teammate feeding, and dragging.
 - **Last-second rescue:** valid feeding pauses bleed-out, so a feed started before the deadline can finish. Cancellation or a lost input lease resumes the remaining time. Dragging does not pause it; an already-expired target cannot start a new feed. Giving up remains terminal, even during feeding.
 - **Drag:** with both hands empty, aim at the body and hold **Use Item/right-click**. You may stand or crouch, including changing posture while dragging. Releasing Use releases the native physics grip. A body cannot be fed, dragged, and carried simultaneously.
+- **Corpse ragdolls (optional Corpse mod):** stand with an empty main hand and hold **Use** to use Sable's ordinary grab. Release Use to let go. Crouch-Use, or Use while holding an item, opens the native loot screen. Corpse access permissions also apply to dragging. Loaded corpses retain all six physical limbs; rest, impacts, moving support, and grabs use native Sable physics.
 - **Zoom while dragging:** Unlocked Camera receives the mouse wheel normally. If no camera/interaction mod claims a vertical scroll, RagRevival consumes it to keep the hotbar from switching to a held item and interrupting the drag. Ordinary Sable grabs keep their own controls.
 - **Give up:** hold **G** for 100 continuous server ticks (five seconds at 20 TPS). Releasing G cancels. Rebind it under **Options → Controls → Key Binds → RagRevival**.
 - The HUD shows the downed countdown, feeding progress, and give-up progress to the relevant player.
@@ -68,6 +77,11 @@ Edit `config/ragrevival-server.toml` on the server (or `<world>/serverconfig/rag
 | `downedSeconds` | 120 | Real-time death countdown, captured when downing begins; paused during valid feeding |
 | `feedingTicks` | 32 | Continuous feeding time; captured when feeding begins |
 | `restoredHealthFraction` | 0.5 | Fraction of the player's current maximum health restored on revival (0.01–1.0) |
+| `maxCorpseRagdolls` | 8 | Deprecated and ignored since 1.6.0 |
+| `corpsePhysicsTicks` | 200 | Deprecated and ignored since 1.6.0 |
+| `corpseRagdollRange` | 48 | Deprecated and ignored since 1.6.0 |
+
+Corpse physics now uses normal chunk loading and Sable's automatic sleep/wake behavior. No corpse chunk tickets are added. Each loaded corpse retains six native physics parts; sleep reduces solver work but does not make large numbers of loaded corpses free.
 
 Version 1.1.0 replaces the old `restoredHealth` fixed health-point setting. NeoForge corrects existing configs to add `restoredHealthFraction = 0.5`; the old value is no longer used. To change the percentage, edit the new setting while the server is stopped.
 
@@ -89,7 +103,7 @@ Every successful revival restores configured health. A held-item revival consume
 - Downed players cannot voluntarily change dimensions. Rescuer dimension changes cancel interactions. External administrative teleportation does not clear the deadline; the server reasserts the ragdoll state.
 - **Totems take precedence on triggering damage:** vanilla totem handling runs before the death interception. Countdown expiry and choosing to give up are final; they do not consume a totem or start another downed state.
 - **Void and `/kill` are terminal.** Initial void damage or administrative generic-kill deaths bypass downing. If a downed body falls below the void boundary, it dies normally. This avoids indefinite inaccessible bodies. Other damage is blocked while downed.
-- Countdown and give-up death release physics, clear the downed marker, and invoke normal player death once. `keepInventory`, XP loss, death messages, loot, and hardcore handling follow Minecraft's normal death path. No second downed trigger occurs. Original damage attribution is retained in memory; after a restart the saved damage type is restored without an absent original attacker.
+- Countdown and give-up death clear the downed marker and invoke normal player death once. With Corpse installed the native body transfers to the corpse; otherwise it is released. `keepInventory`, XP loss, death messages, loot, and hardcore handling follow Minecraft's normal death path. No second downed trigger occurs. Original damage attribution is retained in memory; after a restart the saved damage type is restored without an absent original attacker.
 - Ordinary Reactions ragdolls receive no revive timer, immunity, or G action. If one suffers fatal damage, its existing pose/body is converted in place and its ordinary expiry rules are replaced.
 - Carry On pickup is blocked for downed targets and busy/downed rescuers. Existing carrying is released before downing. Occupied rescuers cannot begin feeding/dragging.
 - If the native ragdoll cannot be established for 100 server ticks, the mod logs the failure and completes normal death rather than leaving an invulnerable standing player.
@@ -113,7 +127,7 @@ The fetch script verifies SHA-256 hashes from the checked-in lock file. Set `JAV
 
 ```powershell
 ./scripts/setup-test-runtime.ps1
-./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.4.3.jar
+./scripts/sync-test-mods.ps1 -ModJar ./build/libs/ragrevival-1.21.1-1.6.0.jar
 ./scripts/start-test-runtime.ps1
 ```
 

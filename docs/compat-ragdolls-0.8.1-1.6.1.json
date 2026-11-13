@@ -1,0 +1,604 @@
+{
+  "date": "2026-11-12",
+  "ragrevival": "1.6.1",
+  "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+  "minecraft": "1.21.1",
+  "neoForge": "21.1.265",
+  "java": "21.0.6",
+  "modernPair": {
+    "ragdolls": "0.8.1",
+    "reactions": "0.8.0"
+  },
+  "oldPair": {
+    "ragdolls": "0.7.5",
+    "reactions": "0.7.0"
+  },
+  "mods": [
+    {
+      "name": "carryon-neoforge-1.21.1-2.2.6.13.jar",
+      "sha256": "d4f9576b6593db9486a89d35c1d84c31ee89141d99dbae2aa470350ab53c4e09"
+    },
+    {
+      "name": "corpse-neoforge-1.21.1-1.1.22.jar",
+      "sha256": "3733d86452b9ac572e924c2946e15e6b7052cc8fc990911f1c79b36ac3651b9f"
+    },
+    {
+      "name": "ragdoll_reactions-1.21.1-0.8.0.jar",
+      "sha256": "aeaaa51c368e7a41589e329762ea87c4f8db258e314c847b84b185b08c285ab3"
+    },
+    {
+      "name": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+      "sha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+    },
+    {
+      "name": "ragrevival-1.21.1-1.6.1.jar",
+      "sha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c"
+    },
+    {
+      "name": "sable_player_ragdoll-1.21.1-0.8.1.jar",
+      "sha256": "52231de8cf20713040e948ec41c0813d8b1eab2e7ec327c1ff5da8bdc3ba33fd"
+    },
+    {
+      "name": "sable-neoforge-1.21.1-2.0.6.jar",
+      "sha256": "9c199157843bf953a47dff625fc5bb41c01a90538d35ad18e6996bbcb8a617c2"
+    }
+  ],
+  "userInstanceReadOnly": true,
+  "guiOrScreenCaptureUsed": false,
+  "primaryPorts": [
+    25631,
+    25632
+  ],
+  "controlPorts": [
+    25635,
+    25636
+  ],
+  "suites": [
+    {
+      "name": "modern-corpse",
+      "passed": 88,
+      "failed": 0,
+      "serverTicks": 1387,
+      "summary": "[12Nov2026 17:24:29.279] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASSED passed=88 failed=0 ticks=1387",
+      "process": {
+        "pid": 7820,
+        "started": "2026-11-12T23:23:04.9050849Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "reactions": "0.8.0",
+        "stage": "final5-modern-startup",
+        "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-corpse-1.6.1.log",
+      "rawLog": "final-native.log",
+      "rawLogSha256": "81b977e8fb8ecb1550db981e75fae7081405f01a6eb10c816d2442222249fcb1"
+    },
+    {
+      "name": "relocated-limb",
+      "passed": 33,
+      "failed": 0,
+      "serverTicks": 186,
+      "summary": "[12Nov2026 17:24:39.096] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseRelocationProbe/]: RAGREVIVAL_RELOCATION PASSED passed=33 failed=0 ticks=186",
+      "process": {
+        "pid": 7820,
+        "started": "2026-11-12T23:23:04.9050849Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "reactions": "0.8.0",
+        "stage": "final5-modern-startup",
+        "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-relocation-1.6.1.log",
+      "rawLog": "final-relocation.log",
+      "rawLogSha256": "c0554b2489f8836da54ba1968ed0d74c9c9d3ef1af5b244fe3cea022bae2b7e8"
+    },
+    {
+      "name": "stationary-platform",
+      "passed": 60,
+      "failed": 0,
+      "serverTicks": 991,
+      "summary": "[12Nov2026 17:25:29.190] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseSublevelProbe/]: RAGREVIVAL_SUBLEVEL PASSED passed=60 failed=0 ticks=991 movingDeath=false",
+      "process": {
+        "pid": 7820,
+        "started": "2026-11-12T23:23:04.9050849Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "reactions": "0.8.0",
+        "stage": "final5-modern-startup",
+        "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-platform-stationary-1.6.1.log",
+      "rawLog": "final-sublevel-stationary.log",
+      "rawLogSha256": "a71652575370e44d11fd30a81818b4dee339164d636952c1a4af985b56a3a889"
+    },
+    {
+      "name": "moving-platform",
+      "passed": 60,
+      "failed": 0,
+      "serverTicks": 991,
+      "summary": "[12Nov2026 17:26:19.276] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseSublevelProbe/]: RAGREVIVAL_SUBLEVEL PASSED passed=60 failed=0 ticks=991 movingDeath=true",
+      "process": {
+        "pid": 7820,
+        "started": "2026-11-12T23:23:04.9050849Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "reactions": "0.8.0",
+        "stage": "final5-modern-startup",
+        "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-platform-moving-1.6.1.log",
+      "rawLog": "final-sublevel-moving.log",
+      "rawLogSha256": "2c75e66497aba6f20614590fd20787c027c39a8fb88a7e75f2cb73165b59a7ba"
+    },
+    {
+      "name": "distance-driven-chunk-cycle",
+      "passed": 15,
+      "failed": 0,
+      "serverTicks": 320,
+      "summary": "[12Nov2026 17:26:35.595] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseChunkProbe/]: RAGREVIVAL_CHUNK PASSED passed=15 failed=0 ticks=320 pid=7820",
+      "process": {
+        "pid": 7820,
+        "started": "2026-11-12T23:23:04.9050849Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "reactions": "0.8.0",
+        "stage": "final5-modern-startup",
+        "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-chunk-1.6.1.log",
+      "rawLog": "final-chunk.log",
+      "rawLogSha256": "4b271e2426d16982a69f49d8a8d54f82ee47ee6ee17368ae33acd90a810d74cf"
+    },
+    {
+      "name": "clean-process-restart",
+      "passed": 32,
+      "failed": 0,
+      "serverTicks": 200,
+      "summary": "[12Nov2026 17:27:09.788] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseRestartProbe/]: RAGREVIVAL_RESTART PASSED passed=32 failed=0 ticks=200 pid=10396 priorPid=7820 run=7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2 world=C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server\\world-final-081-080",
+      "process": {
+        "pid": 10396,
+        "started": "2026-11-12T23:26:46.4663426Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragrevival": "1.6.1",
+        "stage": "clean-after",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-restart-clean-1.6.1.log",
+      "rawLog": "final-restart/clean-after.log",
+      "rawLogSha256": "9370c66cf0ef170fe694451cd0df3ac79bb0910ff64c961dd7f647dab4fe8a87"
+    },
+    {
+      "name": "forced-process-restart-after-save",
+      "passed": 32,
+      "failed": 0,
+      "serverTicks": 200,
+      "summary": "[12Nov2026 17:27:38.519] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseRestartProbe/]: RAGREVIVAL_RESTART PASSED passed=32 failed=0 ticks=200 pid=38236 priorPid=10396 run=50185f60-071d-4a39-a3cc-0d3f30b3cb74 world=C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server\\world-final-081-080",
+      "process": {
+        "pid": 38236,
+        "started": "2026-11-12T23:27:15.2294017Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragrevival": "1.6.1",
+        "stage": "crash-after",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-restart-crash-1.6.1.log",
+      "rawLog": "final-restart/crash-after.log",
+      "rawLogSha256": "f39a31d064db0ada04f29e2bb8cc16890426f4ff197c44ff8d5627e5ae32a59e"
+    },
+    {
+      "name": "old-world-upgrade",
+      "passed": 32,
+      "failed": 0,
+      "serverTicks": 200,
+      "summary": "[12Nov2026 17:29:14.495] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseRestartProbe/]: RAGREVIVAL_RESTART PASSED passed=32 failed=0 ticks=200 pid=33484 priorPid=33892 run=22680855-15c5-4f6b-8c88-aaa4989c9664 world=C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server\\legacy-world-final",
+      "process": {
+        "pid": 33484,
+        "started": "2026-11-12T23:28:50.5469237Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "reactions": "0.8.0",
+        "stage": "final-legacy-upgrade",
+        "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "compactLog": "compat-upgrade-1.6.1.log",
+      "rawLog": "final-legacy-upgrade.log",
+      "rawLogSha256": "0a0f68c4b3bd429c6d9d08ac676584efa403e985a55f65b0f454f0432af86db7"
+    },
+    {
+      "name": "old-native-pair-regression",
+      "passed": 88,
+      "failed": 0,
+      "serverTicks": 1387,
+      "summary": "[12Nov2026 17:23:54.000] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASSED passed=88 failed=0 ticks=1387",
+      "process": {
+        "harnessSha256": "8894CF1CE40EBA9205C854233D3DFCE9899AFD3B7D12314B65164874B63E86CC",
+        "corpse": "1.1.22",
+        "ragdolls": "0.7.5",
+        "level": "world-core-old-final",
+        "pid": 10144,
+        "neoForge": "21.1.265",
+        "reactions": "0.7.0",
+        "harnessNote": "Unmodified prior 1.6.0 full harness, filename retained from legacy archive",
+        "started": "2026-11-12T23:22:04.8759749Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\control-075",
+        "productionSha256": "C87156B4623C4B4DCC7D4D2734F8788CBB32C1F567015C1644C738AD67C6BC9C",
+        "corpseCompatResult": "PASSED 88/88, 1387 ticks; unmodified prior full harness",
+        "scope": "Original native old API: death, inventories, normal transfer, skeleton permissions, lava and void, physics rest/wake, actual grab packets and spring movement, Carry On safety, unload/reload, marker cleanup, obsolete cap ignored",
+        "stopped": true,
+        "stoppedAt": "2026-11-12T23:24:20.148604Z"
+      },
+      "compactLog": "compat-old-pair-1.6.1.log",
+      "rawLog": "final5-old-deps-corpse88.log",
+      "rawLogSha256": "fe261c2647defa7e7843d2fb86b0a60fde7e7271af5c90540736c1c2a3319f9a"
+    },
+    {
+      "name": "modern-no-corpse-nearby-revival",
+      "passed": 125,
+      "failed": 0,
+      "serverTicks": 917,
+      "summary": "[12Nov2026 17:26:44.643] [Server thread/INFO] [com.biguzi.ragrevival.test.NearbyRevivalProbe/]: RAGREVIVAL_NEARBY PASSED passed=125 failed=0 ticks=917",
+      "process": {
+        "productionSha256": "C87156B4623C4B4DCC7D4D2734F8788CBB32C1F567015C1644C738AD67C6BC9C",
+        "reactions": "0.8.0",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "level": "world-final-core-081",
+        "pid": 32912,
+        "sourceHarnessSha256": "82940C753BF88E4A4F789AE6F844DF3E55DB13BFEDF2F475DE371AAD10A5733F",
+        "excludedOptionalClasses": 24,
+        "harnessNote": "Core-only copy excludes optional Corpse/ClientCorpse/AccessoriesManual probe classes; core bytecode unchanged",
+        "harnessSha256": "DA1C247C89DB7B825502C4B742520C2407ACF2C9F4DB45D55F6F882FEBF88A51",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\control-075",
+        "corpsePresent": false,
+        "started": "2026-11-12T23:25:25.720154Z",
+        "nearbyResult": "PASSED 125/125, 917 ticks",
+        "featuresResult": "PASSED 81/81, 376 ticks",
+        "stopped": true,
+        "stoppedAt": "2026-11-12T23:27:46.2236543Z"
+      },
+      "compactLog": "compat-nearby-1.6.1.log",
+      "rawLog": "final5-no-corpse-core-complete.log",
+      "rawLogSha256": "9712881f3e8ddce1e1c004b2a6df002eb6bbfee04037d384b1d7e5a4d2bdbe78"
+    },
+    {
+      "name": "modern-no-corpse-features",
+      "passed": 81,
+      "failed": 0,
+      "serverTicks": 376,
+      "summary": "[12Nov2026 17:27:24.473] [Server thread/INFO] [com.biguzi.ragrevival.test.RevivalFeatureProbe/]: RAGREVIVAL_FEATURE PASSED passed=81 failed=0 ticks=376",
+      "process": {
+        "productionSha256": "C87156B4623C4B4DCC7D4D2734F8788CBB32C1F567015C1644C738AD67C6BC9C",
+        "reactions": "0.8.0",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "level": "world-final-core-081",
+        "pid": 32912,
+        "sourceHarnessSha256": "82940C753BF88E4A4F789AE6F844DF3E55DB13BFEDF2F475DE371AAD10A5733F",
+        "excludedOptionalClasses": 24,
+        "harnessNote": "Core-only copy excludes optional Corpse/ClientCorpse/AccessoriesManual probe classes; core bytecode unchanged",
+        "harnessSha256": "DA1C247C89DB7B825502C4B742520C2407ACF2C9F4DB45D55F6F882FEBF88A51",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\control-075",
+        "corpsePresent": false,
+        "started": "2026-11-12T23:25:25.720154Z",
+        "nearbyResult": "PASSED 125/125, 917 ticks",
+        "featuresResult": "PASSED 81/81, 376 ticks",
+        "stopped": true,
+        "stoppedAt": "2026-11-12T23:27:46.2236543Z"
+      },
+      "compactLog": "compat-features-1.6.1.log",
+      "rawLog": "final5-no-corpse-core-complete.log",
+      "rawLogSha256": "9712881f3e8ddce1e1c004b2a6df002eb6bbfee04037d384b1d7e5a4d2bdbe78"
+    }
+  ],
+  "restarts": [
+    {
+      "mode": "clean",
+      "manifest": {
+        "pid": 7820,
+        "runId": "7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2",
+        "world": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server\\world-final-081-080",
+        "phase": "clean-stopping",
+        "gameTime": 4120,
+        "savedNativeParts": 12,
+        "fixtures": [
+          {
+            "case": "settled-skeleton",
+            "uuid": "66241e7e-d942-405b-93e2-e3429189d381",
+            "deathId": "b467e70a-960c-4ac5-aea8-3145f9bcacd8",
+            "skeleton": true,
+            "x": 2.4558841507912375,
+            "y": 239.98278926774208,
+            "z": 2.496253364342341,
+            "pose": "{active:1b,parts:[{block:5629783292103393408L,limb:[I;-488232159,67388542,-1879726499,-558151600],qw:0.7066437602043152d,qx:-0.6241579651832581d,qy:-0.24811193346977234d,qz:-0.2225351780653d,sublevel:[I;-488232159,67388542,-1879726499,-558151600],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3704148013114237d,y:0.27978397444542225d,z:-0.4650582006155344d},{block:5629783292111782016L,limb:[I;871720699,-1220918738,-1573394117,1084475068],qw:0.7144830226898193d,qx:-0.6184998154640198d,qy:-0.2473614513874054d,qz:-0.2139725685119629d,sublevel:[I;871720699,-1220918738,-1573394117,1084475068],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.0d,y:0.19954678386403657d,z:0.0d},{block:5629783292120170624L,limb:[I;874479595,1728529483,-1928168994,136430507],qw:0.7227053046226501d,qx:-0.6097838282585144d,qy:-0.24830372631549835d,qz:-0.21025250852108002d,sublevel:[I;874479595,1728529483,-1928168994,136430507],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3317817956711755d,y:0.19220744337903284d,z:0.2591684887919903d},{block:5629783292128559232L,limb:[I;-472176654,394020308,-1985338882,-1372050373],qw:0.7211023569107056d,qx:-0.609101414680481d,qy:-0.2518908381462097d,qz:-0.21344289183616638d,sublevel:[I;-472176654,394020308,-1985338882,-1372050373],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.23695175809905278d,y:0.19233600117115657d,z:-0.18723880208194554d},{block:5629783292136947840L,limb:[I;-772487895,-694203478,-1103710510,474275126],qw:0.6678026914596558d,qx:-0.667791485786438d,qy:-0.23246639966964722d,qz:-0.232494056224823d,sublevel:[I;-772487895,-694203478,-1103710510,474275126],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.28977040354509054d,y:0.1422080979999123d,z:0.6579448106472561d},{block:5629783292145336448L,limb:[I;-1222464995,-1775285770,-1894852437,-797914045],qw:0.6691400408744812d,qx:-0.6691382527351379d,qy:-0.22856728732585907d,qz:-0.22861044108867645d,sublevel:[I;-1222464995,-1775285770,-1894852437,-797914045],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.47541113246265243d,y:0.14220707168081503d,z:0.5113831379365346d}],root:[I;871720699,-1220918738,-1573394117,1084475068]}",
+            "death": "{ArmorInventory:[{Slot:2,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Experience:0,Id:[I;-1268259062,-1777579323,-1364709051,-105075496],Items:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:4,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;178389500,1977437469,-1538945466,-2091645108],PosX:2.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526000210L}",
+            "equipment": "[{},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{},{},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{},{}]",
+            "entity": "{Age:72124,Air:300s,Death:{ArmorInventory:[{Slot:2,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Experience:0,Id:[I;-1268259062,-1777579323,-1364709051,-105075496],Items:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:4,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;178389500,1977437469,-1538945466,-2091645108],PosX:2.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526000210L},FallDistance:0.0f,Fire:-1s,Invulnerable:0b,Motion:[0.0d,0.0d,0.0d],NeoForgeData:{\"ragrevival:restart_fixture\":\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2\",restartCase:\"settled-skeleton\"},OnGround:0b,PortalCooldown:0,Pos:[2.4558841507912375d,239.98278926774208d,2.496253364342341d],Rotation:[0.0f,0.0f],UUID:[I;1713643134,-649969573,-1813847230,-1853238399],\"ragrevival:corpse_equipment\":[{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},Slot:1},{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},Slot:4}],\"ragrevival:corpse_pose\":{active:1b,parts:[{block:5629783292103393408L,limb:[I;-488232159,67388542,-1879726499,-558151600],qw:0.7066437602043152d,qx:-0.6241579651832581d,qy:-0.24811193346977234d,qz:-0.2225351780653d,sublevel:[I;-488232159,67388542,-1879726499,-558151600],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3704148013114237d,y:0.27978397444542225d,z:-0.4650582006155344d},{block:5629783292111782016L,limb:[I;871720699,-1220918738,-1573394117,1084475068],qw:0.7144830226898193d,qx:-0.6184998154640198d,qy:-0.2473614513874054d,qz:-0.2139725685119629d,sublevel:[I;871720699,-1220918738,-1573394117,1084475068],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.0d,y:0.19954678386403657d,z:0.0d},{block:5629783292120170624L,limb:[I;874479595,1728529483,-1928168994,136430507],qw:0.7227053046226501d,qx:-0.6097838282585144d,qy:-0.24830372631549835d,qz:-0.21025250852108002d,sublevel:[I;874479595,1728529483,-1928168994,136430507],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3317817956711755d,y:0.19220744337903284d,z:0.2591684887919903d},{block:5629783292128559232L,limb:[I;-472176654,394020308,-1985338882,-1372050373],qw:0.7211023569107056d,qx:-0.609101414680481d,qy:-0.2518908381462097d,qz:-0.21344289183616638d,sublevel:[I;-472176654,394020308,-1985338882,-1372050373],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.23695175809905278d,y:0.19233600117115657d,z:-0.18723880208194554d},{block:5629783292136947840L,limb:[I;-772487895,-694203478,-1103710510,474275126],qw:0.6678026914596558d,qx:-0.667791485786438d,qy:-0.23246639966964722d,qz:-0.232494056224823d,sublevel:[I;-772487895,-694203478,-1103710510,474275126],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.28977040354509054d,y:0.1422080979999123d,z:0.6579448106472561d},{block:5629783292145336448L,limb:[I;-1222464995,-1775285770,-1894852437,-797914045],qw:0.6691400408744812d,qx:-0.6691382527351379d,qy:-0.22856728732585907d,qz:-0.22861044108867645d,sublevel:[I;-1222464995,-1775285770,-1894852437,-797914045],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.47541113246265243d,y:0.14220707168081503d,z:0.5113831379365346d}],root:[I;871720699,-1220918738,-1573394117,1084475068]}}"
+          },
+          {
+            "case": "active-player",
+            "uuid": "798b0260-ce86-4d87-8f7e-22f9a8720c2d",
+            "deathId": "40137b03-749a-4770-9cd1-c7116d06ff33",
+            "skeleton": false,
+            "x": 10.503290427503185,
+            "y": 239.9683615867246,
+            "z": 1.2578952618726909,
+            "pose": "{active:1b,parts:[{block:5629783292153725056L,limb:[I;1180685084,458901759,-1128666778,1064847879],qw:0.7875105142593384d,qx:-0.6162960529327393d,qy:-0.0023687323555350304d,qz:-9.325432474724948E-4d,sublevel:[I;1180685084,458901759,-1128666778,1064847879],vx:-2.6946974685415626E-4d,vy:7.552111492259428E-5d,vz:-4.874548758380115E-4d,wx:-0.0017957494128495455d,wy:0.0d,wz:9.410336497239769E-4d,x:-4.227288337510515E-4d,y:0.3031227882754024d,z:-0.5899918385633647d},{block:5629783292162113664L,limb:[I;-150902369,-373013452,-2017361714,421865757],qw:0.7455808520317078d,qx:-0.6664106845855713d,qy:0.001913580228574574d,qz:0.0015587288653478026d,sublevel:[I;-150902369,-373013452,-2017361714,421865757],vx:-1.307413913309574E-4d,vy:-9.072198299691081E-4d,vz:-1.1373261804692447E-4d,wx:-0.001648580888286233d,wy:-5.816452321596444E-4d,wz:0.003593837609514594d,x:0.0d,y:0.20128476823595065d,z:0.0d},{block:5629783292178890880L,limb:[I;-1369226984,-1340191729,-2131326576,-394044641],qw:0.7486610412597656d,qx:-0.6581777334213257d,qy:0.06201104447245598d,qz:0.04963357001543045d,sublevel:[I;-1369226984,-1340191729,-2131326576,-394044641],vx:-0.00891580805182457d,vy:-0.0038334091659635305d,vz:5.045963334850967E-4d,wx:0.03136518597602844d,wy:-0.04742305353283882d,wz:0.13553352653980255d,x:0.464561292450659d,y:0.19570173095215182d,z:-0.015570906219294134d},{block:5629783292187279488L,limb:[I;1523898404,-1999027764,-1544490229,-1512323893],qw:0.7521281838417053d,qx:-0.6590061783790588d,qy:0.0013688983162865043d,qz:0.003501410596072674d,sublevel:[I;1523898404,-1999027764,-1544490229,-1512323893],vx:-1.0751426452770829E-4d,vy:-0.0016303103184327483d,vz:-9.151509148068726E-4d,wx:-0.005579980555921793d,wy:-1.4519247783228995E-11d,wz:7.727401680313051E-4d,x:-0.2993365438932951d,y:0.1956884560648291d,z:6.595379340703644E-4d},{block:5629783292195668096L,limb:[I;-1253395399,-1349235148,-1800756242,-947847373],qw:0.7069494128227234d,qx:-0.7070757150650024d,qy:-0.011525423265993595d,qz:-0.01155979186296463d,sublevel:[I;-1253395399,-1349235148,-1800756242,-947847373],vx:-9.168161341222003E-5d,vy:4.427660314831883E-5d,vz:-1.0100754479935858E-5d,wx:-7.700268906774E-5d,wy:1.2679568328621826E-7d,wz:7.380376337096095E-4d,x:0.17208558149235387d,y:0.15658978176165306d,z:0.7009498020932228d},{block:5629783292204056704L,limb:[I;671812554,-772389038,-1648991152,719009646],qw:0.7070586085319519d,qx:-0.7071345448493958d,qy:0.0037484688218683004d,qz:0.003852158086374402d,sublevel:[I;671812554,-772389038,-1648991152,719009646],vx:-6.208496051840484E-5d,vy:3.3985619666054845E-5d,vz:1.1959264156757854E-5d,wx:9.301859245169908E-5d,wy:4.906235417934113E-8d,wz:4.8816052731126547E-4d,x:-0.05482106208605764d,y:0.15661702441477132d,z:0.6977631206654389d}],root:[I;-150902369,-373013452,-2017361714,421865757]}",
+            "death": "{ArmorInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{Slot:1,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{Slot:2,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{Slot:3,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Experience:0,Id:[I;1075018499,1956267888,-1663973615,1829175091],Items:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;178389500,1977437469,-1538945466,-2091645108],PosX:10.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526000215L}",
+            "equipment": "[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},{}]",
+            "entity": "{Age:104,Air:300s,Death:{ArmorInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{Slot:1,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{Slot:2,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{Slot:3,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Experience:0,Id:[I;1075018499,1956267888,-1663973615,1829175091],Items:[{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;178389500,1977437469,-1538945466,-2091645108],PosX:10.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526000215L},FallDistance:0.0f,Fire:-1s,Invulnerable:0b,Motion:[0.0d,0.0d,0.0d],NeoForgeData:{\"ragrevival:restart_fixture\":\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2\",restartCase:\"active-player\"},OnGround:0b,PortalCooldown:0,Pos:[10.503290427503185d,239.9683615867246d,1.2578952618726909d],Rotation:[0.0f,0.0f],UUID:[I;2039153248,-830059129,-1887558919,-1468920787],\"ragrevival:corpse_equipment\":[{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},Slot:0},{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:shield\"'},count:1,id:\"minecraft:shield\"},Slot:1},{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},Slot:2},{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},Slot:3},{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},Slot:4},{Item:{components:{\"minecraft:custom_name\":'\"7e61e081-1d8c-4fe1-aaa0-98ee2efaadd2:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},Slot:5}],\"ragrevival:corpse_pose\":{active:1b,parts:[{block:5629783292153725056L,limb:[I;1180685084,458901759,-1128666778,1064847879],qw:0.7875105142593384d,qx:-0.6162960529327393d,qy:-0.0023687323555350304d,qz:-9.325432474724948E-4d,sublevel:[I;1180685084,458901759,-1128666778,1064847879],vx:-2.6946974685415626E-4d,vy:7.552111492259428E-5d,vz:-4.874548758380115E-4d,wx:-0.0017957494128495455d,wy:0.0d,wz:9.410336497239769E-4d,x:-4.227288337510515E-4d,y:0.3031227882754024d,z:-0.5899918385633647d},{block:5629783292162113664L,limb:[I;-150902369,-373013452,-2017361714,421865757],qw:0.7455808520317078d,qx:-0.6664106845855713d,qy:0.001913580228574574d,qz:0.0015587288653478026d,sublevel:[I;-150902369,-373013452,-2017361714,421865757],vx:-1.307413913309574E-4d,vy:-9.072198299691081E-4d,vz:-1.1373261804692447E-4d,wx:-0.001648580888286233d,wy:-5.816452321596444E-4d,wz:0.003593837609514594d,x:0.0d,y:0.20128476823595065d,z:0.0d},{block:5629783292178890880L,limb:[I;-1369226984,-1340191729,-2131326576,-394044641],qw:0.7486610412597656d,qx:-0.6581777334213257d,qy:0.06201104447245598d,qz:0.04963357001543045d,sublevel:[I;-1369226984,-1340191729,-2131326576,-394044641],vx:-0.00891580805182457d,vy:-0.0038334091659635305d,vz:5.045963334850967E-4d,wx:0.03136518597602844d,wy:-0.04742305353283882d,wz:0.13553352653980255d,x:0.464561292450659d,y:0.19570173095215182d,z:-0.015570906219294134d},{block:5629783292187279488L,limb:[I;1523898404,-1999027764,-1544490229,-1512323893],qw:0.7521281838417053d,qx:-0.6590061783790588d,qy:0.0013688983162865043d,qz:0.003501410596072674d,sublevel:[I;1523898404,-1999027764,-1544490229,-1512323893],vx:-1.0751426452770829E-4d,vy:-0.0016303103184327483d,vz:-9.151509148068726E-4d,wx:-0.005579980555921793d,wy:-1.4519247783228995E-11d,wz:7.727401680313051E-4d,x:-0.2993365438932951d,y:0.1956884560648291d,z:6.595379340703644E-4d},{block:5629783292195668096L,limb:[I;-1253395399,-1349235148,-1800756242,-947847373],qw:0.7069494128227234d,qx:-0.7070757150650024d,qy:-0.011525423265993595d,qz:-0.01155979186296463d,sublevel:[I;-1253395399,-1349235148,-1800756242,-947847373],vx:-9.168161341222003E-5d,vy:4.427660314831883E-5d,vz:-1.0100754479935858E-5d,wx:-7.700268906774E-5d,wy:1.2679568328621826E-7d,wz:7.380376337096095E-4d,x:0.17208558149235387d,y:0.15658978176165306d,z:0.7009498020932228d},{block:5629783292204056704L,limb:[I;671812554,-772389038,-1648991152,719009646],qw:0.7070586085319519d,qx:-0.7071345448493958d,qy:0.0037484688218683004d,qz:0.003852158086374402d,sublevel:[I;671812554,-772389038,-1648991152,719009646],vx:-6.208496051840484E-5d,vy:3.3985619666054845E-5d,vz:1.1959264156757854E-5d,wx:9.301859245169908E-5d,wy:4.906235417934113E-8d,wz:4.8816052731126547E-4d,x:-0.05482106208605764d,y:0.15661702441477132d,z:0.6977631206654389d}],root:[I;-150902369,-373013452,-2017361714,421865757]}}"
+          }
+        ]
+      },
+      "manifestSha256": "e5c14902b66c195f1ffabfcf77b2959e7e9a5df08f7cc2e1c15fe975e37f2cfe",
+      "beforeProcess": {
+        "pid": 7820,
+        "started": "2026-11-12T23:23:04.9050849Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragdolls": "0.8.1",
+        "reactions": "0.8.0",
+        "stage": "final5-modern-startup",
+        "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "afterProcess": {
+        "pid": 10396,
+        "started": "2026-11-12T23:26:46.4663426Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragrevival": "1.6.1",
+        "stage": "clean-after",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      }
+    },
+    {
+      "mode": "crash",
+      "manifest": {
+        "pid": 10396,
+        "runId": "50185f60-071d-4a39-a3cc-0d3f30b3cb74",
+        "world": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server\\world-final-081-080",
+        "phase": "crash-ready",
+        "gameTime": 4426,
+        "savedNativeParts": 12,
+        "fixtures": [
+          {
+            "case": "settled-skeleton",
+            "uuid": "6c74ddad-3031-4fb6-ad4f-2c9292b70d10",
+            "deathId": "1c783ff3-f78d-413a-9d89-bc89962f3c3a",
+            "skeleton": true,
+            "x": 2.4558841507912375,
+            "y": 239.98278926774208,
+            "z": 2.496253364342341,
+            "pose": "{active:1b,parts:[{block:5629783292103393408L,limb:[I;686547925,-2058730112,-1370238711,1889442025],qw:0.7066437602043152d,qx:-0.6241579651832581d,qy:-0.24811193346977234d,qz:-0.2225351780653d,sublevel:[I;686547925,-2058730112,-1370238711,1889442025],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3704148013114237d,y:0.27978397444542225d,z:-0.4650582006155344d},{block:5629783292111782016L,limb:[I;1327983149,-2125967873,-1423674322,-1547721914],qw:0.7144830226898193d,qx:-0.6184998154640198d,qy:-0.2473614513874054d,qz:-0.2139725685119629d,sublevel:[I;1327983149,-2125967873,-1423674322,-1547721914],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.0d,y:0.19954678386403657d,z:0.0d},{block:5629783292120170624L,limb:[I;186987409,-1574681263,-1113375071,-726536406],qw:0.7227053046226501d,qx:-0.6097838282585144d,qy:-0.24830372631549835d,qz:-0.21025250852108002d,sublevel:[I;186987409,-1574681263,-1113375071,-726536406],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3317817956711755d,y:0.19220744337903284d,z:0.2591684887919903d},{block:5629783292128559232L,limb:[I;-1239249430,-47821033,-1107264932,-961919550],qw:0.7211023569107056d,qx:-0.609101414680481d,qy:-0.2518908381462097d,qz:-0.21344289183616638d,sublevel:[I;-1239249430,-47821033,-1107264932,-961919550],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.23695175809905278d,y:0.19233600117115657d,z:-0.18723880208194554d},{block:5629783292136947840L,limb:[I;244360227,-386118084,-1774663591,-20684762],qw:0.6678026914596558d,qx:-0.667791485786438d,qy:-0.23246639966964722d,qz:-0.232494056224823d,sublevel:[I;244360227,-386118084,-1774663591,-20684762],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.28977040354509054d,y:0.1422080979999123d,z:0.6579448106472561d},{block:5629783292145336448L,limb:[I;1802950169,-1706997948,-1205288729,918863596],qw:0.6691400408744812d,qx:-0.6691382527351379d,qy:-0.22856728732585907d,qz:-0.22861044108867645d,sublevel:[I;1802950169,-1706997948,-1205288729,918863596],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.47541113246265243d,y:0.14220707168081503d,z:0.5113831379365346d}],root:[I;1327983149,-2125967873,-1423674322,-1547721914]}",
+            "death": "{ArmorInventory:[{Slot:2,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Experience:0,Id:[I;477642739,-141737670,-1651917687,-1775289286],Items:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:4,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;-1820428838,-495631516,-1388666678,-1989615279],PosX:2.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526029980L}",
+            "equipment": "[{},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{},{},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{},{}]",
+            "entity": "{Age:72120,Air:300s,Death:{ArmorInventory:[{Slot:2,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Experience:0,Id:[I;477642739,-141737670,-1651917687,-1775289286],Items:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:4,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;-1820428838,-495631516,-1388666678,-1989615279],PosX:2.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526029980L},FallDistance:0.0f,Fire:-1s,Invulnerable:0b,Motion:[0.0d,0.0d,0.0d],NeoForgeData:{\"ragrevival:restart_fixture\":\"50185f60-071d-4a39-a3cc-0d3f30b3cb74\",restartCase:\"settled-skeleton\"},OnGround:0b,PortalCooldown:0,Pos:[2.4558841507912375d,239.98278926774208d,2.496253364342341d],Rotation:[0.0f,0.0f],UUID:[I;1819598253,808538038,-1387320174,-1833497328],\"ragrevival:corpse_equipment\":[{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},Slot:1},{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},Slot:4}],\"ragrevival:corpse_pose\":{active:1b,parts:[{block:5629783292103393408L,limb:[I;686547925,-2058730112,-1370238711,1889442025],qw:0.7066437602043152d,qx:-0.6241579651832581d,qy:-0.24811193346977234d,qz:-0.2225351780653d,sublevel:[I;686547925,-2058730112,-1370238711,1889442025],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3704148013114237d,y:0.27978397444542225d,z:-0.4650582006155344d},{block:5629783292111782016L,limb:[I;1327983149,-2125967873,-1423674322,-1547721914],qw:0.7144830226898193d,qx:-0.6184998154640198d,qy:-0.2473614513874054d,qz:-0.2139725685119629d,sublevel:[I;1327983149,-2125967873,-1423674322,-1547721914],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.0d,y:0.19954678386403657d,z:0.0d},{block:5629783292120170624L,limb:[I;186987409,-1574681263,-1113375071,-726536406],qw:0.7227053046226501d,qx:-0.6097838282585144d,qy:-0.24830372631549835d,qz:-0.21025250852108002d,sublevel:[I;186987409,-1574681263,-1113375071,-726536406],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.3317817956711755d,y:0.19220744337903284d,z:0.2591684887919903d},{block:5629783292128559232L,limb:[I;-1239249430,-47821033,-1107264932,-961919550],qw:0.7211023569107056d,qx:-0.609101414680481d,qy:-0.2518908381462097d,qz:-0.21344289183616638d,sublevel:[I;-1239249430,-47821033,-1107264932,-961919550],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.23695175809905278d,y:0.19233600117115657d,z:-0.18723880208194554d},{block:5629783292136947840L,limb:[I;244360227,-386118084,-1774663591,-20684762],qw:0.6678026914596558d,qx:-0.667791485786438d,qy:-0.23246639966964722d,qz:-0.232494056224823d,sublevel:[I;244360227,-386118084,-1774663591,-20684762],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.28977040354509054d,y:0.1422080979999123d,z:0.6579448106472561d},{block:5629783292145336448L,limb:[I;1802950169,-1706997948,-1205288729,918863596],qw:0.6691400408744812d,qx:-0.6691382527351379d,qy:-0.22856728732585907d,qz:-0.22861044108867645d,sublevel:[I;1802950169,-1706997948,-1205288729,918863596],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.47541113246265243d,y:0.14220707168081503d,z:0.5113831379365346d}],root:[I;1327983149,-2125967873,-1423674322,-1547721914]}}"
+          },
+          {
+            "case": "active-player",
+            "uuid": "5722b224-6a9d-418c-92e4-c6c861c06b72",
+            "deathId": "aadabfe0-5bce-482b-b403-543f2c686e91",
+            "skeleton": false,
+            "x": 10.503870005052764,
+            "y": 239.96711182808738,
+            "z": 1.2601778386275309,
+            "pose": "{active:1b,parts:[{block:5629783292153725056L,limb:[I;1587056919,-1189851276,-1504228773,-1805865072],qw:0.7904267907142639d,qx:-0.6125488877296448d,qy:-0.0028430952224880457d,qz:-0.00116354797501117d,sublevel:[I;1587056919,-1189851276,-1504228773,-1805865072],vx:-7.301086443476379E-4d,vy:1.7771466809790581E-4d,vz:-0.001922374707646668d,wx:-0.00704183429479599d,wy:-8.711548843409744E-11d,wz:0.002589120762422681d,x:0.003034596998016781d,y:0.3048913457407423d,z:-0.5894610760848062d},{block:5629783292162113664L,limb:[I;-2084866105,-263107853,-1719738570,1094591235],qw:0.7446690201759338d,qx:-0.6674296259880066d,qy:-0.0014227366773411632d,qz:-0.00194175960496068d,sublevel:[I;-2084866105,-263107853,-1719738570,1094591235],vx:-7.772401440888643E-4d,vy:-0.0014015348860993981d,vz:-5.636652931571007E-4d,wx:-0.00931848306208849d,wy:0.0035430830903351307d,wz:-0.03069208934903145d,x:0.0d,y:0.20151871151492173d,z:0.0d},{block:5629783292170502272L,limb:[I;484960511,1993622405,-1144017626,-1598544295],qw:0.7471716403961182d,qx:-0.6598302721977234d,qy:0.06357106566429138d,qz:0.04814000055193901d,sublevel:[I;484960511,1993622405,-1144017626,-1598544295],vx:0.015335259027779102d,vy:5.817278870381415E-4d,vz:-0.004456742201000452d,wx:-0.08912374079227448d,wy:0.08627497404813766d,wz:-0.23962688446044922d,x:0.46742587372197164d,y:0.1957762671621026d,z:-0.012043818973396903d},{block:5629783292178890880L,limb:[I;492315348,-71286605,-1333606306,534453302],qw:0.7513158321380615d,qx:-0.6599389910697937d,qy:2.5651644682511687E-4d,qz:0.0022226842120289803d,sublevel:[I;492315348,-71286605,-1333606306,534453302],vx:-6.793333450332284E-4d,vy:0.0029294274281710386d,vz:-0.0011176964035257697d,wx:0.009781542234122753d,wy:2.903849556645799E-11d,wz:0.0018840031698346138d,x:-0.2974535470782804d,y:0.19607013826532693d,z:-0.002592691693171778d},{block:5629783292187279488L,limb:[I;-331381419,787301643,-1886100567,-598074524],qw:0.7070317268371582d,qx:-0.7070661783218384d,qy:-0.008974778465926647d,qz:-0.00911665614694357d,sublevel:[I;-331381419,787301643,-1886100567,-598074524],vx:-3.8939062505960464E-4d,vy:1.3936132017988712E-4d,vz:-1.601199764991179E-4d,wx:-0.0012758123921230435d,wy:-5.081736767498235E-11d,wz:0.003040310461074114d,x:0.17036776955757205d,y:0.15784515398235044d,z:0.700857757793981d},{block:5629783292195668096L,limb:[I;1063963807,1762151078,-1298616610,1721123984],qw:0.7071506977081299d,qx:-0.7070431709289551d,qy:0.003670123405754566d,qz:0.003805735381320119d,sublevel:[I;1063963807,1762151078,-1298616610,1721123984],vx:-9.089912055060267E-4d,vy:0.0015385111328214407d,vz:-2.8423140975064598E-5d,wx:0.002916947240009904d,wy:2.5319825454062084E-6d,wz:0.009174760431051254d,x:-0.05874505837390309d,y:0.15788494971471323d,z:0.6973092761668747d}],root:[I;-2084866105,-263107853,-1719738570,1094591235]}",
+            "death": "{ArmorInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{Slot:1,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{Slot:2,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{Slot:3,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Experience:0,Id:[I;-1428504608,1540245547,-1274850241,745041553],Items:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;-1820428838,-495631516,-1388666678,-1989615279],PosX:10.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526029984L}",
+            "equipment": "[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},{}]",
+            "entity": "{Age:100,Air:300s,Death:{ArmorInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{Slot:1,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{Slot:2,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{Slot:3,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Experience:0,Id:[I;-1428504608,1540245547,-1274850241,745041553],Items:[{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;-1820428838,-495631516,-1388666678,-1989615279],PosX:10.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526029984L},FallDistance:0.0f,Fire:-1s,Invulnerable:0b,Motion:[0.0d,0.0d,0.0d],NeoForgeData:{\"ragrevival:restart_fixture\":\"50185f60-071d-4a39-a3cc-0d3f30b3cb74\",restartCase:\"active-player\"},OnGround:0b,PortalCooldown:0,Pos:[10.503870005052764d,239.96711182808738d,1.2601778386275309d],Rotation:[0.0f,0.0f],UUID:[I;1461891620,1788690828,-1830500664,1640000370],\"ragrevival:corpse_equipment\":[{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},Slot:0},{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:shield\"'},count:1,id:\"minecraft:shield\"},Slot:1},{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},Slot:2},{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},Slot:3},{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},Slot:4},{Item:{components:{\"minecraft:custom_name\":'\"50185f60-071d-4a39-a3cc-0d3f30b3cb74:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},Slot:5}],\"ragrevival:corpse_pose\":{active:1b,parts:[{block:5629783292153725056L,limb:[I;1587056919,-1189851276,-1504228773,-1805865072],qw:0.7904267907142639d,qx:-0.6125488877296448d,qy:-0.0028430952224880457d,qz:-0.00116354797501117d,sublevel:[I;1587056919,-1189851276,-1504228773,-1805865072],vx:-7.301086443476379E-4d,vy:1.7771466809790581E-4d,vz:-0.001922374707646668d,wx:-0.00704183429479599d,wy:-8.711548843409744E-11d,wz:0.002589120762422681d,x:0.003034596998016781d,y:0.3048913457407423d,z:-0.5894610760848062d},{block:5629783292162113664L,limb:[I;-2084866105,-263107853,-1719738570,1094591235],qw:0.7446690201759338d,qx:-0.6674296259880066d,qy:-0.0014227366773411632d,qz:-0.00194175960496068d,sublevel:[I;-2084866105,-263107853,-1719738570,1094591235],vx:-7.772401440888643E-4d,vy:-0.0014015348860993981d,vz:-5.636652931571007E-4d,wx:-0.00931848306208849d,wy:0.0035430830903351307d,wz:-0.03069208934903145d,x:0.0d,y:0.20151871151492173d,z:0.0d},{block:5629783292170502272L,limb:[I;484960511,1993622405,-1144017626,-1598544295],qw:0.7471716403961182d,qx:-0.6598302721977234d,qy:0.06357106566429138d,qz:0.04814000055193901d,sublevel:[I;484960511,1993622405,-1144017626,-1598544295],vx:0.015335259027779102d,vy:5.817278870381415E-4d,vz:-0.004456742201000452d,wx:-0.08912374079227448d,wy:0.08627497404813766d,wz:-0.23962688446044922d,x:0.46742587372197164d,y:0.1957762671621026d,z:-0.012043818973396903d},{block:5629783292178890880L,limb:[I;492315348,-71286605,-1333606306,534453302],qw:0.7513158321380615d,qx:-0.6599389910697937d,qy:2.5651644682511687E-4d,qz:0.0022226842120289803d,sublevel:[I;492315348,-71286605,-1333606306,534453302],vx:-6.793333450332284E-4d,vy:0.0029294274281710386d,vz:-0.0011176964035257697d,wx:0.009781542234122753d,wy:2.903849556645799E-11d,wz:0.0018840031698346138d,x:-0.2974535470782804d,y:0.19607013826532693d,z:-0.002592691693171778d},{block:5629783292187279488L,limb:[I;-331381419,787301643,-1886100567,-598074524],qw:0.7070317268371582d,qx:-0.7070661783218384d,qy:-0.008974778465926647d,qz:-0.00911665614694357d,sublevel:[I;-331381419,787301643,-1886100567,-598074524],vx:-3.8939062505960464E-4d,vy:1.3936132017988712E-4d,vz:-1.601199764991179E-4d,wx:-0.0012758123921230435d,wy:-5.081736767498235E-11d,wz:0.003040310461074114d,x:0.17036776955757205d,y:0.15784515398235044d,z:0.700857757793981d},{block:5629783292195668096L,limb:[I;1063963807,1762151078,-1298616610,1721123984],qw:0.7071506977081299d,qx:-0.7070431709289551d,qy:0.003670123405754566d,qz:0.003805735381320119d,sublevel:[I;1063963807,1762151078,-1298616610,1721123984],vx:-9.089912055060267E-4d,vy:0.0015385111328214407d,vz:-2.8423140975064598E-5d,wx:0.002916947240009904d,wy:2.5319825454062084E-6d,wz:0.009174760431051254d,x:-0.05874505837390309d,y:0.15788494971471323d,z:0.6973092761668747d}],root:[I;-2084866105,-263107853,-1719738570,1094591235]}}"
+          }
+        ]
+      },
+      "manifestSha256": "a6f6e3e1c9849782cf0933553a3a958e2892bf137ae788ea96d158d24dda644a",
+      "beforeProcess": {
+        "pid": 10396,
+        "started": "2026-11-12T23:26:46.4663426Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragrevival": "1.6.1",
+        "stage": "clean-after",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      },
+      "afterProcess": {
+        "pid": 38236,
+        "started": "2026-11-12T23:27:15.2294017Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+        "neoForge": "21.1.265",
+        "ragrevival": "1.6.1",
+        "stage": "crash-after",
+        "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+        "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+      }
+    }
+  ],
+  "oldWorldUpgrade": {
+    "copiedWorld": {
+      "source": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265\\world-native-1.6.0-carryon",
+      "destination": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server\\legacy-world-final",
+      "copiedUtc": "2026-11-12T23:21:50.9883765Z",
+      "sourceLevelDatSha256": "dd755d87592a011df980d5c9266cc0ebd93176de31f1449d03b20a27b03f8ca2",
+      "copyLevelDatSha256": "dd755d87592a011df980d5c9266cc0ebd93176de31f1449d03b20a27b03f8ca2",
+      "sourceManifestSha256": "0484d0d18f71c5ace7aeb503d2bc555b6ea1b7ae93c0860a4fc88accc59dc951",
+      "copyManifestSha256": "0484d0d18f71c5ace7aeb503d2bc555b6ea1b7ae93c0860a4fc88accc59dc951"
+    },
+    "manifest": {
+      "pid": 33892,
+      "runId": "22680855-15c5-4f6b-8c88-aaa4989c9664",
+      "world": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server\\legacy-world-final",
+      "phase": "clean-stopping",
+      "gameTime": 12055,
+      "savedNativeParts": 12,
+      "fixtures": [
+        {
+          "case": "settled-skeleton",
+          "uuid": "c1d242e4-d4a7-4fa9-81dc-09e78686630f",
+          "deathId": "36ff87a2-f074-4bfc-ba98-00c72679c9e0",
+          "skeleton": true,
+          "x": 2.4562930091652437,
+          "y": 239.9820839006819,
+          "z": 2.4965371445178914,
+          "pose": "{active:1b,parts:[{qw:0.7086480855941772d,qx:-0.6216872930526733d,qy:-0.24924321472644806d,qz:-0.2218123823404312d,sublevel:[I;-1454853057,-1409594988,-1621769546,2323705],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.36947736894754923d,y:0.2811912458024608d,z:-0.4656047180652547d},{qw:0.7145052552223206d,qx:-0.6194457411766052d,qy:-0.2457502782344818d,qz:-0.21301649510860443d,sublevel:[I;-213964061,1707822119,-1098009207,-921115219],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.0d,y:0.19963990392832898d,z:0.0d},{qw:0.7201353907585144d,qx:-0.6093431115150452d,qy:-0.2533174157142639d,qz:-0.2143276333808899d,sublevel:[I;-324362636,-1465037213,-1141262887,759088921],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.32806924111252966d,y:0.19255447867294606d,z:0.2555565564526159d},{qw:0.7197695374488831d,qx:-0.6094428300857544d,qy:-0.25369763374328613d,qz:-0.21482263505458832d,sublevel:[I;-891812123,-1547678089,-1278911017,-2132856425],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.23999436320338852d,y:0.19270445493251032d,z:-0.1874587160063954d},{qw:0.6676944494247437d,qx:-0.6676810383796692d,qy:-0.232781320810318d,qz:-0.23280681669712067d,sublevel:[I;1141073079,1662143088,-1979968047,-313449312],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.2887697589114069d,y:0.14291358115522712d,z:0.6586788568705466d},{qw:0.6691154837608337d,qx:-0.6690992712974548d,qy:-0.22864766418933868d,qz:-0.2287159562110901d,sublevel:[I;-1042777297,-1506327460,-1909329312,-1508280248],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.47446471667667334d,y:0.14290992404488634d,z:0.5125371650399213d}],root:[I;-213964061,1707822119,-1098009207,-921115219]}",
+          "death": "{ArmorInventory:[{Slot:2,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Experience:0,Id:[I;922716066,-260813828,-1164443449,645515744],Items:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:4,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;824399738,-1862906858,-1557696931,-1077794723],PosX:2.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526124632L}",
+          "equipment": "[{},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{},{},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{},{}]",
+          "entity": "{Age:72128,Air:300s,Death:{ArmorInventory:[{Slot:2,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"}],Experience:0,Id:[I;922716066,-260813828,-1164443449,645515744],Items:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:4,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;824399738,-1862906858,-1557696931,-1077794723],PosX:2.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526124632L},FallDistance:0.0f,Fire:-1s,Invulnerable:0b,Motion:[0.0d,0.0d,0.0d],NeoForgeData:{\"ragrevival:restart_fixture\":\"22680855-15c5-4f6b-8c88-aaa4989c9664\",restartCase:\"settled-skeleton\"},OnGround:0b,PortalCooldown:0,Pos:[2.4562930091652437d,239.9820839006819d,2.4965371445178914d],Rotation:[0.0f,0.0f],UUID:[I;-1043184924,-727232599,-2116285977,-2038013169],\"ragrevival:corpse_equipment\":[{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},Slot:1},{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},Slot:4}],\"ragrevival:corpse_pose\":{active:1b,parts:[{qw:0.7086480855941772d,qx:-0.6216872930526733d,qy:-0.24924321472644806d,qz:-0.2218123823404312d,sublevel:[I;-1454853057,-1409594988,-1621769546,2323705],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.36947736894754923d,y:0.2811912458024608d,z:-0.4656047180652547d},{qw:0.7145052552223206d,qx:-0.6194457411766052d,qy:-0.2457502782344818d,qz:-0.21301649510860443d,sublevel:[I;-213964061,1707822119,-1098009207,-921115219],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.0d,y:0.19963990392832898d,z:0.0d},{qw:0.7201353907585144d,qx:-0.6093431115150452d,qy:-0.2533174157142639d,qz:-0.2143276333808899d,sublevel:[I;-324362636,-1465037213,-1141262887,759088921],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:0.32806924111252966d,y:0.19255447867294606d,z:0.2555565564526159d},{qw:0.7197695374488831d,qx:-0.6094428300857544d,qy:-0.25369763374328613d,qz:-0.21482263505458832d,sublevel:[I;-891812123,-1547678089,-1278911017,-2132856425],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.23999436320338852d,y:0.19270445493251032d,z:-0.1874587160063954d},{qw:0.6676944494247437d,qx:-0.6676810383796692d,qy:-0.232781320810318d,qz:-0.23280681669712067d,sublevel:[I;1141073079,1662143088,-1979968047,-313449312],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.2887697589114069d,y:0.14291358115522712d,z:0.6586788568705466d},{qw:0.6691154837608337d,qx:-0.6690992712974548d,qy:-0.22864766418933868d,qz:-0.2287159562110901d,sublevel:[I;-1042777297,-1506327460,-1909329312,-1508280248],vx:0.0d,vy:0.0d,vz:0.0d,wx:0.0d,wy:0.0d,wz:0.0d,x:-0.47446471667667334d,y:0.14290992404488634d,z:0.5125371650399213d}],root:[I;-213964061,1707822119,-1098009207,-921115219]}}"
+        },
+        {
+          "case": "active-player",
+          "uuid": "eb7a1d7c-6771-4854-b007-e04f034395d3",
+          "deathId": "f886943d-1e66-49b2-8391-5403e90c23fd",
+          "skeleton": false,
+          "x": 10.493891252865321,
+          "y": 239.9859425365024,
+          "z": 1.300836361238627,
+          "pose": "{active:1b,parts:[{qw:0.7387921214103699d,qx:-0.6739250421524048d,qy:0.0023214854300022125d,qz:0.0024402025155723095d,sublevel:[I;-469330807,1694912064,-1628940031,507581278],vx:-6.970946560613811E-5d,vy:-1.4371046563610435E-4d,vz:-5.199554725550115E-4d,wx:-0.0020376592874526978d,wy:-4.355774421704872E-11d,wz:1.2343614071141928E-4d,x:-0.00460959850741105d,y:0.2719767750210451d,z:-0.5951974161359352d},{qw:0.7576793432235718d,qx:-0.6526130437850952d,qy:0.0031540803611278534d,qz:0.0028715322259813547d,sublevel:[I;1736529031,-1884533546,-1837007433,-245838015],vx:-5.021180186304264E-5d,vy:-6.545300711877644E-4d,vz:3.0400219657167327E-6d,wx:-0.00212071998976171d,wy:-0.001643117400817573d,wz:0.004060607869178057d,x:0.0d,y:0.19831442552245448d,z:0.0d},{qw:0.7649651765823364d,qx:-0.6398283243179321d,qy:0.05525350943207741d,qz:0.04893975332379341d,sublevel:[I;792640398,-1503507478,-1677466520,892647273],vx:2.032672055065632E-4d,vy:2.010748903558124E-5d,vz:1.5402572171296924E-4d,wx:1.5596068988088518E-4d,wy:2.9383637593127787E-4d,wz:-0.0015624799998477101d,x:0.4604677189799897d,y:0.19016030447565413d,z:-0.016530582641733682d},{qw:0.7659630179405212d,qx:-0.6428326964378357d,qy:0.0061259944923222065d,qz:0.005416727624833584d,sublevel:[I;930094360,-1636087828,-1490133764,-1612657985],vx:1.1095133959315717E-4d,vy:-0.001441186061128974d,vz:-8.604770409874618E-4d,wx:-0.004874621517956257d,wy:-4.053523007314652E-4d,wz:-3.7512319977395236E-5d,x:-0.2976839818802741d,y:0.19065854846164143d,z:8.291343263824302E-4d},{qw:0.7071042656898499d,qx:-0.7071045637130737d,qy:-0.0018560278695076704d,qz:-0.0018030533101409674d,sublevel:[I;2068961630,1688424431,-1217725028,1925025557],vx:-8.471333421766758E-4d,vy:-4.032649449072778E-4d,vz:6.493625696748495E-4d,wx:0.005194871220737696d,wy:2.118349051727364E-8d,wz:0.0067770653404295444d,x:0.18183003234697637d,y:0.13906214588385524d,z:0.6956762944575186d},{qw:0.7070785760879517d,qx:-0.7071055769920349d,qy:0.004617992788553238d,qz:0.004514274187386036d,sublevel:[I;828575102,-2028320819,-1189818131,208363203],vx:-1.3821414904668927E-4d,vy:7.170430035330355E-5d,vz:7.209890463855118E-5d,wx:5.78959530685097E-4d,wy:4.029000422178797E-8d,wz:0.0011180553119629622d,x:-0.05273626390446218d,y:0.13903302197323342d,z:0.6960539423985521d}],root:[I;1736529031,-1884533546,-1837007433,-245838015]}",
+          "death": "{ArmorInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{Slot:1,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{Slot:2,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{Slot:3,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Experience:0,Id:[I;-125397955,510020018,-2087627773,-385080323],Items:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;824399738,-1862906858,-1557696931,-1077794723],PosX:10.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526124640L}",
+          "equipment": "[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},{}]",
+          "entity": "{Age:108,Air:300s,Death:{ArmorInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{Slot:1,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{Slot:2,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{Slot:3,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Dimension:\"minecraft:overworld\",Equipment:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"}],Experience:0,Id:[I;-125397955,510020018,-2087627773,-385080323],Items:[{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:extra\"'},count:5,id:\"minecraft:gold_ingot\"}],MainInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{Slot:8,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:diamonds\"'},count:7,id:\"minecraft:diamond\"},{Slot:15,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:emeralds\"'},count:13,id:\"minecraft:emerald\"}],Model:0b,OffHandInventory:[{Slot:0,components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:shield\"'},count:1,id:\"minecraft:shield\"}],PlayerName:\"RestartOwner\",PlayerUuid:[I;824399738,-1862906858,-1557696931,-1077794723],PosX:10.5d,PosY:240.0d,PosZ:2.5d,Timestamp:1794526124640L},FallDistance:0.0f,Fire:-1s,Invulnerable:0b,Motion:[0.0d,0.0d,0.0d],NeoForgeData:{\"ragrevival:restart_fixture\":\"22680855-15c5-4f6b-8c88-aaa4989c9664\",restartCase:\"active-player\"},OnGround:0b,PortalCooldown:0,Pos:[10.493891252865321d,239.9859425365024d,1.300836361238627d],Rotation:[0.0f,0.0f],UUID:[I;-344318596,1735477332,-1341661105,54760915],\"ragrevival:corpse_equipment\":[{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},Slot:0},{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:shield\"'},count:1,id:\"minecraft:shield\"},Slot:1},{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},Slot:2},{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},Slot:3},{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},Slot:4},{Item:{components:{\"minecraft:custom_name\":'\"22680855-15c5-4f6b-8c88-aaa4989c9664:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},Slot:5}],\"ragrevival:corpse_pose\":{active:1b,parts:[{qw:0.7387921214103699d,qx:-0.6739250421524048d,qy:0.0023214854300022125d,qz:0.0024402025155723095d,sublevel:[I;-469330807,1694912064,-1628940031,507581278],vx:-6.970946560613811E-5d,vy:-1.4371046563610435E-4d,vz:-5.199554725550115E-4d,wx:-0.0020376592874526978d,wy:-4.355774421704872E-11d,wz:1.2343614071141928E-4d,x:-0.00460959850741105d,y:0.2719767750210451d,z:-0.5951974161359352d},{qw:0.7576793432235718d,qx:-0.6526130437850952d,qy:0.0031540803611278534d,qz:0.0028715322259813547d,sublevel:[I;1736529031,-1884533546,-1837007433,-245838015],vx:-5.021180186304264E-5d,vy:-6.545300711877644E-4d,vz:3.0400219657167327E-6d,wx:-0.00212071998976171d,wy:-0.001643117400817573d,wz:0.004060607869178057d,x:0.0d,y:0.19831442552245448d,z:0.0d},{qw:0.7649651765823364d,qx:-0.6398283243179321d,qy:0.05525350943207741d,qz:0.04893975332379341d,sublevel:[I;792640398,-1503507478,-1677466520,892647273],vx:2.032672055065632E-4d,vy:2.010748903558124E-5d,vz:1.5402572171296924E-4d,wx:1.5596068988088518E-4d,wy:2.9383637593127787E-4d,wz:-0.0015624799998477101d,x:0.4604677189799897d,y:0.19016030447565413d,z:-0.016530582641733682d},{qw:0.7659630179405212d,qx:-0.6428326964378357d,qy:0.0061259944923222065d,qz:0.005416727624833584d,sublevel:[I;930094360,-1636087828,-1490133764,-1612657985],vx:1.1095133959315717E-4d,vy:-0.001441186061128974d,vz:-8.604770409874618E-4d,wx:-0.004874621517956257d,wy:-4.053523007314652E-4d,wz:-3.7512319977395236E-5d,x:-0.2976839818802741d,y:0.19065854846164143d,z:8.291343263824302E-4d},{qw:0.7071042656898499d,qx:-0.7071045637130737d,qy:-0.0018560278695076704d,qz:-0.0018030533101409674d,sublevel:[I;2068961630,1688424431,-1217725028,1925025557],vx:-8.471333421766758E-4d,vy:-4.032649449072778E-4d,vz:6.493625696748495E-4d,wx:0.005194871220737696d,wy:2.118349051727364E-8d,wz:0.0067770653404295444d,x:0.18183003234697637d,y:0.13906214588385524d,z:0.6956762944575186d},{qw:0.7070785760879517d,qx:-0.7071055769920349d,qy:0.004617992788553238d,qz:0.004514274187386036d,sublevel:[I;828575102,-2028320819,-1189818131,208363203],vx:-1.3821414904668927E-4d,vy:7.170430035330355E-5d,vz:7.209890463855118E-5d,wx:5.78959530685097E-4d,wy:4.029000422178797E-8d,wz:0.0011180553119629622d,x:-0.05273626390446218d,y:0.13903302197323342d,z:0.6960539423985521d}],root:[I;1736529031,-1884533546,-1837007433,-245838015]}}"
+        }
+      ]
+    },
+    "manifestSha256": "231e59d6f69d6f3e6d75c3c4f63e33042a4027f2cad11915f39433b628a7048c",
+    "beforeProcess": {
+      "pid": 33892,
+      "started": "2026-11-12T23:28:31.5853174Z",
+      "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+      "neoForge": "21.1.265",
+      "ragdolls": "0.7.5",
+      "reactions": "0.7.0",
+      "stage": "final-legacy-old-prepare",
+      "productionFilename": "ragrevival-1.21.1-1.5.0.jar",
+      "productionSha256": "ce9ebc2749d7f3086d6ae292323e720bb2954851390d704dc0674be83b90b1c4",
+      "harnessFilename": "ragrevival-1.21.1-1.5.0-test-harness.jar",
+      "harnessSha256": "8894cf1ce40eba9205c854233d3dfce9899afd3b7d12314b65164874b63e86cc"
+    },
+    "afterProcess": {
+      "pid": 33484,
+      "started": "2026-11-12T23:28:50.5469237Z",
+      "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+      "neoForge": "21.1.265",
+      "ragdolls": "0.8.1",
+      "reactions": "0.8.0",
+      "stage": "final-legacy-upgrade",
+      "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+      "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+      "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+      "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+    }
+  },
+  "finalShutdown": {
+    "pid": 33484,
+    "stopped": true,
+    "observedUtc": "2026-11-12T23:29:15.4513747Z",
+    "process": {
+      "pid": 33484,
+      "started": "2026-11-12T23:28:50.5469237Z",
+      "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\compat-081-080\\server",
+      "neoForge": "21.1.265",
+      "ragdolls": "0.8.1",
+      "reactions": "0.8.0",
+      "stage": "final-legacy-upgrade",
+      "productionFilename": "ragrevival-1.21.1-1.6.1.jar",
+      "productionSha256": "c87156b4623c4b4dcc7d4d2734f8788cbb32c1f567015c1644c738ad67c6bc9c",
+      "harnessFilename": "ragrevival-1.21.1-1.6.1-test-harness.jar",
+      "harnessSha256": "82940c753bf88e4a4f789ae6f844df3e55db13bfedf2f475de371aad10a5733f"
+    }
+  },
+  "coreControlComparison": {
+    "controls": [
+      {
+        "nearby": {
+          "passed": 125,
+          "failed": 0
+        },
+        "log": "control-075-core-complete.log",
+        "stopped": true,
+        "features": {
+          "passed": 81,
+          "failed": 0
+        },
+        "reactions": "0.7.0",
+        "ragdolls": "0.7.5",
+        "productionSha256": "CE9EBC2749D7F3086D6AE292323E720BB2954851390D704DC0674BE83B90B1C4",
+        "name": "old CE9 baseline",
+        "corpsePresent": false
+      },
+      {
+        "nearby": {
+          "passed": 125,
+          "failed": 0
+        },
+        "log": "control-081-core-complete.log",
+        "stopped": true,
+        "features": {
+          "passed": 81,
+          "failed": 0
+        },
+        "reactions": "0.8.0",
+        "ragdolls": "0.8.1",
+        "productionSha256": "76034D739E96C2A70BC3CF95BC76B0B34DA4275FDCCF428D28C3BCDC85032C2F",
+        "name": "candidate2 modern core",
+        "corpsePresent": false
+      },
+      {
+        "nearby": {
+          "passed": 123,
+          "failed": 2
+        },
+        "failures": [
+          "terminal death: cleanup removes its own original seat",
+          "terminal death: cleanup removes and unregisters its own original body"
+        ],
+        "corpse": "1.1.22",
+        "stopped": true,
+        "interpretation": "Legacy core-only terminal cleanup expectations conflict with existing native Corpse handoff: original body is retained, native detach unseats but keeps its empty seat while the root block exists. This seat behavior is present in both 0.7.5 and 0.8.1.",
+        "feedingChecks": "All teammate-feeding assertions passed unchanged",
+        "reactions": "0.8.0",
+        "ragdolls": "0.8.1",
+        "log": "control-081-corpse-nearby.log",
+        "productionSha256": "76034D739E96C2A70BC3CF95BC76B0B34DA4275FDCCF428D28C3BCDC85032C2F",
+        "name": "candidate2 modern fresh Corpse",
+        "corpsePresent": true
+      }
+    ],
+    "neoForge": "21.1.265",
+    "scope": "Isolated headless comparison; original modpack untouched"
+  },
+  "scopeLimits": [
+    "Relevant-mod dedicated integration subset; full-pack and client checks are documented separately",
+    "Twelve simultaneously simulated corpses, not a hundreds-of-bodies performance benchmark",
+    "Forced restart follows completed save; no unsaved-data or interrupted-filesystem-write claim",
+    "Core-only test jars omit optional Corpse test subscribers, with retained core bytecode unchanged"
+  ]
+}

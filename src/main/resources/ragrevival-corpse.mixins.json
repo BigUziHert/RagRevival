@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.biguzi.ragrevival.compat.corpse.mixin",
+  "plugin": "com.biguzi.ragrevival.compat.corpse.mixin.CorpseMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["CorpseEntityPoseMixin", "CorpseBoundingBoxMixin", "CorpseOwnPartCollisionMixin", "CorpseInteractionMixin", "CorpseGrabPacketMixin", "CorpseGrabReleaseMixin"],
+  "client": ["CorpseRendererMixin", "CorpseLivingRendererMixin", "CorpseArmorLayerMixin", "CorpseEarsLayerMixin", "CorpseNativePartRendererMixin", "CorpseGrabClientMixin"],
+  "injectors": {"defaultRequire": 1}
+}

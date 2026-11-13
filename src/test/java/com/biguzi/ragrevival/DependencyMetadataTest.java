@@ -25,7 +25,7 @@ class DependencyMetadataTest {
         var versions = Map.of(
                 "neoforge", List.of("21.1.248", "21.1.249"),
                 "sable", List.of("2.0.3", "2.0.5"),
-                "sable_player_ragdoll", List.of("0.6.9", "0.7.0", "0.7.2", "0.7.3", "0.7.4", "0.7.5", "0.8.0", "1.0.0"));
+                "sable_player_ragdoll", List.of("0.6.9", "0.7.0", "0.7.2", "0.7.3", "0.7.4", "0.7.5", "0.8.0", "0.8.1", "1.0.0"));
         for (var entry : versions.entrySet()) {
             var dependency = required(dependencies, entry.getKey());
             assertSame(IModInfo.UNBOUNDED, dependency.getVersionRange(),
@@ -70,6 +70,23 @@ class DependencyMetadataTest {
         }
     }
 
+    @Test void reactionsUpgradeIsAcceptedByTheActualLoaderParser() throws Exception {
+        var released = parseDependency(new TomlParser().parse(new StringReader("""
+                modId="ragdoll_reactions"
+                type="required"
+                versionRange="[0.7.0]"
+                ordering="AFTER"
+                side="BOTH"
+                """)));
+        assertFalse(accepts(released, "0.8.0"), "Reproduce the old JAR's upgrade rejection");
+        var fixed = required(productionDependencies(), "ragdoll_reactions");
+        assertTrue(accepts(fixed, "0.7.0"));
+        assertTrue(accepts(fixed, "0.8.0"));
+        assertFalse(accepts(fixed, "0.6.9"));
+        assertFalse(accepts(fixed, "0.9.0"));
+        assertEquals(released.getOrdering(), fixed.getOrdering());
+    }
+
     @Test void allRequiredModsRemainMandatoryOnBothSides() throws Exception {
         var dependencies = productionDependencies();
         for (String id : List.of("neoforge", "minecraft", "sable", "sable_player_ragdoll", "ragdoll_reactions")) {
@@ -93,6 +110,13 @@ class DependencyMetadataTest {
         assertEquals(IModInfo.DependencyType.OPTIONAL, carryOn.getType());
         assertEquals(IModInfo.DependencySide.BOTH, carryOn.getSide());
         assertTrue(accepts(carryOn, "2.2.6.13"));
+    }
+
+    @Test void corpseRemainsOptionalAndAcceptsTheModpackVersion() throws Exception {
+        var corpse = required(productionDependencies(), "corpse");
+        assertEquals(IModInfo.DependencyType.OPTIONAL, corpse.getType());
+        assertEquals(IModInfo.DependencySide.BOTH, corpse.getSide());
+        assertTrue(accepts(corpse, "1.1.22"));
     }
 
     private static Map<String, IModInfo.ModVersion> productionDependencies()

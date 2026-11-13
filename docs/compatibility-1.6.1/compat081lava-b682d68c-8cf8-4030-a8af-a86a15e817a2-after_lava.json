@@ -1,0 +1,195 @@
+{
+  "scope": "Read-only count of uniquely tagged fixtures in loaded worlds; never forces chunks or transfers items. Cosmetic corpse render copies are deliberately excluded.",
+  "run": "b682d68c-8cf8-4030-a8af-a86a15e817a2",
+  "label": "compat081lava",
+  "stage": "after_lava",
+  "player": "ReviveOne",
+  "playerUUID": "8e37a656-4e67-3507-b517-7df18801794f",
+  "playerPosition": "(201.5, 71.0, 204.5)",
+  "dimension": {
+    "namespace": "minecraft",
+    "path": "overworld"
+  },
+  "gameTime": 9779,
+  "originalAccessorySlots": {
+    "artifacts:plastic_drinking_hat": "hat[0]",
+    "artifacts:lucky_scarf": "necklace[0]"
+  },
+  "availableSlots": [
+    {
+      "name": "accessories:chest",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "accessories:feet",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "accessories:head",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "accessories:legs",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "aether:accessory_slot",
+      "cosmeticSize": 2,
+      "size": 2
+    },
+    {
+      "name": "aether:cape_slot",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "aether:gloves_slot",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "aether:pendant_slot",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "aether:ring_slot",
+      "cosmeticSize": 2,
+      "size": 2
+    },
+    {
+      "name": "aether:shield_slot",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "anklet",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "back",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "belt",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "cape",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "charm",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "face",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "hand",
+      "cosmeticSize": 2,
+      "size": 2
+    },
+    {
+      "name": "hat",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "linked_typewriter",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "necklace",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "ring",
+      "cosmeticSize": 2,
+      "size": 2
+    },
+    {
+      "name": "rings",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "shoes",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "talisman",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "waist",
+      "cosmeticSize": 1,
+      "size": 1
+    },
+    {
+      "name": "wrist",
+      "cosmeticSize": 1,
+      "size": 1
+    }
+  ],
+  "items": [
+    {
+      "item": "artifacts:plastic_drinking_hat",
+      "count": 1,
+      "location": "corpse_additional",
+      "container": "minecraft:overworld/bad6b72d-53e1-42ec-ab92-ebafc8d12f19",
+      "slot": 0,
+      "sameComponentsAsEquipped": true,
+      "stackNBT": "{components:{\"minecraft:custom_data\":{\"ragrevival:manual_accessories\":{label:\"compat081lava\",run:[I;-1232939380,-1929887696,-1464883094,367531938]}},\"minecraft:custom_name\":\u0027\"[compat081lava] Plastic Drinking Hat\"\u0027},count:1,id:\"artifacts:plastic_drinking_hat\"}"
+    },
+    {
+      "item": "artifacts:lucky_scarf",
+      "count": 1,
+      "location": "corpse_additional",
+      "container": "minecraft:overworld/bad6b72d-53e1-42ec-ab92-ebafc8d12f19",
+      "slot": 1,
+      "sameComponentsAsEquipped": true,
+      "stackNBT": "{components:{\"minecraft:custom_data\":{\"ragrevival:manual_accessories\":{label:\"compat081lava\",run:[I;-1232939380,-1929887696,-1464883094,367531938]}},\"minecraft:custom_name\":\u0027\"[compat081lava] Lucky Scarf\"\u0027},count:1,id:\"artifacts:lucky_scarf\"}"
+    }
+  ],
+  "corpses": [
+    {
+      "uuid": "bad6b72d-53e1-42ec-ab92-ebafc8d12f19",
+      "owner": "8e37a656-4e67-3507-b517-7df18801794f",
+      "dimension": {
+        "namespace": "minecraft",
+        "path": "overworld"
+      },
+      "position": "(213.41898077522362, 70.99075131443044, 196.50721538131017)"
+    }
+  ],
+  "countsByLocation": {
+    "artifacts:plastic_drinking_hat": {
+      "corpse_additional": 1
+    },
+    "artifacts:lucky_scarf": {
+      "corpse_additional": 1
+    }
+  },
+  "componentMatches": {
+    "artifacts:plastic_drinking_hat": 1,
+    "artifacts:lucky_scarf": 1
+  },
+  "exactlyOneOfEachWithComponents": true,
+  "note": "Main inventory and Additional Items are distinct from equipped Accessories slots; this report makes no auto-reequip assumption."
+}

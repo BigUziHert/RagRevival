@@ -3,7 +3,7 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.146'
 }
 
-version = '1.4.3'
+version = '1.6.1'
 group = 'com.biguzi.ragrevival'
 base { archivesName = 'ragrevival-1.21.1' }
 java {
@@ -29,10 +29,12 @@ neoForge {
     }
     mods { ragrevival { sourceSet sourceSets.main } }
 }
+def dependencyDirectory = providers.gradleProperty('ragrevivalDepsDir').orElse('.local/deps').get()
 dependencies {
-    implementation fileTree(dir: '.local/deps', include: ['sable-neoforge-*.jar', 'sable_player_ragdoll-*.jar', 'ragdoll_reactions-*.jar'])
-    compileOnly fileTree(dir: '.local/deps', include: ['carryon-*.jar'])
-    compileOnly files('.local/deps/sable-companion-common-1.21.1-1.6.0.jar')
+    implementation fileTree(dir: dependencyDirectory, include: ['sable-neoforge-*.jar', 'sable_player_ragdoll-*.jar', 'ragdoll_reactions-*.jar'])
+    compileOnly fileTree(dir: dependencyDirectory, include: ['carryon-*.jar'])
+    compileOnly fileTree(dir: dependencyDirectory, include: ['corpse-neoforge-1.21.1-*.jar'])
+    compileOnly files("${dependencyDirectory}/sable-companion-common-1.21.1-1.6.0.jar")
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // Exercise the loader version from the reported dependency failure, without booting Minecraft.

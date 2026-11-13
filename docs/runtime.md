@@ -14,8 +14,11 @@ pwsh -File scripts/sync-test-mods.ps1
 pwsh -File scripts/start-test-runtime.ps1
 ```
 
-Install RagRevival **1.4.3** on all three instances together. It uses network
-protocol 3. See the [1.4.3 release notes](../artifacts/1.4.3/README.md) for the
+Install RagRevival **1.6.0** on all three instances together. It uses network
+protocol 5. See [native corpse physics and dragging](corpse-native-1.6.0.md),
+[original Corpse compatibility](corpse-compatibility-1.5.0.md),
+[restart and moving-platform fixes](corpse-persistence-1.5.1.md),
+and the [1.4.3 release notes](../artifacts/1.4.3/README.md) for the
 performance changes and the [1.4.2 release notes](../artifacts/1.4.2/README.md) for the
 knockdown XP penalty and potion rules. The earlier [1.4.1 verification](test-results-1.4.1.md)
 covers the fix for nearby ragdoll cleanup releasing another downed player's seat.
@@ -74,7 +77,7 @@ pwsh -File scripts/test-server-command.ps1 'stop'
 ```
 
 Close both clients and stop the server before replacing mod jars. `sync-test-mods.ps1`
-copies only the three required mods, RagRevival, Carry On if present, and Unlocked
+copies only the three required mods, RagRevival, Corpse and Carry On if present, and Unlocked
 Camera if present. It never installs the compile-only extracted Sable companion
 jar because Sable already bundles that dependency.
 
@@ -116,7 +119,7 @@ positions, so run it only in the isolated test world. With the server stopped:
 
 ```powershell
 ./gradlew.bat testModJar
-Copy-Item build/libs/ragrevival-1.21.1-1.4.3-test-harness.jar .local/server/mods/
+Copy-Item build/libs/ragrevival-1.21.1-1.6.0-test-harness.jar .local/server/mods/
 pwsh -File scripts/start-test-runtime.ps1
 # After both clients join, leave them idle:
 pwsh -File scripts/test-server-command.ps1 'ragrevivaltest run'

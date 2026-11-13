@@ -1,0 +1,11 @@
+{
+  "version": "1.6.0",
+  "sha256": "ce9ebc2749d7f3086d6ae292323e720bb2954851390d704dc0674be83b90b1c4",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.249",
+  "corpseInstalled": false,
+  "startup": "passed",
+  "cleanShutdown": "passed",
+  "pid": 521476,
+  "scope": "Isolated optional-dependency startup smoke; no full modpack or client check."
+}

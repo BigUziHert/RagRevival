@@ -1,0 +1,2 @@
+ReviveOne has the following entity data: [{count: 7, Slot: 8b, id: "minecraft:diamond"}, {count: 1, Slot: 102b, id: "minecraft:diamond_chestplate"}, {count: 1, Slot: -106b, id: "minecraft:shield"}]
+

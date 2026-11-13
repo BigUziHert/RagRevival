@@ -2,6 +2,7 @@ package com.biguzi.ragrevival;
 
 import com.biguzi.ragrevival.client.RevivalClient;
 import com.biguzi.ragrevival.compat.CarryOnCompat;
+import com.biguzi.ragrevival.compat.corpse.CorpseCompat;
 import com.biguzi.ragrevival.network.RevivalNetwork;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -20,6 +21,7 @@ public final class RagRevival {
         NeoForge.EVENT_BUS.register(DownedManager.class);
         NeoForge.EVENT_BUS.addListener(RevivalCommands::register);
         CarryOnCompat.register();
+        CorpseCompat.register();
         if (FMLEnvironment.dist == Dist.CLIENT) RevivalClient.register(bus);
     }
 }

@@ -1,0 +1,6 @@
+{
+  "tick": 16025,
+  "action": "transfer",
+  "menu": "de.maxhenkel.corpse.gui.CorpseAdditionalContainer",
+  "scope": "Explicit test-only native GUI packet; inventory is handled by Corpse on the server."
+}

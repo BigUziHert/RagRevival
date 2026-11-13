@@ -1,0 +1,88 @@
+{
+  "playerPosition": "(59.3, 70.0, 7.3)",
+  "playerBox": "AABB[58.99999998807907, 70.0, 6.999999988079071] -\u003e [59.600000011920926, 71.79999995231628, 7.600000011920929]",
+  "searchBox": "AABB[51.99999998807907, 63.0, -1.1920929132713809E-8] -\u003e [66.60000001192093, 78.79999995231628, 14.60000001192093]",
+  "screen": "de.maxhenkel.corpse.gui.CorpseInventoryScreen",
+  "corpses": [
+    {
+      "id": 216,
+      "uuid": "6ca51d78-0e00-4ff5-b76b-4849952485f6",
+      "position": "(57.492431640625, 69.981201171875, 4.30322265625)",
+      "box": "AABB[57.06235264343461, 69.981201171875, 3.4272361783724152] -\u003e [58.04673382302452, 70.54105489891185, 5.376618702195094]",
+      "distance": 3.4997616,
+      "inNativeSearch": true,
+      "active": true
+    },
+    {
+      "id": 217,
+      "uuid": "9231c424-e36f-44c8-a75b-f1f17edb6470",
+      "position": "(60.5, 69.97998046875, 4.302978515625)",
+      "box": "AABB[60.07512203238835, 69.97998046875, 3.422856660360549] -\u003e [61.04821834190393, 70.54439509439194, 5.3758914832590845]",
+      "distance": 3.2283957,
+      "inNativeSearch": true,
+      "active": true
+    }
+  ],
+  "nativeLimbs": [
+    {
+      "id": "dbe00260-5f99-4a1b-881c-f8ded3a82545",
+      "part": "HEAD",
+      "corpseMarker": true
+    },
+    {
+      "id": "4c1d4877-57ae-485d-81b7-74d79eada9ff",
+      "part": "TORSO",
+      "corpseMarker": true
+    },
+    {
+      "id": "380e604a-7eb1-4eb4-9d46-ca87385433ce",
+      "part": "LEFT_ARM",
+      "corpseMarker": true
+    },
+    {
+      "id": "77145f28-cb24-4894-bd48-2d8551fca761",
+      "part": "RIGHT_ARM",
+      "corpseMarker": true
+    },
+    {
+      "id": "4d11b66c-5fa2-4e6b-ae8b-51c6654d21de",
+      "part": "LEFT_LEG",
+      "corpseMarker": true
+    },
+    {
+      "id": "c1402493-cda3-439c-a5e9-ee6ce6d79446",
+      "part": "RIGHT_LEG",
+      "corpseMarker": true
+    },
+    {
+      "id": "5fcd03a2-c189-4bc9-9553-90ea77ebf396",
+      "part": "HEAD",
+      "corpseMarker": true
+    },
+    {
+      "id": "d9483d2d-6f8d-4bf8-a802-43552a851f17",
+      "part": "TORSO",
+      "corpseMarker": true
+    },
+    {
+      "id": "4b51ce6f-5a4f-47a6-96d2-3366737f5f85",
+      "part": "LEFT_ARM",
+      "corpseMarker": true
+    },
+    {
+      "id": "566b08d1-e3bd-40cc-a8f4-be506a74bb71",
+      "part": "RIGHT_ARM",
+      "corpseMarker": true
+    },
+    {
+      "id": "cf21749b-70f0-4a9b-8775-aed2060903bc",
+      "part": "LEFT_LEG",
+      "corpseMarker": true
+    },
+    {
+      "id": "d0837f57-bdd6-489f-88d5-814912e1a9e3",
+      "part": "RIGHT_LEG",
+      "corpseMarker": true
+    }
+  ]
+}

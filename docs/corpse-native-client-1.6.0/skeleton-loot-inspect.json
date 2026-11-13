@@ -1,0 +1,65 @@
+{
+  "playerPosition": "(204.5, 70.0, 200.5)",
+  "playerBox": "AABB[204.19999998807907, 70.0, 200.19999998807907] -\u003e [204.80000001192093, 71.79999995231628, 200.80000001192093]",
+  "searchBox": "AABB[197.19999998807907, 63.0, 193.19999998807907] -\u003e [211.80000001192093, 78.79999995231628, 207.80000001192093]",
+  "screen": "de.maxhenkel.corpse.gui.CorpseInventoryScreen",
+  "useDown": false,
+  "shiftDown": false,
+  "mainHand": "7 minecraft:diamond",
+  "selectedSlot": 8,
+  "hitResult": "entity\u003dentity.corpse.corpse id\u003d32 location\u003d(205.98893582233032, 70.54337813787537, 199.60368104399103)",
+  "yaw": -121.05,
+  "pitch": 31.78,
+  "fallbackBlockTrace": "BLOCK MutableBlockPos{x\u003d20481032, y\u003d128, z\u003d20495368} Block{sable_player_ragdoll:ragdoll_part}[body_part\u003dtorso]",
+  "nativeActivePos": "null",
+  "nativeServerGrabState": false,
+  "corpses": [
+    {
+      "id": 32,
+      "uuid": "b00c3193-c245-488e-a014-ec629bfdee8f",
+      "position": "(206.50120460442233, 69.98033402032776, 199.29967491500625)",
+      "box": "AABB[205.95246470413653, 69.98033402032776, 198.22668417251816] -\u003e [207.04994450470812, 70.54337813787537, 200.37266565749434]",
+      "distance": 2.333664,
+      "inNativeSearch": true,
+      "active": true
+    }
+  ],
+  "nativeLimbs": [
+    {
+      "part": "HEAD",
+      "center": "(206.5081787109375, 70.26184844970703, 198.705322265625)",
+      "corpseMarker": true,
+      "id": "5d458e9d-f753-4500-b4f5-ecfd297103fc"
+    },
+    {
+      "part": "TORSO",
+      "center": "(206.50120436097484, 70.18007034204882, 199.2996761381749)",
+      "corpseMarker": true,
+      "id": "f8478379-45a1-425c-ba3c-919feb12f5ae"
+    },
+    {
+      "part": "LEFT_ARM",
+      "center": "(206.92399577029508, 70.1726475765021, 199.30110073355422)",
+      "corpseMarker": true,
+      "id": "a6edd9f2-4b82-4ef3-bcfa-328d2a15c195"
+    },
+    {
+      "part": "RIGHT_ARM",
+      "center": "(206.20339951043152, 70.17258096091379, 199.29590727591832)",
+      "corpseMarker": true,
+      "id": "680ce452-6e05-4b2a-8a72-aae1f2847d4b"
+    },
+    {
+      "part": "LEFT_LEG",
+      "center": "(206.676588968863, 70.12500244374205, 199.99695015998995)",
+      "corpseMarker": true,
+      "id": "2f1d1474-5d21-4122-8f8d-6b63d56e557d"
+    },
+    {
+      "part": "RIGHT_LEG",
+      "center": "(206.44138768443074, 70.12497376943274, 199.99537463709828)",
+      "corpseMarker": true,
+      "id": "f13eda85-44d6-420b-bf9c-79c2453bff58"
+    }
+  ]
+}

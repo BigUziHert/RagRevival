@@ -15,7 +15,7 @@ foreach ($pattern in $required) {
     if ($matches.Count -ne 1) { throw "Expected exactly one $pattern in .local/deps, found $($matches.Count)." }
     $dependencies += $matches[0]
 }
-$optional = @(Get-ChildItem -LiteralPath "$runtime/deps" -Filter '*.jar' | Where-Object Name -Match '^(carryon|unlocked[_-]?camera)' | Where-Object Name -NotMatch '(sources|javadoc)')
+$optional = @(Get-ChildItem -LiteralPath "$runtime/deps" -Filter '*.jar' | Where-Object Name -Match '^(carryon|corpse-|unlocked[_-]?camera)' | Where-Object Name -NotMatch '(sources|javadoc)')
 foreach ($instance in @('server','client-one','client-two')) {
     $mods = Join-Path $runtime "$instance/mods"
     New-Item -ItemType Directory -Force -Path $mods | Out-Null

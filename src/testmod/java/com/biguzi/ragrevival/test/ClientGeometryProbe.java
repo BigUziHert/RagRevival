@@ -38,6 +38,7 @@ public final class ClientGeometryProbe {
     public ClientGeometryProbe() {
         NeoForge.EVENT_BUS.addListener(this::render);
         new DragScrollProbe();
+        if (net.neoforged.fml.ModList.get().isLoaded("corpse")) new ClientCorpseProbe();
     }
 
     private void render(RenderGuiEvent.Post event) {

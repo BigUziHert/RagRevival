@@ -15,10 +15,9 @@ import dev.leo.sableplayerragdoll.api.RagdollLimbOptions;
 import dev.leo.sableplayerragdoll.api.RagdollPoseSnapshot;
 import dev.leo.sableplayerragdoll.block.entity.RagdollPartBlockEntity;
 import dev.leo.sableplayerragdoll.entity.RagdollSeatEntity;
-import dev.leo.sableplayerragdoll.physics.RagdollExpireHelper;
+import com.biguzi.ragrevival.ragdoll.NativeRagdollCompat;
 import dev.leo.sableplayerragdoll.physics.RagdollSessionManager;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
-import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
 import io.netty.channel.embedded.EmbeddedChannel;
 import java.lang.reflect.Field;
 import java.util.ArrayDeque;
@@ -154,8 +153,7 @@ final class NearbyRevivalProbe {
         after(1, () -> {
             var root = RagdollSessionManager.activeRagdollForPlayer(first.serverLevel(), first.getUUID());
             if (root == null) throw new IllegalStateException("Missing ordinary ragdoll fixture");
-            RagdollExpireHelper.expire(SubLevelPhysicsSystem.get(first.serverLevel()), first.serverLevel(),
-                    root, "ordinary regression expiry");
+            NativeRagdollCompat.expire(first.serverLevel(), root, "ordinary regression expiry");
             check(!DownedManager.isDowned(first) && first.isAlive() && !first.isPassenger() && firstSeat.isRemoved(),
                     "ordinary expiration releases its healthy rider");
             check(RagdollSessionManager.activeRagdollForPlayer(first.serverLevel(), first.getUUID()) == null,
@@ -470,6 +468,13 @@ final class NearbyRevivalProbe {
             if (player.isAlive()) player.doTick();
         }
         feed();
+        if (heartbeatActor != null && heartbeatTarget != null && heartbeatActor != heartbeatTarget && ticks % 5 == 0) {
+            LOGGER.info("RAGREVIVAL_NEARBY_FEED tick={} scenario={} actor={} delta={} targetBody={} canReach={} passenger={} nativeRagdoll={} feeding={} stackCount={}",
+                    ticks, scenario, heartbeatActor.position(), heartbeatActor.getDeltaMovement(),
+                    RagdollBridge.worldPosition(heartbeatTarget), RagdollBridge.canReach(heartbeatActor, heartbeatTarget),
+                    heartbeatActor.isPassenger(), RagdollAPI.isRagdolled(heartbeatActor),
+                    DownedManager.isFeeding(heartbeatActor), heartbeatActor.getMainHandItem().getCount());
+        }
         while (!steps.isEmpty() && steps.peek().tick <= ticks) steps.remove().action.run();
     }
 

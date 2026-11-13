@@ -1,0 +1,164 @@
+[11Nov2026 12:30:26.054] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.neoForgeVersion, 21.1.265, --fml.fmlVersion, 4.0.45, --fml.mcVersion, 1.21.1, --fml.neoFormVersion, 20240808.144430, nogui]
+[11Nov2026 12:30:26.058] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Oracle Corporation Java HotSpot(TM) 64-Bit Server VM 21.0.6+8-LTS-188
+[11Nov2026 12:30:26.060] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.6 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
+[11Nov2026 12:30:26.239] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[11Nov2026 12:30:26.333] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/corpse-sublevels/libraries/net/fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/sponge-mixin-0.16.4+mixin.0.8.7.jar%2373!/ Service=ModLauncher Env=SERVER
+[11Nov2026 12:30:26.569] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "server-1.21.1-20240808.144430-srg.jar" [locator: production server provider +net.neoforged:neoforge:21.1.265:server]
+[11Nov2026 12:30:26.586] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.265-universal.jar" [locator: PathBasedLocator[name=neoforge, paths=[libraries\net\neoforged\neoforge\21.1.265\neoforge-21.1.265-universal.jar]], reader: mod manifest]
+[11Nov2026 12:30:26.594] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "carryon-neoforge-1.21.1-2.2.6.13.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\mods}, reader: mod manifest]
+[11Nov2026 12:30:26.597] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "corpse-neoforge-1.21.1-1.1.22.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\mods}, reader: mod manifest]
+[11Nov2026 12:30:26.600] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragdoll_reactions-1.21.1-0.7.0.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\mods}, reader: mod manifest]
+[11Nov2026 12:30:26.603] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragrevival-1.21.1-1.6.0-test-harness.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\mods}, reader: mod manifest]
+[11Nov2026 12:30:26.608] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragrevival-1.21.1-1.6.0.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\mods}, reader: mod manifest]
+[11Nov2026 12:30:26.611] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-neoforge-1.21.1-2.0.6.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\mods}, reader: mod manifest]
+[11Nov2026 12:30:26.614] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable_player_ragdoll-1.21.1-0.7.5.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\mods}, reader: mod manifest]
+[11Nov2026 12:30:26.776] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 7 dependencies adding them to mods collection
+[11Nov2026 12:30:26.776] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "mixinextras-neoforge-0.5.5.jar" [parent: neoforge-21.1.265-universal.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:30:26.777] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "molang-compiler-3.1.1.19.jar" [parent: veil-neoforge-1.21.1-4.3.2.jar, locator: jarinjar]
+[11Nov2026 12:30:26.777] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "veil-neoforge-1.21.1-4.3.2.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:30:26.777] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-companion-common-1.21.1-1.6.0.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:30:26.778] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "dev.ryanhcode.sable.sable-sable_rapier-1.21.1-2.0.6.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:30:26.778] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "glsl-processor-0.2.3.jar" [parent: veil-neoforge-1.21.1-4.3.2.jar, locator: jarinjar]
+[11Nov2026 12:30:26.778] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "net.neoforged.neoforge-coremods-21.1.265.jar" [parent: neoforge-21.1.265-universal.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:30:26.779] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Carry On 2.2.6 (carryon)
+		Corpse 1.21.1-1.1.22 (corpse)
+		Minecraft 1.21.1 (minecraft)
+		NeoForge 21.1.265 (neoforge)
+		Ragdoll Reactions 0.7.0 (ragdoll_reactions)
+		RagRevival 1.6.0 (ragrevival)
+		RagRevival Integration Tests 1.0.0 (ragrevival_tests)
+		Sable 2.0.6 (sable)
+		Sable Companion 1.6.0 (sablecompanion)
+		Sable Ragdolls 0.7.5 (sable_player_ragdoll)
+		Veil 4.3.2 (veil)
+[11Nov2026 12:30:27.160] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[11Nov2026 12:30:27.174] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[11Nov2026 12:30:27.385] [main/WARN] [mixin/]: Reference map 'carryon.refmap.json' for carryon.mixins.json could not be read. If this is a development environment you can ignore this message
+[11Nov2026 12:30:27.432] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
+[11Nov2026 12:30:27.433] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
+[11Nov2026 12:30:27.433] [main/WARN] [mixin/]: Reference map 'sable_player_ragdoll.refmap.json' for sable_player_ragdoll.mixins.json could not be read. If this is a development environment you can ignore this message
+[11Nov2026 12:30:27.433] [main/WARN] [mixin/]: Reference map 'sable_player_ragdoll.refmap.json' for sable_player_ragdoll.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[11Nov2026 12:30:28.428] [main/WARN] [oshi.driver.windows.perfmon.PerfmonDisabled/]: Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[11Nov2026 12:30:28.612] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[11Nov2026 12:30:33.287] [modloading-worker-0/INFO] [Veil/]: Veil is initializing.
+[11Nov2026 12:30:33.323] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.265, for MC 1.21.1
+[11Nov2026 12:30:33.352] [modloading-worker-0/INFO] [dev.ryanhcode.sable.Sable/]: Sable loaded!
+[11Nov2026 12:30:33.977] [modloading-sync-worker/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] post-physics ragdoll hook registered
+[11Nov2026 12:30:33.982] [modloading-sync-worker/INFO] [ragdoll_reactions/]: [ragdoll_reactions] post-physics accel/decel trigger registered
+[11Nov2026 12:30:34.115] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [corpse] Starting version check at https://update.maxhenkel.de/neoforge/corpse
+[11Nov2026 12:30:34.123] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[11Nov2026 12:30:34.184] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/corpse-sublevels/libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar%23124!/assets/.mcassetsroot' uses unexpected schema
+[11Nov2026 12:30:34.184] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/corpse-sublevels/libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar%23124!/data/.mcassetsroot' uses unexpected schema
+[11Nov2026 12:30:34.981] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [corpse] Found status: UP_TO_DATE Current: 1.21.1-1.1.22 Target: null
+[11Nov2026 12:30:35.159] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1290 recipes
+[11Nov2026 12:30:35.283] [main/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1399 advancements
+[11Nov2026 12:30:35.578] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.21.1
+[11Nov2026 12:30:35.579] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[11Nov2026 12:30:35.579] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[11Nov2026 12:30:35.579] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[11Nov2026 12:30:35.619] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on 127.0.0.1:25611
+[11Nov2026 12:30:35.663] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Adding UDP server channel future
+[11Nov2026 12:30:35.707] [Netty Server IO #0/INFO] [dev.ryanhcode.sable.Sable/]: Server UDP channel active
+[11Nov2026 12:30:35.707] [Server thread/INFO] [net.minecraft.server.network.ServerConnectionListener/]: Using default channel type
+[11Nov2026 12:30:35.711] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[11Nov2026 12:30:35.711] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: The server will make no attempt to authenticate usernames. Beware.
+[11Nov2026 12:30:35.711] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[11Nov2026 12:30:35.712] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: To change this, set "online-mode" to "true" in the server.properties file.
+[11Nov2026 12:30:35.756] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "world"
+[11Nov2026 12:30:35.794] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Creating physics pipeline for ResourceKey[minecraft:dimension / minecraft:overworld] using RapierPhysicsPipelineProvider
+[11Nov2026 12:30:35.799] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Using game directory relative Sable Rapier native directory C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-sublevels\.sable\natives
+[11Nov2026 12:30:35.879] [Server thread/ERROR] [dev.ryanhcode.sable.Sable/]: Failed to apply tag physics properties. Unknown block: create:flywheel
+[11Nov2026 12:30:35.978] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Creating physics pipeline for ResourceKey[minecraft:dimension / minecraft:the_nether] using RapierPhysicsPipelineProvider
+[11Nov2026 12:30:35.979] [Server thread/ERROR] [dev.ryanhcode.sable.Sable/]: Failed to apply tag physics properties. Unknown block: create:flywheel
+[11Nov2026 12:30:35.995] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Creating physics pipeline for ResourceKey[minecraft:dimension / minecraft:the_end] using RapierPhysicsPipelineProvider
+[11Nov2026 12:30:35.996] [Server thread/ERROR] [dev.ryanhcode.sable.Sable/]: Failed to apply tag physics properties. Unknown block: create:flywheel
+[11Nov2026 12:30:36.016] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[11Nov2026 12:30:36.141] [Worker-Main-8/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[11Nov2026 12:30:36.193] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 177 ms
+[11Nov2026 12:30:36.193] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (0.472s)! For help, type "help"
+[11Nov2026 12:30:36.194] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting remote control listener
+[11Nov2026 12:30:36.197] [Server thread/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Listener started
+[11Nov2026 12:30:36.197] [Server thread/INFO] [net.minecraft.server.rcon.thread.RconThread/]: RCON running on 127.0.0.1:25612
+[11Nov2026 12:30:36.216] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[11Nov2026 12:30:36.224] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] ragdoll system active (debug=true)
+[11Nov2026 12:30:36.224] [Server thread/INFO] [ragdoll_reactions/]: [ragdoll_reactions] accel/decel trigger active (debug=false)
+[11Nov2026 12:31:15.122] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: ReviveOne[/127.0.0.1:55276] logged in with entity id 19 at (201.5, 70.0, 200.5)
+[11Nov2026 12:31:15.126] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Beginning attempted authentication with player ReviveOne
+[11Nov2026 12:31:15.194] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ReviveOne joined the game
+[11Nov2026 12:31:15.229] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ReviveOne has made the advancement [Cover Me with Diamonds]
+[11Nov2026 12:31:15.538] [Netty Server IO #0/INFO] [dev.ryanhcode.sable.Sable/]: UDP authentication complete with /127.0.0.1:55276, UDP routing to /127.0.0.1:63857
+[11Nov2026 12:31:15.597] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] restored playerless ragdoll 6b68c65d (6 parts)
+[11Nov2026 12:31:24.308] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:24.369] [RCON Client /127.0.0.1 #2/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.394] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:34.435] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] removed ragdoll sublevel 6b68c65d
+[11Nov2026 12:31:34.436] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] expiring ragdoll 6b68c65d immediately (api restored corpse release)
+[11Nov2026 12:31:34.437] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Killed Corpse of ReviveOne]
+[11Nov2026 12:31:34.450] [RCON Client /127.0.0.1 #3/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.458] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:34.460] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Killed 3 entities]
+[11Nov2026 12:31:34.461] [RCON Client /127.0.0.1 #4/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.467] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:34.472] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Removed 9 item(s) from player ReviveOne]
+[11Nov2026 12:31:34.473] [RCON Client /127.0.0.1 #5/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.479] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:34.482] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported ReviveOne to 200.500000, 70.000000, 200.500000]
+[11Nov2026 12:31:34.482] [RCON Client /127.0.0.1 #6/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.488] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:34.492] [RCON Client /127.0.0.1 #7/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.499] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:34.500] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported ReviveOne to 201.500000, 70.000000, 200.500000]
+[11Nov2026 12:31:34.500] [RCON Client /127.0.0.1 #8/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.506] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:31:34.507] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Set the time to 1000]
+[11Nov2026 12:31:34.507] [RCON Client /127.0.0.1 #9/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:31:34.544] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] queued playerless ragdoll 1aa7c8be at 203, 70, 200 heading=-0.00,0.00,1.00 (6 parts, 5 constraints)
+[11Nov2026 12:31:34.556] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] queued playerless ragdoll f8478379 at 206, 70, 200 heading=-0.00,0.00,1.00 (6 parts, 5 constraints)
+[11Nov2026 12:31:34.579] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] restored playerless ragdoll 1aa7c8be (6 parts)
+[11Nov2026 12:31:34.580] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] restored playerless ragdoll f8478379 (6 parts)
+[11Nov2026 12:31:34.583] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] ragdoll launched 1aa7c8be linear=0.00,-0.00,-0.50 angular=0.00,0.00,0.00 parts=1
+[11Nov2026 12:31:34.583] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] ragdoll launched f8478379 linear=0.00,-0.00,-0.50 angular=0.00,0.00,0.00 parts=1
+[11Nov2026 12:32:24.971] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:32:24.999] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported ReviveOne to 200.000000, 70.000000, 201.500000]
+[11Nov2026 12:32:25.002] [RCON Client /127.0.0.1 #10/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:32:48.453] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:32:48.481] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported ReviveOne to 200.000000, 70.000000, 201.500000]
+[11Nov2026 12:32:48.494] [RCON Client /127.0.0.1 #11/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:33:29.266] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:33:29.292] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported ReviveOne to 197.900000, 70.000000, 202.400000]
+[11Nov2026 12:33:29.304] [RCON Client /127.0.0.1 #12/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:33:43.376] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:33:43.424] [RCON Client /127.0.0.1 #13/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:33:51.287] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:33:51.315] [RCON Client /127.0.0.1 #14/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:33:58.814] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:33:58.838] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported ReviveOne to 204.500000, 70.000000, 200.500000]
+[11Nov2026 12:33:58.852] [RCON Client /127.0.0.1 #15/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:34:12.619] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] removed ragdoll sublevel 1aa7c8be
+[11Nov2026 12:34:12.619] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] expiring ragdoll 1aa7c8be immediately (api playerless release)
+[11Nov2026 12:34:34.284] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:34:34.311] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Teleported ReviveOne to 204.500000, 70.000000, 200.500000]
+[11Nov2026 12:34:34.324] [RCON Client /127.0.0.1 #16/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:35:08.268] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: ReviveOne lost connection: Disconnected
+[11Nov2026 12:35:08.269] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ReviveOne left the game
+[11Nov2026 12:35:08.686] [RCON Listener #1/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Client /127.0.0.1 started
+[11Nov2026 12:35:08.714] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Rcon: Stopping the server]
+[11Nov2026 12:35:08.718] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[11Nov2026 12:35:08.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[11Nov2026 12:35:08.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[11Nov2026 12:35:08.731] [RCON Client /127.0.0.1 #17/INFO] [net.minecraft.server.rcon.thread.RconClient/]: Thread RCON Client /127.0.0.1 shutting down
+[11Nov2026 12:35:08.733] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[11Nov2026 12:35:08.734] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[world]'/minecraft:overworld
+[11Nov2026 12:35:08.771] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[11Nov2026 12:35:08.771] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[world]'/minecraft:the_nether
+[11Nov2026 12:35:08.784] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[11Nov2026 12:35:08.784] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[world]'/minecraft:the_end
+[11Nov2026 12:35:08.804] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[11Nov2026 12:35:08.805] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[11Nov2026 12:35:08.805] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[11Nov2026 12:35:08.805] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[11Nov2026 12:35:08.824] [Server thread/INFO] [net.minecraft.server.rcon.thread.GenericThread/]: Thread RCON Listener stopped

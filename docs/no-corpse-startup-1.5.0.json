@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-11",
+  "scenario": "Dedicated startup with optional Corpse absent",
+  "result": "PASS",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.249",
+  "java": "21",
+  "mods": [
+    {
+      "file": "carryon-neoforge-1.21.1-2.2.6.13.jar",
+      "sha256": "d4f9576b6593db9486a89d35c1d84c31ee89141d99dbae2aa470350ab53c4e09"
+    },
+    {
+      "file": "ragdoll_reactions-1.21.1-0.7.0.jar",
+      "sha256": "d61a118c0b5ad2f3e761af6b3d71726bc2887bb3d0c7c90c2dc604bb4d3792b8"
+    },
+    {
+      "file": "ragrevival-1.21.1-1.5.0.jar",
+      "sha256": "4f963c81c37296c9a4638b64e135ddb4fb01f77075c904b433680e971c9e9b56"
+    },
+    {
+      "file": "sable_player_ragdoll-1.21.1-0.7.5.jar",
+      "sha256": "69611deff1c2b18ae0ae7dbaea24cc14f4b69f0368297653933ae9b33adf2d2b"
+    },
+    {
+      "file": "sable-neoforge-1.21.1-2.0.6.jar",
+      "sha256": "9c199157843bf953a47dff625fc5bb41c01a90538d35ad18e6996bbcb8a617c2"
+    }
+  ],
+  "evidence": [
+    "[11Nov2026 10:50:28.446] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.21.1",
+    "[11Nov2026 10:50:29.455] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (0.829s)! For help, type \"help\"",
+    "[11Nov2026 10:50:29.460] [Server thread/INFO] [net.minecraft.server.rcon.thread.RconThread/]: RCON running on 127.0.0.1:25604",
+    "[11Nov2026 10:50:29.514] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] ragdoll system active (debug=true)"
+  ],
+  "limits": "Dedicated startup only; no clients or Corpse gameplay. Existing Sable warnings about absent Create flywheel physics definitions occur without Create installed."
+}

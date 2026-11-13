@@ -1,0 +1,180 @@
+{
+  "date": "2026-11-11",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.265",
+  "java": "21.0.6",
+  "ragrevival": "1.5.1",
+  "productionSha256": "c6cebc64113bb55b712aafee9e4d622e6383bbfc5c756e73dc7d80715a34d7dd",
+  "runtimeFilenameNote": "RagRevival production and harness jars retained old runtime filenames during overwrite; internal metadata and SHA256 identify version1.5.1.",
+  "userInstanceReadOnly": true,
+  "sameWorldDirectory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265\\world",
+  "mods": [
+    {
+      "runtimeFilename": "carryon-neoforge-1.21.1-2.2.6.13.jar",
+      "sha256": "d4f9576b6593db9486a89d35c1d84c31ee89141d99dbae2aa470350ab53c4e09"
+    },
+    {
+      "runtimeFilename": "corpse-neoforge-1.21.1-1.1.22.jar",
+      "sha256": "3733d86452b9ac572e924c2946e15e6b7052cc8fc990911f1c79b36ac3651b9f"
+    },
+    {
+      "runtimeFilename": "ragdoll_reactions-1.21.1-0.7.0.jar",
+      "sha256": "d61a118c0b5ad2f3e761af6b3d71726bc2887bb3d0c7c90c2dc604bb4d3792b8"
+    },
+    {
+      "runtimeFilename": "ragrevival-1.21.1-1.5.0-test-harness.jar",
+      "sha256": "0a58ca5e049ef3d568d387dda6cd18998afe1262776d0691d15bf02dbf0bcf41"
+    },
+    {
+      "runtimeFilename": "ragrevival-1.21.1-1.5.0.jar",
+      "sha256": "c6cebc64113bb55b712aafee9e4d622e6383bbfc5c756e73dc7d80715a34d7dd"
+    },
+    {
+      "runtimeFilename": "sable_player_ragdoll-1.21.1-0.7.5.jar",
+      "sha256": "69611deff1c2b18ae0ae7dbaea24cc14f4b69f0368297653933ae9b33adf2d2b"
+    },
+    {
+      "runtimeFilename": "sable-neoforge-1.21.1-2.0.6.jar",
+      "sha256": "9c199157843bf953a47dff625fc5bb41c01a90538d35ad18e6996bbcb8a617c2"
+    }
+  ],
+  "cases": [
+    {
+      "mode": "clean",
+      "runId": "c4d56f40-792b-4f3b-9bbf-625186b6b87b",
+      "beforePid": 519948,
+      "afterPid": 523860,
+      "beforeProcess": {
+        "pid": 519948,
+        "started": "2026-11-11T17:44:21.8208864Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265",
+        "neoForge": "21.1.265",
+        "stage": "clean-before",
+        "ragrevival": "1.5.1",
+        "productionSha256": "c6cebc64113bb55b712aafee9e4d622e6383bbfc5c756e73dc7d80715a34d7dd"
+      },
+      "afterProcess": {
+        "pid": 523860,
+        "started": "2026-11-11T17:44:54.4650701Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265",
+        "neoForge": "21.1.265",
+        "stage": "clean-after",
+        "ragrevival": "1.5.1",
+        "productionSha256": "c6cebc64113bb55b712aafee9e4d622e6383bbfc5c756e73dc7d80715a34d7dd"
+      },
+      "world": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265\\world",
+      "gameTime": 36210,
+      "manifestPhase": "clean-stopping",
+      "manifestNbtSha256": "f59d690c8110e2e665c3f13f7bf87a5fb2e20c51a2654bd68057a466014fbf11",
+      "physicsBodiesAtShutdownRequest": 1,
+      "savedNativeParts": 6,
+      "checksPassed": 26,
+      "checksFailed": 0,
+      "postRestartTicks": 200,
+      "fixtures": [
+        {
+          "case": "settled-skeleton",
+          "uuid": "30072eb4-af2c-4241-9b3b-78db9d6e9abc",
+          "deathId": "f1b5f62e-8858-41b6-b133-be58da356a9c",
+          "skeleton": true,
+          "savedPosition": [
+            2.5,
+            240.0,
+            2.5
+          ],
+          "equipment": "[{},{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{},{},{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{},{}]",
+          "deathNbtSha256": "89d0b1a4f750b2e0741c9ff8ceb8bb2358fef68d674ef32c4101373c1c11b74e"
+        },
+        {
+          "case": "active-player",
+          "uuid": "6b5e077b-a70a-41ac-97d8-0fadbf041e01",
+          "deathId": "4b3e6d24-7bb7-44a5-aa3f-2463eb2e1a93",
+          "skeleton": false,
+          "savedPosition": [
+            10.500089316667932,
+            240.001,
+            2.5007487866172173
+          ],
+          "equipment": "[{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"c4d56f40-792b-4f3b-9bbf-625186b6b87b:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},{}]",
+          "deathNbtSha256": "b986def3729c64da2bf6715d71c5710949d36c95414b86ffc566f91b0be81bef"
+        }
+      ],
+      "prepareLog": "corpse-restart-1.5.1-clean-before.log",
+      "checkLog": "corpse-restart-1.5.1-clean-after.log"
+    },
+    {
+      "mode": "crash",
+      "runId": "47b3c3f9-5fc9-4184-ad08-e772c47fd4f3",
+      "beforePid": 523860,
+      "afterPid": 521924,
+      "beforeProcess": {
+        "pid": 523860,
+        "commandLine": "\"C:\\Program Files\\Java\\jdk-21\\bin\\java.exe\" \"@C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265/launch-server.args\"",
+        "started": "2026-11-11T17:44:54.4650701Z",
+        "killedAfterSaveUtc": "2026-11-11T17:45:38.0638766Z"
+      },
+      "afterProcess": {
+        "pid": 521924,
+        "started": "2026-11-11T17:45:48.3414039Z",
+        "directory": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265",
+        "neoForge": "21.1.265",
+        "stage": "crash-after",
+        "ragrevival": "1.5.1",
+        "productionSha256": "c6cebc64113bb55b712aafee9e4d622e6383bbfc5c756e73dc7d80715a34d7dd"
+      },
+      "world": "C:\\Users\\caleb\\Documents\\ChatGPT\\RagRevival\\.local\\corpse-compat\\neo265\\world",
+      "gameTime": 36824,
+      "manifestPhase": "crash-ready",
+      "manifestNbtSha256": "1634ebfddd68609cb7a76cab9c3e3dc59ff2c1f55103db944910a6f4cd630997",
+      "physicsBodiesAtShutdownRequest": 1,
+      "savedNativeParts": 6,
+      "checksPassed": 26,
+      "checksFailed": 0,
+      "postRestartTicks": 200,
+      "fixtures": [
+        {
+          "case": "settled-skeleton",
+          "uuid": "f98ff05b-ee22-4bc9-840d-9e29e9813192",
+          "deathId": "a00a0020-122c-43cc-80d3-8aacfecc0111",
+          "skeleton": true,
+          "savedPosition": [
+            2.5,
+            240.0,
+            2.5
+          ],
+          "equipment": "[{},{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:settled-skeleton:shield\"'},count:1,id:\"minecraft:shield\"},{},{},{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:settled-skeleton:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{},{}]",
+          "deathNbtSha256": "3c494b03f0a92e4754edb8fafa55b88c4ce7431cb7b38bebe587b4012449b08b"
+        },
+        {
+          "case": "active-player",
+          "uuid": "78ada7e8-b8c4-4688-aed9-faac87a3748d",
+          "deathId": "6d6d8836-626b-4889-8f7f-d631a0897f96",
+          "skeleton": false,
+          "savedPosition": [
+            10.500089744634051,
+            239.97675289103847,
+            2.5007477758852077
+          ],
+          "equipment": "[{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:active-player:tool\"'},count:1,id:\"minecraft:iron_pickaxe\"},{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:active-player:shield\"'},count:1,id:\"minecraft:shield\"},{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:active-player:boots\"'},count:1,id:\"minecraft:diamond_boots\"},{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:active-player:leggings\"'},count:1,id:\"minecraft:diamond_leggings\"},{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:active-player:chestplate\"'},count:1,id:\"minecraft:diamond_chestplate\"},{components:{\"minecraft:custom_name\":'\"47b3c3f9-5fc9-4184-ad08-e772c47fd4f3:active-player:helmet\"'},count:1,id:\"minecraft:diamond_helmet\"},{}]",
+          "deathNbtSha256": "8ca2cb1f0a4e5a1dc5f74c6e7f180b5538596573fec55b293bbf628cc1cc0e45"
+        }
+      ],
+      "prepareLog": "corpse-restart-1.5.1-crash-before.log",
+      "checkLog": "corpse-restart-1.5.1-crash-after.log"
+    }
+  ],
+  "broaderRegression": {
+    "status": "passed",
+    "checksPassed": 69,
+    "checksFailed": 0,
+    "serverTicks": 957,
+    "processId": 521924,
+    "log": "corpse-checks-1.5.1-neoforge-265.log"
+  },
+  "scopeLimits": [
+    "Relevant-mod integration subset, not complete modpack world",
+    "No unsaved-data or interrupted-disk-write recovery claim",
+    "No separate distance-driven chunk unload cycle",
+    "No new client visual test in this persistence probe"
+  ]
+}

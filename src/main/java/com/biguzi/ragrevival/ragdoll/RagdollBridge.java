@@ -10,10 +10,10 @@ import dev.leo.sableplayerragdoll.api.RagdollLaunchOptions;
 import dev.leo.sableplayerragdoll.api.RagdollLimbOptions;
 import dev.leo.sableplayerragdoll.api.RagdollPoseSnapshot;
 import dev.leo.sableplayerragdoll.api.RagdollSession;
+import dev.leo.sableplayerragdoll.api.PlayerlessDespawnRule;
+import dev.leo.sableplayerragdoll.api.PlayerlessRagdollSession;
 import dev.leo.sableplayerragdoll.block.entity.RagdollPartBlockEntity;
 import dev.leo.sableplayerragdoll.entity.RagdollSeatEntity;
-import dev.leo.sableplayerragdoll.physics.RagdollAssemblyHelper;
-import dev.leo.sableplayerragdoll.physics.RagdollExpireHelper;
 import dev.leo.sableplayerragdoll.physics.RagdollSeatingHelper;
 import dev.leo.sableplayerragdoll.physics.RagdollSessionManager;
 import dev.ryanhcode.sable.Sable;
@@ -61,16 +61,20 @@ public final class RagdollBridge {
     public static boolean ensureDowned(ServerPlayer player) {
         cancelPendingPose(player.getUUID());
         ServerSubLevel root = RagdollSessionManager.activeRagdollForPlayer(player.serverLevel(), player.getUUID());
-        if (root != null && !RagdollSessionManager.isExpiring(root)) {
+        UUID owner = root == null ? null : NativeRagdollCompat.ownerForPlayer(player, root);
+        if (root != null && !NativeRagdollCompat.withOwnerResult(owner, () -> RagdollSessionManager.isExpiring(root))) {
             PENDING.remove(player.getUUID());
             // Reactions may have provided its own expiration rules. Replace those without rebuilding the body.
-            RagdollSessionManager.setCustomDespawnConditions(root, NEVER_EXPIRE);
-            RagdollSessionManager.setDismountLocked(root, true);
+            NativeRagdollCompat.withOwner(owner, () -> {
+                RagdollSessionManager.setCustomDespawnConditions(root, NEVER_EXPIRE);
+                RagdollSessionManager.setDismountLocked(root, true);
+            });
             // In 0.7.2 this flag belongs to the clicked limb, not the whole linked body.
-            for (UUID partId : RagdollAssemblyHelper.linkedParts(root.getUniqueId())) {
-                RagdollAPI.setGrabDisabled(player.serverLevel(), partId, true);
-            }
-            if (CONFIGURED_ROOTS.add(root.getUniqueId())) {
+            NativeRagdollCompat.withOwner(owner, () -> {
+                for (UUID partId : NativeRagdollCompat.linkedParts(player.serverLevel(), owner))
+                    RagdollAPI.setGrabDisabled(player.serverLevel(), partId, true);
+            });
+            if (CONFIGURED_ROOTS.add(owner)) {
                 // Remove grips started before this ordinary ragdoll became downed.
                 for (Part part : parts(player)) {
                     for (ServerPlayer other : player.server.getPlayerList().getPlayers()) {
@@ -79,7 +83,7 @@ public final class RagdollBridge {
                 }
             }
             if (!(player.getVehicle() instanceof RagdollSeatEntity)) {
-                RagdollSeatingHelper.trySeatEntity(player.serverLevel(), player, root);
+                NativeRagdollCompat.withOwner(owner, () -> RagdollSeatingHelper.trySeatEntity(player.serverLevel(), player, root));
             }
             return player.getVehicle() instanceof RagdollSeatEntity;
         }
@@ -103,14 +107,38 @@ public final class RagdollBridge {
         RagdollSession pending = PENDING.remove(player.getUUID());
         RagdollSession session = RagdollAPI.activeSession(player);
         ServerSubLevel root = RagdollSessionManager.activeRagdollForPlayer(player.serverLevel(), player.getUUID());
-        if (root != null) CONFIGURED_ROOTS.remove(root.getUniqueId());
+        UUID owner = root == null ? null : NativeRagdollCompat.ownerForPlayer(player, root);
+        if (root != null) CONFIGURED_ROOTS.remove(owner);
         if (root != null && SubLevelPhysicsSystem.get(player.serverLevel()) != null) {
             // Explicit world placement avoids retaining the destroyed plotyard's coordinates.
-            RagdollExpireHelper.expireImmediate(SubLevelPhysicsSystem.get(player.serverLevel()),
-                    player.serverLevel(), root, "api revival release", true);
+            NativeRagdollCompat.withOwner(owner, () -> NativeRagdollCompat.expireImmediate(SubLevelPhysicsSystem.get(player.serverLevel()),
+                    player.serverLevel(), root, "api revival release", true));
         } else if (session != null) session.release();
         else if (pending != null) pending.release();
         LAST_ATTEMPT.remove(player.getUUID());
+    }
+
+    /** Keeps the actual six native bodies, constraints and momentum when final death creates a corpse. */
+    public static PlayerlessRagdollSession detachForCorpse(ServerPlayer player) {
+        ServerSubLevel root = RagdollSessionManager.activeRagdollForPlayer(player.serverLevel(), player.getUUID());
+        if (root == null) return null;
+        UUID owner = NativeRagdollCompat.ownerForPlayer(player, root);
+        cancelPendingPose(player.getUUID());
+        stopDrag(player);
+        for (Drag drag : List.copyOf(DRAGS.values())) {
+            if (drag.targetId().equals(player.getUUID())) stopDrag(drag.rescuer());
+        }
+        Vec3 position = worldPosition(player);
+        PlayerlessRagdollSession detached = NativeRagdollCompat.retainIdentity(NativeRagdollCompat.withOwnerResult(owner,
+                () -> RagdollAPI.detachActive(player, PlayerlessDespawnRule.never())), owner);
+        if (detached != null) {
+            PENDING.remove(player.getUUID());
+            CONFIGURED_ROOTS.remove(owner);
+            LAST_ATTEMPT.remove(player.getUUID());
+            // Corpse's later death capture must see world coordinates, never the plotyard.
+            player.teleportTo(position.x, position.y, position.z);
+        }
+        return detached;
     }
 
     /** Actual world position, including players seated in the off-world Sable plotyard. */
@@ -125,7 +153,7 @@ public final class RagdollBridge {
     /** The exact topology sent to clients; skin UUID alone also matches playerless dummies. */
     public static List<UUID> bodyPartIds(ServerPlayer player) {
         ServerSubLevel root = RagdollSessionManager.activeRagdollForPlayer(player.serverLevel(), player.getUUID());
-        return root == null || root.isRemoved() ? List.of() : List.copyOf(RagdollAssemblyHelper.linkedParts(root.getUniqueId()));
+        return root == null || root.isRemoved() ? List.of() : NativeRagdollCompat.linkedParts(player.serverLevel(), NativeRagdollCompat.ownerForPlayer(player, root));
     }
 
     /** Sable reports projectile hits on limbs using their local plotyard block coordinates. */
@@ -135,7 +163,8 @@ public final class RagdollBridge {
         if (limb == null) return null;
         ServerPlayer player = level.getServer().getPlayerList().getPlayer(part.skinProfile().getId());
         // An ordinary ragdoll dummy can share the player's skin without belonging to their body.
-        return player != null && player.level() == level && bodyPartIds(player).contains(limb.getUniqueId()) ? player : null;
+        return player != null && player.level() == level
+                && parts(player).stream().anyMatch(owned -> owned.blockEntity() == part) ? player : null;
     }
 
     public static void acceptClientParts(UUID playerId, List<UUID> partIds) {
@@ -184,7 +213,7 @@ public final class RagdollBridge {
         double reach = rescuer.entityInteractionRange();
         ServerSubLevel root = RagdollSessionManager.activeRagdollForPlayer(target.serverLevel(), target.getUUID());
         if (root == null) return false;
-        Set<UUID> ownParts = Set.copyOf(RagdollAssemblyHelper.linkedParts(root.getUniqueId()));
+        Set<UUID> ownParts = Set.copyOf(NativeRagdollCompat.linkedParts(target.serverLevel(), NativeRagdollCompat.ownerForPlayer(target, root)));
         for (Part part : parts(target)) {
             Vec3 localEye = part.pose().transformPositionInverse(eye);
             for (AABB box : part.localBoxes()) {
@@ -272,21 +301,35 @@ public final class RagdollBridge {
         SubLevelContainer container = SubLevelContainer.getContainer(player.level());
         if (container == null) return List.of();
         List<Part> found = new ArrayList<>();
-        Set<UUID> linkedParts = player instanceof ServerPlayer serverPlayer ? Set.copyOf(bodyPartIds(serverPlayer))
-                : CLIENT_PARTS.getOrDefault(player.getUUID(), Set.of());
+        if (player instanceof ServerPlayer serverPlayer) {
+            ServerSubLevel root = RagdollSessionManager.activeRagdollForPlayer(serverPlayer.serverLevel(), player.getUUID());
+            if (root == null || root.isRemoved()) return List.of();
+            for (NativeRagdollCompat.Limb limb : NativeRagdollCompat.limbs(serverPlayer.serverLevel(),
+                    NativeRagdollCompat.ownerForPlayer(serverPlayer, root)))
+                addPart(player, found, limb.subLevel(), limb.block());
+            return found;
+        }
+        Set<UUID> linkedParts = CLIENT_PARTS.getOrDefault(player.getUUID(), Set.of());
         if (linkedParts.isEmpty()) return List.of();
         for (UUID partId : linkedParts) {
             SubLevel subLevel = container.getSubLevel(partId);
             if (subLevel == null || subLevel.isRemoved() || subLevel.getPlot() == null) continue;
-            BlockPos pos = subLevel.getPlot().getCenterBlock();
-            if (!(player.level().getBlockEntity(pos) instanceof RagdollPartBlockEntity part)
-                    || !player.getUUID().equals(part.skinProfile().getId())) continue;
-            Pose3dc pose = subLevel instanceof ClientSubLevelAccess client ? client.renderPose() : subLevel.logicalPose();
-            List<AABB> localBoxes = part.getBlockState().getShape(player.level(), pos).toAabbs().stream()
-                    .map(box -> box.move(pos)).toList();
-            found.add(new Part(part, pose, localBoxes));
+            for (var holder : subLevel.getPlot().getLoadedChunks())
+                for (var block : holder.getChunk().getBlockEntities().values())
+                    if (block instanceof RagdollPartBlockEntity part
+                            && !part.getPersistentData().getBoolean("ragrevival:corpse_part"))
+                        addPart(player, found, subLevel, part);
         }
         return found;
+    }
+
+    private static void addPart(Player player, List<Part> found, SubLevel subLevel, RagdollPartBlockEntity part) {
+        if (subLevel.isRemoved() || part.isRemoved() || !player.getUUID().equals(part.skinProfile().getId())) return;
+        BlockPos pos = part.getBlockPos();
+        Pose3dc pose = subLevel instanceof ClientSubLevelAccess client ? client.renderPose() : subLevel.logicalPose();
+        List<AABB> localBoxes = part.getBlockState().getShape(player.level(), pos).toAabbs().stream()
+                .map(box -> box.move(pos)).toList();
+        found.add(new Part(part, pose, localBoxes));
     }
 
     private static AABB transformBounds(Pose3dc pose, AABB local) {

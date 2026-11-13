@@ -27,6 +27,14 @@
       "scope": "required"
     },
     {
+      "name": "Corpse",
+      "version": "1.1.22",
+      "file": "corpse-neoforge-1.21.1-1.1.22.jar",
+      "url": "https://edge.forgecdn.net/files/9289/316/corpse-neoforge-1.21.1-1.1.22.jar",
+      "sha256": "3733d86452b9ac572e924c2946e15e6b7052cc8fc990911f1c79b36ac3651b9f",
+      "scope": "optional-compile"
+    },
+    {
       "name": "Carry On",
       "version": "2.2.6.13",
       "file": "carryon-neoforge-1.21.1-2.2.6.13.jar",

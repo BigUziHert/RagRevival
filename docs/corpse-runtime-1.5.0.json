@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-11",
+  "minecraft": "1.21.1",
+  "java": "java version \"21.0.6\" 2025-01-21 LTS",
+  "ragrevival": "1.5.0",
+  "networkProtocol": 4,
+  "mode": "Dedicated server, native ServerPlayer fixtures with packet sinks; actual Sable native physics",
+  "userInstanceReadOnly": true,
+  "mods": [
+    {
+      "file": "carryon-neoforge-1.21.1-2.2.6.13.jar",
+      "sha256": "d4f9576b6593db9486a89d35c1d84c31ee89141d99dbae2aa470350ab53c4e09"
+    },
+    {
+      "file": "corpse-neoforge-1.21.1-1.1.22.jar",
+      "sha256": "3733d86452b9ac572e924c2946e15e6b7052cc8fc990911f1c79b36ac3651b9f"
+    },
+    {
+      "file": "ragdoll_reactions-1.21.1-0.7.0.jar",
+      "sha256": "d61a118c0b5ad2f3e761af6b3d71726bc2887bb3d0c7c90c2dc604bb4d3792b8"
+    },
+    {
+      "file": "ragrevival-1.21.1-1.5.0-test-harness.jar",
+      "sha256": "fc8e064311b9abade2371db13fe4569bf50e2bb63b1312837a32f6a6ecb77661"
+    },
+    {
+      "file": "ragrevival-1.21.1-1.5.0.jar",
+      "sha256": "0c8759315eec01f9d9608df0f106d779a328b4bb5633990a8bb20c12add525da"
+    },
+    {
+      "file": "sable_player_ragdoll-1.21.1-0.7.5.jar",
+      "sha256": "69611deff1c2b18ae0ae7dbaea24cc14f4b69f0368297653933ae9b33adf2d2b"
+    },
+    {
+      "file": "sable-neoforge-1.21.1-2.0.6.jar",
+      "sha256": "9c199157843bf953a47dff625fc5bb41c01a90538d35ad18e6996bbcb8a617c2"
+    }
+  ],
+  "runs": [
+    {
+      "neoforge": "21.1.249",
+      "passed": 69,
+      "failed": 0,
+      "serverTicks": 957,
+      "log": "corpse-checks-1.5.0-neoforge-249.log"
+    },
+    {
+      "neoforge": "21.1.265",
+      "passed": 69,
+      "failed": 0,
+      "serverTicks": 957,
+      "log": "corpse-checks-1.5.0-neoforge-265.log"
+    }
+  ],
+  "poseMath": {
+    "combinations": 48,
+    "yawStepDegrees": 15,
+    "faceDownValues": [
+      false,
+      true
+    ],
+    "checks": [
+      "six normalized finite limb transforms",
+      "grounded half-block bounding height",
+      "NaN, invalid quaternion, and missing limb rejection"
+    ]
+  },
+  "stress": {
+    "loadedCorpses": 120,
+    "configuredPhysicsCap": 2,
+    "physicsLifetimeTicks": 20,
+    "checks": [
+      "positive active count within cap",
+      "all 120 inventories and poses preserved",
+      "no physics after expiry",
+      "no tracked bodies after removal"
+    ]
+  },
+  "coverage": [
+    "actual physical fall below void boundary and min-build-height corpse protection",
+    "actual fall into lava, knockdown, terminal death, corpse survival and lavaDamage=true behavior",
+    "one authoritative Corpse entity per death; no corpse on knockdown",
+    "main inventory, armor and offhand retention; native original-slot Transfer Items",
+    "owner-only restrictions and native skeleton access/aging",
+    "creative native death-history GUI recovery availability",
+    "native empty and forced expiry",
+    "keepInventory retains player inventory and creates no duplicate loot",
+    "entity NBT unload/reload via engine setRemoved path preserves inventory and settled pose",
+    "marked orphan six-part cleanup preserves unrelated ordinary ragdoll",
+    "occupied build-limit assembly staging cells remain unchanged",
+    "raised solid-floor collision through 200 physics ticks and 60 retired ticks, compared against ordinary native playerless control",
+    "captured downed pose remains on raised supporting floor with physics budget zero",
+    "active pose saved with observed-style0.02 block floor penetration, engine unload/reload, no new physics, support and complete loot after100 ticks"
+  ],
+  "limitations": [
+    "Relevant dependency subset only; entire provided modpack was not launched or modified",
+    "Server probes use synthetic packet sinks, not physical client input; client visual verification is recorded separately",
+    "Reload check exercises actual entity NBT and engine removal APIs, not a complete world restart or real chunk eviction",
+    "Orphan check discovers a deliberately marked unowned native body, not an abrupt process-kill recovery",
+    "Stress proves bounded physics resources and inventory retention; it is not a frame-rate or long-duration server benchmark"
+  ],
+  "floorRegression": {
+    "baselineLog": "corpse-floor-1.5.0-baseline.log",
+    "fixedLog": "corpse-floor-1.5.0-fixed.log",
+    "baselineProductionSha256": "4375c2ad980bf61e9cf057885c7ddd625783f86570a6a1d4f53dbbf2e51bbfe3",
+    "fixedProductionSha256": "4175ba3a0cd42b2c69e4409dd351441a0383eec876a505537ff5487e1a1c475f",
+    "platformTop": 96,
+    "baselineAfterPhysicsY": 70,
+    "fixedAfterPhysicsY": 96,
+    "physicsTicks": 200,
+    "postPhysicsObservedTicks": 60,
+    "activeVisibleOverlapTolerance": 0.25,
+    "retiredFloorTolerance": 0.01,
+    "explanation": "Native visible boxes slightly overlap the surface while Sable colliders remain supported. Retiring physics now clears small floor penetrations before vanilla movement resumes.",
+    "activePoseReload": {
+      "artificialSupportPenetration": 0.02,
+      "source": "actual native active pose; reproduces observed small collider/outline overlap",
+      "postReloadObservedTicks": 100,
+      "newPhysicsBodies": 0
+    }
+  },
+  "finalProductionSha256": "0c8759315eec01f9d9608df0f106d779a328b4bb5633990a8bb20c12add525da",
+  "clientVerification": "corpse-client-checks-1.5.0.md"
+}

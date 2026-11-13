@@ -1,0 +1,88 @@
+[11Nov2026 11:41:58.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS pose geometry: 48 yaw/face resting poses contain six finite normalized transforms
+[11Nov2026 11:41:58.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS pose geometry: all 48 resting poses sit on their anchor with half-block total height
+[11Nov2026 11:41:58.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS pose geometry: NaN limb coordinates are rejected
+[11Nov2026 11:41:58.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS pose geometry: unnormalized limb quaternions are rejected
+[11Nov2026 11:41:58.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS pose geometry: incomplete limb lists are rejected
+[11Nov2026 11:42:02.431] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: lethal damage creates a downed player
+[11Nov2026 11:42:02.431] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: downing does not create an inventory corpse
+[11Nov2026 11:42:03.166] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: terminal death completes once
+[11Nov2026 11:42:03.166] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: one native corpse was created for this death
+[11Nov2026 11:42:03.166] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: all native inventory compartments survive
+[11Nov2026 11:42:03.167] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: one native death-history record exists
+[11Nov2026 11:42:03.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: exactly one native Corpse entity exists
+[11Nov2026 11:42:03.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: new nearby corpse has temporary native Sable physics
+[11Nov2026 11:42:03.894] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: corpse synchronizes a valid six-limb ragdoll pose
+[11Nov2026 11:42:03.896] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: owner-only access rejects another player
+[11Nov2026 11:42:03.900] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: owner opens Corpse's native inventory menu
+[11Nov2026 11:42:04.044] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: native age rule changes the corpse to skeleton stage
+[11Nov2026 11:42:04.045] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: skeleton access permits another player
+[11Nov2026 11:42:04.793] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: entity save/reload preserves inventories
+[11Nov2026 11:42:04.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: entity save/reload preserves the settled pose
+[11Nov2026 11:42:04.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: native Transfer Items restores original inventory, armor, and offhand slots
+[11Nov2026 11:42:04.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: transfer empties the authoritative inventory
+[11Nov2026 11:42:05.294] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: empty corpse obeys native despawn timing
+[11Nov2026 11:42:05.294] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: empty-corpse removal releases temporary physics
+[11Nov2026 11:42:05.297] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS terminal death: creative death-history recovery remains available
+[11Nov2026 11:42:11.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into void: physical fall below the void boundary causes terminal death
+[11Nov2026 11:42:11.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into void: one native corpse was created for this death
+[11Nov2026 11:42:11.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into void: void death preserves the native inventory
+[11Nov2026 11:42:11.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into void: corpse is recoverable at the minimum build height
+[11Nov2026 11:42:11.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into void: void safety does not retain falling Sable bodies
+[11Nov2026 11:42:13.293] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into void: void protection remains stable across subsequent physics ticks
+[11Nov2026 11:42:17.793] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: falling into real lava triggers knockdown
+[11Nov2026 11:42:17.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: lava knockdown does not prematurely duplicate inventory
+[11Nov2026 11:42:17.810] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: one native corpse was created for this death
+[11Nov2026 11:42:17.810] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: terminal lava death preserves inventory
+[11Nov2026 11:42:21.793] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: corpse survives eighty ticks in the lava basin
+[11Nov2026 11:42:21.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: fluid safety retires temporary Sable bodies
+[11Nov2026 11:42:21.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: lava body stays above the basin floor
+[11Nov2026 11:42:21.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: default lavaDamage=false preserves the corpse
+[11Nov2026 11:42:21.795] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS falling into lava: opt-in lavaDamage=true retains native destructive behavior
+[11Nov2026 11:42:22.047] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS keepInventory: keepInventory death creates no duplicate loot (native empty corpse is allowed)
+[11Nov2026 11:42:22.047] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS keepInventory: keepInventory keeps items on the player
+[11Nov2026 11:42:22.546] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS forced lifetime: configured forced lifetime still removes a full corpse
+[11Nov2026 11:42:23.046] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS bounded physics stress: 120 nearby corpses stay within a two-body physics budget
+[11Nov2026 11:42:23.047] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS bounded physics stress: all 120 corpses retain loot and a six-limb pose even when the budget is full
+[11Nov2026 11:42:25.044] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS bounded physics stress: physics count never exceeds the configured cap during stress
+[11Nov2026 11:42:25.044] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS bounded physics stress: expired simulations leave no Sable bodies for old corpses
+[11Nov2026 11:42:25.044] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS bounded physics stress: retiring physics does not delete any of the 120 loot inventories
+[11Nov2026 11:42:25.194] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS bounded physics stress: removing stress corpses leaves no tracked physics bodies
+[11Nov2026 11:42:28.444] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS orphan cleanup: discovered orphan markers remove all six abandoned Sable parts
+[11Nov2026 11:42:28.444] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS orphan cleanup: orphan cleanup preserves unrelated ordinary ragdolls
+[11Nov2026 11:42:28.693] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS safe assembly staging: occupied build-limit staging cells skip optional physics
+[11Nov2026 11:42:28.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS safe assembly staging: all six preexisting build-limit blocks remain unchanged
+[11Nov2026 11:42:28.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS safe assembly staging: blocked assembly still leaves a lootable posed corpse
+[11Nov2026 11:42:29.194] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: elevated solid-floor fixture starts native corpse physics
+[11Nov2026 11:42:29.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=20 corpseY=257.9344858398352 bboxMinY=257.9344858398352 active=true nativeControlTorsoY=259.0084462429069 platformTop=258.0
+[11Nov2026 11:42:30.693] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=40 corpseY=257.93804467146987 bboxMinY=257.93804467146987 active=true nativeControlTorsoY=258.809573621851 platformTop=258.0
+[11Nov2026 11:42:31.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=60 corpseY=257.9787879295329 bboxMinY=257.9787879295329 active=true nativeControlTorsoY=258.1789272752953 platformTop=258.0
+[11Nov2026 11:42:32.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=80 corpseY=257.978707839122 bboxMinY=257.978707839122 active=true nativeControlTorsoY=258.1789265087928 platformTop=258.0
+[11Nov2026 11:42:33.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=100 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:33.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: reload fixture has an active native body before serialization
+[11Nov2026 11:42:34.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=120 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:35.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=140 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:36.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=160 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:37.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=180 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:38.594] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=198 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:38.644] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=199 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:38.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=200 corpseY=257.9786015121765 bboxMinY=257.9786015121765 active=true nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:38.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: native simulation stays within its expected quarter-block surface overlap
+[11Nov2026 11:42:38.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: restored active pose allocates no new native physics body
+[11Nov2026 11:42:38.696] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: saved active pose with floor penetration remains supported for 100 ticks after reload
+[11Nov2026 11:42:38.696] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: reloaded active pose preserves every inventory compartment
+[11Nov2026 11:42:38.745] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=201 corpseY=258.001 bboxMinY=258.001 active=false nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:38.794] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=202 corpseY=258.0 bboxMinY=258.0 active=false nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:38.844] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=203 corpseY=258.0 bboxMinY=258.0 active=false nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:39.693] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=220 corpseY=258.0 bboxMinY=258.0 active=false nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:40.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=240 corpseY=258.0 bboxMinY=258.0 active=false nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:41.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE_FLOOR tick=260 corpseY=258.0 bboxMinY=258.0 active=false nativeControlTorsoY=258.17892466354334 platformTop=258.0
+[11Nov2026 11:42:41.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: floor fixture physics retires after the configured 200 ticks
+[11Nov2026 11:42:41.695] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: settled corpse remains on the solid platform for sixty post-physics ticks
+[11Nov2026 11:42:41.696] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: floor-settled corpse retains its complete inventory
+[11Nov2026 11:42:41.696] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS solid floor settling: ordinary native playerless control also collides with the platform
+[11Nov2026 11:42:41.712] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS captured pose with zero physics budget: native downed body starts on the raised platform
+[11Nov2026 11:42:43.710] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS captured pose with zero physics budget: one native corpse was created for this death
+[11Nov2026 11:42:46.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS captured pose with zero physics budget: zero budget allocates no corpse physics body
+[11Nov2026 11:42:46.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS captured pose with zero physics budget: captured settled pose stays above its supporting floor without new physics
+[11Nov2026 11:42:46.694] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASS captured pose with zero physics budget: zero-budget captured corpse keeps all inventory compartments
+[11Nov2026 11:42:46.739] [Server thread/INFO] [com.biguzi.ragrevival.test.CorpseCompatProbe/]: RAGREVIVAL_CORPSE PASSED passed=69 failed=0 ticks=957

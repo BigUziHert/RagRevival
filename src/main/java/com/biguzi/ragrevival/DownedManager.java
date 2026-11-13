@@ -102,6 +102,7 @@ public final class DownedManager {
         REVIVAL_GRACE.remove(player.getUUID());
         // Totems already ran before LivingDeathEvent. Administrative kill and the void stay terminal.
         if (event.getSource().is(DamageTypes.GENERIC_KILL) || event.getSource().is(DamageTypes.FELL_OUT_OF_WORLD)) {
+            com.biguzi.ragrevival.compat.corpse.CorpseCompat.captureDyingBody(player);
             if (isDowned(player)) clear(player);
             return;
         }
@@ -393,6 +394,7 @@ public final class DownedManager {
         }
         TERMINAL.add(player.getUUID());
         try {
+            com.biguzi.ragrevival.compat.corpse.CorpseCompat.captureDyingBody(player);
             clear(player);
             player.setHealth(0);
             player.die(source);

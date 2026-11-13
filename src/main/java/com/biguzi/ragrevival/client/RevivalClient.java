@@ -60,6 +60,9 @@ public final class RevivalClient {
     private RevivalClient() {}
 
     public static void register(IEventBus modBus) {
+        if (net.neoforged.fml.ModList.get().isLoaded("corpse")) {
+            com.biguzi.ragrevival.compat.corpse.client.CorpseRagdollRenderer.register();
+        }
         modBus.addListener(RevivalClient::registerKeys);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, RevivalClient::onInteraction);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, RevivalClient::onScroll);

@@ -1,0 +1,4 @@
+Found 7 matching item(s) on player ReviveOne
+
+Accessories after_all_transfer: exact=true counts={artifacts:plastic_drinking_hat={player_inventory=1}, artifacts:lucky_scarf={player_inventory=1}}; report=C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\fullpack-compat-081-080\server\.\world\.\ragrevival-accessories-manual\final5lava-dfbbb41c-779e-47d2-975f-0951d032f145-after_all_transfer.json
+

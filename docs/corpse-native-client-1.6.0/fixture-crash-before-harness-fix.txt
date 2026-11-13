@@ -1,0 +1,195 @@
+---- Minecraft Crash Report ----
+
+// Hi. I'm Sable and I dislike float casts
+Please make sure this issue is not caused by Sable before reporting it to other mod authors.
+If you cannot reproduce it without Sable, file a report on the issue tracker
+https://github.com/ryanhcode/sable/issues
+
+// Shall we play a game?
+
+Time: 2026-11-11 12:29:02
+Description: Ticking entity
+
+java.lang.NullPointerException: Cannot invoke "net.minecraft.server.network.ServerGamePacketListenerImpl.send(net.minecraft.network.protocol.Packet)" because "p_12803_.connection" is null
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.stats.ServerRecipeBook.sendRecipes(ServerRecipeBook.java:70) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.stats.ServerRecipeBook.addRecipes(ServerRecipeBook.java:47) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer.awardRecipes(ServerPlayer.java:1339) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerPlayerMixin from mod veil,pl:mixin:APP:sable.mixins.json:entity.entities_stick_sublevels.player.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_rotations_and_riding.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.teleport_players.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:player_freezing.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.sleeping.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:tracking_points.ServerPlayerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer.awardRecipesByKey(ServerPlayer.java:1352) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerPlayerMixin from mod veil,pl:mixin:APP:sable.mixins.json:entity.entities_stick_sublevels.player.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_rotations_and_riding.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.teleport_players.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:player_freezing.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.sleeping.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:tracking_points.ServerPlayerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.AdvancementRewards.grant(AdvancementRewards.java:77) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.PlayerAdvancements.award(PlayerAdvancements.java:178) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.CriterionTrigger$Listener.run(CriterionTrigger.java:21) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.critereon.SimpleCriterionTrigger.trigger(SimpleCriterionTrigger.java:71) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.critereon.InventoryChangeTrigger.trigger(InventoryChangeTrigger.java:47) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.critereon.InventoryChangeTrigger.trigger(InventoryChangeTrigger.java:43) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer$2.slotChanged(ServerPlayer.java:268) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.inventory.AbstractContainerMenu.triggerSlotListeners(AbstractContainerMenu.java:217) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.inventory.AbstractContainerMenu.broadcastChanges(AbstractContainerMenu.java:171) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/corpse@1.21.1-1.1.22/de.maxhenkel.corpse.gui.CorpseInventoryContainer.broadcastChanges(CorpseInventoryContainer.java:116) ~[corpse-neoforge-1.21.1-1.1.22.jar%23127!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer.tick(ServerPlayer.java:503) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerPlayerMixin from mod veil,pl:mixin:APP:sable.mixins.json:entity.entities_stick_sublevels.player.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_rotations_and_riding.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.teleport_players.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:player_freezing.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.sleeping.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:tracking_points.ServerPlayerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:774) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.guardEntityTick(Level.java:576) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:sable.mixins.json:entity.entity_sublevel_collision.LevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:world_border.LevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.lambda$tick$2(ServerLevel.java:420) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:54) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tick(ServerLevel.java:400) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1037) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.DedicatedServer.tickChildren(DedicatedServer.java:317) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:917) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:707) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.stats.ServerRecipeBook.sendRecipes(ServerRecipeBook.java:70) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.stats.ServerRecipeBook.addRecipes(ServerRecipeBook.java:47) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer.awardRecipes(ServerPlayer.java:1339) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerPlayerMixin from mod veil,pl:mixin:APP:sable.mixins.json:entity.entities_stick_sublevels.player.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_rotations_and_riding.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.teleport_players.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:player_freezing.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.sleeping.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:tracking_points.ServerPlayerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer.awardRecipesByKey(ServerPlayer.java:1352) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerPlayerMixin from mod veil,pl:mixin:APP:sable.mixins.json:entity.entities_stick_sublevels.player.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_rotations_and_riding.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.teleport_players.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:player_freezing.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.sleeping.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:tracking_points.ServerPlayerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.AdvancementRewards.grant(AdvancementRewards.java:77) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.PlayerAdvancements.award(PlayerAdvancements.java:178) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.CriterionTrigger$Listener.run(CriterionTrigger.java:21) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.critereon.SimpleCriterionTrigger.trigger(SimpleCriterionTrigger.java:71) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.critereon.InventoryChangeTrigger.trigger(InventoryChangeTrigger.java:47) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.advancements.critereon.InventoryChangeTrigger.trigger(InventoryChangeTrigger.java:43) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer$2.slotChanged(ServerPlayer.java:268) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.inventory.AbstractContainerMenu.triggerSlotListeners(AbstractContainerMenu.java:217) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.inventory.AbstractContainerMenu.broadcastChanges(AbstractContainerMenu.java:171) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/corpse@1.21.1-1.1.22/de.maxhenkel.corpse.gui.CorpseInventoryContainer.broadcastChanges(CorpseInventoryContainer.java:116) ~[corpse-neoforge-1.21.1-1.1.22.jar%23127!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerPlayer.tick(ServerPlayer.java:503) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerPlayerMixin from mod veil,pl:mixin:APP:sable.mixins.json:entity.entities_stick_sublevels.player.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_rotations_and_riding.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.teleport_players.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:player_freezing.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:respawn_point.sleeping.ServerPlayerMixin from mod sable,pl:mixin:APP:sable.mixins.json:tracking_points.ServerPlayerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:774) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.guardEntityTick(Level.java:576) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:sable.mixins.json:entity.entity_sublevel_collision.LevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:world_border.LevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.lambda$tick$2(ServerLevel.java:420) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:54) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+-- Entity being ticked --
+Details:
+	Entity Type: minecraft:player (net.minecraft.server.level.ServerPlayer)
+	Entity ID: 19
+	Entity Name: ReviveOne
+	Entity's Exact location: 201.50, 70.00, 200.50
+	Entity's Block location: World: (201,70,200), Section: (at 9,6,8 in 12,4,12; chunk contains blocks 192,-64,192 to 207,319,207), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: null
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.guardEntityTick(Level.java:576) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:sable.mixins.json:entity.entity_sublevel_collision.LevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:world_border.LevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.lambda$tick$2(ServerLevel.java:420) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:54) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.tick(ServerLevel.java:400) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1037) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.DedicatedServer.tickChildren(DedicatedServer.java:317) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:917) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:707) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+
+
+-- Affected level --
+Details:
+	All players: 1 total; [ServerPlayer['ReviveOne'/19, l='ServerLevel[world]', x=201.50, y=70.00, z=200.50]]
+	Chunk stats: 1581
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (0,-60,0), Section: (at 0,4,0 in 0,-4,0; chunk contains blocks 0,-64,0 to 15,319,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 37914 game time, 1000 day time
+	Level name: world
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Commands: false
+	Level weather: Rain time: 1 (now: false), thunder time: 1 (now: false)
+	Known server brands: neoforge
+	Removed feature flags: 
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+	Loaded entity count: 28
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.level.ServerLevel.fillReportDetails(ServerLevel.java:1721) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkServerLevelMixin from mod veil,pl:mixin:APP:sable.mixins.json:block_decal_render.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_aabb_lookup.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.entity_kicking.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:entity.server_entities_tick.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:explosion.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:particle.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:physics.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.container.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:stop_lightning.ServerLevelMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.ServerLevelMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1040) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.dedicated.DedicatedServer.tickChildren(DedicatedServer.java:317) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:917) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:707) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[server-1.21.1-20240808.144430-srg.jar%23124!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.network.mixins.json:NetworkMinecraftServerMixin from mod veil,pl:mixin:APP:veil.scheduler.mixins.json:MinecraftServerMixin from mod veil,pl:mixin:APP:sable.mixins.json:udp.MinecraftServerMixin from mod sable,pl:mixin:A}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.6, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 316570320 bytes (301 MiB) / 1073741824 bytes (1024 MiB) up to 4294967296 bytes (4096 MiB)
+	CPUs: 16
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD Ryzen 7 7800X3D 8-Core Processor           
+	Identifier: AuthenticAMD Family 25 Model 97 Stepping 2
+	Microarchitecture: Zen 3
+	Frequency (GHz): 4.19
+	Number of physical packages: 1
+	Number of physical CPUs: 8
+	Number of logical CPUs: 16
+	Graphics card #0 name: AMD Radeon(TM) Graphics
+	Graphics card #0 vendor: Advanced Micro Devices, Inc.
+	Graphics card #0 VRAM (MiB): 512.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 32.0.21045.16010
+	Graphics card #1 name: NVIDIA GeForce RTX 4090
+	Graphics card #1 vendor: NVIDIA
+	Graphics card #1 VRAM (MiB): 24564.00
+	Graphics card #1 deviceId: VideoController2
+	Graphics card #1 versionInfo: 32.0.16.2114
+	Memory slot #0 capacity (MiB): 32768.00
+	Memory slot #0 clockSpeed (GHz): 6.40
+	Memory slot #0 type: Unknown
+	Memory slot #1 capacity (MiB): 32768.00
+	Memory slot #1 clockSpeed (GHz): 6.40
+	Memory slot #1 type: Unknown
+	Virtual memory max (MiB): 68724.36
+	Virtual memory used (MiB): 41253.78
+	Swap memory total (MiB): 4096.00
+	Swap memory used (MiB): 183.61
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 4716.09, total: 475903.00
+	Space in storage for workdir (MiB): available: 4716.09, total: 475903.00
+	JVM Flags: 2 total; -Xms1G -Xmx4G
+	Server Running: true
+	Player Count: 1 / 4; [ServerPlayer['ReviveOne'/19, l='ServerLevel[world]', x=201.50, y=70.00, z=200.50]]
+	Active Data Packs: vanilla, mod_data, mod/carryon (incompatible), mod/veil (incompatible), mod/sablecompanion, mod/corpse (incompatible), mod/neoforge, mod/sable, mod/sable_player_ragdoll, mod/ragdoll_reactions, mod/ragrevival (incompatible), mod/ragrevival_tests
+	Available Data Packs: bundle, trade_rebalance, vanilla, mod/carryon (incompatible), mod/corpse (incompatible), mod/neoforge, mod/ragdoll_reactions, mod/ragrevival (incompatible), mod/ragrevival_tests, mod/sable, mod/sable_player_ragdoll, mod/sablecompanion, mod/veil (incompatible), mod_data
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
+	World Seed: -6004407840527104127
+	Is Modded: Definitely; Server brand changed to 'neoforge'
+	Type: Dedicated Server (map_server.txt)
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeserver
+	ModLauncher services: 
+		sponge-mixin-0.16.4+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.45.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.45.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.45.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		carryon-neoforge-1.21.1-2.2.6.13.jar              |Carry On                      |carryon                       |2.2.6               |Manifest: NOSIGNATURE
+		corpse-neoforge-1.21.1-1.1.22.jar                 |Corpse                        |corpse                        |1.21.1-1.1.22       |Manifest: NOSIGNATURE
+		server-1.21.1-20240808.144430-srg.jar             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.265-universal.jar                   |NeoForge                      |neoforge                      |21.1.265            |Manifest: NOSIGNATURE
+		ragdoll_reactions-1.21.1-0.7.0.jar                |Ragdoll Reactions             |ragdoll_reactions             |0.7.0               |Manifest: NOSIGNATURE
+		ragrevival-1.21.1-1.6.0.jar                       |RagRevival                    |ragrevival                    |1.6.0               |Manifest: NOSIGNATURE
+		ragrevival-1.21.1-1.6.0-test-harness.jar          |RagRevival Integration Tests  |ragrevival_tests              |1.0.0               |Manifest: NOSIGNATURE
+		sable-neoforge-1.21.1-2.0.6.jar                   |Sable                         |sable                         |2.0.6               |Manifest: NOSIGNATURE
+		sable-companion-common-1.21.1-1.6.0.jar           |Sable Companion               |sablecompanion                |1.6.0               |Manifest: NOSIGNATURE
+		sable_player_ragdoll-1.21.1-0.7.5.jar             |Sable Ragdolls                |sable_player_ragdoll          |0.7.5               |Manifest: NOSIGNATURE
+		veil-neoforge-1.21.1-4.3.2.jar                    |Veil                          |veil                          |4.3.2               |Manifest: NOSIGNATURE
+	Crash Report UUID: 78e28258-9deb-4f42-8593-1468405cb045
+	FML: 4.0.45
+	NeoForge: 21.1.265

@@ -1,0 +1,117 @@
+[11Nov2026 12:31:02.157] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--username, ReviveOne, --version, neoforge-21.1.265, --gameDir, C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/corpse-compat/client, --assetsDir, C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/launcher/assets, --assetIndex, 17, --uuid, 8e37a6564e673507b5177df18801794f, --accessToken, ❄❄❄❄❄❄❄❄, --clientId, local-development, --xuid, 0, --userType, legacy, --versionType, release, --fml.neoForgeVersion, 21.1.265, --fml.fmlVersion, 4.0.45, --fml.mcVersion, 1.21.1, --fml.neoFormVersion, 20240808.144430, --launchTarget, forgeclient, --width, 1060, --height, 720, --quickPlayMultiplayer, 127.0.0.1:25611]
+[11Nov2026 12:31:02.163] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Oracle Corporation Java HotSpot(TM) 64-Bit Server VM 21.0.6+8-LTS-188
+[11Nov2026 12:31:02.166] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.6 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
+[11Nov2026 12:31:02.289] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[11Nov2026 12:31:02.417] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[11Nov2026 12:31:02.544] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[11Nov2026 12:31:02.627] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/corpse-compat/launcher265/libraries/net/fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/sponge-mixin-0.16.4+mixin.0.8.7.jar%23159!/ Service=ModLauncher Env=CLIENT
+[11Nov2026 12:31:02.829] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 4090/PCIe/SSE2 GL version 4.6.0 NVIDIA 621.14, NVIDIA Corporation
+[11Nov2026 12:31:02.973] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "client-1.21.1-20240808.144430-srg.jar" [locator: production client provider +net.neoforged:neoforge:21.1.265:client]
+[11Nov2026 12:31:02.989] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.265-universal.jar" [locator: PathBasedLocator[name=neoforge, paths=[C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\launcher265\libraries\net\neoforged\neoforge\21.1.265\neoforge-21.1.265-universal.jar]], reader: mod manifest]
+[11Nov2026 12:31:02.997] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "carryon-neoforge-1.21.1-2.2.6.13.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client\mods}, reader: mod manifest]
+[11Nov2026 12:31:03.000] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "corpse-neoforge-1.21.1-1.1.22.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client\mods}, reader: mod manifest]
+[11Nov2026 12:31:03.004] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragdoll_reactions-1.21.1-0.7.0.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client\mods}, reader: mod manifest]
+[11Nov2026 12:31:03.007] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragrevival-1.21.1-1.6.0-test-harness.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client\mods}, reader: mod manifest]
+[11Nov2026 12:31:03.012] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragrevival-1.21.1-1.6.0.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client\mods}, reader: mod manifest]
+[11Nov2026 12:31:03.017] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-neoforge-1.21.1-2.0.6.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client\mods}, reader: mod manifest]
+[11Nov2026 12:31:03.020] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable_player_ragdoll-1.21.1-0.7.5.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client\mods}, reader: mod manifest]
+[11Nov2026 12:31:03.182] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 7 dependencies adding them to mods collection
+[11Nov2026 12:31:03.182] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "mixinextras-neoforge-0.5.5.jar" [parent: neoforge-21.1.265-universal.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:31:03.183] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "molang-compiler-3.1.1.19.jar" [parent: veil-neoforge-1.21.1-4.3.2.jar, locator: jarinjar]
+[11Nov2026 12:31:03.183] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "veil-neoforge-1.21.1-4.3.2.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:31:03.183] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-companion-common-1.21.1-1.6.0.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:31:03.183] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "dev.ryanhcode.sable.sable-sable_rapier-1.21.1-2.0.6.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:31:03.183] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "glsl-processor-0.2.3.jar" [parent: veil-neoforge-1.21.1-4.3.2.jar, locator: jarinjar]
+[11Nov2026 12:31:03.183] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "net.neoforged.neoforge-coremods-21.1.265.jar" [parent: neoforge-21.1.265-universal.jar, locator: jarinjar, reader: mod manifest]
+[11Nov2026 12:31:03.184] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Carry On 2.2.6 (carryon)
+		Corpse 1.21.1-1.1.22 (corpse)
+		Minecraft 1.21.1 (minecraft)
+		NeoForge 21.1.265 (neoforge)
+		Ragdoll Reactions 0.7.0 (ragdoll_reactions)
+		RagRevival 1.6.0 (ragrevival)
+		RagRevival Integration Tests 1.0.0 (ragrevival_tests)
+		Sable 2.0.6 (sable)
+		Sable Companion 1.6.0 (sablecompanion)
+		Sable Ragdolls 0.7.5 (sable_player_ragdoll)
+		Veil 4.3.2 (veil)
+[11Nov2026 12:31:03.612] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[11Nov2026 12:31:03.627] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclient' with arguments [--version, neoforge-21.1.265, --gameDir, C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\corpse-compat\client, --assetsDir, C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\launcher\assets, --uuid, 8e37a6564e673507b5177df18801794f, --username, ReviveOne, --assetIndex, 17, --accessToken, ❄❄❄❄❄❄❄❄, --clientId, local-development, --xuid, 0, --userType, legacy, --versionType, release, --width, 1060, --height, 720, --quickPlayMultiplayer, 127.0.0.1:25611]
+[11Nov2026 12:31:03.846] [main/WARN] [mixin/]: Reference map 'carryon.refmap.json' for carryon.mixins.json could not be read. If this is a development environment you can ignore this message
+[11Nov2026 12:31:03.887] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
+[11Nov2026 12:31:03.888] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
+[11Nov2026 12:31:03.888] [main/WARN] [mixin/]: Reference map 'sable_player_ragdoll.refmap.json' for sable_player_ragdoll.mixins.json could not be read. If this is a development environment you can ignore this message
+[11Nov2026 12:31:03.888] [main/WARN] [mixin/]: Reference map 'sable_player_ragdoll.refmap.json' for sable_player_ragdoll.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[11Nov2026 12:31:04.162] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/pipeline/PipelineManager (java.lang.ClassNotFoundException: net.irisshaders.iris.pipeline.PipelineManager)
+[11Nov2026 12:31:04.162] [main/WARN] [mixin/]: @Mixin target net.irisshaders.iris.pipeline.PipelineManager was not found veil.neoforge.mixins.json:client.perspective.iris.PipelineManagerMixin from mod veil
+[11Nov2026 12:31:04.444] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[11Nov2026 12:31:05.899] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 253 milliseconds
+[11Nov2026 12:31:06.071] [main/WARN] [oshi.driver.windows.perfmon.PerfmonDisabled/]: Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[11Nov2026 12:31:10.007] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/corpse-compat/launcher265/libraries/net/minecraft/client/1.21.1-20240808.144430/client-1.21.1-20240808.144430-srg.jar%23179!/assets/.mcassetsroot' uses unexpected schema
+[11Nov2026 12:31:10.007] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/corpse-compat/launcher265/libraries/net/minecraft/client/1.21.1-20240808.144430/client-1.21.1-20240808.144430-srg.jar%23179!/data/.mcassetsroot' uses unexpected schema
+[11Nov2026 12:31:10.033] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[11Nov2026 12:31:10.038] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: ReviveOne
+[11Nov2026 12:31:10.096] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[11Nov2026 12:31:10.418] [modloading-worker-0/INFO] [Veil/]: Veil is initializing.
+[11Nov2026 12:31:10.446] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.265, for MC 1.21.1
+[11Nov2026 12:31:10.510] [modloading-worker-0/INFO] [dev.ryanhcode.sable.Sable/]: Sable loaded!
+[11Nov2026 12:31:11.514] [Render thread/INFO] [Veil/]: GL Debug supported
+[11Nov2026 12:31:11.962] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/carryon, mod/veil, mod/sablecompanion, mod/corpse, mod/neoforge, mod/sable, mod/sable_player_ragdoll, mod/ragdoll_reactions, mod/ragrevival, mod/ragrevival_tests
+[11Nov2026 12:31:12.061] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [corpse] Starting version check at https://update.maxhenkel.de/neoforge/corpse
+[11Nov2026 12:31:12.076] [Worker-Main-13/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[11Nov2026 12:31:12.118] [Worker-Main-4/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[11Nov2026 12:31:12.167] [Render thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] post-physics ragdoll hook registered
+[11Nov2026 12:31:12.176] [Render thread/INFO] [ragdoll_reactions/]: [ragdoll_reactions] post-physics accel/decel trigger registered
+[11Nov2026 12:31:12.564] [Worker-Main-7/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'sable_player_ragdoll:blockstates/ragdoll_seat.json' missing model for variant: 'sable_player_ragdoll:ragdoll_seat#'
+[11Nov2026 12:31:12.874] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [corpse] Found status: UP_TO_DATE Current: 1.21.1-1.1.22 Target: null
+[11Nov2026 12:31:13.009] [Render thread/INFO] [Veil/]: Loaded 0 shader redirects, 0 replacements
+[11Nov2026 12:31:13.182] [Render thread/INFO] [Veil/]: Loaded 17 shaders from: pinwheel/shaders/program
+[11Nov2026 12:31:13.310] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[11Nov2026 12:31:13.310] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[11Nov2026 12:31:13.422] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on Headphones (7- Arctis Pro Wireless Game)
+[11Nov2026 12:31:13.423] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[11Nov2026 12:31:13.510] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[11Nov2026 12:31:13.520] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[11Nov2026 12:31:13.521] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[11Nov2026 12:31:13.522] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[11Nov2026 12:31:13.522] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[11Nov2026 12:31:13.524] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[11Nov2026 12:31:13.524] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[11Nov2026 12:31:13.524] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[11Nov2026 12:31:13.525] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[11Nov2026 12:31:13.570] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[11Nov2026 12:31:13.572] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[11Nov2026 12:31:13.572] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[11Nov2026 12:31:13.573] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[11Nov2026 12:31:13.573] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[11Nov2026 12:31:13.594] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[11Nov2026 12:31:13.654] [Render thread/INFO] [Veil/]: Loaded 2 framebuffers
+[11Nov2026 12:31:13.687] [Render thread/INFO] [Veil/]: Loaded 3 post pipelines
+[11Nov2026 12:31:13.700] [Render thread/INFO] [Veil/]: Loaded 4 render types
+[11Nov2026 12:31:13.700] [Render thread/INFO] [Veil/]: Enabled bloom pipeline
+[11Nov2026 12:31:13.707] [Render thread/INFO] [Veil/]: Loaded 0 quasar particles
+[11Nov2026 12:31:13.707] [Render thread/INFO] [Veil/]: Loaded 0 templates
+[11Nov2026 12:31:13.707] [Render thread/INFO] [Veil/]: Loaded 0 modules
+[11Nov2026 12:31:13.713] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[11Nov2026 12:31:13.833] [Render thread/INFO] [net.minecraft.client.gui.screens.ConnectScreen/]: Connecting to 127.0.0.1, 25611
+[11Nov2026 12:31:13.835] [Render thread/INFO] [Veil/]: Compiled 57 vanilla shaders in 189.3 ms
+[11Nov2026 12:31:14.321] [Server Connector #1/INFO] [dev.ryanhcode.sable.Sable/]: Starting remote client UDP channel future
+[11Nov2026 12:31:14.329] [Netty Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Client UDP channel active
+[11Nov2026 12:31:15.088] [Render thread/INFO] [Veil/]: Finished uploading vanilla shaders
+[11Nov2026 12:31:15.507] [Render thread/INFO] [dev.ryanhcode.sable.Sable/]: Received UDP authentication request, sending response over UDP to 127.0.0.1/127.0.0.1:25611
+[11Nov2026 12:31:15.669] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] ReviveOne has made the advancement [Cover Me with Diamonds]
+[11Nov2026 12:31:15.692] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 21 advancements
+[11Nov2026 12:31:15.697] [Render thread/ERROR] [dev.ryanhcode.sable.Sable/]: Failed to apply tag physics properties. Unknown block: create:flywheel
+[11Nov2026 12:31:16.055] [Render thread/INFO] [Veil/]: Multi-Bind supported, using core
+[11Nov2026 12:31:58.706] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-11_12.31.58.png
+[11Nov2026 12:32:41.861] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-11_12.32.41.png
+[11Nov2026 12:32:49.350] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-11_12.32.49.png
+[11Nov2026 12:33:50.581] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-11_12.33.50.png
+[11Nov2026 12:34:25.676] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-11_12.34.25.png
+[11Nov2026 12:34:55.148] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Saved screenshot as 2026-11-11_12.34.55.png
+[11Nov2026 12:35:08.248] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
+[11Nov2026 12:35:08.249] [Netty Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Client UDP channel inactive
+[11Nov2026 12:35:08.250] [Netty Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Closed UDP channel!

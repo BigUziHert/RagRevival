@@ -1,0 +1,34 @@
+[11:44:23.396] [main/INFO] [Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.neoForgeVersion, 21.1.249, --fml.fmlVersion, 4.0.44, --fml.mcVersion, 1.21.1, --fml.neoFormVersion, 20240808.144430, nogui] 
+[11:44:23.734] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/no-corpse-compat/libraries/net/fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/sponge-mixin-0.15.2+mixin.0.8.7.jar%2373!/ Service=ModLauncher Env=SERVER 
+[11:44:24.020] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "server-1.21.1-20240808.144430-srg.jar" [locator: production server provider +net.neoforged:neoforge:21.1.249:server] 
+[11:44:24.047] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.249-universal.jar" [locator: PathBasedLocator[name=neoforge, paths=[libraries\net\neoforged\neoforge\21.1.249\neoforge-21.1.249-universal.jar]], reader: mod manifest] 
+[11:44:24.058] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "carryon-neoforge-1.21.1-2.2.6.13.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\no-corpse-compat\mods}, reader: mod manifest] 
+[11:44:24.063] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragdoll_reactions-1.21.1-0.7.0.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\no-corpse-compat\mods}, reader: mod manifest] 
+[11:44:24.073] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ragrevival-1.21.1-1.5.1.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\no-corpse-compat\mods}, reader: mod manifest] 
+[11:44:24.078] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-neoforge-1.21.1-2.0.6.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\no-corpse-compat\mods}, reader: mod manifest] 
+[11:44:24.082] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable_player_ragdoll-1.21.1-0.7.5.jar" [locator: {mods folder locator at C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\no-corpse-compat\mods}, reader: mod manifest] 
+[11:44:24.287] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "mixinextras-neoforge-0.5.3.jar" [parent: neoforge-21.1.249-universal.jar, locator: jarinjar, reader: mod manifest] 
+[11:44:24.288] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "molang-compiler-3.1.1.19.jar" [parent: veil-neoforge-1.21.1-4.3.2.jar, locator: jarinjar] 
+[11:44:24.288] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "veil-neoforge-1.21.1-4.3.2.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest] 
+[11:44:24.288] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-companion-common-1.21.1-1.6.0.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest] 
+[11:44:24.289] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "dev.ryanhcode.sable.sable-sable_rapier-1.21.1-2.0.6.jar" [parent: sable-neoforge-1.21.1-2.0.6.jar, locator: jarinjar, reader: mod manifest] 
+[11:44:24.289] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "glsl-processor-0.2.3.jar" [parent: veil-neoforge-1.21.1-4.3.2.jar, locator: jarinjar] 
+[11:44:24.289] [main/INFO] [loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "net.neoforged.neoforge-coremods-21.1.249.jar" [parent: neoforge-21.1.249-universal.jar, locator: jarinjar, reader: mod manifest] 
+		NeoForge 21.1.249 (neoforge)
+		RagRevival 1.5.1 (ragrevival)
+		Sable Ragdolls 0.7.5 (sable_player_ragdoll)
+[11:44:25.396] [main/WARN] [mixin/]: Reference map 'sable_player_ragdoll.refmap.json' for sable_player_ragdoll.mixins.json could not be read. If this is a development environment you can ignore this message 
+[11:44:25.396] [main/WARN] [mixin/]: Reference map 'sable_player_ragdoll.refmap.json' for sable_player_ragdoll.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message 
+[11:44:31] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.249, for MC 1.21.1
+[11:44:32] [modloading-sync-worker/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] post-physics ragdoll hook registered
+ragrevival (version 1.5.0 -> 1.5.1)
+[11:44:32] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/no-corpse-compat/libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar%23122!/assets/.mcassetsroot' uses unexpected schema
+[11:44:32] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/C:/Users/caleb/Documents/ChatGPT/RagRevival/.local/no-corpse-compat/libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar%23122!/data/.mcassetsroot' uses unexpected schema
+[11:44:34] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.21.1
+[11:44:34] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on 127.0.0.1:25603
+[11:44:34] [Server thread/INFO] [de.ry.sa.Sable/]: Using game directory relative Sable Rapier native directory C:\Users\caleb\Documents\ChatGPT\RagRevival\.local\no-corpse-compat\.sable\natives
+[11:44:35] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.527s)! For help, type "help"
+[11:44:35] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[11:44:35] [Server thread/INFO] [sable_player_ragdoll/]: [sable_player_ragdoll] ragdoll system active (debug=true)
+[11:45:10] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[11:45:10] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
